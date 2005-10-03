@@ -1,11 +1,21 @@
 \documentclass{book}
+%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+%
 \usepackage{graphicx}
 \usepackage{makeidx}
+%
 \title{\textbf{Interdisciplinary Mathematical Modeling}}
 \author{Warren Weckesser\\
 Department of Mathematics\\
 Colgate University}
+%
+\newtheorem{question}{Question}
+%
 \makeindex
+%
 \begin{document}
 \maketitle
 \tableofcontents
@@ -39,8 +49,194 @@ are needed in this book are summarized in an appendix.
 If  $f'(x_{0})=0$, then $x(t)=x_{0}$ is a solution.  Such a constant
 solution is called an \emph{equilibrium solution}.\index{equilibrium}
 \subsection{Population Growth--Malthusian\index{Malthusian}}
+
+
+The simplest assumption for modeling the growth of a population
+is:
+\begin{quote}
+\emph{The rate of change of the population is proportional to the current population level.}
+\end{quote} 
+Let $t$ be time, and let $p(t)$ be the population at time $t$.
+For now we'll assume that some convenient system of units is used;
+we'll have more to say about units later.
+We also assume that $p$ is ``large'' in some sense, so that it is reasonable
+to treat $p$ as a real number, not an integer.  If, for example, the population
+was just three rabbits, the following models would probably not provide good
+approximations to the actual growth of the population.  If the population
+is measured in thousands of rabbits, then $p(0)=3.12$ makes sense,
+and the following models are more reasonable.
+
+We convert the above assumption into an equation involving $t$
+and $p$.
+The ``rate of change of the population'' is the derivative, $\frac{dp}{dt}$, and the
+current population is $p(t)$, so the mathematical version of the above
+assumption is
+\begin{equation}
+  \frac{dp}{dt} = rp
+\end{equation}
+where $r$ is the constant of proportionality.
+(Note that I have suppressed the argument of $p$ for brevity.)
+This is a \emph{first order differential equation}.
+(The \emph{order} of a differential equation is the order of the
+highest derivative in the equation.)
+
+Frequently, the question we ask is ``What is the population at time $t$
+if the population is $P_0$ at time $t=0$?''  That is, we impose the
+condition that $p(0)=P_0$.  This is called an
+\emph{initial condition}, and the problem of solving the differential
+equation with a given initial condition is called an
+\emph{initial value problem}.
+
+To solve this equation, we must find a \emph{function} $p(t)$
+that satisfies the equation.  In this case, the solution is
+\begin{equation}
+  p(t) = P_0 e^{rt}
+\end{equation}
+(Let's check:  $\frac{dp}{dt} = rP_0e^{rt} = r p(t)$, so  it solves the differential
+equation, and $p(0) = P_0e^0 = P_0$, so it also satisfies the initial condition.)
+Thus, if $r > 0$, the simple assumption given above results in
+\emph{exponential growth}.
+(If $r < 0$, we obtain \emph{exponential decay}.)
+
 \subsection{The Logistic Equation\index{logistic equation}}
-... carrying capacity\index{carrying capacity}
+
+For a population with unlimited resources, exponential growth
+is a pretty accurate description of what happens.
+However, no environment can support exponential growth forever.
+Eventually the food runs out, or there is simply not enough space
+for a larger population.
+Presumably there is a maximum population level that the environment
+can sustain.  This level is called the \emph{carrying capacity}
+of the environment. If the population is larger than the
+carrying capacity, overcrowding or a lack of food results in a
+\emph{decreasing} population.
+We'll modify the equation to take this into account.
+
+The right side of the equation gives the rate of change of $p$ as a function
+of $p$.
+If we divide the the right side by $p$, we obtain the
+\emph{per capita growth rate}, or simply the \emph{growth rate}.  For the initial assumption,
+the growth rate  is just the constant $r$.
+To incorporate the assumption of a carrying capacity, we will assume that the
+growth rate depends on $p$.  When $p$ is near zero, we assume that there
+are plenty of resources for the population to grow, so the growth rate should be
+near $r$.  As the population becomes bigger, the growth rate should decrease,
+and it should be zero when the population is at the carrying capacity.
+If the population exceeds the carrying capacity, the growth rate should
+be negative.
+
+The simplest formula for such a growth rate is a straight line that has
+the value $r$ when $p=0$ and the value $0$ when $p=K$, as shown in
+Figure~\ref{fig:growthrate}.
+\begin{figure}
+\centerline{\includegraphics[width=3.25in]{matlab/logistic_percapita_growthrate.eps}} 
+\caption{Per capita growth rate for the logistic equation.}
+\label{fig:growthrate}
+\end{figure} 
+The equation that we obtain is
+\begin{equation}
+  \frac{dp}{dt} = r\left(1-\frac{p}{K}\right)p
+\label{eqn:logistic}
+\end{equation}
+This first order differential equation is commonly called the \emph{logistic equation}.
+Later we'll see how to find the exact solutions to this equation.
+For now, we'll learn as much as we can about its solutions without actually solving the
+equation.  To do this, we plot the right side of \eqref{eqn:logistic} as a function of $p$.
+The graph is shown in Figure~\ref{fig:logisticrhs}.
+\begin{figure}
+\centerline{\includegraphics[width=3.25in]{matlab/logistic_growthrate.eps}} 
+\caption{A plot of $\frac{dp}{dt}$ as a function of $p$ for the logistic
+equation \eqref{eqn:logistic}.}
+\label{fig:logisticrhs}
+\end{figure}
+We can use the information in Figure~\ref{fig:logisticrhs} to determine the
+behavior of solutions to \eqref{eqn:logistic}.
+Suppose, for example, that the population is initially ``small''.
+(In this case, small means ``a small fraction of $K$''.)
+Then the graph in Figure~\ref{fig:logisticrhs} tells us that
+$\frac{dp}{dt}$ is also small but positive.  In other words, the slope
+of $p(t)$ is small and positive.  This means that $p(t)$ is an increasing
+function of $t$, so in a little while, $p$ will be larger.  Looking back to
+Figure~\ref{fig:logisticrhs}, we see that this means $\frac{dp}{dt}$ will be
+larger than it was before, and therefore the slope of $p(t)$ has increased.
+So initially, $p(t)$ will grow faster and faster.  This is not surprising, since
+when $p$ is small, $p^2$ is very small, and if we ignore the $p^2$ term in the
+logistic equation, we obtain $\frac{dp}{dt} \approx rp$.  So when the
+population is small, the growth is almost exponential.
+
+Eventually the population will reach $K/2$.  This is the population
+level at which the population grows the fastest.
+When the population reaches this level, further increases in the
+population result in \emph{lower} growth rates.
+For example, if $p(t) = 0.75K$ at some time $t$, we see in
+Figure~\ref{fig:logisticrhs} that $\frac{dp}{dt}$ is positive, but it is
+decreasing as $p$ increases.  In the next moment, $p$ will be larger,
+but then the slope of $p(t)$ will be smaller.
+As $p$ gets closer and closer to $K$, the slope gets smaller and smaller.
+In fact, $p(t)$ will approach $K$ asymptotically, but never reach it.
+A graph of a solution to the logistic equation~\eqref{eqn:logistic} is
+shown in Figure~\ref{fig:logisticsol}.
+\begin{figure}
+\centerline{\includegraphics[width=3.5in]{matlab/logistic_solution.eps}} 
+\caption{The graph of $p(t)$, a solution to the logistic
+equation \eqref{eqn:logistic}.}
+\label{fig:logisticsol}
+\end{figure}
+
+\begin{question}
+What happens if the initial population is greater than $K$?
+\end{question}
+
+Note that if the inital population is exactly $K$, then
+$\frac{dp}{dt} = 0$.  The constant function $p(t)=K$ is an
+exact solution to the differential equation.
+We call a constant solution an \emph{equilibrium solution}.
+
+\begin{question}
+Does the logistic equation \eqref{eqn:logistic} have any other
+equilibrium solutions?
+\end{question}
+
+The method for analyzing solutions to the logistic equation can be
+applied to any first order equation of the form
+\begin{equation}
+   \frac{dy}{dt} = f(y)
+\end{equation}
+where $f(y)$ is a given function.
+In particular, we assume that $t$ does \emph{not} appear explicitly
+in $f$.  Such an equation is called \emph{autonomous}.
+When $t$ appears explicity in the right side of the equation,
+we say the equation is \emph{nonautonomous}.
+For example, the equation
+\begin{equation}
+  \frac{dp}{dt} = (r+a \sin(\omega t))p
+\end{equation}
+is nonautonomous, since $t$ appears explicitly in the right side of the
+equation (in the argument of the sine function).
+In this case, the explicit time dependence might model a growth
+rate with seasonal dependence.
+
+The basic procedure to analyze an autonomous
+first order differential equation is to sketch the graph of $f(y)$, identify
+the equilibrium solutions (where $f(y)=0$), and determine the
+behavior of non-equilibrium solutions based on the graph
+of $f(y)$.
+
+\begin{question}
+Consider the differential equation
+\[
+   \frac{dy}{dt} = y(y-1)(y-2)
+\]
+(a) Find the equilibrium solutions.\\
+(b) Sketch $\frac{dy}{dt}$ as a function of $y$.\\
+(c) In one set of axes, sketch several solutions $y(t)$. Include the equilibrium solutions,
+and several more non-equilibrium solutions to show all the possible behaviors.
+(Since this is not necessarily a population model, you should consider negative values
+of $y$ as well as positive.)
+\end{question}
+
+
+
 \section{Systems of Differential Equations}
 \subsection{Phase Plane Analysis}
 \subsection{Equilibrium Points and Stability}

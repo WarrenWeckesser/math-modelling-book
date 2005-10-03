@@ -2,6 +2,7 @@ rtexstr = '$r$';
 ptexstr = '$p$';
 Ktexstr = '$K$';
 dpdttexstr = '$\frac{dp}{dt}$';
+ttexstr = '$t$';
 
 shft = 0.18;
 dn = 0.08;
@@ -38,7 +39,6 @@ h3 = text('string',rtexstr,         ...
 axis([0 4 -0.4 1.2])
 axis off
 
-
 print('-deps','logistic_percapita_growthrate.eps');
 
 figure(2)
@@ -72,3 +72,45 @@ axis([0 4 -0.4 1.2])
 axis off
 
 print('-deps','logistic_growthrate.eps')
+
+figure(3)
+clf
+
+tmax = 5;
+t = linspace(0,tmax,101);
+p0 = K/10;
+z = exp(-r*t);
+p = (p0*K)./(p0+(K-p0)*z);
+plot(t,p,'b','linewidth',2);
+hold on
+plot([0 tmax],[K K],'k--','linewidth',1.5)
+plot([0 tmax],[0 0],'k')
+plot([0 0],[-0.4 1.25*K],'k')
+plot([0 0],[K K],'ko','linewidth',1.5);
+plot([0 0],[p0 p0],'bo','linewidth',1.5);
+shft = .33;
+h1 = text('string',ttexstr,         ...
+             'interpreter','latex', ...
+             'fontsize',20,         ...
+             'pos',[tmax,-dn]);
+h2 = text('string',Ktexstr,         ...
+             'interpreter','latex', ...
+             'fontsize',20,         ...
+             'pos',[-shft,K]);
+h3 = text('string','$p(t)$',      ...
+             'interpreter','latex', ...
+             'fontsize',20,         ...
+             'pos',[shft/2 1.25*K]);
+h4 = text('string','$p_0$',      ...
+             'interpreter','latex', ...
+             'fontsize',20,         ...
+             'pos',[-shft p0]);
+%xlabel('t')
+%ylabel('p')
+
+title('Solution to the Logistic Equation','fontsize',14)
+
+axis([0 tmax 0 1.25*K])
+axis off
+
+print('-deps','logistic_solution.eps')
