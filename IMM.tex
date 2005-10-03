@@ -1,0 +1,132 @@
+\documentclass{book}
+\usepackage{makeidx}
+\title{\textbf{Interdisciplinary Mathematical Modeling}}
+\author{Warren Weckesser\\
+Department of Mathematics\\
+Colgate University}
+\makeindex
+\begin{document}
+\maketitle
+\tableofcontents
+%
+\chapter*{Foreword}
+\paragraph{Rough notes for now...}
+\begin{itemize}
+\item  I have intentionally avoided examples from physics.
+One goal of this book is
+to promote the use of mathematical models in fields outside of the
+physical sciences.
+\item The emphasis of the modeling is dynamic processes.
+The mathematical topics are differential equations, discrete maps,
+and Markov Chains (which are, in fact, linear maps).
+Optimization, linear programming and other related topics
+are \emph{not} covered in this book.
+\item Prerequisite for the book include calculus (single variable)
+and basic linear algebra.  The essential facts from linear algebra that
+are needed in this book are summarized in an appendix.
+\end{itemize}
+%
+\chapter{Introduction}
+%
+\chapter{Differential Equations}
+\section{What is a Differential Equation?}
+\section{Modeling with Differential Equations}
+\section{First Order Differential Equations}
+...
+\medskip
+\noindent
+If  $f'(x_{0})=0$, then $x(t)=x_{0}$ is a solution.  Such a constant
+solution is called an \emph{equilibrium solution}.\index{equilibrium}
+\subsection{Population Growth--Malthusian\index{Malthusian}}
+\subsection{The Logistic Equation\index{logistic equation}}
+... carrying capacity\index{carrying capacity}
+\section{Systems of Differential Equations}
+\subsection{Phase Plane Analysis}
+\subsection{Equilibrium Points and Stability}
+... The Jacobian\index{Jacobian} is ...
+\subsection{Higher Dimensional Systems}
+%
+\chapter[Dimensional Analysis]{Dimensional Analysis and Nondimensionalization}
+\section{Dimensions and Units}
+\section{Nondimensional Equations and Parameters}
+\section{Exercises}
+%
+\chapter{Applications of Differential Equations}
+\section{Economics}
+\subsection{Solow Growth Model}
+\section{Population Models}
+\subsection{Predator-Prey\index{predator-prey}}
+\subsection{Competing Species\index{competing species}}
+\section{War and Peace}
+\subsection{Battle of Attrition}
+\subsection{Arms Race}
+\section{Love and Marriage}
+\subsection{Romeo and Juliet\index{Romeo}\index{Juliet}}
+\subsection{Laura and Petrarch\index{Laura}\index{Petrarch}}
+\section{Epidemiology}
+\subsection{The SI Model\index{SI model}}
+\subsection{The SIS Model\index{SIS model}}
+\subsection{The SIR Model\index{SIR model}}
+\subsection{The SIQR Model\index{SIQR model}}
+\section{Exercises}
+
+%
+\chapter{Discrete Maps}
+\section{Modeling with Discrete Maps}
+\section{One-Dimensional Linear Maps}
+\section{One-Dimensional Nonlinear Maps}
+\subsection{Cobwebbing}
+\section{Higher Dimensional Maps}
+\section{Applications}
+\subsection{Marital Relationships}
+The model discussed in this section is based on the
+work of Gottman, Murray, \emph{et al}\cite{GM}.
+\section{Exercises}
+\chapter{Hybrid Models}
+\section{Introduction}
+Often, models of dynamical systems lead to equations that combine
+both differential equations and discrete maps.
+\subsection{Periodic Drug Doses}
+\section{Exercises}
+%
+\chapter{Markov Chains}
+\section{A Brief Introduction to Probability}
+\section{Markov Chains}
+\subsection{An Example: The Coin and Die Game}
+\section{Monopoly (tm)}
+\section{Baseball}
+\section{Exercises}
+\appendix
+\chapter{A Brief Review of Linear Algebra}
+\section{Matrices}
+\section{Eigenvalues and Eigenvectors\index{eigenvalue}\index{eigenvector}}
+\subsection{Shortcuts for $2\times 2$ Matrices}
+\chapter{Computer Tools for Computation and Graphics}
+%
+% Do Octave, Scilab, Maxima, and Yacas require the trademark symbol?
+%
+In this appendix I give a brief introduction to some
+readily available software packages that can be used to solve
+differential equations and discrete maps.  MATLAB (tm)
+is a widely used commercial package.  Octave (tm) and
+Scilab (tm) are free open source software packages. 
+\section{MATLAB (tm)}
+\section{Octave (tm)}
+\section{Scilab (tm)}
+\chapter{Computer Tools for Symbolic Computing}
+The computer can be a powerful tool for performing
+algebraic computations.  In this appendix I give a brief introduction
+to a few software packages that can do symbolic computations.
+Maple (tm) and Mathematica (tm) are widely used commercial
+packages.  Maxima (tm) and Yacas (tm) are free open-source
+programs.
+\section{Maple (tm)}
+\section{Mathematica (tm)}
+\section{Maxima (tm)}
+\section{Yacas (tm)}
+%
+\begin{thebibliography}{99}
+\bibitem{GM} Gottman, J. Murray, ...
+\end{thebibliography}
+\printindex
+\end{document}
