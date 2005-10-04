@@ -254,6 +254,8 @@ and several more non-equilibrium solutions to show all the possible behaviors.
 of $y$ as well as positive.)
 \end{question}
 
+
+
 \subsection{Solving First Order Differential Equations: Two Special Cases}
 
 In this section, we discuss
@@ -1170,7 +1172,159 @@ Here is the phase portrait:
 %
 \chapter{Applications of Differential Equations}
 \section{Economics}
-\subsection{Solow Growth Model}
+\subsection{Solow Growth Model\index{Solow growth model}}
+We consider a model from macroeconomics.
+Let $K$ be the capital,%
+\footnote{\emph{Capital} includes things that are owned to be used
+in production, such as buildings and manufacturing equipment.}%
+~$L$ the labor, and $Q$ the production output of an economy.
+We are interested in a \emph{dynamic} problem, so $K(t)$, $L(t)$ and
+$Q(t)$ are all functions of time, but we will suppress the $t$ argument.
+In elementary economics, one learns that a common assumption is that
+$Q$ can be expressed as function of $K$ and $L$:
+\begin{equation}
+   Q = f(K,L).
+   \label{EQN:PROD}
+\end{equation}
+%We make the reasonable assumptions that $f_K > 0$ and $f_L > 0$.
+%(The subscript denotes a partial derivative: $f_K = \partial f/\partial K$.)
+%These assumptions mean that $Q$ increases if either $K$ or $L$ increases.
+%That is, with more capital or more labor, we can produce more.
+%We also assume that $f_{KK} < 0$ and $f_{LL} < 0$.
+%These assumptions say that $f$ has \emph{diminishing returns} to the
+%inputs $K$ and $L$.  In other words, the larger $K$ is, the less is the
+%effect of increasing $K$, and the same holds for $L$.
+We assume that $f$ has, using economics terminology,
+\emph{constant returns to scale}.  Mathematically, this means
+that multiplying $K$ and $L$ by the same amount results in $Q$ being
+multiplied by the same amount.  That is, for any constant $b$,
+\[
+   f(bK,bL) = bf(K,L).
+\]
+For example, the Cobb-Douglas function\index{Cobb-Douglas function}
+$f(K,L) = K^{1/3}L^{2/3}$
+satisfies this assumption. 
+
+We make two more assumptions.
+We assume that a constant proportion of $Q$ is invested in capital.
+This means that the \emph{rate of change} of $K$ is proportional to
+$Q$:
+\begin{equation}
+    \frac{dK}{dt} = s Q,
+\label{EQN:DKDT}
+\end{equation}
+where $s > 0$ is the proportionality constant.
+We also assume that the labor force is growing according
+to the equation
+\begin{equation}
+   \frac{dL}{dt} = \lambda L,
+   \label{EQN:DLDT}
+\end{equation}
+where $\lambda > 0$ is the growth rate.  (As you know, this is a simple
+first order equation for $L$ which we can solve to find 
+$L = L_0 e^{\lambda t}$.)
+
+Now we will combine equations \eqref{EQN:PROD}, \eqref{EQN:DKDT},
+and \eqref{EQN:DLDT} to obtain a first order differential equation.
+First we express the relation $Q=f(K,L)$ in a different form.
+Because $f$ has constant returns to scale, we can write
+\begin{equation}
+   Q = f(K,L) = f\left(L\frac{K}{L},L\right) 
+        = Lf\left(\frac{K}{L},1\right) = Lg(k),
+   \label{EQN:QG}
+\end{equation}
+or
+\begin{equation}
+  \frac{Q}{L} = g(k)
+\end{equation}
+where we have introduced a new variable $k = K/L$
+(so $k$ is the \emph{ratio} of capital to labor),
+and we have defined a new function $g(k) = f(k,1)$.
+By differentiating the relation $K = kL$ we obtain
+\begin{equation}
+   \frac{dK}{dt}  = k\frac{dL}{dt} + \frac{dk}{dt} L
+\end{equation}
+so
+\begin{equation}
+\begin{split}
+   \frac{dk}{dt} & = \frac{1}{L} \left(\frac{dK}{dt} - \frac{dL}{dt} k\right) \\
+                    & = \frac{1}{L} \left( sQ - \lambda L k \right) \\
+                    & = s \frac{Q}{L} - \lambda k \\
+                    & = s g(k) - \lambda k .
+\end{split}
+\end{equation}
+Thus we have the \emph{Solow Growth Model} \cite{Solow}\index{Solow growth model}
+\begin{equation}
+  \frac{dk}{dt} = s g(k) - \lambda k
+\end{equation}
+which models the growth of the ratio of capital to labor
+under the assumptions given earlier.
+
+As an example, let's take the production function to be a
+Cobb-Douglas function $f(K,L) = K^{1/3}L^{2/3}$.
+Then $g(k) = f(k,1) = k^{1/3}$, and the differential equation for
+$k$ is
+\begin{equation}
+   \frac{dk}{dt} = sk^{1/3} - \lambda k .
+\label{eqn:solowcobb}
+\end{equation}
+By solving
+\[
+   sk^{1/3} - \lambda k = 0,
+\]
+we find the equilibrium solutions to be $k=0$ or $k=(s/\lambda)^{3/2}$.
+
+The following plot shows the graph of $\frac{dk}{dt}$ versus $k$ when $s=1$ and
+ $\lambda=1$.
+
+%\centerline{\includegraphics[width=2.75in,angle=270]{hw01n4b.eps}}
+\centerline{\fbox{PLOT HERE!}}
+
+%\vspace{0.25in}
+\noindent
+Changing $\lambda$ or $s$ will change the scale
+(and the numerical value of the non-zero equilibrium),
+but the graph of $dk/dt$ versus $k$ will always have the
+same qualitative shape as the graph shown above.
+
+We can see that if $k>0$ is small, $k$
+will increase, so the equilibrium $k=0$ is \emph{unstable}.
+The graph of $k(t)$ will have an inflection point when $k$ reaches
+$\left(\frac{s}{3\lambda}\right)^{3/2}$ (where $dk/dt$ has its maximum).
+$k$ will then converge asymptotically to the non-zero equilibrium.
+
+The equilibrium $k=(s/\lambda)^{3/2}$ is \emph{asymptotically stable}:
+any solution that starts near the equilibrium will converge to the equilibrium
+as $t\rightarrow \infty$.
+In fact, \emph{all} solutions with $k(0)>0$ will converge asymptotically to this
+equilibrium.
+
+A \emph{direction field}\index{direction field} of a first order differential equation is created by
+taking a grid of $(t,k)$ values, evaluating the right side of the differential
+equation at each point in the grid to find the slope of the solution $k(t)$
+through that point, and then plotting a short line segment with that slope
+at the point.
+The following shows a direction field and some solutions
+of \eqref{eqn:solowcobb} when $s=1$ and $\lambda=1$.
+
+%\centerline{\includegraphics[width=4in,angle=270]{hw01n4dirfield.eps}}
+\centerline{\fbox{DIRECTION FIELD HERE!}}
+
+\vspace{0.25in}
+
+What does this mean in terms of the capital $K$ and the labor $L$?
+Since $k(t) = K(t)/L(t)$, and $L(t) = L_0e^{\lambda t}$, if $k(t)$ converges to an
+asymptotically stable equilibrium $k_1$, then $K(t)$ must behave asymptotically like
+$k_1  L(t)$.  This means that, in the long term, $K(t)$ must 
+grow exponentially, with the
+same exponent as $L(t)$.
+This model predicts that in the long term, capital will grow
+exponentially along with the labor.
+If, for example, the capital is too low, it will rapidly increase until it becomes
+approximately proportional to the labor, and then it will settle into a long term behavior in
+which capital remains proportional to the labor.
+
+
 \section{Population Models}
 \subsection{Predator-Prey\index{predator-prey}}
 \subsection{Competing Species\index{competing species}}
@@ -1452,6 +1606,9 @@ programs.
 %
 \begin{thebibliography}{99}
 \bibitem{GM} Gottman, J. Murray, ...
+\bibitem{Solow}
+R.~M.~Solow, A Contribution to the Theory of Economic Growth,
+\emph{Quarterly Journal of Economics}, February, 1956, pp. 65--94.
 \end{thebibliography}
 \printindex
 \end{document}
