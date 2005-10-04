@@ -19,6 +19,9 @@
 %
 \newcommand{\BZ}{\vec{\textbf{0}}}  % Bold Zero (not "Z")
 %
+\newcommand\T{\rule{0pt}{2.6ex}}
+\newcommand\B{\rule[-1.2ex]{0pt}{0pt}}
+%
 \newcommand{\ds}{\displaystyle}
 %
 \title{\textbf{Interdisciplinary Mathematical Modeling}}
@@ -1363,11 +1366,537 @@ both differential equations and discrete maps.
 \chapter{Markov Chains}
 \section{A Brief Introduction to Probability}
 \section{Markov Chains}
-\subsection{An Example: The Coin and Die Game}
 
+A (finite) Markov chain is a process with a finite
+number of states (or outcomes, or events) in which
+the probability of being in a particular state
+at step $n+1$ depends only on the state occupied
+at step $n$.
+
+Let $S = \{S_1,S_2,\ldots,S_r\}$ be the possible states.
+Let
+\begin{equation}
+   \BP_n = \begin{bmatrix}
+               p_1 \\ p_2 \\ \vdots \\ p_r
+           \end{bmatrix}
+\end{equation}
+be the vector  of probabilities of each state
+at step $n$. That is, the $i$th entry of $\BP_n$
+is the probability that the process is in
+state $S_i$ at step $n$.
+For such a probability vector, $p_1+p_2+\cdots+p_r = 1$.
+
+Let
+\begin{equation}
+  p_{ij} = \textrm{Prob( State $n+1$ is $S_i$ $|$ State $n$ is $S_j$)},
+\end{equation}
+and let
+\begin{equation}
+   P = \begin{bmatrix}
+           p_{11} & p_{12} & \cdots & p_{1r} \\
+	   p_{21} & p_{22} & \cdots & p_{2r} \\
+	   \vdots  &  & \ddots \\
+	   p_{r1} &  & & p_{rr}
+       \end{bmatrix}
+\end{equation}
+That is, $p_{ij}$ is the (conditional) probability
+of being in state $S_i$ at step $n+1$ given that the
+process was in state $S_j$ at step $n$.
+$P$ is called the \emph{transition matrix}.
+$P$ contains all the conditional probabilities
+of the Markov chain.
+It can be useful to label the rows and columns
+of $P$ with the states, as in this example
+with three states:
+
+\medskip
+\centerline{%
+\begin{minipage}{3in}
+\begin{tabbing}
+  MMMMM \= MMMMMMMMMMMMMMM \kill
+    \> \hspace{1.5cm} State $n$ \\
+    \> \hspace{1cm} $\overbrace{S_1 \quad\; S_2 \quad \; S_3}$ \\
+    State $n+1$ \> $\;\left\{\begin{matrix} S_1 \T\B \\ S_2 \B \\ S_3 \B \end{matrix}
+                          \begin{bmatrix}
+                              p_{11} & p_{12} & p_{13} \T\B \\
+			      p_{21} & p_{22} & p_{23} \B \\
+			      p_{31} & p_{32} & p_{33} \B
+                          \end{bmatrix}\right.$
+\end{tabbing}
+\end{minipage}
+}
+
+The fundamental property of a Markov chain is that 
+\begin{equation}
+   \BP_{n+1} = P\BP_{n}.
+\end{equation}
+Given an initial probability vector $\BP_0$,
+we can determine the probability vector at any
+step $n$ by computing the iterates of a linear map.
+
+The information contained in the transition matrix
+can also be represented in a \emph{transition diagram}.
+In a transition diagram, the states are arranged
+in a diagram, typically with a ``bubble''
+around each state.
+If $p_{ij} > 0$, then an
+arrow is drawn from state $j$ to state $i$, and the
+arrow is labeled with $p_{ij}$.  Examples are given
+in the following discussions.
+
+In these notes, we will consider two special cases
+of Markov chains: regular Markov chains and absorbing
+Markov chains.
+Generalizations of Markov chains, including
+continuous time Markov processes and infinite
+dimensional Markov processes, are widely studied,
+but we will not discuss them in these notes.
+%
+%
+\subsection*{Regular Markov Chains}
+
+\noindent
+\emph{Definition.} A Markov chain is a \emph{regular}
+Markov chain if some power of the transition
+matrix has only positive entries.
+That is, if we define the $(i,j)$ entry of $P^n$
+to be $p_{ij}^{(n)}$, then the Markov chain is
+regular if there is some $n$ such that
+$p_{ij}^{(n)}> 0$ for all $(i,j)$.
+
+\medskip
+If a Markov chain is regular, then no matter what the
+initial state, in $n$ steps there is a positive
+probability that the process is in \emph{any} of the states.
+
+\paragraph{Essential facts about regular Markov chains.}
+\begin{enumerate}
+\item
+$P^n\rightarrow W$ as $n\rightarrow\infty$, where
+$W$ is a constant matrix and all the columns of
+$W$ are the same.
+\item There is a unique probability vector
+$\BW$ such that $P\BW = \BW$.
+
+Note:
+\begin{enumerate}
+\item $\BW$ is a fixed point of the linear map $\BX_{i+1} = P\BX_i$.
+\item $\BW$ is an eigenvector associated with the eigenvalue $\lambda=1$.
+(The claim implies that the transition matrix $P$ of a regular
+Markov chain \emph{must} have the eigenvalue $\lambda=1$.
+Then $\BW$ is the eigenvector whose entries add up to $1$.)
+\item The matrix $W$ is $W = \begin{bmatrix} \BW & \BW & \cdots & \BW\end{bmatrix}$.
+\end{enumerate}
+\item $P^n\BP_0 \rightarrow \BW$ as $n\rightarrow\infty$ for \emph{any}
+initial probability vector $\BP_0$.
+Thus $\BW$ gives the long-term probability distribution of the
+states of the Markov chain.
+\end{enumerate}
+\paragraph{Example: Sunny or Cloudy.}
+A meteorologist studying the weather in a region
+decides to classify each day as simply \emph{sunny}
+or \emph{cloudy}.  After analyzing several years of weather records,
+he finds:
+\begin{itemize}
+\item the day after a sunny day is
+sunny $80$\% of the time, and cloudy $20$\% of the time; and
+\item the day after a cloudy day is
+sunny $60$\% of the time, and cloudy $40$\% of the time.
+\end{itemize}
+We can setup up a Markov chain to model this process.
+There are just two states: $S_1=$ \emph{sunny}, and $S_2 = $ \emph{cloudy}.
+The transition diagram is
+
+\medskip
+\centerline{%
+\includegraphics[width=4in]{fig/SunnyCloudyStateDiagram.eps}
+}
+
+\medskip
+\noindent
+and the transition matrix is
+\begin{equation}
+  P = \begin{bmatrix}
+          0.8 & 0.6 \\
+	  0.2 & 0.4 
+      \end{bmatrix}.
+\end{equation}
+We see that all entries of $P$ are positive, so the Markov
+chain is regular.  (The conditions of the 
+definition are satisfied when $n=1$.)
+
+To find the long-term probabilities of sunny and cloudy days,
+we must find the eigenvector of $P$ associated with the
+eigenvalue $\lambda=1$. We know from Linear Algebra that
+if $\BV$ is an eigenvector, then so is $c\BV$ for any
+constant $c\ne0$.  The probability vector $\BW$ is the
+eigenvector that is also a probability vector. That is,
+the sum of the entries of the vector $\BW$ must be $1$.
+
+We solve
+\begin{equation}
+\begin{split}
+   P\BW & = \BW \\
+   (P-I)\BW & = \BZ
+\end{split}
+\end{equation}
+Now
+\begin{equation}
+  P-I = \begin{bmatrix}
+            -0.2 &  0.6 \\
+	     0.2 & -0.6
+        \end{bmatrix}
+\end{equation}
+If you have recently studied Linear Algebra, you could probably
+write the answer down with no further work, but we will
+show the details here.
+We form the augmented matrix and use Gaussian elimination:
+\begin{equation}
+\begin{bmatrix}
+   -0.2 &  0.6 & \vdots & 0 \\
+    0.2 & -0.6 & \vdots & 0
+\end{bmatrix}
+\rightarrow
+\begin{bmatrix}
+   1 & -3 & \vdots & 0 \\
+   0 &  0 & \vdots & 0
+\end{bmatrix}
+\end{equation}
+which tells us $w_1 = 3w_2$, or $w_1=3s$, $w_2 = s$, where 
+$s$ is arbitrary, or
+\begin{equation}
+   \BW = s\begin{bmatrix} 3 \\ 1 \end{bmatrix}
+\end{equation}
+The vector $\BW$ must be a probability vector, so $w_1+w_2=1$.
+This implies $4s=1$ or $s=1/4$.
+Thus
+\begin{equation}
+   \BW = \begin{bmatrix} 3/4 \\ 1/4 \end{bmatrix}.
+\end{equation}
+This vector tells us that in the long run,
+the probability is $3/4$ that the process will be in state 1,
+and $1/4$ that the process will be in state 2.
+In other words, in the long run
+$75$\% of the days are sunny and $25$\% of the days
+are cloudy.
+%
+\paragraph{Examples: Regular or not?}
+Here are a few examples of determining whether or not a
+Markov chain is regular.
+\begin{enumerate}
+\item Suppose the transition matrix is
+\begin{equation}
+  P = \begin{bmatrix} 1/3 & 0 \\ 2/3 & 1 \end{bmatrix}.
+\end{equation}
+We find
+\begin{equation}
+ P^2 = \begin{bmatrix} (1/3)^2 & 0 \\ (2/3)(1+1/3) & 1 \end{bmatrix},
+ \quad
+ P^3 = \begin{bmatrix} (1/3)^3 & 0 \\ (2/3)(1+1/3+(1/3)^2) & 1 \end{bmatrix},
+\end{equation}
+and, in general,
+\begin{equation}
+ P^n = \begin{bmatrix} (1/3)^n & 0 \\ (2/3)(1+1/3+\cdots+(1/3)^{n-1}) & 1 \end{bmatrix}.
+\end{equation}
+The upper right entry in $P^n$ is $0$ for all $n$, so the Markov chain
+is \emph{not} regular.
+\item Here's a simple example that is not regular.
+\begin{equation}
+   P = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}
+\end{equation}
+Then
+\begin{equation}
+   P^2 = I, \quad P^3 = P, \quad \textrm{etc.}
+\end{equation}
+Since $P^n=I$ if $n$ is even and $P^n=P$ if $n$ is odd, $P$
+always has two entries that are zero.  Therefore the Markov
+chain is not regular.
+\item
+Let
+\begin{equation}
+  P = \begin{bmatrix}
+           1/5 & 1/5 & 2/5 \\
+	   0   & 2/5 & 3/5 \\
+	   4/5 & 2/5 & 0
+      \end{bmatrix}
+\end{equation}
+The transition matrix has two entries that are zero, but
+\begin{equation}
+  P^2 = \begin{bmatrix}
+           9/25 & 7/25 & 5/25 \\
+	   12/25 & 10/25 & 6/25 \\
+	   4/25 & 8/25 & 14/25
+        \end{bmatrix}.
+\end{equation}
+Since all the entries of $P^2$ are positive, the Markov chain
+is regular.
+\end{enumerate}
+%
+%
+%
+\subsection*{Absorbing Markov Chains}
+
+We consider another important class of Markov chains.
+A state $S_k$ of a Markov chain is called
+an \emph{absorbing state} if, once the Markov chains enters
+the state, it remains there forever.  In other words,
+the probability of leaving the state is zero.
+This means $p_{kk} = 1$, and $p_{jk} = 0$ for $j\ne k$.
+
+A Markov chain is called an \emph{absorbing chain}
+if
+\begin{enumerate}
+\item[(i)] it has at least one absorbing state; and
+\item[(ii)] for every state in the chain, the probability
+of reaching an absorbing state in a finite number
+of steps is nonzero.
+\end{enumerate}
+An essential observation for an absorbing Markov chain
+is that it will eventually enter an absorbing state.
+(This is a consequence of the fact that if
+a random event has a probability $p>0$ of occurring,
+then the probability that it does not occur is $1-p$,
+and the probability that it does not occur in $n$
+trials is $(1-p)^n$.  As $n\rightarrow\infty$, the
+probability that the event does not occur
+goes to zero.)
+The non-absorbing states in an absorbing Markov chain
+are called \emph{transient states}.
+
+\medskip
+Suppose an absorbing Markov chain
+has $k$ absorbing states and $\ell$ transient
+states.
+If, in our set of states, we list the absorbing
+states first, we see that the
+transition matrix has the form
+
+\medskip
+\centerline{%
+\begin{minipage}{3in}
+\begin{tabbing}
+  MMMMM \= MMMMMMMMMMMMMMM \kill
+    \> \hspace{0.8cm}Absorbing States \hspace{0.6cm}Transient States \\
+    \> \hspace{1cm} $\overbrace{S_1 \;\; S_2 \;\;\; \cdots\;\; S_k}$
+       \hspace{0.2cm} $\overbrace{\;\;S_{k+1} \quad \; \cdots \quad\;\; S_{k+\ell}\;\;}$ \\
+    \> $\begin{matrix}
+             S_1 \B \\
+	     S_2 \T \\
+	     \vdots \B \\
+	     S_{k}  \\
+	     S_{k+1}  \\
+	     \vdots \\
+	     S_{k+\ell}
+	\end{matrix}
+    \begin{bmatrix}
+         1 & 0 & \cdots & 0 & p_{1,k+1} & \cdots & p_{1,k+\ell} \T \\
+	 0 & 1 &        & \vdots  &   \vdots  &        & \vdots      \\
+	 \vdots & & \ddots & 0\\
+	 0      & \cdots & 0 & 1       & p_{k,k+1} & \cdots & p_{k,k+\ell} \\
+	 0      & \cdots & \cdots & 0 & p_{k+1,k+1} & \cdots & p_{k+1,k+\ell} \\
+	 \vdots & & & \vdots & \vdots & & \vdots \\
+	 0  & \cdots & \cdots & 0 & p_{k+\ell,k+1} & \cdots & p_{k+\ell,k+\ell}
+    \end{bmatrix}$
+\end{tabbing}
+\end{minipage}
+}
+
+% \begin{equation}
+%     \begin{bmatrix}
+%          1 & 0 & \cdots & 0 & p_{1,k+1} & \cdots & p_{1,k+\ell} \\
+% 	 0 & 1 &        & \vdots  &   \vdots  &        & \vdots      \\
+% 	 \vdots & & \ddots & 0\\
+% 	 0      & \cdots & 0 & 1       & p_{k,k+1} & \cdots & p_{k,k+\ell} \\
+% 	 0      & \cdots & \cdots & 0 & p_{k+1,k+1} & \cdots & p_{k+1,k+\ell} \\
+% 	 \vdots & & & \vdots & \vdots & & \vdots \\
+% 	 0  & \cdots & \cdots & 0 & p_{k+\ell,k+1} & \cdots & p_{k+\ell,k+\ell}
+%     \end{bmatrix}.
+% \end{equation}
+
+\medskip
+\noindent
+That is, we may partition $P$ as
+\begin{equation}
+  P = \begin{bmatrix}
+             I & R \\
+	     \textbf{0} & Q \\
+      \end{bmatrix}
+\end{equation}
+where $I$ is $k\times k$, $R$ is $k \times \ell$,
+\textbf{0} is $\ell\times k$ and $Q$ is $\ell\times \ell$.
+$R$ gives the probabilities of transitions from
+transient states to absorbing states, while $Q$
+gives the probabilities of transitions from
+transient states to transient states.
+
+Consider the powers of $P$:
+\begin{equation}
+  P^2 = \begin{bmatrix}
+             I & R(I+Q) \\
+	     \textbf{0} & Q^2 \\
+        \end{bmatrix},
+	\quad
+  P^3 = \begin{bmatrix}
+             I & R(I+Q+Q^2) \\
+	     \textbf{0} & Q^3 \\
+        \end{bmatrix},
+\end{equation}
+and, in general,
+\begin{equation}
+  P^n = \begin{bmatrix}
+             I & R(I+Q+Q^2+\cdots+Q^{n-1}) \\
+	     \textbf{0} & Q^n \\
+        \end{bmatrix}
+     = \begin{bmatrix}
+             I & R\sum_{i=0}^{n-1}Q^i \\
+	     \textbf{0} & Q^n \\
+        \end{bmatrix},
+\end{equation}
+
+\noindent
+Now I claim that\footnote{%
+There is a slight abuse of notation in the formula given.
+I use the symbol \textbf{0} to mean ``a matrix of zeros
+of the appropriate size''. The two \textbf{0}'s in the
+formula are not necessarily the same size.
+The \textbf{0} in the lower left is $\ell \times k$,
+while the \textbf{0} in the lower right is $\ell\times\ell$.}
+\begin{equation}
+  \lim_{n\rightarrow\infty} P^n
+   = \begin{bmatrix}
+             I & R(I-Q)^{-1} \\
+	     \textbf{0} & \textbf{0}
+     \end{bmatrix}
+\end{equation}
+That is, we have
+\begin{enumerate}
+\item $Q^n\rightarrow\textbf{0}$ as $n \rightarrow\infty$, and
+\item $\ds \sum_{i=0}^{\infty} Q^i = (I-Q)^{-1}$.
+\end{enumerate}
+The first claim, $Q^n\rightarrow\textbf{0}$, means that in the
+long run, the probability is $0$ that the process will be in 
+a transient state. In other words, the probability is $1$
+that the process will eventually enter an absorbing state.
+We can derive the second claim as follows.
+Let
+\begin{equation}
+   U = \sum_{i=0}^{\infty}Q^i = I + Q + Q^2 + \cdots 
+\end{equation}
+Then
+\begin{equation}
+   QU = Q\sum_{i=0}^{\infty}Q^i = Q + Q^2 + Q^3 + \cdots
+      = (I + Q + Q^2 + Q^3+\cdots) - I
+      = U-I.
+\end{equation}
+Then $QU=U-I$ implies
+\begin{equation}
+\begin{split}
+   U-UQ & = I \\
+   U(I-Q) & = I \\
+   U & = (I-Q)^{-1},
+\end{split}
+\end{equation}
+which is the second claim.
+(The claims can be rigorously justified, but for our purposes,
+the above arguments will suffice.)
+
+The matrix $R(I-Q)^{-1}$ has the following meaning.
+The column $i$ of $R(I-Q)^{-1}$ gives the probabilities of
+ending up in each of the absorbing states, given that the
+process started in the $i^{\textrm{th}}$ transient states.
+
+There is more information that we can glean from
+$(I-Q)^{-1}$.
+For convenience, call the transient states
+$T_1$, $T_2$, \ldots, $T_{\ell}$.
+(So $T_j = S_{k+j}$.)
+Let $V(T_i,T_j)$ be the expected number 
+of times that the process is in state $T_i$, given
+that it started in $T_j$.
+($V$ stands for the number of ``\textbf{v}isits''.)
+Also recall that $Q$ gives the probabilities
+of transitions from transient states to transient states,
+so
+\begin{equation}
+  q_{ij} = \textrm{Prob( State $n+1$ is $T_i$ $|$ State $n$ is $T_j$)} 
+\end{equation}
+I claim that $V(T_i,T_j)$ satisfies the following equation:
+\begin{equation}
+  V(T_i,T_j) = e_{ij} + q_{i1}V(T_1,T_j) + q_{i2} V(T_2,T_j)
+                 + \cdots + q_{i\ell}V(T_{\ell},T_j)
+\label{eqn:Vij}
+\end{equation}
+where
+\begin{equation}
+   e_{ij} = \begin{cases}
+                  1 & \textrm{if} \;i=j \\
+		  0 & \textrm{otherwise}
+            \end{cases}
+\end{equation}
+Why? Consider just the term $q_{i1} V(T_1,T_j)$.
+Given that the process started in $T_j$,
+$V(T_1,T_j)$ gives the expected number of times that the process
+will be in $T_1$.
+The number $q_{i1}$ gives the probability of making
+a transition from $T_1$ to $T_i$.
+Therefore, the product $q_{i1}V(T_1,T_j)$
+gives the \emph{expected number of transitions from} $T_1$ \emph{to} $T_i$,
+given that the process started in $T_j$.
+Similarly, $q_{i2}V(T_2,T_j)$ gives the expected number of transitions
+from $T_2$ to $T_i$, and so on.
+Therefore the total number of expected transition to $T_i$
+is $q_{i1}V(T_1,T_j)+q_{i2}V(T_2,T_j)+\cdots+q_{i\ell}V(T_{\ell},T_j)$.
+
+The expected number of transitions into a state is the same
+as the expected number of times that the process is in a state, except in
+one case.  Counting the \emph{transitions} misses the state
+in which the process started, since there is no ``transition''
+into the initial state.  This is why the term $e_{ij}$
+is included in \eqref{eqn:Vij}.  When we consider
+$V(T_i,T_i)$, we have to add 1 to the expected number of transitions
+into $T_i$ to get the correct expected number of times that the
+process was in $T_i$.
+
+Equation \eqref{eqn:Vij} is actually a set of $\ell^2$ equations,
+one for each possible $(i,j)$.  In fact, it is just one component
+of a matrix equation.
+Let
+\begin{equation}
+   N = \begin{bmatrix}
+            V(T_1,T_1) & V(T_1,T_2) & \cdots & V(T_1,T_{\ell}) \\
+	    V(T_2,T_1) & V(T_2,T_2) \\
+	       \vdots  &  &   \ddots \\
+	    V(T_{\ell},T_1) & & & V(T_{\ell},T_{\ell})
+       \end{bmatrix}
+\end{equation}
+Then equation \eqref{eqn:Vij} is the $(i,j)$ entry in the
+matrix equation
+\begin{equation}
+   N = I + QN.
+\label{eqn:determinesN}
+\end{equation}
+(You should check this yourself!)
+Solving \eqref{eqn:determinesN} gives
+\begin{equation}
+\begin{split}
+  N-QN & = I \\
+  (I-Q)N & = I \\
+       N & = (I-Q)^{-1}
+\end{split}
+\end{equation}
+Thus the $(i,j)$ entry of $(I-Q)^{-1}$ gives the expected number
+of times that the process is in the $i^{\textrm{th}}$ transient
+state, given that it started in the $j^{\textrm{th}}$
+transient state.
+It follows that the sum of the $i^{\textrm{th}}$ column of $N$
+gives the expected number of times that the process will be in 
+some transient state, given that the process started
+in the $j^{\textrm{th}}$ transient state.
+
+\paragraph{Example: The Coin and Die Game.}
 In this game there are two players, \emph{Coin}
 and \emph{Die}. \emph{Coin} has a coin, and \emph{Die} has a
-single six-sided die.
+single six-sided die. The rules are:
 
 \begin{itemize}
 \item
@@ -1382,15 +1911,148 @@ If the die turns up \textbf{6}, it is \emph{Coin}'s turn.
 Otherwise, \emph{Die} rolls again.
 \end{itemize}
 
-\paragraph{Class Exercise.}
-With a partner, play the game 20 times, with \emph{Coin}
-going first each time.
-Keep track of who wins each game, and the total
-number of coin flips and rolls of the die
-that takes place in each game.
+\noindent
+When it is \emph{Coin}'s turn, the probability
+is $1/2$ that \emph{Coin} will win and $1/2$ that
+it will become \emph{Die}'s turn.
+When it is \emph{Die}'s turn, the probabilities are
+\begin{itemize}
+\item $1/6$ that \emph{Die} will roll a \textbf{1} and win,
+\item $1/6$ that \emph{Die} will roll a \textbf{6}
+      and it will become \emph{Coin}'s turn, and
+\item $2/3$ that \emph{Die} will
+roll a \textbf{2}, \textbf{3}, \textbf{4}, or \textbf{5} and
+have another turn.
+\end{itemize}
 
-Then play 20 more games, but with \emph{Die} going first
-each time, and keep track of the same information.
+\noindent
+To describe this process as a Markov chain, we define
+four \emph{states} of the process:
+\begin{itemize}
+\item \emph{State 1}: \emph{Coin} has won the game.
+\item \emph{State 2}: \emph{Die} has won the game.
+\item \emph{State 3}: It is \emph{Coin}'s turn.
+\item \emph{State 4}: It is \emph{Die}'s turn.
+\end{itemize}
+We represent the possible outcomes in
+the following transition diagram:
+
+\medskip
+\centerline{%
+\includegraphics[width=4in]{fig/CoinAndDieStateDiagram.eps}
+}
+
+\medskip
+\noindent
+This is an absorbing Markov chain.  The absorbing
+states are State 1 and State 2, in which one of the players
+has won the game, and the transient states
+are State 3 and State 4.
+
+The transition matrix is
+\begin{equation}
+ P = \begin{bmatrix}
+         1 & 0 & 1/2 &  0  \\
+	 0 & 1 &  0  & 1/6 \\
+	 0 & 0 &  0  & 1/6 \\
+	 0 & 0 & 1/2 & 2/3 
+     \end{bmatrix}
+   = \begin{bmatrix}
+         1 & 0 & \vdots & 1/2 &  0  \\
+	 0 & 1 & \vdots &  0  & 1/6 \\
+	 \hdotsfor{5} \\
+	 0 & 0 & \vdots &  0  & 1/6 \\
+	 0 & 0 & \vdots & 1/2 & 2/3 
+     \end{bmatrix}
+   = \begin{bmatrix}
+         I & R \\
+	 \textbf{0} & Q 
+     \end{bmatrix}
+\end{equation}
+where
+\begin{equation}
+  R = \begin{bmatrix}
+            1/2 & 0 \\
+	     0  & 1/6
+      \end{bmatrix}
+  \quad\textrm{and}\quad
+  Q = \begin{bmatrix}
+            0 & 1/6 \\
+	    1/2 & 2/3
+      \end{bmatrix}.
+\end{equation}
+We find
+\begin{equation}
+  I-Q = \begin{bmatrix}
+            1  & -1/6 \\
+	  -1/2 & 1/3 
+        \end{bmatrix},
+\end{equation}
+so
+\begin{equation}
+  N = (I-Q)^{-1} = \begin{bmatrix}
+                 4/3 & 2/3 \\
+		 2   &  4
+               \end{bmatrix},
+\label{eqn:CDN}
+\end{equation}
+and
+\begin{equation}
+  R(I-Q)^{-1} = \begin{bmatrix}
+                   2/3 & 1/3 \\
+		   1/3 & 2/3
+                \end{bmatrix}
+\end{equation}
+Recall that the first column of $R(I-Q)^{-1}$
+gives the probabilities of entering State 1 or
+State 2 if the process starts in State 3.
+``Starts in State 3'' means \emph{Coin} goes first,
+and ``State 1'' means \emph{Coin} wins,
+so this matrix tells us that if \emph{Coin} goes
+first, the probability that \emph{Coin} will win
+is $2/3$, and the probability that
+\emph{Die} will win is $1/3$.
+Similarly, if \emph{Die} goes first,
+the probability that \emph{Coin} will win
+is $1/3$, and the probability that
+\emph{Die} will win is $2/3$.
+
+From \eqref{eqn:CDN}, we can also conclude the following:
+\begin{enumerate}
+\item If \emph{Coin} goes first, then the expected number of
+turns for \emph{Coin} is $4/3$, and the expected number of
+turns for \emph{Die} is $2$.  Thus the expected total number
+of turns is $10/3\approx 3.33$.
+\item If \emph{Die} goes first, then the expected number of
+turns for \emph{Coin} is $2/3$, and the expected number of
+turns for \emph{Die} is $4$.  Thus the expected total number
+of turns is $14/3\approx 4.67$.
+\end{enumerate}
+
+The following table gives the results of our
+``experiment'' with the Coin and Die Game along with
+the predictions of the theory.
+In class, a total of 220 games were played in which
+\emph{Coin} went first.
+\emph{Coin} won 138 times, and the total number of
+turns was 821, for an average of 3.73 turns per game.
+
+\medskip
+\centerline{
+\fbox{%
+\begin{tabular}{lrr}
+\emph{Quantity}  & \emph{Predicted} & \emph{Experiment} \\
+Percentage Won by Coin & 66.7     &   62.7      \\
+Average Number of Turns per Game & 3.33  & 3.73
+\end{tabular} 
+}}
+
+\medskip
+It appears that in our experiment, \emph{Die} won more
+often than predicted by the theory.
+Presumably if we played the game a lot more, the
+experimental results would approach the predicted results.
+
 
 \section{Monopoly (tm)}
 \section{Baseball}
