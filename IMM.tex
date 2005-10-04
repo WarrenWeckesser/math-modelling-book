@@ -9,10 +9,17 @@
 %
 \newcommand{\BA}{\vec{\textbf{a}}}
 \newcommand{\BB}{\vec{\textbf{b}}}
-\newcommand{\BX}{\vec{\textbf{x}}}
 \newcommand{\BF}{\vec{\textbf{f}}}
-\newcommand{\BZ}{\vec{\textbf{0}}}
+\newcommand{\BP}{\vec{\textbf{p}}}
+\newcommand{\BQ}{\vec{\textbf{q}}}
+\newcommand{\BU}{\vec{\textbf{u}}}
 \newcommand{\BV}{\vec{\textbf{v}}}
+\newcommand{\BW}{\vec{\textbf{w}}}
+\newcommand{\BX}{\vec{\textbf{x}}}
+%
+\newcommand{\BZ}{\vec{\textbf{0}}}  % Bold Zero (not "Z")
+%
+\newcommand{\ds}{\displaystyle}
 %
 \title{\textbf{Interdisciplinary Mathematical Modeling}}
 \author{Warren Weckesser\\
@@ -534,7 +541,624 @@ $\textrm{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-s^2}\,ds$.}
 
 
 \section{Systems of Differential Equations}
-\subsection{Phase Plane Analysis}
+\subsection{Phase Plane Analysis\index{phase plane}}
+\subsection{Planar Linear Systems}
+
+
+We consider the linear system of two first order
+differential equations
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = ax + by \\
+  \frac{dy}{dt} & = cx + dy
+\end{split}
+\end{equation}
+or equivalently,
+\begin{equation}
+  \frac{d\BX}{dt} = A\BX, \quad \textrm{where} \quad
+     \BX = \begin{bmatrix} x \\ y \end{bmatrix},
+     \quad \textrm{and} \quad
+     A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}.
+\label{eqn:linearsys}
+\end{equation}
+
+\subsection*{Solving the System}
+To solve this system, we first recall that the solution to the
+single equation
+\begin{equation}
+  \frac{dx}{dt} = a x
+\end{equation}
+is $x(t) = c e^{at}$: a constant multiplied by
+an exponential.  We also recall that the last problem of Homework 2
+was a linear system, and the solution to that problem can be
+written in vector form as
+\begin{equation}
+ \BX(t) = \begin{bmatrix} \frac{y_0}{2} \\ y_0 \end{bmatrix} e^{-t}
+            +\begin{bmatrix} -\frac{y_0}{2}+x_0 \\ 0 \end{bmatrix} e^{-3t}
+\end{equation}
+This solution is a combination of constant vectors
+multiplied by an exponential.
+This suggests that to solve~\eqref{eqn:linearsys},
+we look for a solution of the form
+\begin{equation}
+  \BX(t) = \BV e^{\lambda t}
+\end{equation}
+where $\BV$ is a constant vector, and $\lambda$ is a number.
+We note that $\BX(t) = \BZ$ is a solution to \eqref{eqn:linearsys},
+which we call the \emph{trivial solution}\index{trivial solution}.
+We would like to
+find nontrivival solutions, so we assume $\BV\ne \BZ$.
+
+By substituting our ``guess'' into the differential equation, we
+find
+\begin{equation}
+  \lambda \BV e^{\lambda t} = A\left(\BV e^{\lambda t}\right)
+       = A\BV e^{\lambda t}
+\end{equation}
+or, after canceling $e^{\lambda t}$ and rearranging,
+\begin{equation}
+   A\BV = \lambda \BV.
+\label{eqn:eigenvalueprob}
+\end{equation}
+This is the \emph{eigenvalue problem}\index{eigenvalue problem}
+for the matrix $A$.
+To solve \eqref{eqn:linearsys}, we must find
+the eigenvalues ($\lambda$) and
+the corresponding eigenvectors ($\BV$) of $A$.
+
+Recall from linear algebra that an $n\times n$ matrix
+has at most $n$ eigenvalues, and always has at least
+one eigenvalue.  Thus for our $2\times 2$
+system, we expect to find one or two eigenvalues.
+A ``typical'' or ``generic'' $2\times 2$ matrix
+will have two eigenvalues, and that is the case
+we will study.  The case where there is just one
+eigenvalue is also important, but we will not pursue
+it in this course.
+
+An eigenvalue may be real or complex. We note that
+if $\lambda$ is a complex eigenvalue of $A$, then
+the corresponding eigenvector $\BV$ must also be
+complex. Moreover, by taking the complex conjugate
+of both sides of~\eqref{eqn:eigenvalueprob},
+we find
+\begin{equation}
+\begin{split}
+   (A\BV)^* & = (\lambda \BV)^* \\
+   A\BV^* & = \lambda^* \BV^*
+\end{split}
+\end{equation}
+(where $z^*$ is the complex conjugate of $z$).
+The second equation follows from the first
+by using the multiplicative property of the conjugate
+$(wz)^* = w^* z^*$, and
+by noting that
+$A$ is a real matrix, so $A^*=A$.
+The second equation says that $\lambda^*$ is also an eigenvalue,
+with a corresponding eigenvector $\BV^*$.
+The short summary is, for a real matrix $A$,
+\emph{complex eigenvalues always occur in complex conjugate
+pairs}.
+
+Finally, it is not hard to verify that if $\BX_1(t)$ and
+$\BX_2(t)$ are solutions to \eqref{eqn:linearsys}, then
+so is $c_1 \BX_1(t) + c_2\BX_2(t)$ for any constants
+$c_1$ and $c_2$.  Equation \eqref{eqn:linearsys} is
+a pair of coupled first order equation, so we expect the
+general solution to have two arbitrary constants.
+In fact, the general solution must have the form
+\begin{equation}
+  \BX(t) = c_1 \BX_1(t) + c_2 \BX_2(t).
+\end{equation}
+We'll find the general solution in two cases: real and distinct eigenvalues,
+and complex eigenvalues.
+
+\paragraph{Real, distinct eigenvalues.}
+Suppose that $A$ has real eigenvalues $\lambda_1$
+and $\lambda_2$, and $\lambda_1 \ne \lambda_2$.
+Let $\BV_1$ and $\BV_2$ be corresponding eigenvectors.
+The general solution is
+\begin{equation}
+\textrm{\framebox{%
+ $\BX(t) = c_1 \BV_1 e^{\lambda_1 t} + c_2 \BV_2 e^{\lambda_2 t}$
+}}
+\label{eqn:gensolreal}
+\end{equation}
+where $c_1$ and $c_2$ are arbitrary constants.
+
+\paragraph{Complex eigenvalues.}
+Because the matrix $A$ is real, we know that complex eigenvalues must
+occur in complex conjugate pairs.
+Suppose $\lambda_1 = \mu + i\omega$, with eigenvector
+$\BV_1=\BA+i\BB$ (where $\BA$ and $\BB$ are real vectors).
+If we use the formula for real eigenvalues,
+we obtain
+\begin{equation}
+ \BX = c_1 \BV_1 e^{\lambda_1 t} + c_2 \BV_1^* e^{\lambda_1^* t} 
+\end{equation}
+where $z^*$ denotes the complex conjugate of $z$.
+This expression is a solution to the differential equations.
+However, for arbitrary $c_1$ and $c_2$, this expression will
+generally be complex-valued, and we want a \emph{real-valued}
+solution.
+We derive such a solution based on the following observation:
+\emph{If the matrix $A$ has only real elements, and} $\BX(t)$
+\emph{is a complex solution to the linear system of differential equations,
+then the real and imaginary parts of} $\BX(t)$
+\emph{are also solutions
+to the differential equation.}  (We take the ``imaginary part''
+to be the coefficient of $i$, so the imaginary part is also
+a real-valued solution.)  This claim is easily verified:
+Assume $\BX(t) = \BP(t) + i \BQ(t)$ is a solution to
+$d\BX/dt = A\BX$.  Then
+\begin{equation}
+  \frac{d\BP}{dt} + i\frac{d\BQ}{dt} = A(\BP+i\BQ) = A\BP + iA\BQ
+\end{equation}
+Two complex expressions are equal if and only if their real
+and imaginary parts are equal, so this equation implies
+\begin{equation}
+  \frac{d\BP}{dt} = A\BP \quad \textrm{and} \quad
+  \frac{d\BQ}{dt} = A\BQ.
+\end{equation}
+
+Now consider the complex solution
+\begin{equation}
+  \BX_1(t) = \BV_1 e^{\lambda_1 t}
+    = (\BA+i\BB) e^{(\mu + i\omega)t}
+\end{equation}
+To separate this into its real and imaginary parts, we use
+\emph{Euler's formula}\index{Euler's formula}:
+$e^{i\theta} = \cos\theta + i \sin\theta$.
+Then
+\begin{equation}
+\begin{split}
+  \BX_1(t) & = \BV_1 e^{\lambda_1 t} \\
+     & = (\BA+i\BB) e^{(\mu + i\omega)t} \\
+     & = (\BA+i\BB)e^{\mu t} e^{i\omega t} \\
+     & = e^{\mu t} (\BA+i\BB)(\cos \omega t + i\sin \omega t) \\
+     & = e^{\mu t} \left(\BA\cos\omega t - \BB\sin\omega t + i(\BA\sin\omega t + \BB\cos\omega t)\right) \\
+     & = \left[e^{\mu t}\left(\BA\cos\omega t - \BB\sin\omega t \right) \right]
+         + i \left[e^{\mu t}\left(\BA\sin\omega t + \BB\cos\omega t\right) \right]
+\end{split} 
+\end{equation}
+The real part of this solution is 
+$\BU(t) = e^{\mu t}\left(\BA\cos\omega t - \BB\sin\omega t \right)$
+and the imaginary part (i.e. the coefficient of $i$) is
+$\BW(t) = e^{\mu t}\left(\BA\sin\omega t + \BB\cos\omega t\right)$.
+Each of these is real-valued, and by the observation given
+above, each is a solution to the differential equations.
+We may then write the general solution as
+\begin{equation}
+\textrm{\framebox{%
+  $\displaystyle \BX(t) = c_1 \BU(t) + c_2 \BW(t)
+     = c_1 e^{\mu t}\left(\BA\cos\omega t - \BB\sin\omega t \right)
+         + c_2 e^{\mu t}\left(\BA\sin\omega t + \BB\cos\omega t\right).$
+}}
+\label{eqn:gensolcomplex}
+\end{equation}
+Note that we never had to write down the second (complex conjugate)
+eigenvalue or eigenvector. 
+
+\subsection*{Classifying the Equilibrium and Its Stability}
+We now consider several subcases of the real and complex cases.
+Our goal is to understand the possible behaviors of solutions
+in the various cases.
+An important property of an equilibrium point is its
+\emph{stability}\index{stability}.
+The following describes three basic cases.
+
+\begin{itemize}
+\item If all solutions that start close to an equilibrium converge
+to the equilibrium asymptotically as $t\rightarrow\infty$, we
+say the equilibrium is
+\emph{asymptotically stable}\index{asymptotically stable}.
+\item If all solutions in sufficiently small neighborhoods
+of the equilibrium remain close to the equilibrium, we say
+the equilibrium is \emph{stable}\index{stable}.
+
+Note that asymptotic stability implies stability.
+\item If every neighborhood of the equilibrium contains solutions
+arbitrarily close to the equilibrium that leave the neighborhood, we say the equilibrium is \emph{unstable}\index{unstable}. 
+\end{itemize}
+
+\paragraph{Real, distinct eigenvalues.}
+Let $\lambda_1$ and $\lambda_2$ be real eigenvalues,
+$\lambda_1\ne\lambda_2$, and let $\BV_1$ and $\BV_2$
+be respective eigenvectors.  We consider the following
+cases.
+\begin{enumerate}
+\item $\pmb{\lambda_1 < \lambda_2 < 0}$.
+
+When both eigenvalues are negative, it is clear from
+\eqref{eqn:gensolreal}
+that $\ds\lim_{t\rightarrow\infty}\BX(t) = \BZ$. All
+trajectories approach $\BZ$ asymptotically.
+
+The equilibrium $\BZ$ is called a \emph{sink.}
+It is \emph{asymptotically stable}.
+
+\item $\pmb{0 < \lambda_1 < \lambda _2}$.
+
+In this case, all solutions diverge from the origin.
+However, for any solution $\BX(t)$, we have
+$\ds\lim_{t\rightarrow -\infty}\BX(t) = \BZ$, so all solutions 
+converge to $\BZ$ backwards in time.
+
+The equilibrium $\BZ$ is called a \emph{source.}
+It is \emph{unstable}.
+
+\item $\pmb{\lambda_1 < 0 < \lambda_2}$.
+
+Looking at \eqref{eqn:gensolreal}, we see that if $c_2=0$, the solution
+will converge to $\BZ$ as $t\rightarrow\infty$.
+If $c_2\ne 0$, then eventually the term $c_2\BV_2e^{\lambda_2 t}$ will
+dominate, and the solution will grow exponentially.
+Thus, there are solutions that converge to $\BZ$, but ``most''
+(i.e. those with $c_2\ne 0$) will not.
+
+The equilibrium $\BZ$ is called a \emph{saddle point}, 
+and it is \emph{unstable}.
+\item Zero eigenvalue.  It is also possible that
+one of the eigenvalues is zero.  The analysis
+of this case is left as an exercise.
+\end{enumerate}
+
+We can say a little more about cases 1 and 2.
+Consider the sink, where $\lambda_1 < \lambda_2 < 0$.
+We can write the general solution as
+\begin{equation}
+\BX(t) = e^{\lambda_2 t}\left[c_1\BV_1 e^{(\lambda_1-\lambda_2)t} + c_2\BV_2\right] 
+\end{equation} 
+Suppose $c_2\ne 0$.
+Since $\lambda_1-\lambda_2 < 0$, the first term in the
+square brackets goes to zero as $t$ increases,
+and for large positive $t$ we have
+\begin{equation}
+  \BX(t) \approx c_2\BV_2 e^{\lambda_2 t}.
+\end{equation}
+This says that as the solution converges to zero, it does
+so along the direction of $\BV_2$.
+That is, $\BX(t)$ will approach $\BZ$ along a curve that
+is tangent to the eigenvector $\BV_2$.
+
+In the case of a source, where $0 < \lambda_1 < \lambda_2$,
+we can write the general solution as
+\begin{equation}
+\BX(t) = e^{\lambda_1 t}\left[c_1\BV_1 + c_2\BV_2 e^{(\lambda_2-\lambda_1)t}\right] 
+\end{equation}
+Suppose $c_1\ne 0$.
+For large \emph{negative} $t$, the second term in the
+square brackets goes to zero while the first is constant, so we have
+\begin{equation}
+ \BX(t) \approx c_1 \BV_1 e^{\lambda_1 t}.
+\end{equation}
+This says that
+as $t\rightarrow-\infty$, the solution converges to
+$\BZ$ along the direction of $\BV_1$.  That is,
+$\BX(t)$ will approach $\BZ$ (as $t\rightarrow-\infty$)
+along a curve that is tangent to the eigenvector
+$\BV_1$.
+
+We can summarize these observations by saying
+that in the case of a source or sink,
+\emph{curved trajectories in the phase plane approach
+$\BZ$ along curves that are tangent to the eigenvector
+of the eigenvalue closest to zero.}
+By stating it this way, we don't have to worry
+about which eigenvalue we called $\lambda_1$ or
+$\lambda_2$.  This observation will be very useful
+when we sketch phase portraits.
+
+\paragraph{Complex eigenvalues.}
+We assume one eigenvalue is $\lambda_1 = \mu + i\omega$,
+and a corresponding eigenvector is
+$\BV_1 = \BA+i\BB$.
+We can rewrite the general solution~\eqref{eqn:gensolcomplex}
+as
+\begin{equation}
+\BX(t) = 
+     e^{\mu t} \left[ c_1 \left(\BA\cos\omega t - \BB\sin\omega t \right)
+         + c_2 \left(\BA\sin\omega t + \BB\cos\omega t\right)\right]
+\end{equation}
+Note that the only $t$ dependence in the expression in the square
+brackets is through $\sin\omega t$ and $\cos\omega t$.
+Thus the expression in the square brackets is periodic, with
+period $T = 2\pi/\omega$.
+All solutions therefore have an oscillatory behavior, 
+but whether the oscillation grows or decays depends on the
+sign of $\mu$.
+We have the following subcases.
+\begin{enumerate}
+
+\item $\pmb{\mu < 0}$.
+
+In this case, the amplitude of the oscillation decays
+exponentially.
+The trajectories spiral into the origin as $t$ increases,
+and $\ds\lim_{t\rightarrow\infty} \BX(t) = \BZ$.
+
+The equilibrium $\BZ$ is called a \emph{spiral sink.}
+It is \emph{asymptotically stable}.
+
+\item $\pmb{\mu = 0}$.
+
+Since $e^{0}=1$, the solution is periodic.
+In the phase plane, the trajectories are ellipses.
+
+The equilibrium $\BZ$ is called a \emph{center}, and it is
+\emph{stable}.
+
+\item $\pmb{\mu > 0}$.
+
+In this case, the amplitude of the oscillation grows
+exponentially.
+The trajectories spiral out of the origin as $t$ increases.
+Considering backwards time, we have
+$\ds \lim_{t\rightarrow-\infty} \BX(t) = \BZ$.
+
+The equilibrium $\BZ$ is called a \emph{spiral source.}
+It is \emph{unstable}.
+\end{enumerate}
+
+\subsection*{Sketching Phase Portraits for Planar Linear Systems}
+
+\noindent
+We summarize the procedure for sketching the phase portraits for
+the linear system
+\[
+    \frac{d\BX}{dt} = A\BX, \quad \textrm{where} \quad
+    \BX=\begin{bmatrix} x \\ y \end{bmatrix},
+    \quad \textrm{and} \quad
+    A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}.
+\]
+\paragraph{Procedure}
+\begin{enumerate}
+\item
+Find the eigenvalues of the matrix, and classify the equilibrium as a
+saddle, sink, source, spiral source, spiral sink, or center.
+(There are a few other special cases that we did not cover.)
+\item
+If the eigenvalues are real, find the associated eigenvectors, and
+draw the straight-line solutions.
+\item  Sketch the \emph{nullclines}, and indicate the
+directions of the vector field on the nullclines.
+
+The $x$ \emph{nullcline} is the line where $\frac{dx}{dt}=0$,
+so $ax+by=0$. Along this line, the vector field is vertical, so trajectories
+must have a vertical tangent when they cross this line.
+
+The $y$ \emph{nullcline} is the line where $\frac{dy}{dt}=0$, so
+$cx+dy=0$.  Along this line,the vector field is horizontial, so
+trajectories must have a horizontal tangent when they cross this line.
+ 
+\item Indicate the direction of the vector field on the $x$ and $y$ axes.
+Note that at the points $(1,0)$ and $(0,1)$, the
+vector field is given by the first and second columns of $A$, respectively.
+\item
+If the eigenvalues are real, distinct, and of the same sign,
+all trajectories except the straight-line solutons
+will approach the origin \emph{tangent to the eigenvector
+of the eigenvalue closest to zero}.
+\item Use the above information to sketch several representative trajectories.
+\end{enumerate}
+
+\subsection*{Examples}
+In the following examples, we will find the general solution and sketch
+the phase portrait for the given system of differential equations.
+\paragraph{Example 1.}
+\[
+  \frac{d\BX}{dt} = A \BX, \quad \textrm{where} \quad
+    A = \begin{bmatrix}
+                   \frac{1}{2} & -1 \\
+		   1 & -1 \\
+        \end{bmatrix}
+\]
+or equivalently,
+\[
+\begin{split}
+   \frac{dx}{dt} & = \frac{1}{2} x - y \\
+   \frac{dy}{dt} & = x - y
+\end{split}
+\]
+\begin{enumerate}
+\item
+The characteristic polynomial is $\lambda^2 +\frac{1}{2}\lambda+\frac{1}{2}$,
+and the eigenvalues are
+$\lambda = -\frac{1}{4}\pm i \frac{\sqrt{7}}{4}$.
+The eigenvalues are complex,
+and the real part is negative,
+so the origin is a \emph{spiral sink}.
+
+\item In the complex case, we don't need the eigenvectors
+to sketch the phase portrait, but we do need an eigenvector
+$\BV_1$ associated with $\lambda_1 = \mu + i \omega$
+to find the general solution.
+In this case, $\lambda_1 = -\frac{1}{4}+i\frac{\sqrt{7}}{4}$,
+so $\mu = -\frac{1}{4}$ and $\omega = \frac{\sqrt{7}}{4}$,
+and
+\begin{equation}
+A-\lambda_1 I =
+  \begin{bmatrix}
+     \frac{1}{2} - \left( -\frac{1}{4}+i\frac{\sqrt{7}}{4} \right) & -1 \\
+     1 & -1 -\left( -\frac{1}{4}+i\frac{\sqrt{7}}{4} \right)
+  \end{bmatrix}
+     = 
+  \begin{bmatrix}
+          \frac{3}{4}-i\frac{\sqrt{7}}{4} & -1 \\
+	  1 & -\frac{3}{4}-i\frac{\sqrt{7}}{4}
+  \end{bmatrix}
+\end{equation}
+From the first row of $A-\lambda_1 I$ we see that we can choose
+\begin{equation}
+  \BV_1 = \begin{bmatrix} 1 \\ \frac{3}{4}-i\frac{\sqrt{7}}{4} \end{bmatrix}
+   = \begin{bmatrix} 1 \\ \frac{3}{4} \end{bmatrix}
+      + i \begin{bmatrix} 0 \\ -\frac{\sqrt{7}}{4} \end{bmatrix}
+\end{equation}
+So
+\begin{equation}
+  \BA = \begin{bmatrix} 1 \\ \frac{3}{4} \end{bmatrix}
+  \quad \textrm{and} \quad
+  \BB = \begin{bmatrix} 0 \\ -\frac{\sqrt{7}}{4} \end{bmatrix}
+\end{equation}
+The general solution is then
+\begin{multline}
+  \BX(t) = c_1 e^{-(1/4)t}
+      \left\{\begin{bmatrix} 1 \\ \frac{3}{4} \end{bmatrix} \cos\left( \sqrt{7}t/4\right)
+      - \begin{bmatrix} 0 \\ -\frac{\sqrt{7}}{4} \end{bmatrix}
+         \sin\left(\sqrt{7}t/4\right) \right\} \\
+	 +
+	  c_2 e^{-(1/4)t}
+	 \left\{
+	 \begin{bmatrix} 1 \\ \frac{3}{4} \end{bmatrix}
+	   \sin\left( \sqrt{7}t/4 \right)
+	  +
+	 \begin{bmatrix} 0 \\ -\frac{\sqrt{7}}{4} \end{bmatrix}
+	   \cos \left( \sqrt{7}t/4 \right)
+	   \right\}
+\end{multline}
+
+\item
+The $x$ nullcline is
+\[
+    \frac{1}{2} x - y = 0, \quad \textrm{or} \quad y = \frac{1}{2}x.
+\]
+At the point $(1,1/2)$, we have $\frac{dy}{dt} = 1/2 > 0$, so the
+vectors on the $x$ nullcline in the first quadrant point in the
+positive $y$ direction. (Since this problem is linear, they
+must point in the opposite direction in the opposite quadrant.)
+
+The $y$ nullcline is
+\[
+  x - y = 0, \quad \textrm{or} \quad y = x.
+\]
+At the point $(1,1)$, we have $\frac{dx}{dt} = -1/2$, so the
+vectors on the $y$ nullcline in the first quadrant point
+in the negative $x$ direction.
+\item The vector field at $(1,0)$ is
+$\begin{bmatrix} 1/2 \\ 1\end{bmatrix}$, and at $(0,1)$ it
+is
+$\begin{bmatrix} -1 \\ -1 \end{bmatrix}$.
+Vectors in these directions are drawn on the positive
+$x$ and $y$ axes, respectively (and vector in the opposite
+directions are drawn on the negative $x$ and $y$ axes).
+\item
+(The eigenvalues are complex, so this guideline is not
+applicable.)
+\item
+Here is the phase portrait.  The dashed lines are the nullclines.
+We know the equilibrium is a spiral sink, so the trajectories
+will spiral into the origin.  We use the vector field on the
+nullclines and the axes to make a ``pretty good'' sketch
+of two of the spiral trajectories.
+
+\medskip
+\noindent
+\centerline{\includegraphics[width=3.5in]{matlab/LinPhPortExample1.eps}}
+\end{enumerate}
+
+\paragraph{Example 2.}
+We consider the linear system of differential equations
+with
+\[
+   A = \begin{bmatrix}
+            4 & -2 \\ 3 & -3
+       \end{bmatrix}
+\]
+\begin{enumerate}
+\item
+The characteristic polynomial is
+$\lambda^2 -\lambda -6$, and the eigenvalues are
+$\lambda_1 = -2$ and $\lambda_2 = 3$.
+We have real eigenvalues with opposite signs, so
+$\BZ$ is a \emph{saddle point}.
+\item
+The corresponding eigenvectors are
+$\BV_1 = \begin{bmatrix} 1 \\ 3 \end{bmatrix}$
+and
+$\BV_2 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$.
+These will correspond to straight-line solutions with
+slope $3$ and $1/2$, respectively, in the phase plane.
+
+The general solution is
+\begin{equation}
+\BX(t) = c_1 \begin{bmatrix} 1 \\ 3 \end{bmatrix} e^{-2t}
+   + c_2 \begin{bmatrix} 2 \\ 1 \end{bmatrix} e^{3t}.
+\end{equation}
+\item
+The $x$ nullcline is $4x-2y=0$, or $y = 2x$, and the
+$y$ nullcline is $3x-3y=0$, or $y=x$.  These are shown
+as dashed lines in the phase plane.
+\item
+The vector field at $(1,0)$ is $\begin{bmatrix} 4 \\ 3 \end{bmatrix}$,
+and the vector field at $(0,1)$
+is $\begin{bmatrix} -2 \\ -3 \end{bmatrix}$.  Vectors in the
+same direction as these are shown on the positive $x$ and $y$ axes,
+respectively.
+(They are in the opposite directions on the negative axes.
+\item
+(This guideline is not applicable, since the eigenvalues
+have opposite signs.)
+\item
+Here is the phase portrait:
+
+\noindent
+\centerline{\includegraphics[width=3.5in]{matlab/LinPhPortExample2.eps}}
+\end{enumerate}
+
+\paragraph{Example 3.}
+We'll look at one more example, this time with
+\[
+   A = \begin{bmatrix}
+            4 & 2 \\ 1 & 3
+       \end{bmatrix}
+\]
+\begin{enumerate}
+\item
+The characteristic polynomial is
+$\lambda^2 -7\lambda +10$, and the eigenvalues are
+$\lambda_1 = 2$ and $\lambda_2 = 5$.
+We have positive real eigenvalues, so
+$\BZ$ is a \emph{source}.
+\item
+The corresponding eigenvectors are
+$\BV_1 = \begin{bmatrix} 1 \\ -1 \end{bmatrix}$
+and
+$\BV_2 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$.
+These will correspond to straight-line solutions with
+slope $-1$ and $1/2$, respectively, in the phase plane.
+
+The general solution is
+\begin{equation}
+\BX(t) = c_1 \begin{bmatrix} 1 \\ -1 \end{bmatrix} e^{2t}
+   + c_2 \begin{bmatrix} 2 \\ 1 \end{bmatrix} e^{5t}.
+\end{equation}
+\item
+The $x$ nullcline is $4x+2y=0$, or $y = -2x$, and the
+$y$ nullcline is $x+3y=0$, or $y=-x/3$.  These are the
+dashed lines in the phase plane.
+\item
+The vector field at $(1,0)$ is $\begin{bmatrix} 4 \\ 1 \end{bmatrix}$,
+and the vector field at $(0,1)$
+is $\begin{bmatrix} 1 \\ 3 \end{bmatrix}$.  Vectors in the
+same direction as these are shown on the positive $x$ and $y$ axes,
+respectively.
+\item We have two distinct eigenvalues with the same sign, so
+we know that the equilibrium is a source, and all trajectories
+(except the straight-line solution associated with the
+bigger eigenvalue) will come out of the origin
+tangent to the eigenvector associated with the eigenvalue
+closest to zero.  In this case, the trajectories will
+be tangent to the direction of
+$\BV_1 = \begin{bmatrix}1 \\ -1 \end{bmatrix}$.
+\item
+Here is the phase portrait:
+
+\noindent
+\centerline{\includegraphics[width=3.5in]{matlab/LinPhPortExample3.eps}}
+\end{enumerate}
+
+
+
 \subsection{Equilibrium Points and Stability}
 ... The Jacobian\index{Jacobian} is ...
 \subsection{Higher Dimensional Systems}

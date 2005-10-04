@@ -57,3 +57,5 @@ plot(v(:,1),v(:,2),'k-','linewidth',lw)
 % plot(v(:,1),v(:,2),'k-','linewidth',lw)
 % [t,v] = ode45(@linearsys,[0 Tb],ic,opts,A);
 % plot(v(:,1),v(:,2),'k-','linewidth',lw)
+
+print('-depsc','LinPhPortExample1.eps')
