@@ -38,6 +38,9 @@ function noconclusion
     set(gca,'XTick',[0 .5 1])
     grid on
     
+    set(gcf,'paperposition',[0.25 2.5 4 3]);
+    print('-deps','noconclusion1.eps');
+    
     figure(2)
     clf
     r = 0;
@@ -76,6 +79,8 @@ function noconclusion
     set(gca,'fontsize',12,'fontweight','bold')
 %    set(gca,'XTick',[0 .5 1])
     grid on
+    set(gcf,'paperposition',[0.25 2.5 4 3]);
+    print('-deps','noconclusion2.eps')
     
     figure(3)
     clf
@@ -116,6 +121,9 @@ function noconclusion
 %    set(gca,'XTick',[0 .5 1])
     grid on
 
+    set(gcf,'paperposition',[0.25 2.5 4 3]);
+    print('-deps','noconclusion3.eps')
+    
 end
     
 function y = logisticmap(x,r)

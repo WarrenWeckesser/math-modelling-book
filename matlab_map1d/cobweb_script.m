@@ -29,7 +29,7 @@ function cobweb_script(dosave)
     plot([x0 x1],[x1 x1],'k-','linewidth',2)
     plot([x1 x1],[0 x1],'k--','linewidth',1.5)
     text(x1,ylabelcoord,'x_1','fontsize',12,'fontweight','bold')
-    
+    set(gcf,'paperposition',[0.25 2.5 4 3])
     if (dosave)
         pause
         print('-deps','logisticmap_cobweb1.eps')
@@ -89,6 +89,11 @@ function cobweb_script(dosave)
     grid on
     set(gca,'fontsize',12,'fontweight','bold')
     x
+    set(gca,'ytick',[0 .2 .4 .6 .8 1]);
+    if (dosave)
+        set(gcf,'paperposition',[0.25 2.5 4 3])
+        print('-deps','logisticmap_timeseries.eps')
+    end
     
     figure(3)
     clf
@@ -110,6 +115,10 @@ function cobweb_script(dosave)
         plot([x0 x0],[x0 x1],'k-','linewidth',2)
     end
     
+    if (dosave)
+        set(gcf,'paperposition',[0.25 2.5 4 3])
+        print('-deps','logisticmap_cobwebfinal.eps')
+    end
     
 end
     

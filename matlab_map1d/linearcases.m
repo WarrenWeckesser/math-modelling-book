@@ -3,14 +3,17 @@ function linearcases(w)
     cwlw = 1.5;
     figure(1)
     if (w == 1)
+        % positive values
         avals = [1.15 1.0 0.75 0];
         xmin = -2;
         xmax = 30;
     elseif (w == 2)
+        % negative values
         avals = [-0.75 -1.0 -1.15];
         xmin = -30;
         xmax = 30;
     else
+        % zero
         avals = [0];
         xmin = -2;
         xmax = 20;
@@ -59,5 +62,12 @@ function linearcases(w)
         grid on
         set(gca,'fontsize',12,'fontweight','bold')
         text(1,0.9*xmax,astr,'fontsize',12,'fontweight','bold')
+        
     end
+    if (w == 1)
+        print('-deps','linearcases_pos.eps');
+    elseif (w == 2)
+        print('-deps','linearcases_neg.eps');
+    end
+
 end

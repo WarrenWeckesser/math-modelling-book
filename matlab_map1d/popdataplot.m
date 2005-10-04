@@ -22,4 +22,7 @@ function popdataplot
     set(gca,'fontsize',12,'fontweight','bold')
     x
 
+    set(gcf,'paperposition',[0.25 2.5 4 3])
+    print('-depsc','popdataplot.eps')
+    
 end
