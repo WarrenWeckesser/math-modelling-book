@@ -1337,10 +1337,156 @@ which capital remains proportional to the labor.
 \section{Love and Marriage}
 \subsection{Romeo and Juliet\index{Romeo}\index{Juliet}}
 \subsection{Laura and Petrarch\index{Laura}\index{Petrarch}}
-\section{Epidemiology}
-\subsection{The SI Model\index{SI model}}
-\subsection{The SIS Model\index{SIS model}}
-\subsection{The SIR Model\index{SIR model}}
+\section{Epidemiolog\index{epidemiology}}
+\subsection{The SIR Model\index{SIR model} and Related Models}
+
+In these notes we consider some models of the spread of disease.
+These models lead to systems of differential equations.
+
+We will assume that the population has a fixed size $N$.
+We also assume that the people (or animals) in the population
+intermingle sufficiently fast that we do not have to take
+into account the geography of the community.
+Our model will not attempt to deal with the geographic spread
+of the disease. It will only look at the total number of
+people infected within the given population.
+
+\paragraph{The SI Model.}
+In the simplest model, we will consider just two classes
+of people: those who have been infected, and those who have
+not.
+Let $I(t)$ be the number of people infected at time $t$.
+(We'll often call this group the ``infectives''.)
+Let $S(t)$ be the number of people who have not
+been infected, but are susceptible to the disease.
+In our simplest model, we will assume that no one is immune,
+so each person is susceptible, or infected.  Thus
+\[
+   S+I = N.
+\]
+So we suppose we have a population of interacting people,
+some of whom are infected.  How fast will the susceptible
+people become infected?  We can think of this in terms
+of probability.  If we pick two people at random from
+the population, what is the probability that one is
+susceptible and the other is infected? The probability
+of picking a susceptible person is $S/N$, and the probability
+of picking an infective is $I/N$.  For large $N$ (i.e. for
+$N-1\approx N$), the probability that two random
+people will consist of one susceptible and one infected
+is $2(S/N)(I/N) = rSI$, where $r$ is a constant.
+Of course, an infective coming into contact
+with a susceptible does not necessarily spread the disease
+to the susceptible.
+We can take the ``infectiousness'' of the disease into
+account by adjusting the constant $r$.
+The gist of this argument is that we expect the rate
+of change of $S$ (which is the same as the rate of
+the spread of the disease in this model) to be proportional
+to the \emph{product} $SI$.
+We assume $r>0$.  Then the equation that gives the
+rate of change of $S$ is
+\begin{equation}
+  \frac{dS}{dt} = -r S I.
+\label{eqn:SI_S}
+\end{equation}
+The minus sign accounts for this being a \emph{decrease}
+in the number of susceptibles.
+In this simplest model, the spread of the disease
+means people move from being susceptible to
+infected, so any loss in $S$ must have a corresponding
+gain in $I$.  Thus
+\begin{equation}
+  \frac{dI}{dt} = r S I.
+\label{eqn:SI_I}
+\end{equation}
+Equations \eqref{eqn:SI_S} and \eqref{eqn:SI_I}
+constitute a \emph{system of differential equations}.
+Many dynamical processes are modeled with systems of differential
+equations; we'll see many more in this course.
+In fact, this is a \emph{nonlinear} system.
+Typically, nonlinear systems
+that arise in the real world can not be solved analytically.
+It turns out that this particular system can be solved.
+
+First, we check that the total population remains constant by adding these
+two equations.  We find
+\begin{equation}
+  \frac{dS}{dt} + \frac{dI}{dt} = 0
+\end{equation}
+and integrating from $0$ to $t$ gives
+\begin{equation}
+  S(t) + I(t) = S(0)+I(0).
+\end{equation}
+The initial population was $N$, so we have
+$S(t)+I(t)=N$.
+This means we can replace $S$ in \eqref{eqn:SI_I} with
+$N-I$ to obtain
+\begin{equation}
+  \frac{dI}{dt} = r(N-I)I.
+\end{equation}
+This is just another version of the logistic equation, 
+which we know how to solve.
+If $I(0)>0$, we know that $I(t)$ will approach the
+equilibrium $N$ as $t\rightarrow\infty$.
+Thus, this simple model predicts that
+everyone will become infected, no matter how small
+the initial population of infectives.
+
+\paragraph{The SIR Model.}
+For many diseases, people recover after being infected,
+and from then on they are immune to the disease.
+To incorporate this into our model of the spread of
+a disease, we consider a third class of \emph{recovered}
+people. (Calling them the recovered people is the
+optimistic point of view.  It turns out that the
+model is the same if we interpret this group as
+\emph{removed}, meaning deceased.)
+
+We assume that the rate at which the infected
+group changes to recovered is proportional to
+the number of infected people.
+
+\emph{Why? ...}
+
+So, if we have a group of infectives, and no
+one else is becoming infected, the equation
+for $I(t)$ is
+\begin{equation}
+  \frac{dI}{dt} = -\gamma I,
+\end{equation}
+where $\gamma > 0$ is the constant of proportionality.
+The parameter $\gamma$ depends on how fast people
+typically recover from the disease.
+The decrease in $I$ because of recovery results
+in a corresponding increase in $R(t)$.
+Putting this all together, we obtain the
+$SIR$ model:
+\begin{equation}
+\begin{split}
+   \frac{dS}{dt} & = -r S I \\
+   \frac{dI}{dt} & = r S I - \gamma I \\
+   \frac{dR}{dt} & = \gamma I
+\end{split}
+\label{eqn:SIR}
+\end{equation}
+As in the $SI$ model, we have assumed that the total
+population remains constant.  This is apparent in the equations:
+add them all together to find
+\begin{equation}
+   \frac{dS}{dt} + \frac{dI}{dt} + \frac{dR}{dt} = 0
+   \quad \textrm{which implies} \quad
+   S(t) + I(t) + R(t) = N.
+\end{equation}
+Also note that $R$ does not appear in the first two equations
+of \eqref{eqn:SIR}.  This means we can analyze the equations
+for $S$ and $I$, and then infer the behavior of $R$ afterwards.
+
+\medskip
+\noindent
+\emph{To be continued...}
+
+
 \subsection{The SIQR Model\index{SIQR model}}
 \section{Exercises}
 %
