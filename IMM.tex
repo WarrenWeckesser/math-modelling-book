@@ -7,6 +7,9 @@
 \usepackage{graphicx}
 \usepackage{makeidx}
 %
+%
+\newcommand{\Real}{\mathbb{R}}
+%
 \newcommand{\BA}{\vec{\textbf{a}}}
 \newcommand{\BB}{\vec{\textbf{b}}}
 \newcommand{\BF}{\vec{\textbf{f}}}
@@ -19,10 +22,12 @@
 %
 \newcommand{\BZ}{\vec{\textbf{0}}}  % Bold Zero (not "Z")
 %
-\newcommand\T{\rule{0pt}{2.6ex}}
-\newcommand\B{\rule[-1.2ex]{0pt}{0pt}}
+\newcommand{\T}{\rule{0pt}{2.6ex}}
+\newcommand{\B}{\rule[-1.2ex]{0pt}{0pt}}
 %
 \newcommand{\ds}{\displaystyle}
+%
+\newtheorem{theorem}{Theorem}
 %
 \title{\textbf{Interdisciplinary Mathematical Modeling}}
 \author{Warren Weckesser\\
@@ -37,10 +42,19 @@ Colgate University}
 \maketitle
 \tableofcontents
 %
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
 \chapter*{Foreword}
 \paragraph{Rough notes for now...}
 \begin{itemize}
-\item  I have intentionally avoided examples from physics.
+\item Goals: (i) Convert a description of a dynamical process
+into a set of mathematical equations.
+(ii) Use an appropriate combination of analysis and computer
+simulation to study the mathematical model.
+\item  I have intentionally minimized the
+number of examples from physics.
 One goal of this book is
 to promote the use of mathematical models in fields outside of the
 physical sciences.
@@ -54,17 +68,32 @@ and basic linear algebra.  The essential facts from linear algebra that
 are needed in this book are summarized in an appendix.
 \end{itemize}
 %
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
 \chapter{Introduction}
 %
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
 \chapter{Differential Equations}
-\section{What is a Differential Equation?}
+
 \section{Modeling with Differential Equations}
+\emph{Start with an example; discuss significance of a
+relationship between and function and its derivative...}
+%
 \section{First Order Differential Equations}
-...
-\medskip
+The general form of a first order (autonomous) differential
+equation is
+\[
+   \frac{dy}{dt} = f(y)
+\]
 \noindent
-If  $f'(x_{0})=0$, then $x(t)=x_{0}$ is a solution.  Such a constant
+If  $f'(y_{0})=0$, then $y(t)=y_{0}$ is a solution.  Such a constant
 solution is called an \emph{equilibrium solution}.\index{equilibrium}
+
 \subsection{Population Growth--Malthusian\index{Malthusian}}
 
 
@@ -259,19 +288,19 @@ of $y$ as well as positive.)
 
 
 
-\subsection{Solving First Order Differential Equations: Two Special Cases}
+\subsection{Separable First Order Differential Equations (*)}
 
-In this section, we discuss
+In this section and the next, we discuss
 two techniques for solving certain first order
 differential equations.
 The general form for a first order differential equation is
 \begin{equation}
    y'(t) = f(t,y)
 \end{equation}
-\paragraph{1. Separable Equations} ~
+In this section we discuss \emph{separable} equations,
+and in the next we discuss \emph{linear} equations.
 
-\vspace{0.2cm}
-\noindent
+\medskip
 If $f$ can be ``separated'' into a quotient of a function of $t$ and a function
 of $y$ as
 \begin{equation}
@@ -376,10 +405,10 @@ The final concise formula for the solution is
    p(t) = Ce^{rt + (a/\omega)\sin(\omega t)}
 \end{equation}
 where $C$ is an arbitrary constant.
-\paragraph{2. Linear Equations} ~
+%
+%
+\subsection{Linear First Order Differential Equations (*)}
 
-\vspace{0.2cm}
-\noindent
 If the first order differential equation has the form
 \begin{equation}
     y'(t) = p(t) y + g(t),
@@ -543,9 +572,36 @@ You may have seen the \emph{error function}
 $\textrm{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-s^2}\,ds$.}
 
 
+\subsection{Exercises}
+\begin{enumerate}
+\item For each of the following differential equations,
+determine the equilibrium solutions, sketch $f(y)$ as a function
+of $y$, and sketch the solutions where $y(0)=1/2$, $y(0)=1$, and
+$y(0)=3/2$.
+\begin{enumerate}
+\item $\ds y' = -2y + 1$
+\item $\ds y' = y(2-y)$
+\item $\ds y' = \sin(\pi y)$
+\end{enumerate}
+\item
+If possible, find a formula for the solutions to the
+differential equations in Exercise 1.
+\item
+\emph{...a question in which a description must be converted to
+a differential equation...}
+\item
+\emph{...another...}
+\end{enumerate}
 
+\section{Linear Systems of Differential Equations}
+\subsection{Systems -- An Introduction}
 
-\section{Systems of Differential Equations}
+We state without proof the following theorems.
+\begin{theorem}
+Uniqueness...
+\end{theorem}
+This theorem means that trajectories in phase
+space do not cross each other.
 \subsection{Phase Plane Analysis\index{phase plane}}
 \subsection{Planar Linear Systems}
 
@@ -1161,18 +1217,52 @@ Here is the phase portrait:
 \noindent
 \centerline{\includegraphics[width=3.5in]{matlab/LinPhPortExample3.eps}}
 \end{enumerate}
-
-
-
+%
+%
+%
+\section{Nonlinear Systems}
+We consider the general form of an autonomous
+system of differential equations
+\begin{equation}
+   \dot{\BX} = \BF\left(\BX\right),
+   \label{eqn:NONLIN}
+\end{equation}
+where $\BX \in \Real^{n}$.
 \subsection{Equilibrium Points and Stability}
 ... The Jacobian\index{Jacobian} is ...
+
+\begin{theorem}\index{stability}
+Let $\BX_0$ be an equilibrium point of
+\eqref{eqn:NONLIN}, and let $J$ be the Jacobian
+matrix of \eqref{eqn:NONLIN} at $\BX_0$.
+If the real parts of the eigenvalues of $J$
+are all negative, then $\BX_0$ is an
+asymptotically stable equilibrium point
+of \eqref{eqn:NONLIN}.
+\end{theorem}
 \subsection{Higher Dimensional Systems}
+\[
+  \dot{\BX} = \BF(\BX)
+\]
+\paragraph{Example.}
+\emph{Do a 3D example: solve for equilibria, find the
+Jacobian, determine stability.  At least one point
+should require numerical evaluation of the equilibrium
+and of the eigenvalues of the Jacobian.}
 %
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
 \chapter[Dimensional Analysis]{Dimensional Analysis and Nondimensionalization}
 \section{Dimensions and Units}
 \section{Nondimensional Equations and Parameters}
 \section{Exercises}
 %
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
 \chapter{Applications of Differential Equations}
 \section{Economics}
 \subsection{Solow Growth Model\index{Solow growth model}}
@@ -1338,9 +1428,9 @@ which capital remains proportional to the labor.
 \subsection{Romeo and Juliet\index{Romeo}\index{Juliet}}
 \subsection{Laura and Petrarch\index{Laura}\index{Petrarch}}
 \section{Epidemiology\index{epidemiology}}
-\subsection{The SIR Model\index{SIR model} and Related Models}
+\subsection{Basic Assumptions and the SI Model\index{SI model}}
 
-In these notes we consider some models of the spread of disease.
+In this chapter we consider some models of the spread of disease.
 These models lead to systems of differential equations.
 
 We will assume that the population has a fixed size $N$.
@@ -1433,7 +1523,11 @@ Thus, this simple model predicts that
 everyone will become infected, no matter how small
 the initial population of infectives.
 
-\paragraph{The SIR Model.}
+\subsection{The SIS Model\index{SIS model}}
+For many diseases, infectives can recover,
+but once they have rec
+
+\subsection{The SIR Model\index{SIR model}}
 For many diseases, people recover after being infected,
 and from then on they are immune to the disease.
 To incorporate this into our model of the spread of
@@ -1461,7 +1555,7 @@ typically recover from the disease.
 The decrease in $I$ because of recovery results
 in a corresponding increase in $R(t)$.
 Putting this all together, we obtain the
-$SIR$ model:
+$SIR$ model:\index{SIR model}
 \begin{equation}
 \begin{split}
    \frac{dS}{dt} & = -r S I \\
@@ -1491,6 +1585,9 @@ for $S$ and $I$, and then infer the behavior of $R$ afterwards.
 \section{Exercises}
 %
 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
 \chapter{Discrete Maps}
 %
 \section{Modeling with Discrete Maps}
@@ -1921,12 +2018,19 @@ In this case, $x^*$ is unstable (but it is not a source).
 The model discussed in this section is based on the
 work of Gottman, Murray, \emph{et al}\cite{GM}.
 \section{Exercises}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 \chapter{Hybrid Models}
 \section{Introduction}
 Often, models of dynamical systems lead to equations that combine
 both differential equations and discrete maps.
 \subsection{Periodic Drug Doses}
 \section{Exercises}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \chapter{Markov Chains}
 \section{A Brief Introduction to Probability}
@@ -2625,16 +2729,150 @@ experimental results would approach the predicted results.
 %
 \appendix
 %
-\chapter{Preliminary Mathematical Topics}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+\chapter{Mathematical Topics}
+%
+%
 \section{Complex Numbers}
 %
-\chapter{A Brief Review of Linear Algebra}
+\[
+    i = \sqrt{-1}
+\]
+Let $z=x+iy$
+
+\medskip
+\noindent
+Complex conjugate:
+\[
+   \overline{z} = x-iy.
+\]
+Magnitude or modulus:
+\[
+   \| z \| = \sqrt{x^2+y^2}
+\]
+Note
+\[
+   z \overline{z} = x^2+y^2 = \| z \|^2
+\]
+\[
+   \frac{1}{z} = \frac{\overline{z}}{\|z\|^2}
+\]
+Euler's formula\index{Euler's formula}
+\begin{equation}
+   e^{i\theta} = \cos\theta + i \sin\theta
+   \label{eqn:EULER}
+\end{equation}
+%
+\section{Geometric Series}\index{geometric series}
+If $0 < r < 1$, then
+\begin{equation}
+   \sum_{k=0}^{\infty} r^k = \frac{1}{1-r}
+\end{equation}
+\noindent
+\emph{Proof.}
+Let $S_n = \sum_{k=0}^{n} r^k$.
+Then
+\[
+\begin{split}
+    rS_n & = r\sum_{k=0}^n r^k 
+           = \sum_{k=0}^n r^{k+1} 
+	   = \sum_{k=1}^{n+1} r^k \\
+	 & = r^{n+1} - 1 + \sum_{k=0}^{n} r^k  \\
+	 & = r^{n+1} -1 + S_n \\
+\end{split}
+\]
+By solving for $S_n$ we obtain
+\[
+  S_n = \frac{1-r^{n+1}}{1-r}.
+\]
+Then
+\[
+  \sum_{k=0}^{\infty} r^k
+    = \lim_{n\rightarrow\infty} \sum_{k=0}^{n} r^n
+    = \lim_{n\rightarrow\infty} \frac{1-r^{n+1}}{1-r}
+    = \frac{1}{1-r}.
+\]
+%
+\section{A Few Calculus Reminders}
+
+A function $f$ is \emph{continuous} at at point $a$ if
+\[
+  \lim_{x\rightarrow a} f(x) = f(a).
+\]
+%
+%
+\section{Partial Derivatives}
+The \emph{partial derivative of $f(x,y)$ with respect to $x$},
+written $f_x(x,y)$ or $\frac{\partial f}{\partial x}$, is
+defined to be
+\[
+   f_x(x,y) = \lim_{h\rightarrow 0} \frac{f(x+h,y)}{h}.
+\]
+There is a corresponding definition for $f_y(x,y)$,
+and the generalizations to more variables
+(such as $f_y(w,x,y,z)$) should be clear.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\chapter{Linear Algebra}
+%
 \section{Matrices}
+A \emph{matrix} is an arrangement of numbers into
+a set of rows and columns.  We call a matrix with
+$m$ rows and $n$ columns an $m\times n$ matrix.
+For example,
+\[
+   A = \begin{bmatrix}
+           1 & 5 & -7 \\ 3 & 0 & 4
+       \end{bmatrix}
+\]
+is a $2\times 3$ matrix.
+%
 \section{Eigenvalues and Eigenvectors\index{eigenvalue}\index{eigenvector}}
-\subsection{Shortcuts for $2\times 2$ Matrices}
-In Linear Algebra, you learned how to find the eigenvalues
-and eigenvectors of matrices.  In this section, we give
-some shortcuts for $2\times 2$ matrices.
+%
+The \emph{eigenvalue problem}\index{eigenvalue problem}
+for an $n \times n$ matrix $A$
+is the problem of finding a number $\lambda$ and a nonzero vector $\BV$
+such that
+\begin{equation}
+    A\BV = \lambda \BV.
+    \label{eqn:EIGVALPROB}
+\end{equation}
+The number $\lambda$ is called an \emph{eigenvalue}, 
+and the vector $\BV$ is called an \emph{eigenvector}
+associated with the eigenvalue $\lambda$.
+Note that if $\BV$ is an eigenvector associated with
+$\lambda$, then so is $c\BV$ for any nonzero constant
+$c$.
+The set of all such vectors, augmented with the zero
+vector, is called the \emph{eigenspace}\index{eigenspace}
+associated with the eigenvalue $\lambda$.
+
+We can rewrite \eqref{eqn:EIGVALPROB} as
+\begin{equation}
+   \left(A - \lambda I\right) \BV = \BZ.
+\end{equation}
+Because we insist that eigenvectors be nonzero,
+this equation can only have a solution if
+the matrix $A-\lambda I$ is \emph{singular}.
+We know that a matrix is singular if and only if
+its determinant is zero, so the equation that determines
+the eigenvalues is
+\begin{equation}
+   \det\left(A-\lambda I\right) = 0.
+   \label{eqn:CHAREQN}
+\end{equation}
+The polynomial $\det\left(A-\lambda I\right)$ is called
+the \emph{characteristic polynomial}\index{characteristic polynomial}
+of $A$, and
+\eqref{eqn:CHAREQN} is 
+called the \emph{characteristic equation}\index{characteristc equation}.
+\section{Shortcuts for $2\times 2$ Matrices}
+In this section, we give
+some shortcuts for finding the eigenvectors of $2\times 2$ matrices.
 
 Let
 \[
@@ -2807,7 +3045,11 @@ then want to express $\BV_1$ as
 \]
 so $\BA = \begin{bmatrix} 3 \\ -2\end{bmatrix}$
 and $\BB = \begin{bmatrix} 0 \\ -2\sqrt{2} \end{bmatrix}$.)
-\chapter[Computer Tools]{Computer Tools for Computation and Graphics}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\chapter{Computer Tools}
 %
 % Do Octave, Scilab, Maxima, and Yacas require the trademark symbol?
 %
@@ -2815,10 +3057,22 @@ In this appendix I give a brief introduction to some
 readily available software packages that can be used to solve
 differential equations and discrete maps.  MATLAB (tm)
 is a widely used commercial package.  Octave (tm) and
-Scilab (tm) are free open source software packages. 
+Scilab (tm) are free open source software packages.
+
+The notes provide instructions for the following tasks:
+\begin{enumerate}
+\item Solve a system of algebraic equations.
+\item Solve a system of differential equations.
+\item Solve a $n$-dimensional map.
+\item Find the eigenvalues and eigenvectors of a matrix.
+\end{enumerate}
 \section{MATLAB (tm)}
 \section{Octave (tm)}
 \section{Scilab (tm)}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 \chapter{Symbolic Computing}
 The computer can be a powerful tool for performing
 algebraic computations.  In this appendix I give a brief introduction
@@ -2848,9 +3102,21 @@ M.~Olinick,
 \emph{An Introduction to Mathematical Models
 in the Social and Life Sciences},
 Addison-Wesley, Reading, 1978.
+\bibitem{Rinaldi}
+S.~Rinaldi, Laura and Petrarch: an intriguing case of
+cyclical love dynamics,
+\emph{SIAM J. Appl. Math.}, \textbf{58}(4), 1205--1221 (1998)
 \bibitem{Solow}
 R.~M.~Solow, A Contribution to the Theory of Economic Growth,
 \emph{Quarterly Journal of Economics}, February, 1956, pp. 65--94.
+\bibitem{Sprott}
+J.~C.~Sprott,
+Dynamical models of love,
+\emph{Nonlinear Dynamics, Psychology, and Life Sciences},
+\textbf{8}(3) (2004)
+\bibitem{StrogatzRJ}
+S.~H.~Strogatz, Love affairs and differential equations,
+\emph{Mathematics Magazine}, \textbf{61}(1) (1988)
 \end{thebibliography}
 \printindex
 \end{document}
