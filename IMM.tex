@@ -596,6 +596,77 @@ a differential equation...}
 \section{Linear Systems of Differential Equations}
 \subsection{Systems -- An Introduction}
 
+A general form for a \emph{system} of $n$ first order differential
+equations is
+\begin{equation}
+\begin{split}
+  \frac{dx_1}{dt} & = f_1(t,x_1,x_2,\ldots,x_n) \\
+  \frac{dx_2}{dt} & = f_2(t,x_1,x_2,\ldots,x_n) \\
+  \vdots \\
+  \frac{dx_n}{dt} & = f_n(t,x_1,x_2,\ldots,x_n)
+\end{split}
+\end{equation}
+If all the functions $f_i$ on the right do not explicitly depend on
+$t$, we say the system is \emph{autonomous};\index{autonomous} otherwise it is
+\emph{nonautonomous}.\index{nonautonomous}
+We may write the system in vector notation as
+\begin{equation}
+   \frac{d\BX}{dt} = \BF(t,\BX),
+      \quad
+      \textrm{where}
+      \quad
+      \BX(t) = \begin{bmatrix} x_1(t) \\ x_2(t) \\ \vdots \\ x_n(t)\end{bmatrix}
+      \quad
+      \textrm{and}
+      \quad
+      \BF(t,\BX) = \begin{bmatrix} f_1(t,\BX) \\ f_2(t,\BX) \\ \vdots \\ f_n(t,\BX) \end{bmatrix}
+\end{equation}
+We will focus on the autonomous system
+\begin{equation}
+   \frac{d\BX}{dt} = \BF(\BX).
+\end{equation}
+The function $\BF$ is called a \emph{vector field}.
+It assigns a vector to each point in $\mathbb{R}^n$.
+The vector function $\BX(t)$ is a curve in $\mathbb{R}^n$,
+parameterized by $t$.
+(In this context, $\mathbb{R}^n$ is often called
+the $\emph{phase space}$.)
+The derivative $\frac{d\BX}{dt}$ is a vector tangent to
+the curve.
+If we interpret $\BX(t)$ as the motion of a particle
+in $\mathbb{R}^n$, then $\frac{d\BX}{dt}$ is the \emph{velocity}
+of the particle.
+\emph{Solving} the differential equation means finding
+the vector function
+$\BX(t)$ such that its velocity matches the given vector field
+at all points along the curve.
+
+\paragraph{The Phase Plane.}\index{phase plane}
+In the two dimensional autonomous case, the phase space
+is called the \emph{phase plane}.
+The system of equations can be rewritten as
+\begin{equation}
+\begin{split}
+    \frac{dx}{dt} & = f(x,y) \\
+    \frac{dy}{dt} & = g(x,y)
+\end{split}
+\end{equation}
+\paragraph{Example: The SI Components of the SIR Model.}
+We have previously seen the SIR model of the spread of
+a disease in a population:
+\begin{equation}
+\begin{split}
+   \frac{dS}{dt} & = -rSI \\
+   \frac{dI}{dt} & = rSI -\gamma I \\
+   \frac{dR}{dt} & = \gamma I
+\end{split}
+\end{equation}
+Note that the first two equations do not depend on $R$.
+We can analyze the first two equations as a two dimensional
+system, and then infer the values of $R$ from the
+relation $S+I+R=N$, where $N$ is the (constant) size
+of the total population.
+
 We state without proof the following theorems.
 \begin{theorem}
 Uniqueness...
@@ -1865,8 +1936,17 @@ everyone will become infected, no matter how small
 the initial population of infectives.
 
 \subsection{The SIS Model\index{SIS model}}
-For many diseases, infectives can recover,
-but once they have rec
+%
+% Perhaps the SIS model could be given as an exercise:
+% state the assumption, and then have the student give
+% the equations.
+%
+For some diseases, surving an infection
+does not gaurantee immunity from subsequent infections.
+Infectives can recover,
+but once they have recovered, they return to the
+susceptible pool... 
+
 
 \subsection{The SIR Model\index{SIR model}}
 For many diseases, people recover after being infected,
