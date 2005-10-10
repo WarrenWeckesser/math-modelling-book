@@ -720,9 +720,7 @@ and $\lambda_2$, and $\lambda_1 \ne \lambda_2$.
 Let $\BV_1$ and $\BV_2$ be corresponding eigenvectors.
 The general solution is
 \begin{equation}
-\textrm{\framebox{%
- $\BX(t) = c_1 \BV_1 e^{\lambda_1 t} + c_2 \BV_2 e^{\lambda_2 t}$
-}}
+  \BX(t) = c_1 \BV_1 e^{\lambda_1 t} + c_2 \BV_2 e^{\lambda_2 t}
 \label{eqn:gensolreal}
 \end{equation}
 where $c_1$ and $c_2$ are arbitrary constants.
@@ -790,11 +788,11 @@ Each of these is real-valued, and by the observation given
 above, each is a solution to the differential equations.
 We may then write the general solution as
 \begin{equation}
-\textrm{\framebox{%
-  $\displaystyle \BX(t) = c_1 \BU(t) + c_2 \BW(t)
-     = c_1 e^{\mu t}\left(\BA\cos\omega t - \BB\sin\omega t \right)
-         + c_2 e^{\mu t}\left(\BA\sin\omega t + \BB\cos\omega t\right).$
-}}
+\begin{split}
+   \BX(t) & = c_1 \BU(t) + c_2 \BW(t) \\
+    &  =  c_1 e^{\mu t}\left(\BA\cos\omega t - \BB\sin\omega t \right)
+                 + c_2 e^{\mu t}\left(\BA\sin\omega t + \BB\cos\omega t\right).
+\end{split}
 \label{eqn:gensolcomplex}
 \end{equation}
 Note that we never had to write down the second (complex conjugate)
@@ -1421,6 +1419,349 @@ which capital remains proportional to the labor.
 \section{Population Models}
 \subsection{Predator-Prey\index{predator-prey}}
 \subsection{Competing Species\index{competing species}}
+%
+We consider an example that models the populations
+of two species that are competing for a common resource.
+In the absence of the other species, each species
+grows according to a logistic equation.
+However, the presence of one species lowers
+the \emph{per capita} growth rate of the other species.
+One way to write the equations for this system
+is
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = r_1\left(1-\frac{x}{K_1}-\beta_1 y\right)x \\
+  \frac{dy}{dt} & = r_2\left(1-\frac{y}{K_2}-\beta_2 x\right)y
+\end{split}
+\end{equation}
+Note that if $y(0)=0$, then $y(t)$ remains $0$, and
+the equation for $x(t)$ is
+\begin{equation}
+    \frac{dx}{dt} = r_1 \left(1-\frac{x}{K_1}\right),
+\end{equation}
+which is the familiar logistic equation.
+Similarly, if $x(0)=0$, then $x(t)$ remains $0$ and
+$y(t)$ is governed by a logistic equation.
+
+Let's do a careful analysis of a specific example,
+in which $r_1 = 1$, $K_1 = 1$, $\beta_1 = 1$, 
+$r_2 = 3/4$, $K_2 = 3/4$, and $\beta_2 = 2/3$.
+The differential equations are
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = (1-x-y)x \\
+  \frac{dy}{dt} & = \frac{3}{4}\left(1 -\frac{4}{3}y - \frac{2}{3}x\right)y .
+\end{split}
+\label{eqn:compspecexample}
+\end{equation}
+We'll find the equilibria, find the linearization at each
+equlibrium to determine the behavior near each one, and then
+use the nullclines of~\eqref{eqn:compspecexample} to understand
+what happens in the phase plane ``far away'' from the equilibria.
+
+\paragraph{Equilibria.}
+To find the equilibria, we must solve
+\begin{equation}
+\begin{split}
+(1-x-y)x & = 0 \\
+\frac{3}{4}\left(1 -\frac{4}{3}y - \frac{2}{3}x\right)y & = 0.
+\end{split}
+\label{eqn:exampleequil}
+\end{equation}
+The first equation holds if $x=0$ or $y = 1-x$.
+We consider each case separately in the second equation.
+\begin{itemize}
+\item
+If $x=0$, then the second equation of~\eqref{eqn:exampleequil} implies
+$y=0$ or $y=\frac{3}{4}$.
+
+So two equilibria are $(0,0)$ and $(0,3/4)$.
+\item
+If $y=1-x$, then the second equation
+of~\eqref{eqn:exampleequil} implies
+\begin{equation}
+  \left(1-\frac{4}{3}(1-x) - \frac{2}{3}x\right)(1-x) = 0
+  \implies x=1 \quad \textrm{or} \quad x=\frac{1}{2}.
+\end{equation}
+So two equilibria are $(1,0)$ and $(1/2,1/2)$.
+\end{itemize}
+
+\paragraph{Linearization at each equilibrium.}
+We have found the following equilibria: $(0,0)$, $(0,3/4)$, $(1,0)$, $(1/2,1/2)$.
+We now determine the behavior of~\eqref{eqn:compspecexample}
+near each equilibrium by finding the linearization at each
+equilibrium.
+We will need the Jacobian matrix:
+\begin{equation}
+  J = \begin{bmatrix}
+          1-2x-y & -x \\
+	  -\frac{1}{2}y & \frac{3}{4}-2y-\frac{1}{2}x
+      \end{bmatrix}
+\end{equation}
+For each equilibrium, we will find the Jacobian matrix
+and plot the phase portrait of the linearization.
+We make two remarks about the phase portraits of the linearized
+systems:
+\begin{enumerate}
+\item
+Recall from the notes on ``Linearization'' that we
+used the local coordinates $(u,v)$ for the linearization.
+In a linear system, the scale of the coordinates is not
+important: if you zoom in on the origin of a linear system,
+the phase portrait will look exactly the same.
+So, in the following phase portraits of the linearizations,
+the ranges on the axis are  from $-1$ to $1$.  These
+are \emph{not} the actual $x$ and $y$ ranges.
+\item
+In a population model such as this, $x<0$ and $y<0$
+are not relevant.  However, we will still plot negative
+values in the linearization.  It seems easier to simply
+plot the linear phase portrait, ignoring the actual
+meaning until later.  Also, recall that the linearized
+system is expressed in coordinates measured relative
+to the equilibrium.  If a coordinate of the equilibrium
+is positive, then a negative value of the corresponding
+local coordinates means that the population is less than
+the equilibrium value. It does not necessarily mean that
+the actual population is negative.
+\end{enumerate}
+
+\medskip
+
+At $(0,0)$, the Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+          1 & 0 \\
+	  0 & \frac{3}{4} \\
+      \end{bmatrix} .
+\end{equation}
+The eigenvalues are $\lambda_1 = 3/4$ and $\lambda_2 = 1$, with
+corresponding eigenvectors
+\[
+  \BV_1 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}
+  \quad \textrm{and}\quad 
+  \BV_2 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}.
+\]
+Since $\lambda_1 > 0$ and $\lambda_2 > 0$,
+the equilibrium $(0,0)$ is a
+\emph{source}.  The trajectories come out of $(0,0)$
+tangent to the eigenvector $\BV_1$.
+The phase portrait of the linearization at $(0,0)$ is
+shown in Figure~\ref{fig:CompSpecLinPlots}(a).
+%\centerline{%
+%\includegraphics{matlab/LinCS1.eps}
+%}
+%\noindent
+If we were to ``zoom in'' on the point $(0,0)$
+in~\eqref{eqn:compspecexample}, this is what the 
+phase portrait would look like.
+
+%\medskip
+
+At $(1,0)$, the Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+          -1 & -1 \\
+	  0 & \frac{1}{2} \\
+      \end{bmatrix}.
+\end{equation}
+The eigenvalues are $\lambda_1 = -1$ and $\lambda_2 = 1/2$,
+with corresponding eigenvectors
+\[
+  \BV_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}
+  \quad \textrm{and} \quad
+  \BV_2 = \begin{bmatrix} 1 \\ -3/2 \end{bmatrix}.
+\]
+Since $\lambda_1 < 0$ and $\lambda_2 > 0$, the equilibrium
+$(1,0)$ is a \emph{saddle point}.
+The phase portrait of the linearization at $(1,0)$ is
+shown in Figure~\ref{fig:CompSpecLinPlots}(b).
+
+%\centerline{%
+%\includegraphics{matlab/LinCS2.eps}
+%}
+
+%\medskip
+
+At $(0,3/4)$, the Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+          \frac{1}{4} & 0 \\
+	  -\frac{3}{8} & -\frac{3}{4} \\
+      \end{bmatrix}.
+\end{equation}
+The eigenvalues are $\lambda_1 = -\frac{3}{4}$ and
+$\lambda_2 = \frac{1}{4}$,
+with corresponding eigenvectors
+\[
+  \BV_1 = \begin{bmatrix} 1 \\ -3/8 \end{bmatrix}
+  \quad \textrm{and}\quad 
+  \BV_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}.
+\]
+Since $\lambda_1 < 0$ and $\lambda_2 > 0$,
+the equilibrium $(0,3/4)$
+is a \emph{saddle point}.
+The phase portrait of the linearization at $(0,3/4)$ is
+shown in Figure~\ref{fig:CompSpecLinPlots}(c).
+
+%\centerline{%
+%\includegraphics{matlab/LinCS3.eps}
+%}
+
+%\medskip
+
+At $(1/2,1/2)$, the Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+          -\frac{1}{2} & -\frac{1}{2} \\
+	  -\frac{1}{4} & -\frac{1}{2} \\
+      \end{bmatrix}.
+\end{equation}
+The eigenvalues are
+$\lambda_1 = \frac{-2-\sqrt{2}}{4} \approx -0.853 < 0$
+and $\lambda_2 = \frac{-2+\sqrt{2}}{4} \approx -0.147 < 0$,
+with corresponding eigenvectors
+\[
+  \BV_1 = \begin{bmatrix} \sqrt{2} \\ 1 \end{bmatrix}
+  \quad \textrm{and}\quad
+  \BV_2 = \begin{bmatrix} \sqrt{2} \\ -1 \end{bmatrix}.
+\]
+Since both eigenvalues are negative,
+the equilibrium at $(1/2,1/2)$ is a \emph{sink}.
+The phase portrait of the linearization at $(1/2,1/2)$ is
+shown in Figure~\ref{fig:CompSpecLinPlots}(d)
+
+%\centerline{%
+%\includegraphics{matlab/LinCS4.eps}
+%}
+
+%\medskip
+
+\begin{figure}
+\centerline{\includegraphics[width=2.5in]{matlab/LinCS1.eps}\includegraphics[width=2.5in]{matlab/LinCS2.eps}}
+\vspace{-0.2in}
+\centerline{\hspace{0.2in}\textbf{(a)}\hspace{2.1in}\textbf{(b)}}
+\centerline{\includegraphics[width=2.5in]{matlab/LinCS3.eps}\includegraphics[width=2.5in]{matlab/LinCS4.eps}}
+\vspace{-0.2in}
+\centerline{\hspace{0.2in}\textbf{(c)}\hspace{2.1in}\textbf{(d)}}
+\caption{Phase portraits of the linearizations at each equilibrium point
+of the competing species example:
+(a) at $(0,0)$; (b) at $(1,0)$; (c) at $(0,3/4)$; (d) at $(1/2,1/2)$.}
+\label{fig:CompSpecLinPlots}
+\end{figure}
+
+
+
+\paragraph{Nullclines.}
+Since the eigenvalues at each linearization
+all had nonzero real parts, each linearization
+provides a good approximation to the behavior
+of~\eqref{eqn:compspecexample} near the corresponding
+equilibrium point.
+However, the local linearizations do not tell us what is
+happening in the phase plane far from the equilibria.
+In a planar system such as this, the nullclines
+can provide useful information about the phase portrait.
+
+The $x$ nullcline is given by
+\begin{equation}
+   (1-x-y)x = 0 \implies x=0 \quad\textrm{or}\quad y = 1-x.
+\end{equation}
+So $\frac{dx}{dt}=0$ on the lines $x=0$
+and $y=1-x$.\footnote{In this example, and in all
+the planar linear systems that we have studied,
+the nullclines are straight lines. This is not true in general;
+nullclines can be curves.}
+
+The $y$ nullcline is given by
+\begin{equation}
+  \frac{3}{4}\left(1-\frac{4}{3}y - \frac{2}{3} x\right)y = 0
+\end{equation}
+which gives the lines
+\begin{equation}
+  y = 0 \quad \textrm{or} \quad y = \frac{3}{4} - \frac{1}{2}x.
+\end{equation}
+On these lines, $\frac{dy}{dt}=0$.
+
+The nullclines give the points in the plane where 
+$\frac{dx}{dt}=0$ or $\frac{dy}{dt}=0$.
+They form the boundaries of regions in the plane
+where $\frac{dx}{dt}$ and $\frac{dy}{dt}$ do not change sign.
+This can be very useful information.
+For example, if we know that in a certain region,
+$\frac{dx}{dt} > 0$ and $\frac{dy}{dt}>0$, we know that all
+vectors of the vector field point ``up and to the right'';
+this means all trajectories move up and to the right.
+If this region is in the first quadrant, it implies that
+all trajectories move away from the origin.
+
+In the following plot, the nullclines (that are not coordinate
+axes) are plotted with dashed lines, and trajectories
+are plotted as solid lines.  Since our equations give 
+a model for two species, we only include the first quadrant.
+Negatives values would not be meaningful, so we do not include them.
+
+\smallskip
+\centerline{%
+\fbox{\includegraphics[width=4.5in]{matlab/CompSpec.eps}}
+}
+
+\medskip
+\noindent
+In the region labeled \textsf{\textbf{A}},
+$\frac{dx}{dt}<0$ and $\frac{dy}{dt}<0$.
+All trajectories in this region (which extends out to infinity)
+must move down and to the left.  This implies that
+all these trajectories must either cross the $x$ or $y$ axes,
+or cross the nullclines that form the boundaries between
+\textsf{\textbf{A}} and \textsf{\textbf{B}}
+and between \textsf{\textbf{A}} and \textsf{\textbf{D}}.
+But the coordinate axes are themselves solutions,
+so solutions that do not start on the coordinate axes
+can not cross the axes.  Thus any trajectory that begins in
+\textsf{\textbf{A}} must eventually cross into
+\textsf{\textbf{B}} or \textsf{\textbf{D}}
+(or, in one special case, converge to the equilibrium
+at $(1/2,1/2)$).
+
+Now consider trajectories in \textsf{\textbf{B}}.
+In \textsf{\textbf{B}}, we have
+$\frac{dx}{dt} > 0$ and $\frac{dy}{dt} < 0$.
+All trajectories in this region move down and to the right.
+They can not cross either of the nullclines that
+form the upper and lower boundaries of the region,
+because the vector field on these nullclines points
+\emph{into} \textsf{\textbf{B}}.  Therefore,
+\emph{all trajectories in \textsf{\textbf{B}} must
+converge to $(1/2,1/2)$}.
+
+A similar argument applies to \textsf{\textbf{D}},
+where $\frac{dx}{dt} < 0$ and $\frac{dy}{dt} >0$.
+In this region, all trajectories move up and to the left,
+but they can't cross the nullclines, so
+\emph{all trajectories in \textsf{\textbf{D}} must
+converge to $(1/2,1/2)$}.
+
+Finally, in \textsf{\textbf{C}} we have
+$\frac{dx}{dt} >0$ and $\frac{dy}{dt} > 0$.
+All trajectories in this region move up and to the right.
+Therefore, they must all eventually cross into
+\textsf{\textbf{B}} or \textsf{\textbf{D}}, except
+for the special trajectory in \textsf{\textbf{C}}
+that converges to $(1/2,1/2)$.
+
+Our conclusion is that any trajectory that begins in the
+first quadrant, with $x(0)>0$ and $y(0)>0$, must
+converge to $(1/2,1/2)$. Note that we have concluded this
+without actually solving the differential equations
+given in~\eqref{eqn:compspecexample}.
+Thus, this population model
+predicts that the two species will co-exist in 
+a stable equilibrium.
+(But different parameters values can lead to different
+conclusions.)
+%
+%
 \section{War and Peace}
 \subsection{Battle of Attrition}
 \subsection{Arms Race}
