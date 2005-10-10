@@ -1354,7 +1354,7 @@ system of differential equations
 \end{equation}
 where $\BX \in \Real^{n}$.
 \subsection{Linearization and Stability of Equilibrium Points}
-
+\label{sec:DELinearization}
 
 In this section we discuss \emph{linearization},
 in which a linear system
@@ -1765,7 +1765,9 @@ which capital remains proportional to the labor.
 
 
 \section{Population Models}
+%
 \subsection{Predator-Prey\index{predator-prey}}
+%
 \subsection{Competing Species\index{competing species}}
 %
 We consider an example that models the populations
@@ -2113,9 +2115,11 @@ conclusions.)
 \section{War and Peace}
 \subsection{Battle of Attrition}
 \subsection{Arms Race}
+%
 \section{Love and Marriage}
 \subsection{Romeo and Juliet\index{Romeo}\index{Juliet}}
 \subsection{Laura and Petrarch\index{Laura}\index{Petrarch}}
+%
 \section{Epidemiology\index{epidemiology}}
 \subsection{Basic Assumptions and the SI Model\index{SI model}}
 
@@ -2291,7 +2295,7 @@ for $S$ and $I$, and then infer the behavior of $R$ afterwards.
 \section{Modeling with Discrete Maps}
 %
 \section{One-Dimensional Maps}
-
+\label{sec:OneDimMaps}
 We begin with the simplest model of population growth.
 Suppose, for example, a population increases by 15 percent each
 year.
@@ -2671,7 +2675,7 @@ and \ref{fig:noconclusion1}.
 %
 \begin{figure}
 \centerline{%
-\includegraphics{matlab_map1d/noconclusion2.eps}%
+\includegraphics[width=2.5in]{matlab_map1d/noconclusion2.eps}%
 }
 \caption{An example that shows why we can not determine
 the stability of a fixed point based on the linearization
@@ -2683,7 +2687,7 @@ In this case, $x^*$ is a source.}
 %
 \begin{figure}
 \centerline{%
-\includegraphics{matlab_map1d/noconclusion3.eps}%
+\includegraphics[width=2.5in]{matlab_map1d/noconclusion3.eps}%
 }
 \caption{An example that shows why we can not determine
 the stability of a fixed point based on the linearization
@@ -2695,7 +2699,7 @@ In this case, $x^*$ is a sink.}
 %
 \begin{figure}
 \centerline{%
-\includegraphics{matlab_map1d/noconclusion1.eps}%
+\includegraphics[width=2.5in]{matlab_map1d/noconclusion1.eps}%
 }
 \caption{Another example that shows why we can not determine
 the stability of a fixed point based on the linearization
@@ -2711,6 +2715,244 @@ In this case, $x^*$ is unstable (but it is not a source).
 \end{figure}
 
 \section{Higher Dimensional Maps}
+%
+\section{Linearization and Stability of Fixed Points}
+%
+In this section we discuss the \emph{linearization}\index{linearization}
+of a map at a fixed point. 
+We will focus on two-dimensional systems, but the
+techniques used here also work in $n$ dimensions.
+While there are a few differences, the steps that
+we follow here are fundamentally the same as those
+in Section~\ref{sec:DELinearization}.
+
+A two-dimensional map has the form
+\begin{equation}
+\begin{split}
+  x_{n+1} & = f(x_n,y_n) \\
+  y_{n+1} & = g(x_n,y_n)
+\end{split}
+\label{eqn:map}
+\end{equation}
+The constant solutions to this system are called the fixed points
+of the map.
+They satisfy the equations
+\begin{equation}
+    f(x^*,y^*) = x^*, \quad g(x^*,y^*) = x^*.
+\end{equation}
+
+Replacing $f(x,y)$ with its tangent plane
+approximation at $(x^*,y^*)$ converts the first equation in~\eqref{eqn:map}
+to
+\begin{equation}
+  x_{n+1} = f(x^*,y^*) + f_x(x^*,y^*)(x_n-x^*) + f_y(x^*,y^*)(y_n-y^*).
+\label{eqn:mapapprox1}
+\end{equation}
+We define $u_n = x_n - x^*$ and
+$v_n = y_n - y^*$.  Then $x_{n+1} = u_{n+1} + x^*$, and~\eqref{eqn:mapapprox1}
+becomes
+\begin{equation}
+   u_{n+1} + x^* = f(x^*,y^*) + f_x(x^*,y^*)u_n + f_y(x^*,y^*)v_n
+\end{equation}
+At a fixed point, $f(x^*,y^*) = x^*$, so we can cancel the $x^*$ on the
+left with the $f(x^*,y^*)$ on the right.  Applying the same arguments
+to the equation for $y_{n+1}$ results in the system
+\begin{equation}
+\begin{split}
+   u_{n+1} & = f_x(x^*,y^*)u_n + f_y(x^*,y^*)v_n \\
+   v_{n+1} & = g_x(x^*,y^*)u_n + g_y(x^*,y^*)v_n \\
+\end{split}
+\end{equation}
+This is the linearization\index{linearization}
+of~\eqref{eqn:map} at $(x^*,y^*)$.
+By defining the vector $\BU_n = \begin{bmatrix} u_n \\ v_n \end{bmatrix}$,
+we can write the system in matrix form as
+\begin{equation}
+  \BU_{n+1} = J\BU_n,
+\label{eqn:linearizedmap}
+\end{equation}
+where
+\begin{equation}
+   J = \begin{bmatrix}
+             f_x(x^*,y^*) & f_y(x^*,y^*) \\
+	     g_x(x^*,y^*) & g_y(x^*,y^*)
+       \end{bmatrix}
+\label{eqn:mapjac}
+\end{equation}
+is the Jacobian matrix\index{Jacobian matrix}.
+(Note that this is the same matrix used in the linearization
+at an equilibrium point of a system of differential equations.)
+
+
+\paragraph{What does the linearization tell us about the original system?}
+We have the following result:
+\emph{If neither eigenvalue has magnitude equal to $1$,
+then the behavior of the system \eqref{eqn:map}
+near $(x^*,y^*)$ is qualitatively the same as the behavior of the
+linear approximation \eqref{eqn:linearizedmap}.}
+The classification of the fixed point of the nonlinear map
+is the same as the classification of the origin in the linearization.
+
+In a one-dimensional map $x_{n+1} = f(x_n)$, with a fixed
+point $x^*$, the 
+Jacobian ``matrix'' is simply $f'(x^*)$.  We saw examples
+in Section~\ref{sec:OneDimMaps} that showed why we could not determine
+the stability of a fixed point based on just the linearization
+in the case $|f'(x^*)|=1$.  The above results are a generalization
+of that phenomena to higher dimensions.
+
+
+\paragraph{Example.}
+Consider the map
+\begin{equation}
+\begin{split}
+  x_{n+1} & = (1- x_n)x_n + b y_n \\
+  y_{n+1} & = \frac{y_n}{2} + x_n
+\end{split}
+\label{eqn:linearizationexample}
+\end{equation}
+where $b$ is a constant.
+This is a map of the form shown in~\eqref{eqn:map}, with
+\begin{equation}
+   f(x,y) = (1-x)x+by \quad \textrm{and} \quad g(x,y) = \frac{y}{2}+x.
+\end{equation}
+To find the fixed points, we must solve
+\begin{equation}
+   (1 - x)x + by = x, \quad \textrm{and} \quad \frac{y}{2}+x = y.
+\end{equation}
+From the second equation we have $y = 2x$; putting this into the first equation
+leads to
+\begin{equation}
+   x^2-2bx = 0
+\end{equation}
+and the solutions are
+\begin{equation}
+  x = 0 \quad \textrm{or} \quad x= 2b.
+\end{equation}
+Thus the fixed points are
+$(0,0)$ and $(2b,4b)$.
+In this example, we'll focus on the behavior near $(0,0)$.
+
+The Jacobian matrix 
+at a fixed point $(x^*,y^*)$ is
+\begin{equation}
+   J = \begin{bmatrix}
+          f_x(x^*,y^*) & f_y(x^*,y^*) \\
+	  g_x(x^*,y^*) & g_y(x^*,y^*) 
+       \end{bmatrix}
+     = \begin{bmatrix}
+          1-2x^* & b \\
+	   1    & \frac{1}{2}
+       \end{bmatrix}
+\end{equation}
+At the fixed point $(0,0)$, we find
+\begin{equation}
+  J = \begin{bmatrix}
+          1 & b \\
+	  1 & \frac{1}{2}
+      \end{bmatrix}
+\end{equation}
+The eigenvalues of the Jacobian are
+\begin{equation}
+  \lambda_1 = \frac{3}{4} - \frac{1}{2} \sqrt{\frac{1}{4}+4b}, \quad
+  \lambda_2 = \frac{3}{4} + \frac{1}{2} \sqrt{\frac{1}{4}+4b}.
+\label{eqn:exeigvals}
+\end{equation}
+The first thing to determine is whether the eigenvalues are
+complex or real.  The eigenvalues are complex if
+\begin{equation}
+  \frac{1}{4} + 4b < 0 \implies b < -\frac{1}{16}.
+\end{equation}
+So we have complex eigenvalues if $b < -\frac{1}{16}$ and real
+eigenvalues if $b \ge -\frac{1}{16}$.
+We treat each case separately.
+
+When $b < -\frac{1}{16}$, the eigenvalues are
+\begin{equation}
+   \lambda = \frac{3}{4} \pm \frac{i}{2}\sqrt{-\frac{1}{4}-4b}
+\end{equation}
+To classify the fixed point and determine its stability,
+we must determine whether the magnitude of the eigenvalues
+are greater than or less than one.  To do this, we'll find the
+value(s) of $b$, if any, where $|\lambda| = 1$.
+(Note that this is equivalent to $|\lambda|^2 = 1$.)
+We have
+\begin{equation}
+\begin{split}
+  1 & = |\lambda|^2 \\
+    & = \left(\frac{3}{4}\right)^2 + \left(\frac{1}{2}\sqrt{-\frac{1}{4}-4b} \right)^2 \\
+    & = \frac{1}{2} - b
+\end{split}
+\end{equation}
+which gives $b=-\frac{1}{2}$.
+So we have the following:
+\begin{itemize}
+\item
+If $b < -\frac{1}{2}$, then $|\lambda| > 1$, and $(0,0)$ is a spiral source.
+\item
+If $-\frac{1}{2} < b < -\frac{1}{16}$, then $|\lambda| < 1$, and $(0,0)$
+is a spiral sink.
+\end{itemize}
+Next we consider $b > -\frac{1}{16}$, where the eigenvalues are real.
+From~\eqref{eqn:exeigvals} we observe that $\lambda_1 < \frac{3}{4}$,
+and $\lambda_2 > \frac{3}{4}$, so we only need to determine
+if $\lambda_1 < -1$ or  $\lambda_2 > 1$.
+First, consider
+\begin{equation}
+\begin{split}
+   \lambda_1 & = -1 \\
+   \frac{3}{4} - \frac{1}{2} \sqrt{\frac{1}{4}+4b} & = -1 \\
+   \frac{1}{4}+4b & = \frac{49}{4} \\
+   b & = 3
+\end{split}
+\end{equation}
+So $\lambda_1 < -1$ if $b > 3$.
+
+Next consider
+\begin{equation}
+\begin{split}
+   \lambda_2 & = 1 \\
+   \frac{3}{4} + \frac{1}{2} \sqrt{\frac{1}{4}+4b} & = 1 \\
+   \frac{1}{4}+4b & = \frac{1}{4} \\
+   b & = 0
+\end{split}
+\end{equation}
+So $\lambda_2 < 1$ if $-\frac{1}{16} < b < 0$.
+Thus, we have
+\begin{itemize}
+\item
+If $-\frac{1}{16} < b < 0$, we have $-1 < \lambda_1 < 1$ and $\frac{3}{4} < \lambda_2 < 1$, so
+$(0,0)$ is a sink.
+\item
+If $0 < b < 3$, then $-1 < \lambda_1 < 1$ but $\lambda_2 > 1$, so 
+$(0,0)$ is a saddle.
+\item
+If $b > 3$, then $\lambda_1 < -1$ and $\lambda_2 > 1$, so
+$(0,0)$ is a source.
+\end{itemize}
+The five bulleted statements above give all the cases for the
+fixed point $(0,0)$.
+Figure~\ref{fig:LinearizationFPExamples} shows trajectories
+near the fixed point $(0,0)$ for several values of $\beta$.
+\begin{figure}
+\centerline{%
+\includegraphics[width=2.5in]{matlab/LinearizationFPExample_n1.25.eps}
+\includegraphics[width=2.5in]{matlab/LinearizationFPExample_n0.25.eps}
+}
+\centerline{%
+\includegraphics[width=2.5in]{matlab/LinearizationFPExample_p0.25.eps}
+\includegraphics[width=2.5in]{matlab/LinearizationFPExample_p3.50.eps}
+}
+\caption{Trajectories near $(0,0)$ of system
+\eqref{eqn:linearizationexample}. Upper left: $\beta=-1.25$, spiral source.
+Upper right: $\beta=-0.25$, spiral sink.
+Lower left: $\beta=0.25$, saddle.
+Lower right: $\beta=3.5$, source.}
+\label{fig:LinearizationFPExamples}
+\end{figure}
+
+
+
 \section{Applications}
 \subsection{Marital Relationships}
 The model discussed in this section is based on the
