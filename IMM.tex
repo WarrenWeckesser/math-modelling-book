@@ -94,7 +94,7 @@ equation is
 If  $f'(y_{0})=0$, then $y(t)=y_{0}$ is a solution.  Such a constant
 solution is called an \emph{equilibrium solution}.\index{equilibrium}
 
-\subsection{Population Growth--Malthusian\index{Malthusian}}
+\subsection{Unconstrained Population Growth}
 
 
 The simplest assumption for modeling the growth of a population
@@ -178,7 +178,7 @@ The simplest formula for such a growth rate is a straight line that has
 the value $r$ when $p=0$ and the value $0$ when $p=K$, as shown in
 Figure~\ref{fig:growthrate}.
 \begin{figure}
-\centerline{\includegraphics[width=3.25in]{matlab/logistic_percapita_growthrate.eps}} 
+\centerline{\includegraphics[width=3in]{matlab/logistic_percapita_growthrate.eps}} 
 \caption{Per capita growth rate for the logistic equation.}
 \label{fig:growthrate}
 \end{figure} 
@@ -193,7 +193,7 @@ For now, we'll learn as much as we can about its solutions without actually solv
 equation.  To do this, we plot the right side of \eqref{eqn:logistic} as a function of $p$.
 The graph is shown in Figure~\ref{fig:logisticrhs}.
 \begin{figure}
-\centerline{\includegraphics[width=3.25in]{matlab/logistic_growthrate.eps}} 
+\centerline{\includegraphics[width=3in]{matlab/logistic_growthrate.eps}} 
 \caption{A plot of $\frac{dp}{dt}$ as a function of $p$ for the logistic
 equation \eqref{eqn:logistic}.}
 \label{fig:logisticrhs}
@@ -226,7 +226,7 @@ In fact, $p(t)$ will approach $K$ asymptotically, but never reach it.
 A graph of a solution to the logistic equation~\eqref{eqn:logistic} is
 shown in Figure~\ref{fig:logisticsol}.
 \begin{figure}
-\centerline{\includegraphics[width=3.5in]{matlab/logistic_solution.eps}} 
+\centerline{\includegraphics[width=3in]{matlab/logistic_solution.eps}} 
 \caption{The graph of $p(t)$, a solution to the logistic
 equation \eqref{eqn:logistic}.}
 \label{fig:logisticsol}
@@ -593,7 +593,7 @@ a differential equation...}
 \emph{...another...}
 \end{enumerate}
 
-\section{Linear Systems of Differential Equations}
+\section{Systems of Differential Equations}
 \subsection{Systems -- An Introduction}
 
 A general form for a \emph{system} of $n$ first order differential
@@ -674,6 +674,62 @@ Uniqueness...
 This theorem means that trajectories in phase
 space do not cross each other.
 \subsection{Phase Plane Analysis\index{phase plane}}
+
+The system of differential equations is
+\begin{equation}
+\begin{split}
+   \frac{dx}{dt} & = f(x,y) \\
+   \frac{dy}{dt} & = g(x,y)
+\end{split}
+\end{equation}
+or
+\begin{equation}
+  \frac{d\BX}{dt} = \BF(\BX), \quad \BX \in \mathbb{R}^2, \quad
+      \BF : \mathbb{R}^2 \rightarrow \mathbb{R}^2.
+\end{equation}
+
+The basic steps are
+\begin{enumerate}
+\item Find the equilibrium solutions.
+This means we must solve simultaneously
+\begin{equation}
+    f(x,y) = 0 \quad \textrm{and} \quad g(x,y) =0.
+\end{equation}
+(This may turn out to be very hard or impossible!)
+\item Find and sketch the $x$ and $y$ \emph{nullclines}.
+
+The $x$ nullclines are the curves where $\frac{dx}{dt}=0$, which
+is the set of points where $f(x,y)=0$.
+Since the $x$ component of the vector field is zero on the
+$x$ nullcline, trajectories cross the $x$ nullcline with
+vertical tangents.
+
+Similarly, the $y$ nullclines are the curves where
+$\frac{dy}{dt} = 0$, which is the set of points where $g(x,y) = 0$.
+Trajectories cross the $y$ nullclines with horizontal tangents.
+
+Note that each intersection of an $x$ nullcline and a $y$ nullcline
+is an equilibrium.
+
+Once the nullclines are sketched, figure out the direction of the
+vector field on each nullcline. To do this, simply pick a few points
+on the nullclines and plug them into $\BF(\BX)$.
+
+\item
+The nullclines divide the phase plane in regions.  In each
+region, $\frac{dx}{dt}$ and $\frac{dy}{dt}$ have constant sign.
+This lets us determine (very roughly!) the direction of the
+vector field for all points in each region.  For example,
+if $\frac{dx}{dt} > 0$ and $\frac{dy}{dt} < 0$ in some region,
+then all vectors in the vector field are pointing
+``down and to the right'' (i.e. negative $y$ direction,
+positive $x$ direction).
+\end{enumerate}
+The above steps are often enough to obtain a
+pretty good idea of the behavior of the trajectories
+in the phase plane.
+
+
 \subsection{Planar Linear Systems}
 
 
@@ -1297,8 +1353,114 @@ system of differential equations
    \label{eqn:NONLIN}
 \end{equation}
 where $\BX \in \Real^{n}$.
-\subsection{Equilibrium Points and Stability}
-... The Jacobian\index{Jacobian} is ...
+\subsection{Linearization and Stability of Equilibrium Points}
+
+
+In this section we discuss \emph{linearization},
+in which a linear system
+is used to approximate the behavior of a nonlinear system
+near an equilibrium point.
+We will focus on two-dimensional systems, but the
+techniques used here also work in $n$ dimensions.
+
+Recall that a system of two (autonomous) differential equations has the form
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = f(x,y) \\
+  \frac{dy}{dt} & = g(x,y)
+\end{split}
+\label{eqn:de}
+\end{equation}
+The constant solutions to this system are called the equilibria.
+They satisfy the equation
+\begin{equation}
+    f(x^*,y^*) = 0, \quad g(x^*,y^*) = 0.
+\end{equation}
+If the system is \emph{linear with constant
+coefficients}, we have learned
+how to solve it.  Unfortunately, most problems that arise in the
+real world are not linear,
+and in most cases, nonlinear systems can not be ``solved''--there is
+typically no method for deriving a solution to the equations.
+
+When confronted with a nonlinear problem, we usually must
+be satisfied with an approximate solution.
+One method to find approximate solutions is \emph{linearization}.
+This method is quite general; in these notes, we will look at the
+linearization of the equations near a constant solution.
+
+Recall from calculus
+that the linearization (or tangent plane approximation)
+of $f(x,y)$ at a point $(x^*,y^*)$ is
+\begin{equation}
+  f(x,y) \approx f(x^*,y^*)+f_x(x^*,y^*)(x-x^*) + f_y(x^*,y^*)(y-y^*),
+\end{equation}
+where $f_x(x,y)$ is the partial derivative\footnote{%
+See Appendix~\ref{sec:PartialDerivs} for a review
+of partial derivatives.}
+of $f$ with respect to $x$.
+This is also written $\frac{\partial f}{\partial x}$.
+
+%\paragraph{Linearization at an equilibrium point of a system
+%of differential equations.}
+By replacing $f(x,y)$ in \eqref{eqn:de}
+with its linear approximation near $(x^*,y^*)$,
+we obtain
+\begin{equation}
+   \frac{dx}{dt} = f(x^*,y^*)+f_x(x^*,y^*)(x-x^*) + f_y(x^*,y^*)(y-y^*).
+   \label{eqn:ftangentplane}
+\end{equation}
+If $(x^*,y^*)$ is an equilibrium of \eqref{eqn:de}, we have
+$f(x^*,y^*)=0$, so we can drop that term on the right
+of~\eqref{eqn:ftangentplane}.
+The linear approximation of $g(x,y)$ near $(x^*,y^*)$ gives
+a corresponding equation for $\frac{dy}{dt}$.
+
+Define new coordinates $u = x-x^*$, $v = y-y^*$.
+The $(u,v)$ coordinates are coordinates measured relative to $(x^*,y^*)$.
+In the $(u,v)$ coordinates, the equilibrium is at the origin.
+Since $x^*$ and $y^*$ are constants, we have $\frac{du}{dt} = \frac{dx}{dt}$,
+and $\frac{dv}{dt} = \frac{dy}{dt}$.  Writing the linear approximations
+in terms of $u$ and $v$ gives us
+\begin{equation}
+\begin{split}
+  \frac{du}{dt} & = f_x(x^*,y^*)u + f_y(x^*,y^*)v \\
+  \frac{dv}{dt} & = g_x(x^*,y^*)u + g_y(x^*,y^*)v \\
+\end{split}
+\end{equation}
+This is the \emph{linearization of \eqref{eqn:de} at $(x^*,y^*)$}.
+By defining $\BU = \begin{bmatrix} u \\ v \end{bmatrix}$, we can write
+this in matrix form as
+\begin{equation}
+  \frac{d\BU}{dt} = J\BU,
+\label{eqn:linearizedde}
+\end{equation}
+where
+\begin{equation}
+   J = \begin{bmatrix}
+             f_x(x^*,y^*) & f_y(x^*,y^*) \\
+	     g_x(x^*,y^*) & g_y(x^*,y^*)
+       \end{bmatrix}
+\label{eqn:jac}
+\end{equation}
+is called the \emph{Jacobian matrix}.\index{Jacobian matrix}
+
+\paragraph{What does the linearization tell us about the original system?}
+Equation \eqref{eqn:linearizedde}
+is the linear approximation to \eqref{eqn:de} at the
+equilibrium point $(x^*,y^*)$.
+How ``good'' is this approximation?
+We have the following result:
+\emph{If the real parts of both eigenvalues
+are nonzero, then the behavior of the system \eqref{eqn:de}
+near $(x^*,y^*)$ is qualitatively the same as the behavior of the
+linear approximation \eqref{eqn:linearizedde}.}
+The classification of the equilibrium in the nonlinear system
+is the same as the classification of the origin in
+the linearization.
+This is the case where the linear approximation contains
+enough information to determine the actual behavior of the
+nonlinear system.
 
 \begin{theorem}\index{stability}
 Let $\BX_0$ be an equilibrium point of
@@ -1308,7 +1470,121 @@ If the real parts of the eigenvalues of $J$
 are all negative, then $\BX_0$ is an
 asymptotically stable equilibrium point
 of \eqref{eqn:NONLIN}.
+If any eigenvalue has a positive real part,
+then $\BX_0$ is unstable.
 \end{theorem}
+
+\paragraph{Example.}
+The system of differential equations
+\begin{equation}
+\begin{split}
+   \frac{dx}{dt} & = 3x-y^2 \\
+   \frac{dy}{dt} & = \sin(y)-x
+\end{split}
+\label{eqn:nonlinexample1}
+\end{equation}
+has two equilibria, one of which is  $(0,0)$.
+A phase portrait (generated with PPLANE) is shown in
+Figure~\ref{fig:nonlinexample1}.
+\begin{figure}
+\centerline{%
+\includegraphics[width=5in]{pplane_plots/NonlinExample1.ps}
+}
+\caption{Phase portrait for system \eqref{eqn:nonlinexample1}.}
+\label{fig:nonlinexample1}
+\end{figure}
+  The Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+           3 &  -2y \\
+	   -1 & \cos(y)
+      \end{bmatrix}
+\end{equation}
+and at $(0,0)$, this is
+\begin{equation}
+  J = \begin{bmatrix}
+           3 &  0 \\
+	   -1 & 1
+      \end{bmatrix}.
+\end{equation}
+The eigenvalues are $\lambda_1=1$ and $\lambda_2=3$.
+Both $\lambda_1>0$ and $\lambda_2>0$, so the origin
+in the linearization is a \emph{source}.
+Since the real part of both eigevalues is nonzero,
+we conclude that the equilibrium $(0,0)$ of the original
+nonlinear equations is also a source.
+\emph{Near $(0,0)$}, the linearization provides a
+good approximation to the nonlinear system.
+The image on the left in Figure~\ref{fig:nonlinexample1compare}
+shows the phase portrait of \eqref{eqn:nonlinexample1}
+near $(0,0)$, and the image on the right
+is the phase portrait of the linearization at $(0,0)$.
+\begin{figure}
+\centerline{%
+\includegraphics[width=2.5in]{pplane_plots/NonlinExample1detail.ps}
+\includegraphics[width=2.5in]{pplane_plots/NonlinExample1lin.ps}
+}
+\caption{On the left is the phase portrait of
+\eqref{eqn:nonlinexample1} near $(0,0)$, and on the
+right is the phase portrait of the linearization
+at $(0,0)$.  They are almost the same.  If we zoomed
+in closer, they would appear even more similar.}
+\label{fig:nonlinexample1compare}
+\end{figure}
+%
+%
+\paragraph{Example.}
+The system of differential equations
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = 2x - y -x^2 \\
+  \frac{dy}{dt} & = x - 2y + y^2
+\end{split}
+\end{equation}
+has equilibria at $(0,0)$ and $(1,1)$.
+The Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+           2-2x & -1 \\
+	   1 & -2 + 2y
+      \end{bmatrix}
+\end{equation}
+
+At $(0,0)$, this is
+\begin{equation}
+  J = \begin{bmatrix}
+           2 & -1 \\
+	   1 & -2
+      \end{bmatrix}
+\end{equation}
+This matrix has eigenvalues $\lambda_1 = -\sqrt{3}$ 
+and $\lambda_2 = \sqrt{3}$, so the
+origin of the  linearized system is a saddle point.
+Both eigenvalues are real and nonzero,
+so we conclude that the equilibrium
+$(0,0)$ of the nonlinear system is also a saddle point.
+
+At $(1,1)$, the Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+           0 & -1 \\
+	   1 & 0
+      \end{bmatrix}
+\end{equation}
+This matrix has eigenvalues $\lambda=\pm i$,
+so the linearization results in a \emph{center}.
+Because the real parts of the eigenvalues are
+zero, we can \emph{not} conclude that $(1,1)$
+is actually a center in the nonlinear system.
+Trajectories near $(1,1)$ will rotate around $(1,1)$, but
+the linearization can not tell us if these trajectories
+actually form closed curves.
+The trajectories might, in fact, slowly spiral
+towards or away from $(1,1)$.
+
+%
+\subsection{Periodic Solutions}
+%
 \subsection{Higher Dimensional Systems}
 \[
   \dot{\BX} = \BF(\BX)
@@ -1318,6 +1594,7 @@ of \eqref{eqn:NONLIN}.
 Jacobian, determine stability.  At least one point
 should require numerical evaluation of the equilibrium
 and of the eigenvalues of the Jacobian.}
+\paragraph{Chaos.} Just an example...
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3226,6 +3503,7 @@ A function $f$ is \emph{continuous} at at point $a$ if
 %
 %
 \section{Partial Derivatives}
+\label{sec:PartialDerivs}
 The \emph{partial derivative of $f(x,y)$ with respect to $x$},
 written $f_x(x,y)$ or $\frac{\partial f}{\partial x}$, is
 defined to be
