@@ -1,4 +1,9 @@
 %%
+%% File: immbook.cls
+%%
+%% This was originally amsbook.cls.
+%%
+%%
 %% This is file `amsbook.cls',
 %% generated with the docstrip utility.
 %%
@@ -47,7 +52,7 @@
 %%% ====================================================================
 \NeedsTeXFormat{LaTeX2e}% LaTeX 2.09 can't be used (nor non-LaTeX)
 [1994/12/01]% LaTeX date must December 1994 or later
-\ProvidesClass{amsbook}[2000/10/26 v2.08]
+\ProvidesClass{immbook}[2005/10/11 v1.0]
 \global\expandafter\let\csname ver@amsthm.sty\expandafter\endcsname
   \csname ver@\@currname.\@currext\endcsname
 \let\@xp=\expandafter
@@ -849,7 +854,7 @@
 \newcounter{subparagraph}[paragraph]
 \renewcommand\thepart          {\arabic{part}}
 \renewcommand\thechapter       {\arabic{chapter}}
-\renewcommand\thesection       {\arabic{section}}
+\renewcommand\thesection       {\thechapter.\arabic{section}}
 \renewcommand\thesubsection    {\thesection.\arabic{subsection}}
 \renewcommand\thesubsubsection {\thesubsection .\arabic{subsubsection}}
 \renewcommand\theparagraph     {\thesubsubsection.\arabic{paragraph}}
@@ -891,7 +896,7 @@
 \let\sectionrunhead\partrunhead
 \def\section{\@startsection{section}{1}%
   \z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
-  {\normalfont\bfseries\centering}}
+  {\normalfont\bfseries}}
 \def\subsection{\@startsection{subsection}{2}%
   \normalparindent{.5\linespacing\@plus.7\linespacing}{-.5em}%
   {\normalfont\bfseries}}
