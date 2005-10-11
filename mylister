@@ -1,0 +1,7 @@
+echo '\begin{minipage}{5in}'
+echo '{\tiny'
+echo '\begin{verbatim}'
+cat -b $1
+echo '\end{verbatim}'
+echo '}% close environment for tiny'
+echo '\end{minipage}'

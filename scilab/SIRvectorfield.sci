@@ -6,7 +6,6 @@
 //
 // Copyright (c) 2005 Warren Weckesser
 //
-
 //
 // This function computes the vector field of the
 // SIR model of the spread of a disease in a population
@@ -21,4 +20,3 @@ function xdot = SIRvectorfield(t,x,r,g)
   Rdot = g*I;
   xdot = [Sdot; Idot; Rdot];
 endfunction
-  
