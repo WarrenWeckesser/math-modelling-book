@@ -39,6 +39,8 @@ Colgate University}
 \numberwithin{equation}{chapter}
 \newtheorem{question}{Question}
 \newtheorem{theorem}{Theorem}
+\numberwithin{question}{section}
+\numberwithin{theorem}{chapter}
 %
 \makeindex
 %
@@ -359,7 +361,7 @@ be useful in some cases.
 
 Note that all autonomous first order differential equations are separable.
 
-\paragraph{Example 1.}
+\subsection*{Example 1.}
 We'll apply the method to
 \begin{equation}
    \frac{dp}{dt} = r p
@@ -390,7 +392,7 @@ solution
 where $C$ is an arbitrary constant.
 To satisfy an initial condition $p(0)=P_0$, we let $C=P_0$.
 
-\paragraph{Example 2.}
+\subsection*{Example 2.}
 Now consider a population model in which the per capita growth
 rate varies periodically.  This might be because of seasonal variation.
 The differential equation is
@@ -478,7 +480,7 @@ to \eqref{eqn:linear}:
 \label{eqn:linearsolution}
 \end{equation}
 
-\paragraph{Example 1.}
+\subsection*{Example 1.}
 Consider the initial value problem
 \begin{equation}
    y' = 2y + 3, \quad y(0) = 5.
@@ -511,7 +513,7 @@ So the solution to the initial value problem is
 You should check the answer by substituting it back
 into \eqref{eqn:linearexample1}.
 
-\paragraph{Example 2.}
+\subsection*{Example 2.}
 \begin{equation}
    y' = -\frac{y}{t} + t, \quad y(1) = 2.
 \end{equation}
@@ -551,7 +553,7 @@ Thus the solution to the initial value problem is
 \end{equation}
 
 
-\paragraph{Example 3.}
+\subsection*{Example 3.}
 Consider the differential equation
 \begin{equation}
     y' = 2ty + 3.
@@ -656,7 +658,7 @@ The system of equations can be rewritten as
     \frac{dy}{dt} & = g(x,y)
 \end{split}
 \end{equation}
-\paragraph{Example: The SI Components of the SIR Model.}
+\subsection*{Example: The SI Components of the SIR Model.}
 We have previously seen the SIR model of the spread of
 a disease in a population:
 \begin{equation}
@@ -1133,10 +1135,7 @@ of the eigenvalue closest to zero}.
 \item Use the above information to sketch several representative trajectories.
 \end{enumerate}
 
-\subsection*{Examples}
-In the following examples, we will find the general solution and sketch
-the phase portrait for the given system of differential equations.
-\paragraph{Example 1.}
+\subsection*{Example 1.}
 \[
   \frac{d\BX}{dt} = A \BX, \quad \textrm{where} \quad
     A = \begin{bmatrix}
@@ -1247,7 +1246,7 @@ of two of the spiral trajectories.
 \centerline{\includegraphics[width=3.5in]{matlab/LinPhPortExample1.eps}}
 \end{enumerate}
 
-\paragraph{Example 2.}
+\subsection*{Example 2.}
 We consider the linear system of differential equations
 with
 \[
@@ -1296,7 +1295,7 @@ Here is the phase portrait:
 \centerline{\includegraphics[width=3.5in]{matlab/LinPhPortExample2.eps}}
 \end{enumerate}
 
-\paragraph{Example 3.}
+\subsection*{Example 3.}
 We'll look at one more example, this time with
 \[
    A = \begin{bmatrix}
@@ -1479,7 +1478,7 @@ If any eigenvalue has a positive real part,
 then $\BX_0$ is unstable.
 \end{theorem}
 
-\paragraph{Example.}
+\subsection*{Example 1.}
 The system of differential equations
 \begin{equation}
 \begin{split}
@@ -1538,7 +1537,7 @@ in closer, they would appear even more similar.}
 \end{figure}
 %
 %
-\paragraph{Example.}
+\subsection*{Example 2.}
 The system of differential equations
 \begin{equation}
 \begin{split}
@@ -1594,7 +1593,7 @@ towards or away from $(1,1)$.
 \[
   \dot{\BX} = \BF(\BX)
 \]
-\paragraph{Example.}
+\subsection*{Example.}
 \emph{Do a 3D example: solve for equilibria, find the
 Jacobian, determine stability.  At least one point
 should require numerical evaluation of the equilibrium
@@ -2764,12 +2763,12 @@ The following theorem tells us when the linear approximation
 is ``good enough'' to classify the stability of the
 fixed point $x^*$ of \eqref{eqn:onedmap}.
 
-\paragraph{Theorem 1.}
+\begin{theorem}
 (i) If $|f'(x^*)| < 1$, then $x^*$ is a sink.
 (ii) If $|f'(x^*)| > 1$, then $x^*$ is a source.
+\end{theorem}
 
-
-\paragraph{Example.}
+\subsection*{Example.}
 Consider again the logistic map \eqref{eqn:logisticmap}
 with $r=2.8$.  The graph is shown in
 Figure~\ref{fig:logisticmap_example}, and earlier we found the
@@ -3350,7 +3349,7 @@ in the case $|f'(x^*)|=1$.  The above results are a generalization
 of that phenomena to higher dimensions.
 
 
-\paragraph{Example.}
+\subsection*{Example.}
 Consider the map
 \begin{equation}
 \begin{split}
@@ -3647,7 +3646,8 @@ initial probability vector $\BP_0$.
 Thus $\BW$ gives the long-term probability distribution of the
 states of the Markov chain.
 \end{enumerate}
-\paragraph{Example: Sunny or Cloudy.}
+
+\subsection*{Example: Sunny or Cloudy.}
 A meteorologist studying the weather in a region
 decides to classify each day as simply \emph{sunny}
 or \emph{cloudy}.  After analyzing several years of weather records,
@@ -3735,7 +3735,7 @@ In other words, in the long run
 $75$\% of the days are sunny and $25$\% of the days
 are cloudy.
 %
-\paragraph{Examples: Regular or not?}
+\subsection*{Examples: Regular or not?}
 Here are a few examples of determining whether or not a
 Markov chain is regular.
 \begin{enumerate}
@@ -4048,7 +4048,7 @@ gives the expected number of times that the process will be in
 some transient state, given that the process started
 in the $j^{\textrm{th}}$ transient state.
 
-\paragraph{Example: The Coin and Die Game.}
+\subsection*{Example: The Coin and Die Game.}
 In this game there are two players, \emph{Coin}
 and \emph{Die}. \emph{Coin} has a coin, and \emph{Die} has a
 single six-sided die. The rules are:
@@ -4501,7 +4501,7 @@ a corresponding eigenvector.
 This works even when the eigenvalue is complex.
 It will give a correct complex eigenvector.
 
-\paragraph{Example 1.}
+\subsection*{Example 1.}
 \[
    A = \begin{bmatrix} 1 & 2 \\ 3 & -4 \end{bmatrix}
 \]
@@ -4553,7 +4553,7 @@ or, if we want to minimize the number of minus signs,
   \BV_2 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}
 \]
 
-\paragraph{Example 2.}
+\subsection*{Example 2.}
 \[
    A = \begin{bmatrix} -1 & -3 \\ 4 & 3 \end{bmatrix}
 \]
