@@ -1612,8 +1612,11 @@ and of the eigenvalues of the Jacobian.}
 %
 
 \chapter{Applications of Differential Equations}
-\section{Economics}
-\subsection{Solow Growth Model\index{Solow growth model}}
+%
+In this chapter, we developed models using differential
+equations for a wide variety of systems.
+%
+\section{Solow's Economic Growth Model\index{Solow growth model}}
 We consider a model from macroeconomics.
 Let $K$ be the capital,%
 \footnote{\emph{Capital} includes things that are owned to be used
@@ -2115,7 +2118,116 @@ conclusions.)
 %
 %
 \section{War and Peace}
-\subsection{Battle of Attrition}
+\subsection{Battle of Attrition--The Lanchester Model}
+\index{Lanchester model}
+%
+We consider a model of a battle in which the opponents
+simply blast away at each other until one side is wiped
+out.
+This model was proposed by Lanchester (ref...).
+This is \emph{not} a realistic model of modern warfare!
+(It has been suggested as a model for the battles that
+occur between colonies of ants...\emph{find this reference!})
+In this model $x(t)$ and $y(t)$ are the sizes of the
+opposing armies at time $t$.
+As the battle rages, the losses incurred by army $x$
+are simply proportional to the size of army $y$,
+and the losses incurred by army $y$ are proportional
+to the size of army $x$ (but not necessarily with
+the same proportionality constant).
+That is,
+\begin{equation}
+\begin{split}
+   \frac{dx}{dt} & = - \alpha y \\
+   \frac{dy}{dt} & = - \beta x
+\end{split}
+\end{equation}
+where $\alpha$ and $\beta$ are positive constants.
+This is a planar linear system.
+The coefficient matrix is
+\begin{equation}
+  A = \begin{bmatrix} 0 & -\alpha \\ -\beta & 0 \end{bmatrix}.
+\end{equation}
+The eigenvalues are $\lambda_1 = -\sqrt{\alpha\beta}$
+and $\lambda_2 = \sqrt{\alpha\beta}$,
+so we know that the origin $(0,0)$ is a saddle point.
+A corresponding set of eigevectors are
+\[
+  \BV_1 = \begin{bmatrix} 1 \\ -\sqrt{\frac{\beta}{\alpha}}\end{bmatrix}
+  \quad \textrm{and}\quad
+  \BV_2 = \begin{bmatrix} 1 \\ \sqrt{\frac{\beta}{\alpha}}\end{bmatrix}.
+\]
+The $x$ nullcline is $y=0$, which means that trajectories
+cross the $x$ axis vertically. Similarly, the $y$ nullcline is
+$x=0$, so trajectories cross the $y$ axis horizontally.
+Since the nullclines are the axes, we know that in the first
+quadrant, $dx/dt < 0$ and $dy/dt < 0$, so for any initial
+condition in the first quadrant, the trajectory will eventually
+cross either the $x$ or $y$ axis. If the initial condition
+happens to be in the eigenspace associated with the negative
+eigenvalue $\lambda_1$, the trajectory will converge to
+$(0,0)$. (In this exceptional case, the armies wipe each
+other out!)
+This eigenspace is given by the line
+\begin{equation}
+  y = \sqrt{\frac{\beta}{\alpha}}\, x.
+\end{equation}
+If the initial condition is above the $\lambda_1$ eigenspace
+(so $y_0 > \sqrt{\frac{\beta}{\alpha}}\, x_0$), then
+$y$ wins, and if the initial condition is below this line,
+then $x$ wins.
+
+There is a different approach we can take for studying
+this system.
+By multiplying the first equation by $2\beta x$ and the
+second by $-2\alpha y$, we obtain
+\begin{equation}
+\begin{split}
+ 2\beta x\frac{dx}{dt} & = -2 \alpha \beta x y \\
+ -2\alpha y\frac{dy}{dt} & = 2 \alpha \beta x y.
+\end{split}
+\end{equation}
+Then adding these equations results in
+\begin{equation}
+   2\beta x\frac{dx}{dt} -2\alpha y\frac{dy}{dt} = 0.
+\end{equation}
+We note that the left side of this equation is
+the $t$ derivative of $\beta x^2 - \alpha y^2$.
+So we'll integrate from $0$ to $t$:
+\begin{equation}
+   \int_0^t \left(2\beta x\frac{dx}{dt} -2\alpha y\frac{dy}{dt}\right)\, ds = \int_0^t 0 \, ds = 0.
+\end{equation}
+which gives
+\begin{equation}
+\begin{split}
+  \left.\beta x^2(s) - \alpha y^2(s)\right|_{s=0}^{s=t} & = 0 \\
+   \beta x^2(t) - \alpha y^2(t) - (\beta x^2(0) - \alpha y^2(0)) & = 0 \\
+      \beta x^2(t) - \alpha y^2(t) & = \beta x^2(0) - \alpha y^2(0) =
+         \beta x_0^2 - \alpha y_0^2 \\
+\end{split}
+\end{equation}
+By dropping the explicit $t$ dependence of $x(t)$
+and $y(t)$, we obtain
+\begin{equation}
+   \beta x^2 - \alpha y^2 = \beta x_0^2 - \alpha y_0^2.
+   \label{eqn:lanchester_hyperbola}
+\end{equation}
+This is the equation of a hyperbola in the $(x,y)$ plane.
+Whether the hyperbola crosses the $x$ or $y$ axis is
+determined by the sign of
+$\beta x_0^2 - \alpha y_0^2$.
+If this value is positive, then the hyperbola
+crosses the positive $x$ axis
+at $x=\sqrt{x_0^2 - \frac{\alpha}{\beta} y_0^2}$.
+If $\beta x_0^2 - \alpha y_0^2$
+is negative, then the hyperbola
+crosses the $y$ axis at
+$y = \sqrt{y_0^2 - \frac{\alpha}{\beta} x_0^2}$.
+Thus, if we know the initial sizes of the armies
+and the constants $\alpha$ and $\beta$, we can
+easily determine which army will win, and what the
+size of the winning army will be at the end of the
+battle.
 \subsection{Arms Race}
 %
 \section{Love and Marriage}
