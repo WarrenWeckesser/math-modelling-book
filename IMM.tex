@@ -4617,6 +4617,29 @@ The notes provide instructions for the following tasks:
 \end{enumerate}
 \section{MATLAB (tm)}
 
+\subsection*{Example: Find the eigenvalues of a matrix.}
+The \texttt{eig} function is used to find the eigenvalues
+of a matrix in MATLAB;
+Figure \ref{fig:matlabeigenvaluesoutput} shows an example.
+
+The computation shows that the eigenvalues of the 
+matrix are $1$ and the complex conjugate pair
+$0.2 \pm  0.24494897i$
+(approximately).
+
+\begin{figure}
+\fbox{%
+\input{matlab/eigenvalues.output}
+}
+\caption{An example of the use of
+the \texttt{eig} function in MATLAB.
+(By default, MATLAB prints numbers with four
+decimal places.  The command \texttt{\textbf{format long}}
+increases the number of decimal places
+printed to 14.)}
+\label{fig:matlabeigenvaluesoutput}
+\end{figure}
+
 \subsection*{Example: Solving the SIR Model with MATLAB.}
 Figures \ref{fig:matlabSIRvflisting} and
 \ref{fig:matlabSIRscriptlisting} show MATLAB code that solves
