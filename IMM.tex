@@ -86,7 +86,6 @@ are needed in this book are summarized in an appendix.
 \emph{Start with an example; discuss significance of a
 relationship between and function and its derivative...}
 %
-\section{First Order Differential Equations}
 The general form of a first order (autonomous) differential
 equation is
 \[
@@ -96,7 +95,7 @@ equation is
 If  $f'(y_{0})=0$, then $y(t)=y_{0}$ is a solution.  Such a constant
 solution is called an \emph{equilibrium solution}.\index{equilibrium}
 
-\subsection{Unconstrained Population Growth}
+\section{Unconstrained Population Growth}
 
 
 The simplest assumption for modeling the growth of a population
@@ -146,7 +145,7 @@ Thus, if $r > 0$, the simple assumption given above results in
 \emph{exponential growth}.\index{exponential growth}
 (If $r < 0$, we obtain \emph{exponential decay}.\index{exponential decay})
 
-\subsection{The Logistic Equation\index{logistic equation}}
+\section{The Logistic Equation\index{logistic equation}}
 
 For a population with unlimited resources, exponential growth
 is a pretty accurate description of what happens.
@@ -290,7 +289,7 @@ of $y$ as well as positive.)
 
 
 
-\subsection{Separable First Order Differential Equations (*)}
+\section{Separable First Order Differential Equations (*)}
 
 In this section and the next, we discuss
 two techniques for solving certain first order
@@ -409,7 +408,7 @@ The final concise formula for the solution is
 where $C$ is an arbitrary constant.
 %
 %
-\subsection{Linear First Order Differential Equations (*)}
+\section{Linear First Order Differential Equations (*)}
 
 If the first order differential equation has the form
 \begin{equation}
@@ -574,7 +573,7 @@ You may have seen the \emph{error function}
 $\textrm{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-s^2}\,ds$.}
 
 
-\subsection{Exercises}
+\subsection*{Exercises}
 \begin{enumerate}
 \item For each of the following differential equations,
 determine the equilibrium solutions, sketch $f(y)$ as a function
@@ -596,7 +595,6 @@ a differential equation...}
 \end{enumerate}
 
 \section{Systems of Differential Equations}
-\subsection{Systems -- An Introduction}
 
 A general form for a \emph{system} of $n$ first order differential
 equations is
@@ -675,7 +673,7 @@ Uniqueness...
 \end{theorem}
 This theorem means that trajectories in phase
 space do not cross each other.
-\subsection{Phase Plane Analysis\index{phase plane}}
+\section{Phase Plane Analysis\index{phase plane}}
 
 The system of differential equations is
 \begin{equation}
@@ -732,7 +730,7 @@ pretty good idea of the behavior of the trajectories
 in the phase plane.
 
 
-\subsection{Planar Linear Systems}
+\section{Planar Linear Systems}
 
 
 We consider the linear system of two first order
@@ -1355,7 +1353,7 @@ system of differential equations
    \label{eqn:NONLIN}
 \end{equation}
 where $\BX \in \Real^{n}$.
-\subsection{Linearization and Stability of Equilibrium Points}
+\section{Linearization and Stability of Equilibrium Points}
 \label{sec:DELinearization}
 
 In this section we discuss \emph{linearization},\index{linearization}
@@ -1585,9 +1583,9 @@ The trajectories might, in fact, slowly spiral
 towards or away from $(1,1)$.
 
 %
-\subsection{Periodic Solutions}
+\section{Periodic Solutions}
 %
-\subsection{Higher Dimensional Systems}
+\section{Higher Dimensional Systems}
 \[
   \dot{\BX} = \BF(\BX)
 \]
@@ -1615,6 +1613,14 @@ and of the eigenvalues of the Jacobian.}
 %
 In this chapter, we developed models using differential
 equations for a wide variety of systems.
+We include problems from a wide variety of fields:
+\paragraph{Economics:} Solow growth model
+\paragraph{Population Dynamics:} predator-prey, competing species
+\paragraph{War and Peace:} Lanchester battle model, Richardson's arms
+race model
+\paragraph{Love Affairs:} a variation of Romeo and Juliet, Rinaldi's
+model of Petrarch's love for Laura
+\paragraph{Epidemiology:} the SI, SIR, and SIQR models
 %
 \section{Solow's Economic Growth Model\index{Solow growth model}}
 We consider a model from macroeconomics.
@@ -1768,12 +1774,10 @@ If, for example, the capital is too low, it will rapidly increase until it becom
 approximately proportional to the labor, and then it will settle into a long term behavior in
 which capital remains proportional to the labor.
 
-
-\section{Population Models}
 %
-\subsection{Predator-Prey\index{predator-prey}}
+\section{Predator-Prey\index{predator-prey}}
 %
-\subsection{Competing Species\index{competing species}}
+\section{Competing Species\index{competing species}}
 %
 We consider an example that models the populations
 of two species that are competing for a common resource.
@@ -2117,8 +2121,7 @@ a stable equilibrium.
 conclusions.)
 %
 %
-\section{War and Peace}
-\subsection{Battle of Attrition--The Lanchester Model}
+\section{Battle of Attrition--The Lanchester Model}
 \index{Lanchester model}
 %
 We consider a model of a battle in which the opponents
@@ -2228,14 +2231,12 @@ and the constants $\alpha$ and $\beta$, we can
 easily determine which army will win, and what the
 size of the winning army will be at the end of the
 battle.
-\subsection{Arms Race}
+\section{Arms Race}
 %
-\section{Love and Marriage}
-\subsection{Romeo and Juliet\index{Romeo}\index{Juliet}}
-\subsection{Laura and Petrarch\index{Laura}\index{Petrarch}}
+\section{Romeo and Juliet\index{Romeo}\index{Juliet}}
+\section{Laura and Petrarch\index{Laura}\index{Petrarch}}
 %
-\section{Epidemiology\index{epidemiology}}
-\subsection{Basic Assumptions and the SI Model\index{SI model}}
+\section{Epidemiology and the SI Model\index{SI model}}
 
 In this chapter we consider some models of the spread of disease.
 These models lead to systems of differential equations.
@@ -2330,7 +2331,7 @@ Thus, this simple model predicts that
 everyone will become infected, no matter how small
 the initial population of infectives.
 
-\subsection{The SIS Model\index{SIS model}}
+\section{The SIS Model\index{SIS model}}
 %
 % Perhaps the SIS model could be given as an exercise:
 % state the assumption, and then have the student give
@@ -2343,7 +2344,7 @@ but once they have recovered, they return to the
 susceptible pool... 
 
 
-\subsection{The SIR Model\index{SIR model}}
+\section{The SIR Model\index{SIR model}}
 For many diseases, people recover after being infected,
 and from then on they are immune to the disease.
 To incorporate this into our model of the spread of
@@ -2397,8 +2398,7 @@ for $S$ and $I$, and then infer the behavior of $R$ afterwards.
 \emph{To be continued...}
 
 
-\subsection{The SIQR Model\index{SIQR model}}
-\section{Exercises}
+\section{The SIQR Model\index{SIQR model}}
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3191,7 +3191,7 @@ $\BZ$ is \emph{unstable}.
 $\BZ$ is a \emph{source} or \emph{repellor}.
 \end{itemize}
 
-\subsection{Affine 2D Systems}
+\subsection*{Affine 2D Systems}
 We point out here that it is no harder to solve the
 system
 \begin{equation}
@@ -3476,9 +3476,7 @@ Lower right: $\beta=3.5$, source.}
 \end{figure}
 
 
-
-\section{Applications}
-\subsection{Marital Relationships}
+\section{Marital Relationships: Gottman and Murray's Model}
 The model discussed in this section is based on the
 work of Gottman, Murray, \emph{et al}\cite{GM}.
 \section{Exercises}
