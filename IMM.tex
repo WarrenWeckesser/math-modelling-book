@@ -4190,6 +4190,68 @@ experimental results would approach the predicted results.
 \section{Monopoly (tm)}
 \section{Baseball}
 \section{Exercises}
+\label{sec:exercises_markov}
+\begin{enumerate}
+\item
+%Let
+\label{ex:markov1}
+Let
+\begin{equation}
+  P = \begin{bmatrix}
+           19/20 & 1/10 & 1/10 \\
+	   1/20 & 0   & 0   \\
+	   0    & 9/10 & 9/10
+      \end{bmatrix}
+\end{equation}
+be the transition matrix of a Markov chain.
+\begin{enumerate}
+\item
+Draw the transition diagram that corresponds to this transition matrix.
+\item
+Show that this Markov chain is regular.
+\item
+Find the long-term probability distribution for the state of the Markov
+chain.
+\end{enumerate}
+
+\item
+\label{ex:markov2}
+Consider the following transition diagram:
+
+\medskip
+\centerline{%
+\includegraphics[width=3in]{fig/trans_diag.eps}
+}
+\begin{enumerate}
+\item Find the transition matrix,
+and show that the Markov chain is regular.
+\item  Find the long term probability distribution of the states
+$A$, $B$, and $C$.
+\end{enumerate}
+
+
+%
+\item
+\label{ex:markov3}
+We consider a modification of the ``Coin and Die'' game.
+The rules for \emph{Coin} are the same:
+\begin{itemize}
+\item If the coin turns up \textbf{heads}, \emph{Coin} wins.
+\item If the coin turns up \textbf{tails}, it is \emph{Die}'s turn.
+\end{itemize}
+The new rules for \emph{Die} are:
+\begin{itemize}
+\item If the die turns up \textbf{1 or 2}, \emph{Die} wins.
+\item If the die turns up \textbf{3}, \emph{Die} rolls again.
+\item If the die turns up \textbf{4, 5, or 6}, it is \emph{Coin}'s turn.
+\end{itemize}                                                                \begin{enumerate}
+\item If \emph{Coin} goes first, what is the probability that
+\emph{Coin} wins, and what is the expected number of turns?
+\item If \emph{Die} goes first, what is the probability that
+\emph{Coin} wins, and what is the expected number of turns?
+\end{enumerate}
+\end{enumerate}
+
 %
 \appendix
 %
@@ -4550,6 +4612,167 @@ programs.
 \section{Maxima (tm)}
 \section{Yacas (tm)}
 %
+\chapter[Hints and Solutions]{Hints and Solutions for Selected Exercises}
+\paragraph{\ref{sec:exercises_markov} / \ref{ex:markov1}}
+\begin{enumerate}
+\item[(a)] The transition diagram:
+
+\medskip
+\centerline{%
+\includegraphics[width=4in]{fig/MarkovProbSol.eps}
+}
+\medskip
+
+\item[(b)]
+We find
+\[
+  P ^2= \begin{bmatrix}
+           \frac{363}{400} & \frac{37}{200} & \frac{37}{200} \T\B \\
+	   \frac{19}{400} & \frac{1}{200}   & \frac{1}{200} \B  \\
+	   \frac{9}{200}    & \frac{81}{100} & \frac{81}{100} \B
+      \end{bmatrix}
+\]
+Since each entry in $P^2$ is positive, the Markov chain is regular.
+\item[(c)]
+To find the long-term probability distribution, we find an eigenvector
+associated with the eigenvalue $\lambda=1$, and normalize it so that
+it is a probability vector.
+Thus, we must solve
+\[
+  (P-I)\BW = \BZ.
+\]
+We form the augmented matrix,
+and then reduce it to reduced row echelon form:
+\[
+\begin{bmatrix}
+   -1/20 & 1/10 & 1/10 & \vdots & 0 \\
+   1/20  &   -1  &  0   & \vdots & 0 \\
+   0     &  9/10 & -1/10 & \vdots & 0
+\end{bmatrix}
+\rightarrow
+\begin{bmatrix}
+   1  &   0  & -20/9  & \vdots & 0 \\
+   0  &   1  & -1/9   & \vdots & 0 \\
+   0  &   0  &  0     & \vdots & 0
+\end{bmatrix}
+\]
+The third component $w_3$ of $\BW$ is arbitrary, so we may write
+the set of solutions as
+\[
+   \BW = w_3 \begin{bmatrix}
+               \frac{20}{9} \T\B \\ \frac{1}{9} \B\\ 1
+             \end{bmatrix} .
+\]
+For $\BW$ to be a probability vector, we must have $w_1+w_2+w_3=1$,
+which implies $w_3 = 9/30$.  Then the long-term probability vector
+is
+\[
+  \BW = \begin{bmatrix}
+          \frac{2}{3} \T\B \\ \frac{1}{30} \B \\ \frac{3}{10} \B
+        \end{bmatrix} .
+\]
+\end{enumerate}
+
+\paragraph{\ref{sec:exercises_markov} / \ref{ex:markov2}}
+\begin{enumerate}
+\item[(a)] The transition matrix is
+\[
+  P = \begin{bmatrix}
+           \frac{1}{4}  & \frac{1}{2} & 1 \T\B \\
+	   \frac{1}{4}  & \frac{1}{2} & 0 \B \\
+	   \frac{1}{2}  & 0   & 0 \B
+      \end{bmatrix}
+\]
+Then
+\[
+  P^2 = \begin{bmatrix}
+           \frac{11}{16}  & \frac{3}{8} & \frac{1}{4} \T\B \\
+	   \frac{3}{16}  & \frac{3}{8} & \frac{1}{4} \B \\
+	   \frac{1}{8}  & \frac{1}{4}   & \frac{1}{2} \B
+      \end{bmatrix}
+\]
+and since each entry in $P^2$ is positive, the Markov chain
+is regular.
+\item[(b)]  As in the previous problem, we must find the probability
+vector $\BW$ such that $(P-I)\BW=\BZ$.
+By following the same steps as before, we find
+\[
+   \BW = \begin{bmatrix}
+            \frac{1}{2} \T\B \\ \frac{1}{4} \B \\ \frac{1}{4} \B \\
+         \end{bmatrix}
+\]
+Thus, in the long run, the probabilities of being in state A, B or C
+are $1/2$, $1/4$ and $1/4$, respectively.
+\end{enumerate}
+
+\paragraph{\ref{sec:exercises_markov} / \ref{ex:markov3}}
+The transition diagram for this version of the Coin and Die game is
+
+\medskip
+\centerline{%
+\includegraphics[width=3.5in]{fig/ModCoinAndDieStateDiagram.eps}
+}
+and the transition matrix is
+\[
+P = \begin{bmatrix}
+        1  &  0  & \frac{1}{2} & 0 \T \B \\
+	0  &  1  &   0         & \frac{1}{3} \B \\
+	0  &  0  &   0         & \frac{1}{2} \B \\
+	0  &  0  & \frac{1}{2} & \frac{1}{6} \B \\
+    \end{bmatrix}
+\]
+So
+\[
+  R = \begin{bmatrix}
+          \frac{1}{2} & 0 \T\B \\
+	      0       & \frac{1}{3} \B 
+      \end{bmatrix}
+  \quad \textrm{and}\quad
+  Q = \begin{bmatrix}
+          0 & \frac{1}{2} \T\B \\
+	  \frac{1}{2}    & \frac{1}{6} \B 
+      \end{bmatrix}
+\]
+and we calculate
+\[
+I-Q = \begin{bmatrix}
+          1 & -\frac{1}{2} \T\B \\
+	  -\frac{1}{2}    & \frac{5}{6} \B 
+      \end{bmatrix},
+ \quad
+N = (I-Q)^{-1} =
+      \begin{bmatrix}
+          \frac{10}{7} & \frac{6}{7} \T\B \\
+	  \frac{6}{7}  & \frac{12}{7} \B 
+      \end{bmatrix},
+\]
+and
+\[
+B = R(I-Q)^{-1} =
+      \begin{bmatrix}
+          \frac{5}{7} & \frac{3}{7} \T\B \\
+	  \frac{2}{7}  & \frac{4}{7} \B 
+      \end{bmatrix}.
+\]
+With $N$ and $B$, we can answer the questions.
+\begin{enumerate}
+\item[(a)] If \emph{Coin} goes first, the expected number
+of turns is the sum of the entries in the first column
+of $N$, which is $\frac{16}{7} \approx 2.29$.
+The probability that \emph{Coin} wins if \emph{Coin}
+goes first is given by the entry in the first
+row and column of $B$, which is
+$\frac{5}{7} \approx 0.714$.
+\item[(b)] If \emph{Die} goes first, the expected number
+of turns is the sum of the entries in the second column
+of $N$, which is $\frac{18}{7} \approx 2.57$.
+The probability that \emph{Coin} wins if \emph{Die}
+goes first is given by the entry in the first
+row and second column of $B$, which is
+$\frac{3}{7} \approx 0.429$.
+\end{enumerate}
+
+
 \begin{thebibliography}{99}
 \bibitem{GM}
 J.~M.~Gottman, J.~D.~Murray, C.~C.~Swanson,
