@@ -43,3 +43,7 @@ plot(t,x(1,:),t,x(2,:),t,x(3,:));
 tstr = msprintf('Solution of the SIR Model  (r=%.2f, gamma=%.2f)',r,g);
 xtitle(tstr,'t');
 legend('S','I','R');
+//
+// Save the plot in a file.
+//
+xs2eps(0,'SIR.eps');
