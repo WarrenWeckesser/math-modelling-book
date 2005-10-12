@@ -43,6 +43,18 @@ Colgate University}
 \numberwithin{theorem}{chapter}
 \numberwithin{figure}{chapter}
 %
+\theoremstyle{definition}
+\newtheorem{exercise}{}[section]
+\newtheorem{example}{Example}[section]
+%
+\newenvironment{exercises}%
+{%
+\medskip\hrule\medskip\noindent\textbf{Exercises}%
+}%
+{%
+\medskip\hrule
+}
+%
 \makeindex
 %
 \begin{document}
@@ -153,6 +165,15 @@ Thus, if $r > 0$, the simple assumption given above results in
 \emph{exponential growth}.\index{exponential growth}
 (If $r < 0$, we obtain \emph{exponential decay}.\index{exponential decay})
 
+\begin{exercises}
+\begin{exercise}
+This is a test.
+\end{exercise}
+\begin{exercise}
+One two three four five.
+\end{exercise}
+\end{exercises}
+
 \section{The Logistic Equation\index{logistic equation}}
 
 For a population with unlimited resources, exponential growth
@@ -241,10 +262,6 @@ equation \eqref{eqn:logistic}.}
 \label{fig:logisticsol}
 \end{figure}
 
-\begin{question}
-Describe (and sketch) the solution that
-results when the initial population is greater than $K$.
-\end{question}
 
 Note that if the initial population is exactly $K$, then
 $\frac{dp}{dt} = 0$.  The constant function $p(t)=K$ is an
@@ -252,11 +269,18 @@ exact solution to the differential equation.
 We call a constant solution an
 \emph{equilibrium solution}.\index{equilibrium solution}
 
-\begin{question}
+\begin{exercises}
+\begin{exercise}
 Does the logistic equation \eqref{eqn:logistic} have any other
 equilibrium solutions?
-\end{question}
+\end{exercise}
+\begin{exercise}
+Describe (and sketch) the solution that
+results when the initial population is greater than $K$.
+\end{exercise}
+\end{exercises}
 
+\section{Autonomous First Order Differential Equations}
 The method for analyzing solutions to the logistic equation can be
 applied to any first order equation of the form
 \begin{equation}
@@ -282,19 +306,46 @@ the equilibrium solutions (where $f(y)=0$), and determine the
 behavior of non-equilibrium solutions based on the graph
 of $f(y)$.
 
-\begin{question}
+\begin{exercises}
+
+\begin{exercise}
 Consider the differential equation
 \[
    \frac{dy}{dt} = y(y-1)(y-2)
 \]
-(a) Find the equilibrium solutions.\\
-(b) Sketch $\frac{dy}{dt}$ as a function of $y$.\\
-(c) In one set of axes, sketch several solutions $y(t)$. Include the equilibrium solutions,
+\begin{enumerate}
+\item Find the equilibrium solutions.\\
+\item Sketch $\frac{dy}{dt}$ as a function of $y$.\\
+\item In one set of axes, sketch several solutions $y(t)$. Include the equilibrium solutions,
 and several more non-equilibrium solutions to show all the possible behaviors.
 (Since this is not necessarily a population model, you should consider negative values
 of $y$ as well as positive.)
-\end{question}
+\end{enumerate}
+\end{exercise}
 
+\begin{exercise}
+For each of the following differential equations,
+determine the equilibrium solutions, sketch $f(y)$ as a function
+of $y$, and sketch the solutions where $y(0)=1/2$, $y(0)=1$, and
+$y(0)=3/2$.
+\begin{enumerate}
+\item $\ds y' = -2y + 1$
+\item $\ds y' = y(2-y)$
+\item $\ds y' = \sin(\pi y)$
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
+If possible, find a formula for the solutions to the
+differential equations in Exercise 1.
+\end{exercise}
+\begin{exercise}
+\emph{...a question in which a description must be converted to
+a differential equation...}
+\end{exercise}
+\begin{exercise}
+\emph{...another...}
+\end{exercise}
+\end{exercises}
 
 
 \section{Separable First Order Differential Equations (*)}
@@ -362,7 +413,8 @@ be useful in some cases.
 
 Note that all autonomous first order differential equations are separable.
 
-\subsection*{Example 1.}
+%\subsection*{Example 1.}
+\begin{example}
 We'll apply the method to
 \begin{equation}
    \frac{dp}{dt} = r p
@@ -392,10 +444,11 @@ solution
 \end{equation}
 where $C$ is an arbitrary constant.
 To satisfy an initial condition $p(0)=P_0$, we let $C=P_0$.
+\end{example}
 
-\subsection*{Example 2.}
+\begin{example}
 Now consider a population model in which the per capita growth
-rate varies periodically.  This might be because of seasonal variation.
+rate varies periodically, perhaps because of seasonal variation.
 The differential equation is
 \begin{equation}
    \frac{dp}{dt} = (r + a\cos(\omega t))p
@@ -414,7 +467,19 @@ The final concise formula for the solution is
    p(t) = Ce^{rt + (a/\omega)\sin(\omega t)}
 \end{equation}
 where $C$ is an arbitrary constant.
+\end{example}
 %
+\begin{exercises}
+\begin{exercise}
+Solve the initial value problems.
+\begin{enumerate}
+\item $\ds y' = -y/(t^2+1)$, \hspace{0.25cm} $y(0)=5$.
+\item $\ds y' = -\left(2-e^{-t}\right)y$, \hspace{0.25cm} $y(0)=3$.
+\item $\ds y' = (t+1)y^2$, \hspace{0.25cm} $y(0)=y_0$, where $y_0$ is
+a constant.
+\end{enumerate}
+\end{exercise}
+\end{exercises}
 %
 \section{Linear First Order Differential Equations (*)}
 
@@ -481,7 +546,7 @@ to \eqref{eqn:linear}:
 \label{eqn:linearsolution}
 \end{equation}
 
-\subsection*{Example 1.}
+\begin{example}
 Consider the initial value problem
 \begin{equation}
    y' = 2y + 3, \quad y(0) = 5.
@@ -513,8 +578,8 @@ So the solution to the initial value problem is
 \end{equation}
 You should check the answer by substituting it back
 into \eqref{eqn:linearexample1}.
-
-\subsection*{Example 2.}
+\end{example}
+\begin{example}
 \begin{equation}
    y' = -\frac{y}{t} + t, \quad y(1) = 2.
 \end{equation}
@@ -552,9 +617,9 @@ Thus the solution to the initial value problem is
 \begin{equation}
    y(t) = \frac{t^2}{3} + \frac{5}{3t}.
 \end{equation}
+\end{example}
 
-
-\subsection*{Example 3.}
+\begin{example}
 Consider the differential equation
 \begin{equation}
     y' = 2ty + 3.
@@ -579,28 +644,18 @@ Because the integral of $e^{-t^2}$ appears frequently in mathematics,
 it has been given a name.
 You may have seen the \emph{error function}
 $\textrm{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-s^2}\,ds$.}
+\end{example}
 
+\begin{exercises}
+\begin{exercise}
+Solve the following initial value problems (if possible).
+\begin{enumerate}
+\item $\ds y' = 2y+t$, \hspace{0.25cm} $y(0)=10$
+\item $\ds y' = -\frac{y}{2} + \sin(t)$, \hspace{0.25cm} $y(0)=0$
+\end{enumerate}
+\end{exercise}
+\end{exercises}
 
-\subsection*{Exercises}
-\begin{enumerate}
-\item For each of the following differential equations,
-determine the equilibrium solutions, sketch $f(y)$ as a function
-of $y$, and sketch the solutions where $y(0)=1/2$, $y(0)=1$, and
-$y(0)=3/2$.
-\begin{enumerate}
-\item $\ds y' = -2y + 1$
-\item $\ds y' = y(2-y)$
-\item $\ds y' = \sin(\pi y)$
-\end{enumerate}
-\item
-If possible, find a formula for the solutions to the
-differential equations in Exercise 1.
-\item
-\emph{...a question in which a description must be converted to
-a differential equation...}
-\item
-\emph{...another...}
-\end{enumerate}
 
 \section{Systems of Differential Equations}
 
@@ -659,7 +714,8 @@ The system of equations can be rewritten as
     \frac{dy}{dt} & = g(x,y)
 \end{split}
 \end{equation}
-\subsection*{Example: The SI Components of the SIR Model.}
+\begin{example}
+\textbf{The SI Components of the SIR Model.}
 We have previously seen the SIR model of the spread of
 a disease in a population:
 \begin{equation}
@@ -674,6 +730,7 @@ We can analyze the first two equations as a two dimensional
 system, and then infer the values of $R$ from the
 relation $S+I+R=N$, where $N$ is the (constant) size
 of the total population.
+\end{example}
 
 We state without proof the following theorems.
 \begin{theorem}
@@ -681,6 +738,14 @@ Uniqueness...
 \end{theorem}
 This theorem means that trajectories in phase
 space do not cross each other.
+
+\begin{exercises}
+\begin{exercise}
+An exercise...
+\end{exercise}
+\end{exercises}
+%
+%
 \section{Phase Plane Analysis\index{phase plane}}
 
 The system of differential equations is
@@ -737,7 +802,13 @@ The above steps are often enough to obtain a
 pretty good idea of the behavior of the trajectories
 in the phase plane.
 
-
+\begin{exercises}
+\begin{exercise}
+An exercise...
+\end{exercise}
+\end{exercises}
+%
+%
 \section{Planar Linear Systems}
 
 
@@ -955,7 +1026,7 @@ Note that asymptotic stability implies stability.
 arbitrarily close to the equilibrium that leave the neighborhood, we say the equilibrium is \emph{unstable}\index{unstable}. 
 \end{itemize}
 
-\paragraph{Real, distinct eigenvalues.}
+\subsection*{Real, distinct eigenvalues.}
 Let $\lambda_1$ and $\lambda_2$ be real eigenvalues,
 $\lambda_1\ne\lambda_2$, and let $\BV_1$ and $\BV_2$
 be respective eigenvectors.  We consider the following
@@ -965,8 +1036,11 @@ cases.
 
 When both eigenvalues are negative, it is clear from
 \eqref{eqn:gensolreal}
-that $\ds\lim_{t\rightarrow\infty}\BX(t) = \BZ$. All
-trajectories approach $\BZ$ asymptotically.
+that
+\[
+  \lim_{t\rightarrow\infty}\BX(t) = \BZ.
+\]
+All trajectories approach $\BZ$ asymptotically.
 
 The equilibrium $\BZ$ is called a \emph{sink.}
 It is \emph{asymptotically stable}.
@@ -975,7 +1049,10 @@ It is \emph{asymptotically stable}.
 
 In this case, all solutions diverge from the origin.
 However, for any solution $\BX(t)$, we have
-$\ds\lim_{t\rightarrow -\infty}\BX(t) = \BZ$, so all solutions 
+\[
+  \lim_{t\rightarrow -\infty}\BX(t) = \BZ,
+\]
+so all solutions 
 converge to $\BZ$ backwards in time.
 
 The equilibrium $\BZ$ is called a \emph{source.}
@@ -1043,7 +1120,7 @@ about which eigenvalue we called $\lambda_1$ or
 $\lambda_2$.  This observation will be very useful
 when we sketch phase portraits.
 
-\paragraph{Complex eigenvalues.}
+\subsection*{Complex eigenvalues.}
 We assume one eigenvalue is $\lambda_1 = \mu + i\omega$,
 and a corresponding eigenvector is
 $\BV_1 = \BA+i\BB$.
@@ -1105,7 +1182,8 @@ the linear system
     \quad \textrm{and} \quad
     A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}.
 \]
-\paragraph{Procedure}
+\noindent
+\textbf{Procedure}
 \begin{enumerate}
 \item
 Find the eigenvalues of the matrix, and classify the equilibrium as a
@@ -1136,7 +1214,7 @@ of the eigenvalue closest to zero}.
 \item Use the above information to sketch several representative trajectories.
 \end{enumerate}
 
-\subsection*{Example 1.}
+\begin{example}
 \[
   \frac{d\BX}{dt} = A \BX, \quad \textrm{where} \quad
     A = \begin{bmatrix}
@@ -1244,10 +1322,11 @@ of two of the spiral trajectories.
 
 \medskip
 \noindent
-\centerline{\includegraphics[width=3.5in]{matlab/LinPhPortExample1.eps}}
+\centerline{\includegraphics[width=3in]{matlab/LinPhPortExample1.eps}}
 \end{enumerate}
+\end{example}
 
-\subsection*{Example 2.}
+\begin{example}
 We consider the linear system of differential equations
 with
 \[
@@ -1293,10 +1372,11 @@ have opposite signs.)
 Here is the phase portrait:
 
 \noindent
-\centerline{\includegraphics[width=3.5in]{matlab/LinPhPortExample2.eps}}
+\centerline{\includegraphics[width=3in]{matlab/LinPhPortExample2.eps}}
 \end{enumerate}
+\end{example}
 
-\subsection*{Example 3.}
+\begin{example}
 We'll look at one more example, this time with
 \[
    A = \begin{bmatrix}
@@ -1345,9 +1425,33 @@ $\BV_1 = \begin{bmatrix}1 \\ -1 \end{bmatrix}$.
 Here is the phase portrait:
 
 \noindent
-\centerline{\includegraphics[width=3.5in]{matlab/LinPhPortExample3.eps}}
+\centerline{\includegraphics[width=3in]{matlab/LinPhPortExample3.eps}}
 \end{enumerate}
+\end{example}
 %
+\begin{exercises}
+\begin{exercise}
+Follow the procedure outlined in this section (and demonstrated
+in the examples) to sketch the phase portraits for the linear
+systems with the following coefficient matrices.
+
+\smallskip
+% (I just made these up--I haven't worked out the solutions yet...)
+(1) $\ds A = \begin{bmatrix} 1 & 2 \\ -1 & 2 \end{bmatrix}$
+\hspace{1cm}
+(2) $\ds A = \begin{bmatrix} -1 & 3 \\ -3 & -1 \end{bmatrix}$
+\hspace{1cm}
+(3) $\ds A = \begin{bmatrix} 0 & 1 \\ -2 & -1 \end{bmatrix}$ 
+\end{exercise}
+\begin{exercise}
+Suppose $A$ has one zero eigenvalue and one nonzero eigenvalue.
+\begin{enumerate}
+\item What is the general solution?
+\item Describe the set of equilibrium solutions.
+\item Describe the phase portrait.
+\end{enumerate}
+\end{exercise}
+\end{exercises}
 %
 %
 \section{Nonlinear Systems}
@@ -1450,7 +1554,7 @@ where
 \end{equation}
 is called the \emph{Jacobian matrix}.\index{Jacobian matrix}
 
-\paragraph{What does the linearization tell us about the original system?}
+\subsection*{What does the linearization tell us about the original system?}
 Equation \eqref{eqn:linearizedde}
 is the linear approximation to \eqref{eqn:de} at the
 equilibrium point $(x^*,y^*)$.
@@ -1479,7 +1583,7 @@ If any eigenvalue has a positive real part,
 then $\BX_0$ is unstable.
 \end{theorem}
 
-\subsection*{Example 1.}
+\begin{example}
 The system of differential equations
 \begin{equation}
 \begin{split}
@@ -1536,9 +1640,10 @@ at $(0,0)$.  They are almost the same.  If we zoomed
 in closer, they would appear even more similar.}
 \label{fig:nonlinexample1compare}
 \end{figure}
+\end{example}
 %
 %
-\subsection*{Example 2.}
+\begin{example}
 The system of differential equations
 \begin{equation}
 \begin{split}
@@ -1586,20 +1691,48 @@ the linearization can not tell us if these trajectories
 actually form closed curves.
 The trajectories might, in fact, slowly spiral
 towards or away from $(1,1)$.
-
+\end{example}
+%
+\begin{exercises}
+\begin{exercise}
+An exercise...
+\end{exercise}
+\end{exercises}
 %
 \section{Periodic Solutions}
+It is possible that solutions can oscillate...
+\begin{exercises}
+\begin{exercise}
+An exercise...
+\end{exercise}
+\begin{exercise}
+Another exercise...
+\end{exercise}
+\end{exercises}
+
 %
 \section{Higher Dimensional Systems}
 \[
   \dot{\BX} = \BF(\BX)
 \]
-\subsection*{Example.}
+\begin{example}
 \emph{Do a 3D example: solve for equilibria, find the
 Jacobian, determine stability.  At least one point
 should require numerical evaluation of the equilibrium
 and of the eigenvalues of the Jacobian.}
-\paragraph{Chaos.} Just an example...
+\end{example}
+%
+\section{Chaos} Just an example...
+
+\begin{exercises}
+\begin{exercise}
+An exercise... use a computer to observe chaotic solutions
+to the Lorenz equations.
+\end{exercise}
+\begin{exercise}
+Another exercise...
+\end{exercise}
+\end{exercises}
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
