@@ -1,0 +1,15 @@
+This directory contains the files for the book
+"Interdisciplinary Mathematical Modeling" that I
+am writing.
+
+To create the Latex versions of the listings of
+the sample code given in the appendix, run
+the shell script make_listings.
+
+To create all the plots:
+
+Subdirectory scilab
+   Run scilab:
+   -->exec('SIRscript.sce')
+   This creates "SIR.eps"
+
