@@ -4,6 +4,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 %
+%
 \usepackage{graphicx}
 %\usepackage{makeidx}
 %
@@ -46,6 +47,7 @@ Colgate University}
 \theoremstyle{definition}
 \newtheorem{exercise}{}[section]
 \newtheorem{example}{Example}[section]
+\newtheorem{definition}{Definition}[section]
 %
 \newenvironment{exercises}%
 {%
@@ -67,7 +69,7 @@ Colgate University}
 %
 
 \chapter*{Foreword}
-\paragraph{Rough notes for now...}
+\textbf{Rough notes for now...}
 \begin{itemize}
 \item Goals: (i) Convert a description of a dynamical process
 into a set of mathematical equations.
@@ -704,7 +706,7 @@ the vector function
 $\BX(t)$ such that its velocity matches the given vector field
 at all points along the curve.
 
-\paragraph{The Phase Plane.}\index{phase plane}
+\subsection*{The Phase Plane.}\index{phase plane}
 In the two dimensional autonomous case, the phase space
 is called the \emph{phase plane}.
 The system of equations can be rewritten as
@@ -920,7 +922,7 @@ In fact, the general solution must have the form
 We'll find the general solution in two cases: real and distinct eigenvalues,
 and complex eigenvalues.
 
-\paragraph{Real, distinct eigenvalues.}
+\subsection*{Real, distinct eigenvalues.}
 Suppose that $A$ has real eigenvalues $\lambda_1$
 and $\lambda_2$, and $\lambda_1 \ne \lambda_2$.
 Let $\BV_1$ and $\BV_2$ be corresponding eigenvectors.
@@ -931,7 +933,7 @@ The general solution is
 \end{equation}
 where $c_1$ and $c_2$ are arbitrary constants.
 
-\paragraph{Complex eigenvalues.}
+\subsection*{Complex eigenvalues.}
 Because the matrix $A$ is real, we know that complex eigenvalues must
 occur in complex conjugate pairs.
 Suppose $\lambda_1 = \mu + i\omega$, with eigenvector
@@ -1960,7 +1962,8 @@ equilibrium to determine the behavior near each one, and then
 use the nullclines of~\eqref{eqn:compspecexample} to understand
 what happens in the phase plane ``far away'' from the equilibria.
 
-\paragraph{Equilibria.}
+\noindent
+\textbf{Equilibria.}
 To find the equilibria, we must solve
 \begin{equation}
 \begin{split}
@@ -1987,7 +1990,8 @@ of~\eqref{eqn:exampleequil} implies
 So two equilibria are $(1,0)$ and $(1/2,1/2)$.
 \end{itemize}
 
-\paragraph{Linearization at each equilibrium.}
+\noindent
+\textbf{Linearization at each equilibrium.}
 We have found the following equilibria: $(0,0)$, $(0,3/4)$, $(1,0)$, $(1/2,1/2)$.
 We now determine the behavior of~\eqref{eqn:compspecexample}
 near each equilibrium by finding the linearization at each
@@ -2152,8 +2156,8 @@ of the competing species example:
 \end{figure}
 
 
-
-\paragraph{Nullclines.}
+\noindent
+\textbf{Nullclines.}
 Since the eigenvalues at each linearization
 all had nonzero real parts, each linearization
 provides a good approximation to the behavior
@@ -2261,6 +2265,12 @@ predicts that the two species will co-exist in
 a stable equilibrium.
 (But different parameters values can lead to different
 conclusions.)
+
+\begin{exercises}
+\begin{exercise}
+An exercise...
+\end{exercise}
+\end{exercises}
 %
 %
 \section{Battle of Attrition--The Lanchester Model}
@@ -2373,10 +2383,80 @@ and the constants $\alpha$ and $\beta$, we can
 easily determine which army will win, and what the
 size of the winning army will be at the end of the
 battle.
+
+\begin{exercises}
+\begin{exercise}
+An army of $50,000$ red ants is in a battle
+with an army of $35,000$ larger and stronger black ants.
+The sizes and strengths of the two types of ants
+are such that $\alpha=3\beta$.
+\begin{enumerate}
+\item Based on this description, which type of ant
+(black or red) is represented by $x$
+and which is represented by $y$ in the
+Lanchester model?
+\item If the battle proceeds according to the Lanchester
+model, which army will win, and how many ants will
+remain in the winning army?
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
+In the year 17**, a general is facing an impending battle.
+Across the valley from his encampment, the opposing
+army has $10,000$ soldiers, but the general has only $6,500$.
+His army and the opposing army have similar abilities
+and armaments, so, in a Lanchester model of the battle,
+the proportionality constant $\alpha$ and $\beta$
+are equal.
+If, as might be the case in these times, the battle
+is accurately modeled by the Lanchester equations,
+the general's army will lose the battle.
+Fortunately, the general has $5,000$ reinforcement
+on the way.  Unfortunately, the opposing army
+also expects reinforcements, but only $2,000$.
+This is enough to give the advantage to the opposing
+army.
+
+After consulting his maps, the general realizes that
+he can divert his reinforcements to engage the
+opposing army's reinforcements before they
+reach the valley. According to the Lanchester model,
+the general's reinforcements would defeat
+the opposing army's reinforcements.  The surviving
+reinforcements could then join the general's army
+before the general engages in the battle with the
+opposing army across the valley.
+
+\begin{enumerate}
+\item Show that, if the surviving reinforcements reach the valley
+before the main battle begins, the general will win
+the battle.
+What will be the size of the surviving army?
+\item The general realizes that the opposing army
+might attack before his surviving reinforcements
+reach him. If the reinforcements arrive too late,
+his losses might have been too great, and the
+reinforcements will not be enough to win the battle.
+How large can the pre-reinforcment losses be before
+the reinforcement will not be enough to win the battle?
+\end{enumerate}
+\end{exercise}
+\end{exercises}
+
 \section{Arms Race}
 %
 \section{Romeo and Juliet\index{Romeo}\index{Juliet}}
 \section{Laura and Petrarch\index{Laura}\index{Petrarch}}
+
+\begin{exercises}
+\begin{exercise}
+Adjust parameters, see how the behavior changes...
+\end{exercise}
+\begin{exercise}
+Change the shape of a function... see if the results change
+significantly...
+\end{exercise}
+\end{exercises}
 %
 \section{Epidemiology and the SI Model\index{SI model}}
 
@@ -2391,7 +2471,7 @@ Our model will not attempt to deal with the geographic spread
 of the disease. It will only look at the total number of
 people infected within the given population.
 
-\paragraph{The SI Model.}
+\subsection*{The SI Model.}
 In the simplest model, we will consider just two classes
 of people: those who have been infected, and those who have
 not.
@@ -2846,28 +2926,30 @@ we must solve
 \end{equation}
 So the two fixed points are $x=0$ and $x=\frac{1.8}{2.8}\approx 0.643$.
 
-\paragraph{Definition.}
+\begin{definition}
 The fixed point $x^*$ is a \emph{sink} or \emph{attractor}
 if there is a neighborhood $N$ of $x^*$ such that
 $x_n\rightarrow x^*$ for all $x_0$ in $N$.
 We also say $x^*$ is \emph{asymptotically stable}.
-
-\paragraph{Definition.}
+\end{definition}
+\begin{definition}
 The fixed point $x^*$ is a \emph{source} or \emph{repellor}
 if there is a neighborhood $N$ of $x^*$ such that if $x_0$
 is in $N$, then $x_n$ eventually leaves $N$.
-
-\paragraph{Definition.}
+\end{definition}
+\begin{definition}
 The fixed point $x^*$ is \emph{unstable} if for every
 neighborhood $N$ of $x^*$, there are points arbitrarily close
 to $x^*$ whose iterates leave $N$.
+\end{definition}
 
 \vspace{0.2cm}
 Note that a source is unstable, but an unstable fixed point
 is not necessarily a source.  See, for example,
 Figure~\ref{fig:noconclusion1}.
 
-\paragraph{Behavior near a fixed point: the linearization.}
+\noindent
+\textbf{Behavior near a fixed point: the linearization.}
 Let $x^*$ be a fixed point of \eqref{eqn:onedmap}.
 If $x$ is close to $x^*$,
 we can approximate $f(x)$ with the tangent line at $x^*$:
@@ -2902,7 +2984,7 @@ fixed point $x^*$ of \eqref{eqn:onedmap}.
 (ii) If $|f'(x^*)| > 1$, then $x^*$ is a source.
 \end{theorem}
 
-\subsection*{Example.}
+\begin{example}
 Consider again the logistic map \eqref{eqn:logisticmap}
 with $r=2.8$.  The graph is shown in
 Figure~\ref{fig:logisticmap_example}, and earlier we found the
@@ -2921,6 +3003,7 @@ At $x^*_2$, we have $f'(1.8/2.8) = -0.8$,
 so by Theorem 1,
 $x^*_2$ is a sink.
 \end{itemize}
+\end{example}
 
 \bigskip
 If $|f'(x^*)|=1$, we can not make any conclusions about the
@@ -3166,7 +3249,7 @@ converge to the line $y=-x/2$ as $n$ increases,
 and since $\lambda_2 > 1$, the iterations diverge
 from $\BZ$ as $n$ increases.
 
-\paragraph{Stability.}
+\subsection*{Stability.}
 Suppose $A$ has real and distinct eigenvalues
 $\lambda_1$ and $\lambda_2$, with eigenvectors
 $\BV_1$ and $\BV_2$.
@@ -3188,7 +3271,7 @@ a source is also unstable.)
 \end{itemize}
 %
 %
-\paragraph{Complex Eigenvalues.}
+\subsection*{Complex Eigenvalues.}
 Here we consider the solutions when the eigenvalues of
 $A$ are complex.  Recall that complex eigenvalues of a $A$
 matrix must occur as complex conjugate pairs.
@@ -3324,7 +3407,9 @@ are real numbers, and $\omega > 0$.  We also let $\BA$ and $\BB$
 be the real vectors such that $\BV_1 = \BA+i\BB$.
 We only consider the case in which the eigenvalues are distinct. 
 
-\paragraph{General Solution:}
+\medskip
+\noindent
+\textbf{General Solution:}
 \begin{itemize}
 \item If the eigenvalues of $A$ are real and distinct, then the
 general solution is
@@ -3337,7 +3422,9 @@ general solution is
            + c_2 r^n(\BA\sin(n\theta)+\BB\cos(n\theta))
 \end{equation}
 \end{itemize}
-\paragraph{Stability:}
+
+\noindent
+\textbf{Stability:}
 \begin{itemize}
 \item If $|\lambda_1| < 1$ and $|\lambda_2| < 1$, then
 $\BZ$ is a \emph{sink} or \emph{attractor}; it is
@@ -3394,6 +3481,11 @@ moves the equilibrium or fixed point, but
 the dynamics around that point are the same
 as the linear system without the constant vector added.
 
+\begin{exercises}
+\begin{exercise}
+An exercise...
+\end{exercise}
+\end{exercises}
 
 \section{Higher Dimensional Maps}
 %
@@ -3464,8 +3556,8 @@ is the Jacobian matrix\index{Jacobian matrix}.
 (Note that this is the same matrix used in the linearization
 at an equilibrium point of a system of differential equations.)
 
-
-\paragraph{What does the linearization tell us about the original system?}
+\noindent
+\textbf{What does the linearization tell us about the original system?}
 We have the following result:
 \emph{If neither eigenvalue has magnitude equal to $1$,
 then the behavior of the system \eqref{eqn:map}
@@ -3483,7 +3575,9 @@ in the case $|f'(x^*)|=1$.  The above results are a generalization
 of that phenomena to higher dimensions.
 
 
-\subsection*{Example.}
+\begin{example}
+In this rather long example, we determine
+how the stability of a fixed point depends on a parameter.
 Consider the map
 \begin{equation}
 \begin{split}
@@ -3631,7 +3725,7 @@ Lower left: $\beta=0.25$, saddle.
 Lower right: $\beta=3.5$, source.}
 \label{fig:LinearizationFPExamples}
 \end{figure}
-
+\end{example}
 
 \section{Marital Relationships: Gottman and Murray's Model}
 The model discussed in this section is based on the
@@ -3757,7 +3851,8 @@ If a Markov chain is regular, then no matter what the
 initial state, in $n$ steps there is a positive
 probability that the process is in \emph{any} of the states.
 
-\paragraph{Essential facts about regular Markov chains.}
+\noindent
+\textbf{Essential facts about regular Markov chains.}
 \begin{enumerate}
 \item
 $P^n\rightarrow W$ as $n\rightarrow\infty$, where
@@ -4915,7 +5010,7 @@ programs.
 \section{Yacas (tm)}
 %
 \chapter[Hints and Solutions]{Hints and Solutions for Selected Exercises}
-\paragraph{\ref{sec:exercises_markov} / \ref{ex:markov1}}
+\textbf{\ref{sec:exercises_markov} / \ref{ex:markov1}}
 \begin{enumerate}
 \item[(a)] The transition diagram:
 
@@ -4975,7 +5070,7 @@ is
 \]
 \end{enumerate}
 
-\paragraph{\ref{sec:exercises_markov} / \ref{ex:markov2}}
+\textbf{\ref{sec:exercises_markov} / \ref{ex:markov2}}
 \begin{enumerate}
 \item[(a)] The transition matrix is
 \[
@@ -5007,7 +5102,7 @@ Thus, in the long run, the probabilities of being in state A, B or C
 are $1/2$, $1/4$ and $1/4$, respectively.
 \end{enumerate}
 
-\paragraph{\ref{sec:exercises_markov} / \ref{ex:markov3}}
+\textbf{\ref{sec:exercises_markov} / \ref{ex:markov3}}
 The transition diagram for this version of the Coin and Die game is
 
 \medskip
