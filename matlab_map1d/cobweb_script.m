@@ -10,7 +10,7 @@ function cobweb_script(dosave)
     plot(x,x,'k--','linewidth',1.5)
     
     if (dosave)
-        pause
+%        pause
         print('-deps','logisticmap_example.eps')
     end
     hold on
@@ -31,7 +31,7 @@ function cobweb_script(dosave)
     text(x1,ylabelcoord,'x_1','fontsize',12,'fontweight','bold')
     set(gcf,'paperposition',[0.25 2.5 4 3])
     if (dosave)
-        pause
+%        pause
         print('-deps','logisticmap_cobweb1.eps')
     end
     
@@ -43,7 +43,7 @@ function cobweb_script(dosave)
     text(x2,ylabelcoord,'x_2','fontsize',12,'fontweight','bold')
     
     if (dosave)
-        pause
+%        pause
         print('-deps','logisticmap_cobweb2.eps')
     end
 
@@ -54,7 +54,7 @@ function cobweb_script(dosave)
     text(x3,ylabelcoord,'x_3','fontsize',12,'fontweight','bold')
     
     if (dosave)
-        pause
+%         pause
         print('-deps','logisticmap_cobweb3.eps')
     end
 
@@ -65,7 +65,7 @@ function cobweb_script(dosave)
     text(x4,ylabelcoord,'x_4','fontsize',12,'fontweight','bold')
     
     if (dosave)
-        pause
+%         pause
         print('-deps','logisticmap_cobweb4.eps')
     end
 
