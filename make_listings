@@ -1,0 +1,4 @@
+./mylister scilab/SIRvectorfield.sci > scilab/SIRvectorfield.sci.listing.tex
+./mylister scilab/SIRscript.sce      > scilab/SIRscript.sce.listing.tex
+./mylister matlab/SIRvectorfield.m   > matlab/SIRvectorfield.m.listing.tex
+./mylister matlab/SIRscript.m        > matlab/SIRscript.m.listing.tex
