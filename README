@@ -16,8 +16,22 @@ Subdirectory scilab:
    This creates "SIR.eps"
 
 Subdirectory matlab_map1d:
-   Run matlab, and give the commands:
+   Run matlab, and give the command:
    >> make_all_plots
 
+Subdirectory matlab:
+   Run matlab, and give the commands:
+   >> SIRscript
+   creates "SIRscript.plot.eps"
+   >> logistic_plots
+   creates "logistic_percapita_growthrate.eps",
+           "logistic_growthrate.eps",
+           "logistic_solutions.eps"
+   >> LinPhPortExample1
+   creates "LinPhPortExample1.eps"
+   >> LinPhPortExample2
+   creates "LinPhPortExample2.eps"
+   >> LinPhPortExample3
+   creates "LinPhPortExample3.eps"
 
 Subdirectory matlab:
