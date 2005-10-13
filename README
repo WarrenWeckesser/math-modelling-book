@@ -10,6 +10,12 @@ Subdirectory pplane_plots:
    I'll create some MATLAB scripts to create new versions of
    these plots.
 
+Subdirectory fig:
+   Contains .fig files created with xfig.  Also contains
+   the exported .eps files (but these are not in the Subversion
+   repository).  Run xfig, open each .fig files, and export it
+   as eps.  (Eventually I'll make a script that does this.)
+
 Subdirectory scilab:
    Run scilab and give the command
    -->exec('SIRscript.sce')
