@@ -38,3 +38,8 @@ tstr = sprintf('Solution of the SIR Model  (r=%.2f, gamma=%.2f)',r,g);
 title(tstr);
 xlabel('t');
 legend('S','I','R');
+%
+% Export the figure to a postscript file.
+%
+set(gcf,'PaperPosition',[.25 .25 4 3])
+print('-depsc','SIRscript.plot.eps')
