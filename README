@@ -21,17 +21,26 @@ Subdirectory matlab_map1d:
 
 Subdirectory matlab:
    Run matlab, and give the commands:
+
    >> SIRscript
    creates "SIRscript.plot.eps"
+
+   >> LinearizationFPExample_script
+   creates "LinearizationFPExample_n0.25.eps"
+           "LinearizationFPExample_n1.25.eps"
+           "LinearizationFPExample_p0.25.eps"
+           "LinearizationFPExample_p3.50.eps"
+
    >> logistic_plots
    creates "logistic_percapita_growthrate.eps",
            "logistic_growthrate.eps",
            "logistic_solutions.eps"
+
    >> LinPhPortExample1
    creates "LinPhPortExample1.eps"
+
    >> LinPhPortExample2
    creates "LinPhPortExample2.eps"
+
    >> LinPhPortExample3
    creates "LinPhPortExample3.eps"
-
-Subdirectory matlab:

@@ -1,4 +1,6 @@
-dofig = 4;
+w = 3.5;
+
+for dofig = 1:4
 
 if dofig == 1
     clf
@@ -11,6 +13,8 @@ if dofig == 1
     LinearizationFPExample(b,ics)
     text(-.2,.1,'\beta=0.25','fontsize',12,'fontweight','bold')
     set(gca,'fontsize',12,'fontweight','bold')
+    set(gcf,'PaperPosition',[0.25 0.25 w w])
+    print('-depsc','LinearizationFPExample_p0.25.eps')
 end
 
 if dofig == 2
@@ -24,6 +28,8 @@ if dofig == 2
 %    LinearizationFPExample(b,ics)
     text(-.2,.1,'\beta=-1.25','fontsize',12,'fontweight','bold')
     set(gca,'fontsize',12,'fontweight','bold')
+    set(gcf,'PaperPosition',[0.25 0.25 w w])
+    print('-depsc','LinearizationFPExample_n1.25.eps')
 end
 
 if dofig == 3
@@ -37,6 +43,8 @@ if dofig == 3
 %    LinearizationFPExample(b,ics)
     text(-.2,.1,'\beta=-0.25','fontsize',12,'fontweight','bold')
     set(gca,'fontsize',12,'fontweight','bold')
+    set(gcf,'PaperPosition',[0.25 0.25 w w])
+    print('-depsc','LinearizationFPExample_n0.25.eps')
 end
 
 if dofig == 4
@@ -50,4 +58,8 @@ if dofig == 4
 %    LinearizationFPExample(b,ics)
     text(-.2,.1,'\beta=3.5','fontsize',12,'fontweight','bold')
     set(gca,'fontsize',12,'fontweight','bold')
+    set(gcf,'PaperPosition',[0.25 0.25 w w])
+    print('-depsc','LinearizationFPExample_p3.50.eps')
+end
+
 end
