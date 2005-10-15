@@ -2,3 +2,4 @@
 ./mylister scilab/SIRscript.sce      > scilab/SIRscript.sce.listing.tex
 ./mylister matlab/SIRvectorfield.m   > matlab/SIRvectorfield.m.listing.tex
 ./mylister matlab/SIRscript.m        > matlab/SIRscript.m.listing.tex
+./mylister python/python_example.eigenvalues   > python/python_example.eigenvalues.tex

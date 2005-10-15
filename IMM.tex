@@ -4865,6 +4865,7 @@ differential equations and discrete maps.  MATLAB (tm)
 is a widely used commercial package.
 Scilab is a similar program that is free.
 (Another program to consider is Octave.)
+Python is a program language... etc...
 
 The notes provide instructions for the following tasks:
 \begin{enumerate}
@@ -5019,6 +5020,35 @@ in Figure \ref{fig:scilabSIRscriptoutput}.
 \label{fig:scilabSIRscriptoutput}
 \end{figure}
 %
+%
+\section{Python}
+\subsection*{Example: Find the eigenvalues of a matrix.}
+The \texttt{eig} function from the scipy.linalg library 
+is used to find the eigenvalues
+of a matrix A.
+Figure \ref{fig:pythoneigenvaluesoutput} shows an example.
+The matrix in this example is
+\[
+   A = \begin{bmatrix}
+          0.6 & 0.2 & 0.2 \\
+	  0.1 & 0.2 & 0.7 \\
+	  0.4 & 0.0 & 0.6 \\
+       \end{bmatrix} .
+\]
+The computation shows that the eigenvalues of the 
+matrix are $1$ and the complex conjugate pair
+$0.2 \pm  0.24494897i$
+(approximately).
+
+\begin{figure}[hbp]
+\fbox{%
+\input{python/python_example.eigenvalues}
+}
+\caption{An example of the use of
+the \texttt{eig} function in Python.}
+\label{fig:pythoneigenvaluesoutput}
+\end{figure}
+
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
