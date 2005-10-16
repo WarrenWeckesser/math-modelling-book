@@ -121,6 +121,23 @@ problems.  These are \emph{dynamic} problems;
 problems in which \emph{time} (either continuous
 or discrete) is the independent variable.
 
+\bigskip
+\noindent
+\emph{``The merit of painting lies in the exactness of reproduction.
+      Painting is a science and all sciences are based on mathematics. 
+      No human inquiry can be a science unless it pursues its path
+      through mathematical exposition and demonstration.''}
+
+\hfill -- Leonardo Da Vinci
+
+\bigskip
+\noindent
+\emph{``As far as the laws of mathematics refer to reality, they are not
+certain, as far as they are certain, they do not refer to reality.''}
+
+\hfill  --Albert Einstein
+
+\bigskip
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -142,7 +159,13 @@ solution is called an \emph{equilibrium solution}.\index{equilibrium}
 
 \section{Unconstrained Population Growth}
 
+\noindent
+\emph{``Population, when unchecked, increases in a geometrical ratio. 
+      Subsistence increases only in an arithmetical ratio."}
 
+\hfill    -- Thomas Robert Malthus
+
+\bigskip
 The simplest assumption for modeling the growth of a population
 is:
 \begin{quote}
@@ -180,7 +203,12 @@ equation with a given initial condition is called an
 \emph{initial value problem}.
 
 To solve this equation, we must find a \emph{function} $p(t)$
-that satisfies the equation.  In this case, the solution is
+that satisfies the equation.  In this case, the solution\footnote{%
+``Who has not been amazed to learn that the function $y = e^x$, like a 
+      phoenix rising from its own ashes, is its own derivative?'' 
+       -- Francois le Lionnais
+}
+is
 \begin{equation}
   p(t) = P_0 e^{rt}
 \end{equation}
@@ -2414,6 +2442,7 @@ easily determine which army will win, and what the
 size of the winning army will be at the end of the
 battle.
 
+\medskip
 \begin{exercises}
 \begin{exercise}
 An army of $50,000$ red ants is in a battle
@@ -3777,6 +3806,19 @@ both differential equations and discrete maps.
 %
 \chapter{Markov Chains}
 \section{A Brief Introduction to Probability}
+
+\emph{``The most important questions in life are, for the 
+       most part, really only problems of probability.''}
+
+
+\hfill            -- Pierre Simon de La Place
+
+\bigskip
+Laplace also said \emph{``The theory of probabilities is at bottom nothing but common sense 
+      reduced to calculus.''}
+
+
+
 \section{Markov Chains}
 
 A (finite) Markov chain is a process with a finite
@@ -4073,7 +4115,10 @@ then the probability that it does not occur is $1-p$,
 and the probability that it does not occur in $n$
 trials is $(1-p)^n$.  As $n\rightarrow\infty$, the
 probability that the event does not occur
-goes to zero.)
+goes to zero\footnote{%
+\emph{``Infinity converts the possible into the inevitable.''}
+ -- Norman Cousins 
+}.)
 The non-absorbing states in an absorbing Markov chain
 are called \emph{transient states}.
 
@@ -4680,7 +4725,7 @@ of $A$, and
 called the \emph{characteristic equation}\index{characteristic equation}.
 \section{Shortcuts for $2\times 2$ Matrices}
 In this section, we give
-some shortcuts for finding the eigenvectors of $2\times 2$ matrices.
+some shortcuts for finding the inverse of and the eigenvectors of $2\times 2$ matrices.
 
 Let
 \[
@@ -4688,6 +4733,33 @@ Let
               a & b \\ c & d
        \end{bmatrix}.
 \]
+
+\noindent
+\textbf{Inverse.}
+You can easily check that the inverse is
+\[
+   A^{-1} = \frac{1}{\det A}\begin{bmatrix}
+                               d & -b \\ -c & a
+                            \end{bmatrix}.
+\]
+So to find the inverse of a $2x2$ matrix,
+\emph{interchange the diagonal elements}, \emph{change the sign of the off-diagonal elements}, and
+\emph{divide by the determinant}.
+
+\begin{example}
+\[
+  A = \begin{bmatrix}
+          1 & 7 \\ -3 & 4
+      \end{bmatrix}
+  \quad\quad\quad
+  A^{-1} = \frac{1}{25}\begin{bmatrix}
+                          4 & -7 \\ 3 & 1
+                       \end{bmatrix}
+\]
+\end{example}
+
+\noindent
+\textbf{Eigenvalues and eigenvectors.}
 To find the eigenvalues of $A$, we must solve
 $\det(A-\lambda I)=0$ for $\lambda$.
 (The expression $\det(A-\lambda I)$ is called
@@ -4760,7 +4832,7 @@ a corresponding eigenvector.
 This works even when the eigenvalue is complex.
 It will give a correct complex eigenvector.
 
-\subsection*{Example 1.}
+\begin{example}
 \[
    A = \begin{bmatrix} 1 & 2 \\ 3 & -4 \end{bmatrix}
 \]
@@ -4811,8 +4883,9 @@ or, if we want to minimize the number of minus signs,
 \[
   \BV_2 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}
 \]
+\end{example}
 
-\subsection*{Example 2.}
+\begin{example}
 \[
    A = \begin{bmatrix} -1 & -3 \\ 4 & 3 \end{bmatrix}
 \]
@@ -4853,6 +4926,7 @@ then want to express $\BV_1$ as
 \]
 so $\BA = \begin{bmatrix} 3 \\ -2\end{bmatrix}$
 and $\BB = \begin{bmatrix} 0 \\ -2\sqrt{2} \end{bmatrix}$.)
+\end{example}
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -5140,6 +5214,13 @@ equation in Maxima.}
 \end{example}
 %
 \chapter[Hints and Solutions]{Hints and Solutions for Selected Exercises}
+
+\noindent
+\emph{``In the book of life, the answers aren't in the back.''}
+
+\hfill        -- Charlie Brown (Charles Schulz)
+
+\bigskip
 \textbf{\ref{sec:exercises_markov} / \ref{ex:markov1}}
 \begin{enumerate}
 \item[(a)] The transition diagram:
