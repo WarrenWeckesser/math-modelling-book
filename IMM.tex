@@ -35,7 +35,9 @@
 \title{\textbf{Interdisciplinary Mathematical Modeling}}
 \author{Warren Weckesser\\
 Department of Mathematics\\
-Colgate University}
+Colgate University\\
+\vspace{6in}
+{\small Copyright \copyright ~2005 Warren Weckesser}}
 %
 \numberwithin{equation}{chapter}
 \newtheorem{question}{Question}
@@ -5092,13 +5094,50 @@ in Figure \ref{fig:pythonSIRscriptoutput}.
 The computer can be a powerful tool for performing
 algebraic computations.  In this appendix I give a brief introduction
 to a few software packages that can do symbolic computations.
-Maple (tm) and Mathematica (tm) are widely used commercial
-packages.  Maxima (tm) and Yacas (tm) are free open-source
-programs.
+Maple (tm) is a widely used commercial
+package, and Maxima is a free open-source
+program.
+(Other widely used programs that might also be useful
+are Mathematica (tm), Axiom or Yacas.)
 \section{Maple (tm)}
-\section{Mathematica (tm)}
+\textbf{Solving first order differential equations.}
+\begin{example}
+We'll solve
+\[
+   y' = -y + 3
+\]
+\end{example}
 \section{Maxima (tm)}
-\section{Yacas (tm)}
+\textbf{Solving first order differential equations.}
+\begin{example}
+We'll solve
+\[
+   y' = -y + 3
+\]
+and then we'll require that the solution satisfy the
+initial condition $y(0)=1$.
+The Maxima code in Figure~\ref{fig:maxima_example_firstorderde} shows how this is done.
+In Maxima output, the number $e$ is written \texttt{\%E},
+and the arbitrary constant in the general solution of
+the first order differential equation is written \texttt{\%C}.
+Lines 6 and 7 of Figure~\ref{fig:maxima_example_firstorderde} show that the
+solution to the equation is
+\[
+    y(t) = e^{-t}\left(2 e^{t} + C\right),
+\]
+which we can rewrite as
+\[
+    y(t) = 2 + C e^{-t}.
+\]
+\begin{figure}[hbp]
+\fbox{%
+\input{maxima/maxima_example.firstorderde}
+}
+\caption{Solving a first order differential
+equation in Maxima.}
+\label{fig:maxima_example_firstorderde}
+\end{figure}
+\end{example}
 %
 \chapter[Hints and Solutions]{Hints and Solutions for Selected Exercises}
 \textbf{\ref{sec:exercises_markov} / \ref{ex:markov1}}

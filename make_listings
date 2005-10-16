@@ -5,3 +5,5 @@
 ./mylister python/python_example.eigenvalues   > python/python_example.eigenvalues.tex
 ./mylister python/SIRvectorfield.py   > python/SIRvectorfield.py.listing.tex
 ./mylister python/SIRscript.py        > python/SIRscript.py.listing.tex
+expand maxima/maxima_example.firstorderde > maxima/detabbed1
+./mylister maxima/detabbed1           > maxima/maxima_example.firstorderde.tex
