@@ -1,5 +1,7 @@
+./mylister scilab/eigenvalues.scilab > scilab/eigenvalues.scilab.tex
 ./mylister scilab/SIRvectorfield.sci > scilab/SIRvectorfield.sci.listing.tex
 ./mylister scilab/SIRscript.sce      > scilab/SIRscript.sce.listing.tex
+./mylister matlab/eigenvalues.matlab > matlab/eigenvalues.matlab.tex
 ./mylister matlab/SIRvectorfield.m   > matlab/SIRvectorfield.m.listing.tex
 ./mylister matlab/SIRscript.m        > matlab/SIRscript.m.listing.tex
 ./mylister python/python_example.eigenvalues   > python/python_example.eigenvalues.tex
