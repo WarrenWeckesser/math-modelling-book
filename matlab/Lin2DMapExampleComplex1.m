@@ -52,3 +52,6 @@ for k = 1:N
 end
 
 text(0.55,0.92,'x_0','fontsize',12,'fontweight','bold')
+
+set(gcf,'PaperPosition',[.25 .25 3 2.25])
+print('-depsc','Lin2DMapExampleComplex1.eps')

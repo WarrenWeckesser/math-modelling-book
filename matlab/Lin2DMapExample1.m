@@ -125,3 +125,5 @@ for k = 1:N
     x1 = x2;
 end
 
+set(gcf,'PaperPosition',[.25 .25 3 2.25])
+print('-depsc','Lin2DMapExample1.eps')

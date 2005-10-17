@@ -56,3 +56,6 @@ for k = 1:N
     xstr = sprintf('x_%d',k);
     text(x1(1)+tdx,x1(2)+tdy,xstr,'fontsize',12,'fontweight','bold')
 end
+
+set(gcf,'PaperPosition',[.25 .25 3 2.25])
+print('-depsc','Lin2DMapExampleEig.eps')
