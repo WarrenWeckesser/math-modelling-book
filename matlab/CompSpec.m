@@ -140,6 +140,8 @@ text(0.13,0.75,'B','fontsize',14,'fontweight','bold');
 text(0.4,0.3,'C','fontsize',14,'fontweight','bold');
 text(1,0.1,'D','fontsize',14,'fontweight','bold');
 
+print('-depsc','CompSpec.eps')
+
 end
 
 function z = vfplanar(vf,p,xrange,nx,yrange,ny)

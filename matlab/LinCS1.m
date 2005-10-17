@@ -81,6 +81,8 @@ ic = [0.1; -0.25];
 plot(v(:,1),v(:,2),'k-','linewidth',lw)
 [t,v] = ode45(@linearsys,[0 Tb],ic,opts,A);
 plot(v(:,1),v(:,2),'k-','linewidth',lw)
+
+print('-depsc','LinCS1.eps')
 % ic = [0;1];
 % [t,v] = ode45(@linearsys,[0 Tf],ic,opts,A);
 % plot(v(:,1),v(:,2),'k-','linewidth',lw)
