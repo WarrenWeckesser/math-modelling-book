@@ -2910,7 +2910,7 @@ An example is shown in Figure~\ref{fig:cobwebfinal}.
 %
 \begin{figure}
 \centerline{%
-\includegraphics[width=3.5in]{matlab_map1d/logisticmap_cobwebfinal.eps}
+\includegraphics[width=3.25in]{matlab_map1d/logisticmap_cobwebfinal.eps}
 }
 \caption{When cobwebbing, we usually don't bother dropping
 lines down to the horizontal axis. After the first vertical
@@ -2963,7 +2963,7 @@ and \ref{fig:linearcases_neg} show sample plots of $x_n$
 and cobweb diagrams for the various cases.
 \begin{figure}
 \centerline{%
-\includegraphics{matlab_map1d/linearcases_pos.eps}
+\includegraphics[width=4.25in]{matlab_map1d/linearcases_pos.eps}
 }
 \caption{Examples of linear maps, $a \ge 0$. In all cases, $x_0=10$.}
 \label{fig:linearcases_pos}
@@ -2971,7 +2971,7 @@ and cobweb diagrams for the various cases.
 %
 \begin{figure}
 \centerline{%
-\includegraphics{matlab_map1d/linearcases_neg.eps}
+\includegraphics[width=4.25in]{matlab_map1d/linearcases_neg.eps}
 }
 \caption{Examples of linear maps, $a < 0$. In all cases, $x_0=10$.}
 \label{fig:linearcases_neg}
@@ -3085,7 +3085,7 @@ and \ref{fig:noconclusion1}.
 %
 \begin{figure}
 \centerline{%
-\includegraphics[width=2.5in]{matlab_map1d/noconclusion2.eps}%
+\includegraphics[width=2.25in]{matlab_map1d/noconclusion2.eps}%
 }
 \caption{An example that shows why we can not determine
 the stability of a fixed point based on the linearization
@@ -3097,7 +3097,7 @@ In this case, $x^*$ is a source.}
 %
 \begin{figure}
 \centerline{%
-\includegraphics[width=2.5in]{matlab_map1d/noconclusion3.eps}%
+\includegraphics[width=2.25in]{matlab_map1d/noconclusion3.eps}%
 }
 \caption{An example that shows why we can not determine
 the stability of a fixed point based on the linearization
@@ -3109,7 +3109,7 @@ In this case, $x^*$ is a sink.}
 %
 \begin{figure}
 \centerline{%
-\includegraphics[width=2.5in]{matlab_map1d/noconclusion1.eps}%
+\includegraphics[width=2.25in]{matlab_map1d/noconclusion1.eps}%
 }
 \caption{Another example that shows why we can not determine
 the stability of a fixed point based on the linearization
@@ -3141,9 +3141,11 @@ This is the logistic map with the parameter set to 4.
 do not converge to stable fixed points or periodic solutions.}
 %
 %
+
+\newpage
 \section{Linear 2D Maps}
 
-In these notes, we consider the linear maps of the plane
+We consider the linear maps of the plane
 \begin{equation}
 \begin{split}
   x_{n+1} & = a_{11}x_n + a_{12}y_n \\
@@ -3816,8 +3818,7 @@ both differential equations and discrete maps.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\chapter{Markov Chains}
-\section{A Brief Introduction to Probability}
+\chapter{A Brief Introduction to Probability}
 
 \emph{``The most important questions in life are, for the 
        most part, really only problems of probability.''}
@@ -3830,9 +3831,17 @@ Laplace also said \emph{``The theory of probabilities is at bottom nothing but c
       reduced to calculus.''}
 
 
+\section{The Poisson Distribution\index{Poisson distribution}}
+\begin{equation}
+  \Pr(X=k) = \frac{\lambda^k e^{-\lambda}}{k!}
+\end{equation}
+where $k$ is non-negative integer.
 
-\section{Markov Chains}
 
+
+\chapter{Markov Chains}
+
+\section{Introduction}
 A (finite) Markov chain is a process with a finite
 number of states (or outcomes, or events) in which
 the probability of being in a particular state
