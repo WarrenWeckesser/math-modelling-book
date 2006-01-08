@@ -154,7 +154,7 @@ certain, as far as they are certain, they do not refer to reality.''}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\chapter{Differential Equations}
+\chapter{Differential Equations}\index{differential equation}
 
 \section{Modeling with Differential Equations}
 \emph{Start with an example; discuss significance of a
@@ -204,7 +204,7 @@ assumption is
 where $r$ is the constant of proportionality.
 (Note that I have suppressed the argument of $p$ for brevity.)
 This is a \emph{first order differential equation}.
-(The \emph{order} of a differential equation is the order of the
+(The \emph{order}\index{order} of a differential equation is the order of the
 highest derivative in the equation.)
 
 Frequently, the question we ask is ``What is the population at time $t$
@@ -2701,8 +2701,8 @@ for $S$ and $I$, and then infer the behavior of $R$ afterwards.
 %
 \section{Modeling with Discrete Maps}
 %
-\emph{To do:} Introduce modeling with maps; define the \emph{order}
-of a map; ...
+\emph{To do:} Introduce modeling with maps;
+define the \emph{order}\index{order} of a map; ...
 \section{One-Dimensional Maps}
 \label{sec:OneDimMaps}
 We begin with the simplest model of population growth.
@@ -3571,7 +3571,77 @@ higher dimensional maps of the form
 \end{equation}
 where $\BX \in \Real^n$. etc...
 
+\subsection*{Linear $m$ dimensional maps.}
+A linear $m$-dimensional map with constant coefficients has the form
+\begin{equation}
+  \BX_{n+1} = A\BX_{n}
+\label{eqn:linearmapmdim}\cdot
+\end{equation}
+where $\BX\in \Real^m$ and $A$ is an $m\times m$ matrix.
+Such a problem can be completely solved, but we will not
+derive the method here in its full generality here.
+We will point out that in
+many cases, the methods discussed earlier for the
+``typical'' two dimensional linear map also apply here.
+In particular, if $A$ has $m$ distinct real eigenvalues
+$\lambda_j$, with corresponding eigenvectors
+$\BV_j$, the general solution is
+\begin{equation}
+   \BX_n = c_1 \lambda_1^n \BV_1 + c_2 \lambda_2^n \BV_2
+                 + \cdots + c_m \lambda_m^n\BV_m.
+\label{eqn:linearmdimreal}
+\end{equation}
 %
+If $A$ has some complex eigenvalues (which must occur in
+complex conjugate pairs), real solutions can be derived
+by using the same technique that we derived for the
+two dimensional linear map.
+\begin{example}
+Consider the linear map \eqref{eqn:linearmapmdim} with
+\begin{equation}
+   A = \begin{bmatrix}
+            \frac{1}{2} &  1  &  0 \\
+              0         & -1  & -2 \\
+              0         &  1  & \frac{3}{2}
+       \end{bmatrix}
+\end{equation}
+The eigenvalues are
+$\lambda_1 = \frac{1}{2}$,
+$\lambda_2 = \frac{1}{4} + \frac{\sqrt{7}}{4}i$,
+$\lambda_3 = \frac{1}{4} - \frac{\sqrt{7}}{4}i$,
+with corresponding eigenvectors
+\begin{equation}
+  \BV_1 = \begin{bmatrix} 1  \\ 0 \\ 0 \end{bmatrix}, \quad
+  \BV_2 = \begin{bmatrix} 6 + 2\sqrt{7}i \\ -5 + \sqrt{7} i \\ 4\end{bmatrix},
+  \BV_3 = \begin{bmatrix} 6 - 2\sqrt{7}i \\ -5 - \sqrt{7} i \\ 4\end{bmatrix},
+\end{equation}
+Note that $\lambda_2$ and $\lambda_3$ are complex conjugates,
+as are their corresponding eigenvectors.
+If we use \eqref{eqn:linearmdimreal} for the general solution,
+we will have a complex solution.  We use the same technique
+discussed earlier to create a real-valued general solution.
+We see that
+\begin{equation}
+   \BV_2 = \begin{bmatrix} 6 \\ -5 \\ 4 \end{bmatrix}
+           + i \begin{bmatrix} 2\sqrt{7} \\ \sqrt{7} \\ 0\end{bmatrix}, 
+\end{equation}
+so we have the real vectors
+\begin{equation}
+    \BA = \begin{bmatrix} 6 \\ -5 \\ 4 \end{bmatrix} \quad \textrm{and} \quad
+    \BB = \begin{bmatrix} 2\sqrt{7} \\ \sqrt{7} \\ 0\end{bmatrix}.
+\end{equation}
+From $\lambda_2$ we have $\mu = \frac{1}{4}$ and
+$\omega = \frac{\sqrt{7}}{4}$, so
+$r = \frac{\sqrt{2}}{2} \approx 0.707$ and $\theta = \tan^{-1}(\sqrt{7}) \approx 1.21$.
+The general solution is
+\begin{equation}
+  \BX_n = c_1 \lambda_1^n \BV_1 +
+          c_2 r^n\left(\BA\cos(n\theta) - \BB\sin(n\theta)\right) +
+          c_3 r^n\left(\BA\sin(n\theta) + \BB\cos(n\theta)\right) 
+\end{equation}
+Since $|\lambda_j| < 1$ for $j=1,2,3$, the origin is an
+asymptotically stable fixed point.
+\end{example}
 \subsection*{Converting Higher Order Maps to First Order Systems.}
 
 
