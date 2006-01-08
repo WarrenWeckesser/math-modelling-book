@@ -3971,6 +3971,348 @@ work of Gottman, Murray, \emph{et al}\cite{GM}.
 Often, models of dynamical systems lead to equations that combine
 both differential equations and discrete maps.
 \section{Periodic Drug Doses}
+
+In this section, we consider the concentration of a drug
+in the bloodstream of an individual when the drug is administered
+periodically.  We'll look at a simple model that involves
+both a differential equation and a discrete map.  We'll also
+see another example of using dimensional analysis.
+
+\subsection*{Clearing of a Drug from the Bloodstream}
+There is a variety of mechanisms for a drug to be cleared from the
+bloodstream. Organs in the body may actively absorb the drug, the drug
+may react with other chemicals in the bloodstream,
+or the drug may naturally breakdown
+into simpler components.
+The simplest model of how a drug is cleared from the bloodstream
+results from assuming that the rate of loss of the drug is
+proportional to the concentration of the drug. If $c(t)$ is the
+concentration of the drug at time $t$, the differential equation
+for this simple model is
+\begin{equation}
+  \frac{dc}{dt} = -r c,
+\label{eqn:decay}
+\end{equation}
+where $r>0$ is the proportionality constant that determines
+the rate of clearance\footnote{\emph{Note:} $r$
+is \emph{not} ``the rate at which the drug is cleared''.
+The rate at which the drug is cleared is $\frac{dc}{dt}$, which
+is changing over time.  Sometimes $r$ is called the
+\emph{rate constant}.}.
+We know that the solution to this equation
+is $c(t) = c_0 e^{-rt}$, where $c_0$ is the concentration
+at time $t=0$.
+
+Equation~\eqref{eqn:decay}
+is the same as the equation for the decay of
+radioactive materials, so we can define the
+\emph{half-life} of the drug. This is the time
+required for the amount of the drug to be reduced
+to half the original amount.
+For example, according to an article on
+\textbf{Slate} by Sam Schechner\footnote{\texttt{http://slate.msn.com/id/2110979/}, Dec. 13, 2004}
+about the poisoning of Viktor Yushchenko, some isomers of 
+dioxin have a half-life of more than seven years.
+If a drug has a half-life of seven years, then
+\begin{equation}
+   c(7) = c_0e^{-7r} = \frac{c_0}{2},
+\end{equation}
+which implies
+\begin{equation}
+   r = \frac{\ln 2}{7} \approx 0.0990,
+\end{equation}
+where we assumed $t$ was measured in years, and therefore
+$r$ has the units of years$^{-1}$.
+\begin{question}
+Suppose a drug has a half-life of seven years.
+(a) How long will it take for the amount of the drug to
+be reduced to one-quarter of the original amount?
+(b) How long will it take to be reduced to one percent of the 
+original amount?
+
+\hfill \textbf{Answers:} (a) 14 years, (b) 46.5 years.
+\end{question}
+
+\subsection*{Administering a Drug with Periodic Doses}
+We now suppose that a drug is administered periodically.
+That is, every $h$ time units, a dose is administered that
+increases the concentration by $b$.
+(If the \emph{amount} administered is $a$, and the volume
+of the blood in bloodstream is $V$, then $b=a/V$.
+We will work with $b$ from here on.)
+We assume that the dose causes an instantaneous increase
+in the concentration.  This is probably a
+good assumption for a drug administered by an injection.
+Whether this is a good assumption for a drug taken
+orally depends on the properties of the drug.
+Alcohol, for example, enters the bloodstream fairly
+rapidly, so the instantaneous increase in concentration
+is probably a reasonable approximation for alcohol.
+
+We assume that the first dose is administered at time $t=0$, and
+the concentration of the drug in the bloodstream before then
+is zero.  At $t=0$ the concentration jumps to $b$, and then
+for $0 < t < h$, the concentration decays according
+to~\eqref{eqn:decay}.  At $t=h$, another dose is administered,
+and the concentration increases by $b$. The concentration then decays
+for $h < t < 2h$, and the process continues.
+We expect the plot of the concentration to look like
+the graph shown in Figure~\ref{fig:PeriodicDrugDosePlot}.
+\begin{figure}
+\centerline{%
+\includegraphics[angle=270,width=4.5in]{PeriodicDrugDosePlot.eps}
+}
+\caption{A plot of the concentration $c(t)$ for a drug administered
+periodically.  In this example, $r=0.3$, $h=2$ and $b=1$.
+At $t=0, h, 2h, \ldots$, $c(t)$ increases by $b$; otherwise
+the concentration decays according to~\eqref{eqn:decay}.}
+\label{fig:PeriodicDrugDosePlot}
+\end{figure}
+
+We need some additional notation to describe the
+graph shown in the figure.
+Let
+\begin{equation}
+\begin{split}
+    c(h^{-})  & = \lim_{t\rightarrow h^{-}} c(t)
+                     \quad\quad \textrm{(the limit from below),} \\
+    c(h^{+})  & = \lim_{t\rightarrow h^{+}} c(t)
+                     \quad\quad \textrm{(the limit from above).}
+\end{split}
+\end{equation}
+and define
+\begin{equation}
+   x_n = c((nh)^{-}).
+\end{equation}
+Thus, $x_n$ is the concentration at the moment before
+a new dose is administered.
+It is clear the graph of $c(t)$ will consists of
+periods of decay, separated by jumps.  What we would like to
+know is what happens to $x_n$ as $n$ increases?
+Does $x_n$ increase without bound? Or does $x_n$ approach
+some value asymptotically?  If so, what value does is approach?
+
+\subsection*{Dimensional Analysis of $\pmb{x_{\infty}}$}
+We'll find the exact formula for $x_n$ in the next section.
+In this section, we
+assume that $x_n$ approaches a finite value $x_{\infty}$
+asymptotically as $n\rightarrow\infty$.
+We use dimensional analysis to determine
+(as far as possible) how $x_{\infty}$
+depends on the other parameters.
+
+We use the procedure that we saw for the period of the pendulum
+in an earlier lecture.  Our first task is to find all
+the \emph{independent} nondimensional parameters.
+We list all the relevant parameters along with their
+dimensions in Table~\ref{tbl:params}.
+\begin{table}
+\centerline{%
+\begin{tabular}{|c|l|l|}
+  \hline
+  Parameter & Meaning & Dimension \T \B \\
+  \hline
+    $r$  & proportionality constant for the clearance of the drug  & $\mathcal{T}^{-1}$ \T \B \\
+    $h$  & time period  & $\mathcal{T}$ \\
+    $b$  & instantaneous change in concentration due to each dose & $\mathcal{C}$ \T \B \\
+    $x_{\infty}$ &  asymptotic concentration just before the next dose  & $\mathcal{C}$ \\
+  \hline
+\end{tabular}
+}
+\caption{The list of variables and parameters along with their dimensions.
+$\mathcal{T}$ means \emph{time} and $\mathcal{C}$ means a
+\emph{concentration}.
+(In a problem with a wider variety of parameters, we might want to
+express concentration as an \emph{amount} $\mathcal{A}$ divided by
+a \emph{volume} $\mathcal{V}$ or even divided by the cube of a
+\emph{length} $\mathcal{L}$, but this is not necessary in this
+case.)}
+\label{tbl:params}
+\end{table}
+We see that $\pi_1=rh$
+and $\pi_2=x_{\infty}/b$
+are nondimensional combinations of the parameters.
+With a little thought, we could probably
+convince ourselves that these are the \emph{only} nontrivial
+(or independent) combinations.
+(For example, $rhb^2/x_{\infty}^2$ is nondimensional,
+but it is equivalent to
+$\pi_1/\pi_2^2$, so it is not really a ``new'' parameter.)
+However, for the sake of
+pedagogy, we will follow the formal procedure, and pretend
+we didn't see the ``obvious'' choices.
+
+We must choose exponents $\alpha$, $\beta$, $\gamma$ and $\delta$
+such that
+\begin{equation}
+   \pi = r^{\alpha} b^{\beta} h^{\gamma} x_{\infty}^{\delta}
+\label{eqn:nondimparam}
+\end{equation}
+is dimensionless.  Substituting in the dimensions from 
+Table~\ref{tbl:params}, we require
+\begin{equation}
+   \left(\mathcal{T}^{-1}\right)^{\alpha} \mathcal{C}^{\beta}
+       \mathcal{T}^{\gamma} \mathcal{C}^{\delta} = \mathcal{T}^0\mathcal{C}^0 = 1
+       \quad\implies\quad
+       \mathcal{T}^{-\alpha+\gamma}\mathcal{C}^{\beta+\delta}
+        = \mathcal{T}^{0}\mathcal{C}^{0}.
+\end{equation}
+This results in the linear system of equations
+\begin{equation}
+\begin{split}
+   -\alpha + \gamma & = 0, \\
+    \beta + \delta & = 0. \\
+\label{eqn:linearsys}
+\end{split}
+\end{equation}
+This is easy enough to solve: $\alpha = \gamma$ and $\beta = -\delta$,
+where $\gamma$ and $\delta$ are arbitrary. Equivalently, we can express
+this as
+\begin{equation}
+  \alpha = p, \quad \beta = -q, \quad \gamma = p, \quad \delta = q,
+\end{equation}
+where $p$ and $q$ are arbitrary parameters.
+In vector form,
+\begin{equation}
+\begin{bmatrix} \alpha \\ \beta \\ \gamma \\ \delta \end{bmatrix}
+  =
+\begin{bmatrix} p \\ -q \\ p \\ q \end{bmatrix}
+  =
+p\begin{bmatrix} 1 \\ 0 \\ 1 \\ 0 \end{bmatrix} +
+q\begin{bmatrix} 0 \\ -1 \\ 0 \\ 1 \end{bmatrix} .
+\end{equation}
+A \emph{basis} for the solution set of~\eqref{eqn:linearsys}
+is given by the vectors $\left\{[1,0,1,0],[0,-1,0,1]\right\}$ (written as
+row vectors for convenience).
+Each basis vector gives us exponents that we can plug into~\eqref{eqn:nondimparam} to form a nondimensional parameter.
+Thus we have found (as expected) that there are only two
+independent nondimensional parameters:
+\begin{equation}
+  \pi_1 = r^1 b^0 h^1 x_{\infty}^0 = rh, \quad \textrm{and}\quad
+  \pi_2 = r^0 b^{-1} h^0 x_{\infty}^1 = \frac{x_{\infty}}{b}. 
+\end{equation}
+
+Now we assume that there is some functional relationship
+among $r$, $h$, $b$ and $x_{\infty}$.  Since we don't know
+what it is, we'll assume the general form
+\begin{equation}
+  f(r,h,b,x_{\infty}) = 0.
+\end{equation}
+We expect $f$ to be dimensionally homogeneous; then the
+Buckingham Pi Theorem implies that there is an equivalent
+relationship of the form
+\begin{equation}
+   F(\pi_1, \pi_2) = 0.
+\label{eqn:F}
+\end{equation}
+Moreover, we expect that for most values of $\pi_1$
+and $\pi_2$, this equation can be solved for $\pi_2$
+in terms of $\pi_1$. That is, there is some function
+$G$ such that~\eqref{eqn:F} is equivalent to
+\begin{equation}
+   \pi_2 = G(\pi_1).
+\end{equation}
+Subsituting in the definitions of $\pi_1$ and $\pi_2$ gives
+\begin{equation}
+   \frac{x_{\infty}}{b} = G(rh),
+\end{equation}
+or
+\begin{equation}
+   x_{\infty} = bG(rh).
+\end{equation}
+This gives us the form of the equation that will result if
+we can solve for $x_{\infty}$ in terms of $r$, $h$ and $b$.
+That is, $x_{\infty}$ \emph{must} be
+a product of $b$ and some function of $rh$ only.
+%
+%
+\subsection*{Derivation of the Formula for $\pmb{x_{\infty}}$}
+In this section, we derive the actual formula for
+$x_n$. From that we obtain the formula for
+$x_{\infty}$.
+You may find it helpful to label the plot in
+Figure~\ref{fig:PeriodicDrugDosePlot} using the notation
+from the following discussion.
+
+The instant after the first dose, we have
+\begin{equation}
+  c(0^{+}) = b.
+\end{equation}
+Then, for $0 < t < h$, we have $c(t) = be^{-rt}$, so
+\begin{equation}
+  c(h^{-}) = be^{-rh}.
+\label{eqn:x_one}
+\end{equation}
+At $t=h$, the concentration increases by $b$, so
+\begin{equation}
+  c(h^{+}) = c(h^{-})+b = be^{-rh} + b = b\left(e^{-rh}+1\right)
+\end{equation}
+Then in the next interval, the solution again decays, and we have
+\begin{equation}
+  c((2h)^{-}) = c(h^{+})e^{-rh} = b\left(e^{-rh}+1\right) e^{-rh}
+     = b\left(e^{-2rh} + e^{-rh}\right)
+\label{eqn:x_two}
+\end{equation}
+and after the jump at $t=2h$ we have
+\begin{equation}
+  c((2h)^{+}) = c((2h)^{-})+b = b\left(e^{-2rh}+e^{-rh}\right) + b
+     = b\left( e^{-2rh} + e^{-rh}+1\right)
+\end{equation}
+Once again, in the next time interval, the solution decays and we have
+\begin{equation}
+  c((3h)^{-}) = c((2h)^{+})e^{-rh} = b\left( e^{-2rh} + e^{-rh}+1\right)e^{-rh}
+    = b\left( e^{-3rh} + e^{-2rh}+e^{-rh}\right)
+\label{eqn:x_three}
+\end{equation}
+Recall that we defined $x_n = c((nh)^{-})$.
+The process that we are describing defines a one dimensional mapping
+\begin{equation}
+   x_{n+1} = (x_n+b)e^{-rh}, \quad \textrm{with $x_0=0$.}
+\end{equation}
+Equations~\eqref{eqn:x_one}, \eqref{eqn:x_two} and
+\eqref{eqn:x_three} give the formulas for the first three
+iterations of this map.
+In general, we have
+\begin{equation}
+  x_n = c((nh)^{-}) = b\left( e^{-nrh} + e^{-(n-1)rh} + \cdots + e^{-rh}\right)
+        = b \sum_{k=1}^{n} e^{-krh}
+	= b \sum_{k=1}^{n} \rho^k,
+\label{eqn:xnsum}
+\end{equation}
+where $\rho = e^{-rh}$.
+(Note that, since $r>0$ and $h>0$, we have $0 < \rho < 1$.)
+The formula in Equation~\eqref{eqn:xnsum} is a geometric sum.
+By using Equation~\eqref{eqn:geomsumfromone} from the
+appendix, we obtain
+\begin{equation}
+  x_n = b \rho\left(\frac{1-\rho^n}{1-\rho}\right)
+      = be^{-rh}\left(\frac{1-e^{nrh}}{1-e^{-rh}}\right)
+\end{equation}
+Finally, since $\ds \lim_{n\rightarrow\infty} \rho^n = 0$, we have
+\begin{equation}
+  x_{\infty} = \frac{b\rho}{1-\rho}
+     = \frac{be^{-rh}}{1-e^{-rh}}. 
+\end{equation}
+(This agrees with the result of the
+dimensional analysis of the previous section.)
+
+The example shown earlier was for $r=0.3$, $h=2$ and $b=1$.
+With these values we find $x_{\infty} \approx 1.2164$.
+Figure~\ref{fig:PeriodicDrugDosePlotWithXinf}
+shows the result of ten periods for these parameters.
+The dashed line in this plot indicates $x_{\infty}$.
+\begin{figure}
+\centerline{%
+\includegraphics[angle=270,width=4.5in]{PeriodicDrugDosePlotWithXinf.eps}
+}
+\caption{The graph of $c(t)$ for $r=0.3$, $h=2$, and $b=1$.
+The dashed line shows $x_{\infty} \approx 1.2164$.}
+\label{fig:PeriodicDrugDosePlotWithXinf}
+\end{figure}
+%
+
+
+
 \section{Exercises}
 %
 %
@@ -4797,29 +5139,64 @@ Euler's formula\index{Euler's formula}
    \label{eqn:EULER}
 \end{equation}
 %
-\section{Geometric Series}\index{geometric series}
+\section{Geometric Sum, Geometric Series}
+\index{geometric series}
+\index{geometric sum}
+
+\subsection*{Geometric Sum}
+We derive the formula for the
+geometric sum:
+\begin{equation}
+  \sum_{k=0}^{n} r^k = \frac{1- r^{n+1}}{1-r}.
+\label{eqn:geometricsum}
+\end{equation}
+
+Let
+\begin{equation}
+  S = \sum_{k=0}^{n} r^k
+\end{equation}
+We multiply both sides by $r$, and then manipulate
+the right side so that it is expressed in terms of $S$:
+\begin{equation}
+\begin{split}
+  r S & = r \sum_{k=0}^{n}r^k \\
+     & = \sum_{k=0}^{n}r^{k+1} \\
+     & = \sum_{k=1}^{n+1}r^k \\
+     & = r^{n+1} - 1 + \sum_{k=0}^{n}r^k \\
+     & = r^{n+1} - 1 + S \\
+\end{split}
+\label{eqn:derivation}
+\end{equation}
+Now solve for $S$ to obtain
+\begin{equation}
+   S = \frac{1-r^{n+1}}{1-r} .
+\end{equation}
+
+\medskip
+\noindent
+If the starting index is $1$ instead of $0$,
+we can derive a formula by using the previous
+result:
+\begin{equation}
+\begin{split}
+  \sum_{k=1}^{n} r^k & = \sum_{k=0}^{n-1}r^{k+1} \\
+      & = r \sum_{k=0}^{n-1} r^{k} \\
+      & = r\left(\frac{1-r^n}{1-r}\right).
+\end{split}
+\label{eqn:geomsumfromone}
+\end{equation}
+% \begin{question}
+% Derive this result by using the same method as in
+% Equation~\eqref{eqn:derivation}.
+% \end{question}
+
+\subsection*{Geometric Series.}
 If $0 < r < 1$, then
 \begin{equation}
    \sum_{k=0}^{\infty} r^k = \frac{1}{1-r}
 \end{equation}
 \noindent
 \emph{Proof.}
-Let $S_n = \sum_{k=0}^{n} r^k$.
-Then
-\[
-\begin{split}
-    rS_n & = r\sum_{k=0}^n r^k 
-           = \sum_{k=0}^n r^{k+1} 
-	   = \sum_{k=1}^{n+1} r^k \\
-	 & = r^{n+1} - 1 + \sum_{k=0}^{n} r^k  \\
-	 & = r^{n+1} -1 + S_n \\
-\end{split}
-\]
-By solving for $S_n$ we obtain
-\[
-  S_n = \frac{1-r^{n+1}}{1-r}.
-\]
-Then
 \[
   \sum_{k=0}^{\infty} r^k
     = \lim_{n\rightarrow\infty} \sum_{k=0}^{n} r^n
