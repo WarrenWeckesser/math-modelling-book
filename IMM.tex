@@ -2701,6 +2701,8 @@ for $S$ and $I$, and then infer the behavior of $R$ afterwards.
 %
 \section{Modeling with Discrete Maps}
 %
+\emph{To do:} Introduce modeling with maps; define the \emph{order}
+of a map; ...
 \section{One-Dimensional Maps}
 \label{sec:OneDimMaps}
 We begin with the simplest model of population growth.
@@ -3562,6 +3564,92 @@ An exercise...
 
 \section{Higher Dimensional Maps}
 %
+Most of what we have discussed so far applies to
+higher dimensional maps of the form
+\begin{equation}
+  \BX_{n+1} = \BF(\BX_n)
+\end{equation}
+where $\BX \in \Real^n$. etc...
+
+%
+\subsection*{Converting Higher Order Maps to First Order Systems.}
+
+
+In some maps, the state at step $n+1$ depends on not just the state at step $n$,
+but also on the states at steps $n-1$, $n-2$, etc.
+Here we give some examples of
+converting such a map into a higher dimensional map in which the state at
+step $n+1$ depends only on the state at step $n$.
+\begin{example}
+Suppose we have the map
+\begin{equation}
+   x_{n+1} = f(x_{n},x_{n-1},x_{n-2}).
+\end{equation}
+We define
+\begin{equation}
+\begin{split}
+   a_{n+1} & = x_{n}, \\
+   b_{n+1} & = a_{n}. \\
+\end{split}
+\end{equation}
+Then we have $x_{n-1} = a_{n}$ and $x_{n-2} = b_{n}$.
+The map can now be written
+\begin{equation}
+\begin{split}
+   x_{n+1} & = f(x_{n},a_{n},b_{n}), \\
+   a_{n+1} & = x_{n}, \\
+   b_{n+1} & = a_{n}. \\
+\end{split}
+\end{equation}
+The state of the system is now described by a three dimensional vector,
+and the state at step $n+1$ is a function of the state at step $n$ only.
+\end{example}
+\begin{example}
+Now consider the system
+\begin{equation}
+\begin{split}
+   x_{n+1} & = f(x_{n},x_{n-1},x_{n-2},y_{n},y_{n-1}), \\
+   y_{n+1} & = g(x_{n},x_{n-1},x_{n-2},y_{n},y_{n-1}). \\
+\end{split}
+\end{equation}
+We define
+\begin{equation}
+\begin{split}
+   a_{n+1} & = x_{n}, \\
+   b_{n+1} & = a_{n}, \\
+   c_{n+1} & = y_{n}. \\
+\end{split}
+\end{equation}
+
+Then we have $x_{n-1} = a_{n}$, $x_{n-2} = b_{n}$,
+and $y_{n-1} = c_{n}$.
+
+With these definitions,
+the new state vector is $(x_n,y_n,a_n,b_n,c_n)$, and the map is
+\begin{equation}
+\begin{split}
+   x_{n+1} & = f(x_n,a_n,b_n,y_n,c_n), \\
+   y_{n+1} & = g(x_n,a_n,b_n,y_n,c_n), \\
+   a_{n+1} & = x_n, \\
+   b_{n+1} & = a_n, \\
+   c_{n+1} & = y_n.
+\end{split}
+\end{equation}
+\end{example}
+
+\begin{exercises}
+\begin{exercise}
+Convert the map
+\begin{equation}
+\begin{split}
+   x_{n+1} & = f(x_n,y_{n-1}) \\
+   y_{n+1} & = g(x_n,x_{n-1},y_{n})
+\end{split}
+\end{equation}
+into a higher dimensional first order map.
+\end{exercise}
+\end{exercises}
+
 \section{Linearization and Stability of Fixed Points}
 %
 In this section we discuss the \emph{linearization}\index{linearization}
