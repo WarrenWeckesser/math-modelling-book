@@ -3734,7 +3734,7 @@ associated with such linear maps.
 \emph{more discussion...}
 
 \begin{definition}
-A square $n\times n$ matrix $A$ is \emph{reducible}\index{reducible}
+A square $n\times n$ matrix $A$ is \emph{reducible}\index{reducible matrix}
 if the indices $1$, $2$, $\ldots$, $n$
 can be divided into two disjoint nonempty sets
 $i_1$, $i_2$, $\ldots$, $i_{\mu}$ and
@@ -3743,7 +3743,7 @@ $a_{(i_{\alpha},j_{\beta})} =0$
 for $\alpha=1, 2, \ldots, \mu$ and
 $\beta = 1, 2, \ldots, \nu$.
 A square matrix which is not reducible is said
-to be \emph{irreducible}.\index{irreducible} 
+to be \emph{irreducible}.\index{irreducible matrix} 
 \end{definition}
 If a matrix $A$ is reducible, then by simply reordering the
 variables, we can convert the system
@@ -3826,7 +3826,7 @@ irreducible if and only if
 Varga, Richard S. 1962. Matrix Iterative Analysis. Englewood Cliffs N.J.: Prentice-Hall.)
 
 \begin{theorem}
-\textbf{[Perron-Frobenius Theorem for Irreducible Matrices]}
+\textbf{[Perron-Frobenius Theorem for Irreducible Matrices]}\index{Perron-Frobenius Theorem}
 If $A$ is $n\times n$, nonnegative,
 and irreducible, then
 \begin{enumerate}
@@ -3841,11 +3841,11 @@ and irreducible, then
 
 \begin{definition}
 A nonnegative $n\times n$ matrix $A$ is called
-\emph{primitive} is $A^k > 0$ for some integer $k$.
+\emph{primitive}\index{primitive matrix} is $A^k > 0$ for some integer $k$.
 \end{definition}
 
 \begin{theorem}
-\textbf{[Perron-Frobenius Theorem for Primitive Matrices]}
+\textbf{[Perron-Frobenius Theorem for Primitive Matrices]}\index{Perron-Frobenius Theorem}
 If $A$ is an $n\times n$ nonnegative primitive matrix then
 \begin{enumerate}
 \item one of its eigenvalues is positive and greater than (in absolute value) all other eigenvalues;
@@ -4408,7 +4408,7 @@ This results in the linear system of equations
 \begin{split}
    -\alpha + \gamma & = 0, \\
     \beta + \delta & = 0. \\
-\label{eqn:linearsys}
+\label{eqn:pdd:linearsys}
 \end{split}
 \end{equation}
 This is easy enough to solve: $\alpha = \gamma$ and $\beta = -\delta$,
@@ -4427,7 +4427,7 @@ In vector form,
 p\begin{bmatrix} 1 \\ 0 \\ 1 \\ 0 \end{bmatrix} +
 q\begin{bmatrix} 0 \\ -1 \\ 0 \\ 1 \end{bmatrix} .
 \end{equation}
-A \emph{basis} for the solution set of~\eqref{eqn:linearsys}
+A \emph{basis} for the solution set of~\eqref{eqn:pdd:linearsys}
 is given by the vectors $\left\{[1,0,1,0],[0,-1,0,1]\right\}$ (written as
 row vectors for convenience).
 Each basis vector gives us exponents that we can plug into~\eqref{eqn:nondimparam} to form a nondimensional parameter.
