@@ -3724,6 +3724,141 @@ into a higher dimensional first order map.
 \end{exercise}
 \end{exercises}
 
+\section{The Perron-Frobenius Theorem}\index{Perron-Frobenius Theorem}
+Many modeling problems result in linear maps
+in which all the entries of the matrix
+are nonnegative.
+In this section we discuss some of the theory
+associated with such linear maps.
+
+\emph{more discussion...}
+
+\begin{definition}
+A square $n\times n$ matrix $A$ is \emph{reducible}\index{reducible}
+if the indices $1$, $2$, $\ldots$, $n$
+can be divided into two disjoint nonempty sets
+$i_1$, $i_2$, $\ldots$, $i_{\mu}$ and
+$j_1$, $j_2$, $\ldots$, $j_{\nu}$ (with $\mu+\nu = n$) such that
+$a_{(i_{\alpha},j_{\beta})} =0$
+for $\alpha=1, 2, \ldots, \mu$ and
+$\beta = 1, 2, \ldots, \nu$.
+A square matrix which is not reducible is said
+to be \emph{irreducible}.\index{irreducible} 
+\end{definition}
+If a matrix $A$ is reducible, then by simply reordering the
+variables, we can convert the system
+\begin{equation}
+   \BX(n+1)  = A\BX(n)
+\label{eqn:pf:linmap}
+\end{equation}
+into
+\begin{equation}
+   \BY(n+1) = B\BY(n),
+\label{eqn:pf:reduced}
+\end{equation}
+where
+\begin{equation}
+   B = \begin{bmatrix}
+            B_{11} & B_{12} \\
+            \textbf{0} & B_{22}
+       \end{bmatrix}
+\end{equation}
+In other words, by defining
+\begin{equation}
+   \BY = \begin{bmatrix} \BP \\ \BQ,
+         \end{bmatrix}
+\end{equation}
+where $\BP \in \Real^{\mu}$ and $\BQ \in \Real^{\nu}$,
+we may rewrite
+\eqref{eqn:pf:reduced} as
+\begin{equation}
+\begin{split}
+   \BP(n+1) & = B_{11}\BP(n) + B_{12} \BQ(n) \\
+   \BQ(n+1) & = \quad\quad\quad\quad\quad B_{22} \BQ(n).
+\end{split}
+\end{equation}
+Note that the equation for $\BQ$ does not depend
+on $\BP$; we say that the dynamics for $\BQ$
+are \emph{decoupled}\index{decoupled} from $\BP$.
+
+To reorder the variables, we can use a permutation matrix
+$P$, in which each row and each column contains exactly
+one one, and all other entries are zero.
+\begin{example}
+The matrix 
+\begin{equation}
+  A = \begin{bmatrix}
+            1 & 3 & 1 & 0 \\
+            0 & 1 & 2 & 0 \\
+            0 & 1 & 1 & 0 \\
+            1 & 0 & 3 & 2
+      \end{bmatrix}
+\end{equation}
+is reducible.  By defining
+\begin{equation}
+   \BX = P\BY, \quad \textrm{where}\quad
+   P = \begin{bmatrix}
+          1 & 0 & 0 & 0 \\
+          0 & 0 & 1 & 0 \\
+          0 & 0 & 0 & 1 \\
+          0 & 1 & 0 & 0
+       \end{bmatrix}
+\end{equation}
+we convert \eqref{eqn:pf:linmap} into
+\begin{equation}
+   \BY(n+1) = B\BY(n), \quad \textrm{where} \quad
+   B = \begin{bmatrix}
+         1 & 0 & 3 & 1 \\
+         1 & 2 & 0 & 3 \\
+         0 & 0 & 1 & 2 \\
+         0 & 0 & 1 & 1
+       \end{bmatrix}.
+\end{equation}
+\end{example}
+\begin{theorem}
+An $n\times n$ nonnegative matrix $A$ is 
+irreducible if and only if
+\begin{equation}
+   (I+A)^{n-1} > 0.
+\end{equation}
+\end{theorem}
+(A web page refers to page 6 of:
+Varga, Richard S. 1962. Matrix Iterative Analysis. Englewood Cliffs N.J.: Prentice-Hall.)
+
+\begin{theorem}
+\textbf{[Perron-Frobenius Theorem for Irreducible Matrices]}
+If $A$ is $n\times n$, nonnegative,
+and irreducible, then
+\begin{enumerate}
+\item one of its eigenvalues is positive and greater
+  than or equal to (in absolute value) all other
+  eigenvalues;
+\item there is a positive eigenvector corresponding to that eigenvalue;
+  and
+\item that eigenvalue is a simple root of the characteristic equation of $A$.
+\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+A nonnegative $n\times n$ matrix $A$ is called
+\emph{primitive} is $A^k > 0$ for some integer $k$.
+\end{definition}
+
+\begin{theorem}
+\textbf{[Perron-Frobenius Theorem for Primitive Matrices]}
+If $A$ is an $n\times n$ nonnegative primitive matrix then
+\begin{enumerate}
+\item one of its eigenvalues is positive and greater than (in absolute value) all other eigenvalues;
+\item there is a positive eigenvector corresponding to that eigenvalue; and
+\item that eigenvalue is a simple root of the characteristic equation of $A$.
+\end{enumerate}
+\end{theorem}
+The only difference in the conclusions of the two theorems
+is that in the second version, the inequality in the first
+conclusion is a strict inequality.
+
+%
+%
 \section{Age-Structured Populations and Leslie Matrix Models}
 \index{Leslie matrix}
 \emph{introduction, basic idea, etc...}
