@@ -2,7 +2,10 @@ This directory contains the files for the book
 "Interdisciplinary Mathematical Modeling" that I am writing.
 
 To create the Latex versions of the listings of the sample
-code given in the appendix, run the shell script make_listings.
+code given in the appendix, run the shell script make_listings:
+
+$ ./make_listings
+
 
 Subdirectory pplane_plots:
    This directory contains .eps files that were created with
@@ -64,3 +67,7 @@ Subdirectory matlab:
    >> Lin2DMapExampleComplexrz2
    >> Lin2DMapExampleEig
    >> Lin2DMapExampleEigNeg
+
+
+Subdirectory python
+   $ python SIRscript.py
