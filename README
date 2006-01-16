@@ -50,3 +50,17 @@ Subdirectory matlab:
 
    >> LinPhPortExample3
    creates "LinPhPortExample3.eps"
+
+   >> LinCS1
+   >> LinCS2
+   >> LinCS3
+   >> LinCS4
+   >> CompSpec
+   >> Lin2DMapExample1
+   >> Lin2DMapExample2
+   >> Lin2DMapExampleComplex1
+   >> Lin2DMapExampleComplex2
+   >> Lin2DMapExampleComplexrz1
+   >> Lin2DMapExampleComplexrz2
+   >> Lin2DMapExampleEig
+   >> Lin2DMapExampleEigNeg
