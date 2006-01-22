@@ -23,7 +23,7 @@
 \newcommand{\BX}{\vec{\textbf{x}}}
 \newcommand{\BY}{\vec{\textbf{y}}}
 %
-\newcommand{\BZ}{\vec{\textbf{0}}}  % Bold Zero (not "Z")
+\newcommand{\BZero}{\vec{\textbf{0}}}  % Bold Zero (not "Z")
 %
 \newcommand{\T}{\rule{0pt}{2.6ex}}
 \newcommand{\B}{\rule[-1.2ex]{0pt}{0pt}}
@@ -917,10 +917,10 @@ we look for a solution of the form
   \BX(t) = \BV e^{\lambda t}
 \end{equation}
 where $\BV$ is a constant vector, and $\lambda$ is a number.
-We note that $\BX(t) = \BZ$ is a solution to \eqref{eqn:linearsys},
+We note that $\BX(t) = \BZero$ is a solution to \eqref{eqn:linearsys},
 which we call the \emph{trivial solution}\index{trivial solution}.
 We would like to
-find nontrivial solutions, so we assume $\BV\ne \BZ$.
+find nontrivial solutions, so we assume $\BV\ne \BZero$.
 
 By substituting our ``guess'' into the differential equation, we
 find
@@ -1104,11 +1104,11 @@ When both eigenvalues are negative, it is clear from
 \eqref{eqn:gensolreal}
 that
 \[
-  \lim_{t\rightarrow\infty}\BX(t) = \BZ.
+  \lim_{t\rightarrow\infty}\BX(t) = \BZero.
 \]
-All trajectories approach $\BZ$ asymptotically.
+All trajectories approach $\BZero$ asymptotically.
 
-The equilibrium $\BZ$ is called a \emph{sink.}
+The equilibrium $\BZero$ is called a \emph{sink.}
 It is \emph{asymptotically stable}.
 
 \item $\pmb{0 < \lambda_1 < \lambda _2}$.
@@ -1116,24 +1116,24 @@ It is \emph{asymptotically stable}.
 In this case, all solutions diverge from the origin.
 However, for any solution $\BX(t)$, we have
 \[
-  \lim_{t\rightarrow -\infty}\BX(t) = \BZ,
+  \lim_{t\rightarrow -\infty}\BX(t) = \BZero,
 \]
 so all solutions 
-converge to $\BZ$ backwards in time.
+converge to $\BZero$ backwards in time.
 
-The equilibrium $\BZ$ is called a \emph{source.}
+The equilibrium $\BZero$ is called a \emph{source.}
 It is \emph{unstable}.
 
 \item $\pmb{\lambda_1 < 0 < \lambda_2}$.
 
 Looking at \eqref{eqn:gensolreal}, we see that if $c_2=0$, the solution
-will converge to $\BZ$ as $t\rightarrow\infty$.
+will converge to $\BZero$ as $t\rightarrow\infty$.
 If $c_2\ne 0$, then eventually the term $c_2\BV_2e^{\lambda_2 t}$ will
 dominate, and the solution will grow exponentially.
-Thus, there are solutions that converge to $\BZ$, but ``most''
+Thus, there are solutions that converge to $\BZero$, but ``most''
 (i.e. those with $c_2\ne 0$) will not.
 
-The equilibrium $\BZ$ is called a \emph{saddle point}, 
+The equilibrium $\BZero$ is called a \emph{saddle point}, 
 and it is \emph{unstable}.
 \item Zero eigenvalue.  It is also possible that
 one of the eigenvalues is zero.  The analysis
@@ -1155,7 +1155,7 @@ and for large positive $t$ we have
 \end{equation}
 This says that as the solution converges to zero, it does
 so along the direction of $\BV_2$.
-That is, $\BX(t)$ will approach $\BZ$ along a curve that
+That is, $\BX(t)$ will approach $\BZero$ along a curve that
 is tangent to the eigenvector $\BV_2$.
 
 In the case of a source, where $0 < \lambda_1 < \lambda_2$,
@@ -1171,15 +1171,15 @@ square brackets goes to zero while the first is constant, so we have
 \end{equation}
 This says that
 as $t\rightarrow-\infty$, the solution converges to
-$\BZ$ along the direction of $\BV_1$.  That is,
-$\BX(t)$ will approach $\BZ$ (as $t\rightarrow-\infty$)
+$\BZero$ along the direction of $\BV_1$.  That is,
+$\BX(t)$ will approach $\BZero$ (as $t\rightarrow-\infty$)
 along a curve that is tangent to the eigenvector
 $\BV_1$.
 
 We can summarize these observations by saying
 that in the case of a source or sink,
 \emph{curved trajectories in the phase plane approach
-$\BZ$ along curves that are tangent to the eigenvector
+$\BZero$ along curves that are tangent to the eigenvector
 of the eigenvalue closest to zero.}
 By stating it this way, we don't have to worry
 about which eigenvalue we called $\lambda_1$ or
@@ -1212,9 +1212,9 @@ We have the following subcases.
 In this case, the amplitude of the oscillation decays
 exponentially.
 The trajectories spiral into the origin as $t$ increases,
-and $\ds\lim_{t\rightarrow\infty} \BX(t) = \BZ$.
+and $\ds\lim_{t\rightarrow\infty} \BX(t) = \BZero$.
 
-The equilibrium $\BZ$ is called a \emph{spiral sink.}
+The equilibrium $\BZero$ is called a \emph{spiral sink.}
 It is \emph{asymptotically stable}.
 
 \item $\pmb{\mu = 0}$.
@@ -1222,7 +1222,7 @@ It is \emph{asymptotically stable}.
 Since $e^{0}=1$, the solution is periodic.
 In the phase plane, the trajectories are ellipses.
 
-The equilibrium $\BZ$ is called a \emph{center}, and it is
+The equilibrium $\BZero$ is called a \emph{center}, and it is
 \emph{stable}.
 
 \item $\pmb{\mu > 0}$.
@@ -1231,9 +1231,9 @@ In this case, the amplitude of the oscillation grows
 exponentially.
 The trajectories spiral out of the origin as $t$ increases.
 Considering backwards time, we have
-$\ds \lim_{t\rightarrow-\infty} \BX(t) = \BZ$.
+$\ds \lim_{t\rightarrow-\infty} \BX(t) = \BZero$.
 
-The equilibrium $\BZ$ is called a \emph{spiral source.}
+The equilibrium $\BZero$ is called a \emph{spiral source.}
 It is \emph{unstable}.
 \end{enumerate}
 
@@ -1406,7 +1406,7 @@ The characteristic polynomial is
 $\lambda^2 -\lambda -6$, and the eigenvalues are
 $\lambda_1 = -2$ and $\lambda_2 = 3$.
 We have real eigenvalues with opposite signs, so
-$\BZ$ is a \emph{saddle point}.
+$\BZero$ is a \emph{saddle point}.
 \item
 The corresponding eigenvectors are
 $\BV_1 = \begin{bmatrix} 1 \\ 3 \end{bmatrix}$
@@ -1455,7 +1455,7 @@ The characteristic polynomial is
 $\lambda^2 -7\lambda +10$, and the eigenvalues are
 $\lambda_1 = 2$ and $\lambda_2 = 5$.
 We have positive real eigenvalues, so
-$\BZ$ is a \emph{source}.
+$\BZero$ is a \emph{source}.
 \item
 The corresponding eigenvectors are
 $\BV_1 = \begin{bmatrix} 1 \\ -1 \end{bmatrix}$
@@ -3170,7 +3170,7 @@ $\ds \BX_0 = \begin{bmatrix} x_0 \\ y_0 \end{bmatrix}$.
 %
 %
 \subsection*{Solving the System}
-We note if $\BX_0 = \begin{bmatrix}0 \\ 0\end{bmatrix} \equiv \BZ$, then $\BX_n = \BZ$ for all $n>0$ is a solution to \eqref{eqn:linearmap}.
+We note if $\BX_0 = \begin{bmatrix}0 \\ 0\end{bmatrix} \equiv \BZero$, then $\BX_n = \BZero$ for all $n>0$ is a solution to \eqref{eqn:linearmap}.
 Such a constant solution is called a \emph{fixed point}
 of the map.
 
@@ -3198,9 +3198,9 @@ form
 \label{eqn:solutionguess}
 \end{equation}
 where $\lambda$ is a number and $\BV$ is a constant vector.
-We already know that $\BX_n\equiv\BZ$ is a solution, so without
+We already know that $\BX_n\equiv\BZero$ is a solution, so without
 loss of generality we assume that $\lambda\ne 0$ and
-$\BV \ne \BZ$.
+$\BV \ne \BZero$.
 
 By substituting this ``guess'' into \eqref{eqn:linearmap},
 we obtain
@@ -3324,7 +3324,7 @@ and the solutions are eventually dominated by
 $c_2\lambda_2^n\BV_2$.  This means the trajectories
 converge to the line $y=-x/2$ as $n$ increases,
 and since $\lambda_2 > 1$, the iterations diverge
-from $\BZ$ as $n$ increases.
+from $\BZero$ as $n$ increases.
 
 \subsection*{Stability.}
 Suppose $A$ has real and distinct eigenvalues
@@ -3332,18 +3332,18 @@ $\lambda_1$ and $\lambda_2$, with eigenvectors
 $\BV_1$ and $\BV_2$.
 \begin{itemize}
 \item If $|\lambda_1|<1$ and $|\lambda_2|<1$, then
-$\BX_n\rightarrow\BZ$ as $n$ increases.  We say
-$\BZ$ is a \emph{sink} or \emph{attractor}; also
-$\BZ$ is \emph{asymptotically stable}.
+$\BX_n\rightarrow\BZero$ as $n$ increases.  We say
+$\BZero$ is a \emph{sink} or \emph{attractor}; also
+$\BZero$ is \emph{asymptotically stable}.
 \item If one eigenvalue, say $\lambda_1$ has magnitude less than
 one and the other has magnitude greater than one, then
-we call $\BZ$ a saddle.  (Both the examples shown in
+we call $\BZero$ a saddle.  (Both the examples shown in
 Figures~\ref{fig:Lin2DMapExample1} and \ref{fig:Lin2DMapExample2}
 are saddles.) A saddle is \emph{unstable}, because there
-are trajectories beginning arbitrarily close of $\BZ$ that
-diverge from $\BZ$.
+are trajectories beginning arbitrarily close of $\BZero$ that
+diverge from $\BZero$.
 \item If $|\lambda_1|>1$ and $|\lambda_2|>1$, then
-$\BZ$ is a \emph{source} or \emph{repellor}.  (Of course,
+$\BZero$ is a \emph{source} or \emph{repellor}.  (Of course,
 a source is also unstable.)
 \end{itemize}
 %
@@ -3420,19 +3420,19 @@ for the behavior of $\BX_n$:
 \begin{itemize}
 \item
 If $r < 1$, then $r^n \rightarrow 0$ as $n$ increases,
-and therefore $\BX_n\rightarrow \BZ$.
-In this case, we say that $\BZ$ is a \emph{spiral sink}.
+and therefore $\BX_n\rightarrow \BZero$.
+In this case, we say that $\BZero$ is a \emph{spiral sink}.
 An example is shown on the left in Figure~\ref{fig:Lin2DMapExampleComplex1}.
 \item
 If $r=1$, then in the long run $\BX_n$ does not approach
-$\BZ$ or go off to infinity. Instead, it remains on an ellipse.
+$\BZero$ or go off to infinity. Instead, it remains on an ellipse.
 (However, $\BX_n$ is \emph{not} periodic unless
 $\frac{\theta}{2\pi}$ is a rational number.)
-When $r=1$ we say that $\BZ$ is a \emph{center}.
+When $r=1$ we say that $\BZero$ is a \emph{center}.
 Examples are shown in Figure~\ref{fig:Lin2DMapExampleComplexrz}.
 \item
 If $r > 1$, then $r^n$ grows exponentially, so $\BX_n$
-spirals away from the origin.  We say that $\BZ$ is 
+spirals away from the origin.  We say that $\BZero$ is 
 a \emph{spiral source}.
 An example is shown on the right in 
 Figure~\ref{fig:Lin2DMapExampleComplex1}.
@@ -3504,12 +3504,12 @@ general solution is
 \textbf{Stability:}
 \begin{itemize}
 \item If $|\lambda_1| < 1$ and $|\lambda_2| < 1$, then
-$\BZ$ is a \emph{sink} or \emph{attractor}; it is
+$\BZero$ is a \emph{sink} or \emph{attractor}; it is
 \emph{asymptotically stable}.
 \item If either $|\lambda_1| > 1$ or $|\lambda_2|>1$, then
-$\BZ$ is \emph{unstable}.
+$\BZero$ is \emph{unstable}.
 \item If both $|\lambda_1| > 1$ and $|\lambda_2|>1$, then
-$\BZ$ is a \emph{source} or \emph{repellor}.
+$\BZero$ is a \emph{source} or \emph{repellor}.
 \end{itemize}
 
 \subsection*{Affine 2D Systems}
@@ -4760,7 +4760,7 @@ We solve
 \begin{equation}
 \begin{split}
    P\BW & = \BW \\
-   (P-I)\BW & = \BZ
+   (P-I)\BW & = \BZero
 \end{split}
 \end{equation}
 Now
@@ -5508,7 +5508,7 @@ associated with the eigenvalue $\lambda$.
 
 We can rewrite \eqref{eqn:EIGVALPROB} as
 \begin{equation}
-   \left(A - \lambda I\right) \BV = \BZ.
+   \left(A - \lambda I\right) \BV = \BZero.
 \end{equation}
 Because we insist that eigenvectors be nonzero,
 this equation can only have a solution if
@@ -5583,7 +5583,7 @@ for the eigenvalues $\lambda_1$ and $\lambda_2$.
 An eigenvector associated with $\lambda_1$ is a nontrivial
 solution $\BV_1$ to
 \begin{equation}
-    (A-\lambda_1 I)\BV = \BZ.
+    (A-\lambda_1 I)\BV = \BZero.
 \label{eqn:eigvec}
 \end{equation}
 Now
@@ -6049,7 +6049,7 @@ associated with the eigenvalue $\lambda=1$, and normalize it so that
 it is a probability vector.
 Thus, we must solve
 \[
-  (P-I)\BW = \BZ.
+  (P-I)\BW = \BZero.
 \]
 We form the augmented matrix,
 and then reduce it to reduced row echelon form:
@@ -6105,7 +6105,7 @@ Then
 and since each entry in $P^2$ is positive, the Markov chain
 is regular.
 \item[(b)]  As in the previous problem, we must find the probability
-vector $\BW$ such that $(P-I)\BW=\BZ$.
+vector $\BW$ such that $(P-I)\BW=\BZero$.
 By following the same steps as before, we find
 \[
    \BW = \begin{bmatrix}
