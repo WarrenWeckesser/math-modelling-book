@@ -5500,6 +5500,12 @@ For example,
 \]
 is a $2\times 3$ matrix.
 %
+
+\medskip
+\noindent
+\emph{To do:} Matrix multiplication, basic facts, identity matrix,
+determinants, etc.
+%
 \section{Eigenvalues and Eigenvectors\index{eigenvalue}\index{eigenvector}}
 %
 The \emph{eigenvalue problem}\index{eigenvalue problem}
@@ -5578,8 +5584,9 @@ So to find the inverse of a $2x2$ matrix,
 \textbf{Eigenvalues and eigenvectors.}
 To find the eigenvalues of $A$, we must solve
 $\det(A-\lambda I)=0$ for $\lambda$.
-(The expression $\det(A-\lambda I)$ is called
-the \emph{characteristic polynomial}.)  We have
+% (The expression $\det(A-\lambda I)$ is called
+% the \emph{characteristic polynomial}.)
+We have
 \[
 \begin{split}
    \det(A-\lambda I) & = (a-\lambda)(d-\lambda)-bc \\
@@ -5626,9 +5633,12 @@ We could solve this for, say, $v_2$ in terms of $v_1$,
 and give all the possible eigenvectors in terms of
 the arbitrary parameter $v_1$. (This is the
 \emph{eigenspace} associated with the eigenvalue $\lambda_1$.)
-However, for the
-purpose of solving a system of differential equations,
-all we need is \emph{one} eigenvector.
+However,
+% for the
+% purpose of solving a system of differential equations,
+often
+all we need is \emph{one} eigenvector from this space.
+(More precisely, we want a \emph{basis} for the eigenspace.)
 An easy solution to \eqref{eqn:eigveceqn}
 is $v_1=-b$ and $v_2 = (a-\lambda_1)$.
 Thus (unless $(a-\lambda_1)$ and $b$ both happen to be
