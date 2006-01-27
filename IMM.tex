@@ -602,22 +602,29 @@ The right side of the equation gives the rate of change of $p$
 as a function of $p$.
 If we divide the the right side by $p$, we obtain the
 \emph{per capita growth rate},
-or simply the \emph{growth rate}.\index{growth rate}
+\index{growth rate, per capita}
 For the initial assumption,
-the growth rate  is just the constant $r$.
+the per capita growth rate  is just the constant $r$.
 To incorporate the assumption of a carrying capacity, we will assume that the
-growth rate depends on $p$.  When $p$ is near zero, we assume that there
-are plenty of resources for the population to grow, so the growth rate should be
-near $r$.  As the population becomes bigger, the growth rate should decrease,
-and it should be zero when the population is at the carrying capacity.
+per capita growth rate depends on $p$.
+When $p$ is near zero, we assume that there
+are plenty of resources for the population to grow, so the
+per capita growth rate should be
+near $r$.  As the population becomes bigger, the per capita growth rate
+should decrease: with fewer resources available to each individual,
+we assume that the reproductive ability of each individual decreases.
+The per capita growth rate
+should be zero when the population is at the carrying capacity.
 If the population exceeds the carrying capacity, the growth rate should
-be negative.
+be negative. In this case, conditions are so bad that the death rate
+exceeds the birth rate.
 
-The simplest formula for such a growth rate is a straight line that has
+The simplest formula for such a
+per capita growth rate is a straight line that has
 the value $r$ when $p=0$ and the value $0$ when $p=K$, as shown in
 Figure~\ref{fig:growthrate}.
-\begin{figure}[b]
-\centerline{\includegraphics[width=3in]{matlab/logistic_percapita_growthrate.eps}} 
+\begin{figure}
+\centerline{\includegraphics[width=2.25in]{matlab/logistic_percapita_growthrate.eps}} 
 \caption{Per capita growth rate for the logistic equation.}
 \label{fig:growthrate}
 \end{figure} 
@@ -634,7 +641,7 @@ For now, we'll learn as much as we can about its solutions without actually solv
 equation.  To do this, we plot the right side of \eqref{eqn:logistic} as a function of $p$.
 The graph is shown in Figure~\ref{fig:logisticrhs}.
 \begin{figure}
-\centerline{\includegraphics[width=3in]{matlab/logistic_growthrate.eps}} 
+\centerline{\includegraphics[width=2.25in]{matlab/logistic_growthrate.eps}} 
 \caption{A plot of $\frac{dp}{dt}$ as a function of $p$ for the logistic
 equation \eqref{eqn:logistic}.}
 \label{fig:logisticrhs}
@@ -658,16 +665,16 @@ Eventually the population will reach $K/2$.  This is the population
 level at which the population grows the fastest.
 When the population reaches this level, further increases in the
 population result in \emph{lower} growth rates.
-For example, if $p(t) = 0.75K$ at some time $t$, we see in
+If $K/2 < p(t) < K$, we see in
 Figure~\ref{fig:logisticrhs} that $\frac{dp}{dt}$ is positive, but it is
 decreasing as $p$ increases.  In the next moment, $p$ will be larger,
 but then the slope of $p(t)$ will be smaller.
-As $p$ gets closer and closer to $K$, the slope gets smaller and smaller.
+As $p$ gets closer to $K$, the slope gets smaller.
 In fact, $p(t)$ will approach $K$ asymptotically, but never reach it.
 A graph of a solution to the logistic equation~\eqref{eqn:logistic} is
 shown in Figure~\ref{fig:logisticsol}.
 \begin{figure}
-\centerline{\includegraphics[width=3in]{matlab/logistic_solution.eps}} 
+\centerline{\includegraphics[width=2.25in]{matlab/logistic_solution.eps}} 
 \caption{The graph of $p(t)$, a solution to the logistic
 equation \eqref{eqn:logistic}.}
 \label{fig:logisticsol}
@@ -680,6 +687,8 @@ exact solution to the differential equation.
 We call a constant solution an
 \emph{equilibrium solution}.\index{equilibrium solution}
 
+\newpage
+
 \begin{exercises}
 \begin{exercise}
 Does the logistic equation \eqref{eqn:logistic} have any other
@@ -688,6 +697,14 @@ equilibrium solutions?
 \begin{exercise}
 Describe (and sketch) the solution that
 results when the initial population is greater than $K$.
+Use Figure \ref{fig:logisticrhs} to explain your answer.
+Is the solution $p(t)$ increasing or decreasing?
+Is the graph of $p(t)$ concave up or concave down?
+What happens to $p(t)$ as $t\rightarrow\infty$?
+\end{exercise}
+\begin{exercise}
+Find a formula for the maximum rate of change
+of $p(t)$ if $0 < p(t) < K$.
 \end{exercise}
 \end{exercises}
 
@@ -719,17 +736,68 @@ the equilibrium solutions (where $f(y)=0$), and determine the
 behavior of non-equilibrium solutions based on the graph
 of $f(y)$.
 
-\begin{exercises}
+\begin{example}
+Consider the equation
+\begin{equation}
+\frac{dp}{dt} = -rp + b.
+\label{eqn:auton_example}
+\end{equation}
+Suppose $r > 0$ and $m > 0$.
+Then the graph of the right side of the equation looks like
+the left plot in Figure~\ref{fig:auton_example_plots}.
+\begin{figure}
+\centerline{\includegraphics[width=1.75in]{matlab/auton_example_rhsplot.eps}\hspace{0.25in}\includegraphics[width=1.75in]{matlab/auton_example_solplot.eps}}
+\caption{The left plot shows the graph of the right side of \eqref{eqn:auton_example}.
+The right plot shows an example of a solution.}
+\label{fig:auton_example_plots}
+\end{figure}
+Since $\frac{dp}{dt} = 0$ when $p = \frac{b}{r}$, we have an
+equilibrium solution $p(t) = \frac{b}{r}$.
 
+For $p < \frac{b}{r}$, $\frac{dp}{dt} > 0$, and for
+$p > \frac{b}{r}$, $\frac{dp}{dt} < 0$.
+So if $p(t) < \frac{b}{r}$, $p(t)$ is an increasing function of
+$t$.  As $p$ increases, $\frac{dp}{dt}$ decreases; the closer
+$p$ is to $\frac{b}{r}$, the closer $\frac{dp}{dt}$
+is to zero.
+This suggests that $p(t)$ will approach $\frac{b}{r}$ asymptotically
+from below as $t\rightarrow\infty$.
+A similar argument shows that if $p(t) > \frac{b}{r}$,
+$p(t)$ will approach $\frac{b}{r}$ asymptoticall from above.
+
+The plot on the right in Figure~\ref{fig:auton_example_plots}
+shows an example of a solution, for which $0 < p(0) < \frac{b}{r}$.
+\end{example}
+
+\newpage
+
+\begin{exercises}
+\begin{exercise}
+Classify each of the following first order differential equations
+as autonomous or nonautonomous.
+
+\medskip
+\begin{tabbing}
+\hspace*{0.25in} \= \hspace*{1.5in} \= \hspace*{1.5in} \= \kill
+~ \> 
+(a) $\ds \frac{dy}{dt} = y - y^3$ \>
+(b) $\ds \frac{dx}{dt} = x\cos(t)$ \>
+(c) $\ds \frac{dy}{dt} = 3t$ \\[2pt]
+~ \>
+(d) $\ds y'(t) = 3y(t) + t^2$ \>
+(e) $\ds q'(t) = q(t) + 1$ \>
+(f) $\ds \frac{dy}{dt} = \frac{\pi y}{y^2+1}$
+\end{tabbing}
+\end{exercise}
 \begin{exercise}
 Consider the differential equation
 \[
    \frac{dy}{dt} = y(y-1)(y-2)
 \]
 \begin{enumerate}
-\item Find the equilibrium solutions.\\
-\item Sketch $\frac{dy}{dt}$ as a function of $y$.\\
-\item In one set of axes, sketch several solutions $y(t)$. Include the equilibrium solutions,
+\item[(a)] Find the equilibrium solutions.\\
+\item[(b)] Sketch $\frac{dy}{dt}$ as a function of $y$.\\
+\item[(c)] In one set of axes, sketch several solutions $y(t)$. Include the equilibrium solutions,
 and several more non-equilibrium solutions to show all the possible behaviors.
 (Since this is not necessarily a population model, you should consider negative values
 of $y$ as well as positive.)
@@ -737,19 +805,22 @@ of $y$ as well as positive.)
 \end{exercise}
 
 \begin{exercise}
-For each of the following differential equations,
+For each of the following differential equations
+of the form $y' = f(y)$,
 determine the equilibrium solutions, sketch $f(y)$ as a function
 of $y$, and sketch the solutions where $y(0)=1/2$, $y(0)=1$, and
 $y(0)=3/2$.
-\begin{enumerate}
-\item $\ds y' = -2y + 1$
-\item $\ds y' = y(2-y)$
-\item $\ds y' = \sin(\pi y)$
-\end{enumerate}
-\end{exercise}
-\begin{exercise}
-If possible, find a formula for the solutions to the
-differential equations in Exercise 1.
+\begin{tabbing}
+\hspace*{0.25in} \= \hspace*{1.75in} \= \hspace*{1.5in} \= \kill
+~ \> 
+(a) $\ds y' = -2y + 1$ \>
+(b) $\ds y' = y(2-y)$ \>
+(c) $\ds y' = \sin(\pi y)$ \\[2pt]
+~ \>
+(d) $\ds y' = y^{1/2} - y$ ~~ $(y \ge 0)$ \>
+(e) $\ds y' = (y-1)^2$ \>
+(f) $\ds y' = (y-1)^3$
+\end{tabbing}
 \end{exercise}
 % \begin{exercise}
 % \emph{...a question in which a description must be converted to
@@ -784,9 +855,11 @@ there is a chance that the solutions can
 be found analytically.
 The differential equation may be written
 \begin{equation}
-  g(y(t))y'(t) = h(t)
+  g(y(t))y'(t) = h(t).
 \label{eqn:separated}
 \end{equation}
+(I have chosen to \emph{not} suppress the $t$ dependence of
+$y$ for the moment.)
 We now integrate both sides:
 \begin{equation}
     \int_0^t g(y(s))y'(s) \, ds = \int_0^t h(s) \, ds
@@ -803,7 +876,11 @@ Thus, on the left side of \eqref{eqn:integrated}, we have
   \int_0^t g(y)y'(s)\,ds = \int_0^t \left(\frac{d}{ds} p(y(s))\right)\, ds = p(y(t)) = 
     \int_{y_0}^y g(z) \, dz
 \end{equation}
-The net result can be summarized with the following formal procedure:
+This means we can try to solve an equation of the form
+\begin{equation}
+   \frac{dy}{dt} = \frac{h(t)}{g(y)}
+\end{equation}
+with the following formal procedure:
 \begin{enumerate}
 \item Treat the derivative $\frac{dy}{dt}$ as a fraction and rewrite the differential equation
 as
@@ -886,10 +963,12 @@ where $C$ is an arbitrary constant.
 \begin{exercise}
 Solve the initial value problems.
 \begin{enumerate}
-\item $\ds y' = -y/(t^2+1)$, \hspace{0.25cm} $y(0)=5$.
-\item $\ds y' = -\left(2-e^{-t}\right)y$, \hspace{0.25cm} $y(0)=3$.
-\item $\ds y' = (t+1)y^2$, \hspace{0.25cm} $y(0)=y_0$, where $y_0$ is
+\item[(a)] $\ds y' = -y/(t^2+1)$, \hspace{0.25cm} $y(0)=5$.
+\item[(b)] $\ds y' = -\left(2-e^{-t}\right)y$, \hspace{0.25cm} $y(0)=3$.
+\item[(c)] $\ds y' = (t+1)y^2$, \hspace{0.25cm} $y(0)=y_0$, where $y_0$ is
 a constant.
+\item[(d)] $\ds y' = e^{-rt}y$, ~~ $(r > 0)$, \hspace{0.25cm}
+                                       $y(0)=1$.
 \end{enumerate}
 \end{exercise}
 \end{exercises}
@@ -909,7 +988,7 @@ We can always express the solution to such an equation
 in terms of integrals.  The only obstacle will be
 evaluating the integrals.
 
-To derive the solution, we first simply move $p(t)y$ to the left:
+To derive the solution, we first move $p(t)y$ to the left:
 \begin{equation}
     y'(t) - p(t) y =  g(t),
 \label{eqn:intermediateA}
@@ -931,10 +1010,12 @@ This is a separable equation; a solution is
    \mu(t) = e^{-\int p(t)\, dt}.
 \end{equation}
 We could include an arbitrary multiple of this function
-by multiplying it by an arbitraryconstant $C$, but we
-don't need it.  Equivalently, when we find the integral
-$\int p(t)\,dt$, we may choose the constant of integration
-to be zero.
+by multiplying it by an arbitrary constant $C$, but
+since \emph{any} such $\mu(t)$ will work for us, we
+might as well choose $C=1$.
+(Equivalently, when we find the integral
+$\int p(t)\,dt$, we choose the constant of integration
+to be zero.)
 
 With this choice of $\mu$, 
 \eqref{eqn:intermediateB} becomes
@@ -1040,7 +1121,7 @@ Consider the differential equation
 \begin{equation}
     y' = 2ty + 3.
 \end{equation}
-The differential equation is linear, with p(t) = 2t and g(t)=3.
+The differential equation is linear, with $p(t) = 2t$ and $g(t)=3$.
 The integrating factor is
 \begin{equation}
    \mu(t) = e^{-\int p(t)\,dt} = e^{-\int 2t\, dt}
@@ -1066,8 +1147,10 @@ $\textrm{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-s^2}\,ds$.}
 \begin{exercise}
 Solve the following initial value problems (if possible).
 \begin{enumerate}
-\item $\ds y' = 2y+t$, \hspace{0.25cm} $y(0)=10$
-\item $\ds y' = -\frac{y}{2} + \sin(t)$, \hspace{0.25cm} $y(0)=0$
+\item[(a)] $\ds y' = 2y+t$, \hspace{0.25cm} $y(0)=10$
+\item[(b)] $\ds y' = -\frac{y}{2} + \sin(t)$, \hspace{0.25cm} $y(0)=0$
+\item[(c)] $\ds y' = -y + e^{-2t}$, \hspace{0.25cm} $y(0)=1$
+\item[(d)] $\ds y' = -y + e^{-t}$, \hspace{0.25cm} $y(0)=1$
 \end{enumerate}
 \end{exercise}
 \end{exercises}

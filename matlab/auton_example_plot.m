@@ -1,7 +1,7 @@
 rtexstr = '$r$';
 ptexstr = '$p$';
 btexstr = '$b$';
-peqtexstr = '$\frac{m}{r}$';
+peqtexstr = '$\frac{b}{r}$';
 dpdttexstr = '$\frac{dp}{dt}$';
 ttexstr = '$t$';
 
