@@ -68,6 +68,8 @@ Subdirectory matlab:
    >> Lin2DMapExampleEig
    >> Lin2DMapExampleEigNeg
 
+   >> poploop(5,43)
+   >> popstats(50000)
 
 Subdirectory python
    $ python SIRscript.py
