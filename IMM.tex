@@ -148,6 +148,7 @@ or discrete) is the independent variable.
 certain, as far as they are certain, they do not refer to reality.''}
 
 \hfill  --Albert Einstein
+\index{Einstein, Albert}
 
 \bigskip
 %
@@ -207,6 +208,7 @@ Equation \eqref{eqn:mousepop} is the rule that describes
 how the population changes over time.  Such a rule
 involving discrete time is sometimes called 
 a \emph{difference equation}.
+\index{difference equation}
 This terminology is a bit clearer if we rewrite the
 equation as
 \begin{equation}
@@ -296,6 +298,7 @@ Thus we have
 \label{eqn:mousepopdiffeq}
 \end{equation}
 This is a \emph{differential equation}.
+\index{differential equation}
 This equation says that the
 instantaneous rate of change of the population
 at time $t$ is proportional to the population at time $t$;
@@ -373,17 +376,22 @@ more concisely as
 \end{equation}
 where $\BF$ is the vector-valued function
 (or \emph{map}, or \emph{mapping})
+\index{map, mapping}
 given by the right side of \eqref{eqn:mouseagemodel}.
 
 Equation \eqref{eqn:general_map}
 is a general form for multi-dimensional
 discrete time models.
 We will often call such an equation an
-\emph{iterated map}. (Just like the one-dimensional
+\emph{iterated map}.
+\index{iterated map}
+ (Just like the one-dimensional
 case, these are also often called \emph{difference equations}.)
+\index{difference equation}
 
 We will also study multi-dimensional
 \emph{systems of differential equations}:
+\index{differential equation, system}
 \begin{equation}
    \BX'(t) = \BF(\BX(t))
 \label{eqn:general_diffeq}
@@ -400,14 +408,14 @@ where
 \subsection*{Deterministic vs. Stochastic Models.}
 We have one more important categorization to discuss.
 Both \eqref{eqn:general_map} and \eqref{eqn:general_diffeq}
-are \emph{deterministic}.
+are \emph{deterministic}.\index{deterministic}
 That is, for a given starting state (e.g. $\BX(0)$),
 the fate of the population is determined;
 the equations produce only one possible solution.
 There are no random events incorporated in the model.
 
 Models that explicitly include random events are 
-called \emph{stochastic}.
+called \emph{stochastic}.\index{stochastic}
 For example, suppose we model a population of mice
 with the rule that in each year, there is a one in ten
 chance that a mouse will die, and a one in two chance that
@@ -458,32 +466,36 @@ simulations.}
 \end{figure}
 
 
-\chapter{Differential Equations}\index{differential equation}
+\chapter{Differential Equations}
+\index{differential equation}
 
-\section{Modeling with Differential Equations}
-\emph{Start with an example; discuss significance of a
-relationship between and function and its derivative...}
-%
-The general form of a first order (autonomous) differential
-equation is
-\[
-   \frac{dy}{dt} = f(y)
-\]
-\noindent
-If  $f'(y_{0})=0$, then $y(t)=y_{0}$ is a solution.  Such a constant
-solution is called an \emph{equilibrium solution}.\index{equilibrium}
+\centerline{(Draft version. \copyright ~ 2005, 2006 Warren Weckesser)}
+\bigskip
+
+% \section{Modeling with Differential Equations}
+% \emph{Start with an example; discuss significance of a
+% relationship between and function and its derivative...}
+% %
+% The general form of a first order (autonomous) differential
+% equation is
+% \[
+%    \frac{dy}{dt} = f(y)
+% \]
+% \noindent
+% If  $f'(y_{0})=0$, then $y(t)=y_{0}$ is a solution.  Such a constant
+% solution is called an \emph{equilibrium solution}.\index{equilibrium}
 
 \section{Unconstrained Population Growth}
 
-\noindent
-\emph{``Population, when unchecked, increases in a geometrical ratio. 
-      Subsistence increases only in an arithmetical ratio."}
-
-\hfill    -- Thomas Robert Malthus
-
-\bigskip
+% \noindent
+% \emph{``Population, when unchecked, increases in a geometrical ratio. 
+%       Subsistence increases only in an arithmetical ratio."}
+% 
+% \hfill    -- Thomas Robert Malthus
+% 
+% \bigskip
 The simplest assumption for modeling the growth of a population
-is:
+with a continous time model is
 \begin{quote}
 \emph{The rate of change of the population is proportional to the current population level.}
 \end{quote} 
@@ -491,10 +503,12 @@ Let $t$ be time, and let $p(t)$ be the population at time $t$.
 For now we'll assume that some convenient system of units is used;
 we'll have more to say about units later.
 We also assume that $p$ is ``large'' in some sense, so that it is reasonable
-to treat $p$ as a real number, not an integer.  If, for example, the population
-was just three rabbits, the following models would probably not provide good
-approximations to the actual growth of the population.  If the population
-is measured in thousands of rabbits, then $p(0)=3.12$ makes sense,
+to treat $p$ as a real number, not an integer.
+If, for example, the population was just three rabbits, the following
+models would not provide good
+approximations to the actual growth of the population.
+If the population is measured in thousands of rabbits,
+then $p(0)=3.12$ makes sense,
 and the following models are more reasonable.
 
 We convert the above assumption into an equation involving $t$
@@ -504,6 +518,7 @@ current population is $p(t)$, so the mathematical version of the above
 assumption is
 \begin{equation}
   \frac{dp}{dt} = rp
+\label{eqn:growth}
 \end{equation}
 where $r$ is the constant of proportionality.
 (Note that I have suppressed the argument of $p$ for brevity.)
@@ -534,14 +549,38 @@ Thus, if $r > 0$, the simple assumption given above results in
 \emph{exponential growth}.\index{exponential growth}
 (If $r < 0$, we obtain \emph{exponential decay}.\index{exponential decay})
 
+\newpage
+
 \begin{exercises}
 \begin{exercise}
-This is a test.
+When the number of atoms in a radioactive sample is large,
+the following statement is found to be accurate:
+\emph{The amount of the radioactive isotope decays at 
+a rate that is proportional to the amount present.}
+Let $y(t)$ be the amount of the isotope at time $t$.
+The differential equation for $y$ is generally written
+\[
+   y'(t) = -ry
+\]
+where we assume $r > 0$.  The solution is
+\[
+   y(t) = y_0 e^{-rt}.
+\]
+The \emph{half-life}\index{half-life} $h$ of a radioactive
+isotope is the time required for the amount to be reduced
+to half the original amount.
+Use the above formula to express $r$ in terms of $h$.
 \end{exercise}
 \begin{exercise}
-One two three four five.
+The radioactive element americium-241 has a half-life
+of 458 years.
+If a sample initially contains 3 mg of americium-241,
+find the amount of americium-241 that remains
+after (a) 10 years, (b) 916 years, (c) 10000 years.
 \end{exercise}
 \end{exercises}
+
+\newpage
 
 \section{The Logistic Equation\index{logistic equation}}
 
@@ -556,10 +595,11 @@ can sustain.  This level is called the
 of the environment. If the population is larger than the
 carrying capacity, overcrowding or a lack of food results in a
 \emph{decreasing} population.
-We'll modify the equation to take this into account.
+We'll modify the growth equation
+\eqref{eqn:growth} to take this into account.
 
-The right side of the equation gives the rate of change of $p$ as a function
-of $p$.
+The right side of the equation gives the rate of change of $p$
+as a function of $p$.
 If we divide the the right side by $p$, we obtain the
 \emph{per capita growth rate},
 or simply the \emph{growth rate}.\index{growth rate}
@@ -576,7 +616,7 @@ be negative.
 The simplest formula for such a growth rate is a straight line that has
 the value $r$ when $p=0$ and the value $0$ when $p=K$, as shown in
 Figure~\ref{fig:growthrate}.
-\begin{figure}
+\begin{figure}[b]
 \centerline{\includegraphics[width=3in]{matlab/logistic_percapita_growthrate.eps}} 
 \caption{Per capita growth rate for the logistic equation.}
 \label{fig:growthrate}
