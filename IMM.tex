@@ -2335,50 +2335,75 @@ where $\lambda > 0$ is the per capita growth rate.  This is a
 first order equation for $L$ which we can solve to find 
 $L = L_0 e^{\lambda t}$.
 
-Now we will combine equations \eqref{EQN:PROD}, \eqref{EQN:DKDT},
-and \eqref{EQN:DLDT} to obtain a first order differential equation.
-First we express the relation $Q=f(K,L)$ in a different form.
-Because $f$ has constant returns to scale, we can write
+If possible, we would like to combine \eqref{EQN:PROD},
+\eqref{EQN:DKDT}, and \eqref{EQN:DLDT} into a single
+equation that we may easily analyze. A natural first
+attempt is to substitute \eqref{EQN:PROD} into
+\eqref{EQN:DKDT} to obtain
 \begin{equation}
-   Q = f(K,L) = f\left(L\frac{K}{L},L\right) 
-        = Lf\left(\frac{K}{L},1\right) = Lg(k),
-   \label{EQN:QG}
+  \frac{dK}{dt} = sf(K,L)
+\label{eqn:solowfirstattempt}
 \end{equation}
-or
+Since $L(t)$ is a known function,
+the only unknown function is $K(t)$.
+Thus this is
+a first order differential equation for $K(t)$.
+It is, however, nonautonomous. $L(t) = L_0 e^{\lambda t}$,
+so the right side depends on $t$ explicitly.
+We could still try to analyze this equation, but it would
+be nice if we could find an \emph{autonomous} first order
+differential equation.  It turns out we can derive an
+autonomous equation for 
+the \emph{ratio} $\frac{K}{L}$ instead of $K$.
+
+First, because $f$ has constant returns to scale,
+we may write
 \begin{equation}
-  \frac{Q}{L} = g(k)
+  f(K,L) = f\left(L\frac{K}{L},L\right) = Lf\left(\frac{K}{L},1\right).
 \end{equation}
-where we have introduced a new variable
+Then, after dividing by $L$, \eqref{eqn:solowfirstattempt} becomes
+\begin{equation}
+  \frac{1}{L}\frac{dK}{dt} = sf\left(\frac{K}{L},1\right)
+\label{eqn:solowintermediate}
+\end{equation}
+Next, we consider the
+derivative of $\frac{K}{L}$ given by the quotient rule,
+and we use \eqref{EQN:DLDT}:
+\begin{equation}
+  \frac{d}{dt}\left(\frac{K}{L}\right)
+    = \frac{1}{L}\frac{dK}{dt} - \frac{K}{L^2}\frac{dL}{dt}
+    = \frac{1}{L}\frac{dK}{dt} - \lambda\frac{K}{L}.
+\end{equation}
+If we subtract $\lambda\frac{K}{L}$ from both sides of
+\eqref{eqn:solowintermediate}, the left side becomes
+$\frac{d}{dt}\left(\frac{K}{L}\right)$, so we obtain
+\begin{equation}
+  \frac{d}{dt}\left(\frac{K}{L}\right) =
+    sf\left(\frac{K}{L},1\right) - \lambda\frac{K}{L}
+\label{eqn:solowKoverL}
+\end{equation}
+We now have an equation in which the unknown function
+is $\frac{K}{L}$.  Let us define
 \begin{equation}
    k = \frac{K}{L}
+\label{eqn:solowdefk}
 \end{equation}
-(so $k$ is the \emph{ratio} of capital to labor),
-and we have defined a new function
+and
 \begin{equation}
     g(k) = f(k,1).
+\label{eqn:solowdefg}
 \end{equation}
-By differentiating the relation $K = kL$ we obtain
-\begin{equation}
-   \frac{dK}{dt}  = k\frac{dL}{dt} + \frac{dk}{dt} L
-\end{equation}
-so
-\begin{equation}
-\begin{split}
-   \frac{dk}{dt} & = \frac{1}{L} \left(\frac{dK}{dt} - \frac{dL}{dt} k\right) \\
-                    & = \frac{1}{L} \left( sQ - \lambda L k \right) \\
-                    & = s \frac{Q}{L} - \lambda k \\
-                    & = s g(k) - \lambda k .
-\end{split}
-\end{equation}
-Thus we have the \emph{Solow Growth Model} \cite{Solow}\index{Solow growth model}
+Then \eqref{eqn:solowKoverL} becomes
 \begin{equation}
   \frac{dk}{dt} = s g(k) - \lambda k
 \end{equation}
+This is the \emph{Solow Growth Model} \cite{Solow}\index{Solow growth model}
 which models the growth of the ratio of capital to labor
 under the assumptions given earlier.
 
+\medskip
 \fbox{%
-\begin{minipage}{4.75in}
+\begin{minipage}{4.7in}
 \medskip
 \centerline{\textbf{Summary}}
 \medskip
@@ -2386,10 +2411,10 @@ under the assumptions given earlier.
 \\[3pt]
 \hspace*{0.15cm}(1) $Q=f(K,L)$ where $f(K,L)$ is a function
 with constant returns to scale.
-\\[3pt]
+\\[4pt]
 \hspace*{0.15cm}(2) $\ds \frac{dK}{dt} = sQ$; a fraction of the production output
 is invested in capital.
-\\[3pt]
+\\[4pt]
 \hspace*{0.15cm}(3) $\ds \frac{dL}{dt} = \lambda L$; labor grows according to this
 equation.
 \\[6pt]
@@ -2405,6 +2430,7 @@ equation.
 \end{minipage}
 }
 
+\medskip
 \begin{example}
 As an example, let's take the production function to be
 \begin{equation}
@@ -2421,7 +2447,7 @@ $k$ is
 \label{eqn:solowcobb}
 \end{equation}
 Figure~\ref{fig:solow_rhsplot} shows the graph of
-$\frac{dk}{dt}$ versus $k$ when $s=1$ and  $\lambda=1$.
+$\frac{dk}{dt}$ versus $k$.
 \begin{figure}
 \centerline{\includegraphics[width=2.75in]{matlab/solow_rhsplot.eps}}
 \caption{The graph of the right side of equation \eqref{eqn:solowcobb}.}
@@ -2444,7 +2470,8 @@ We see that if $k>0$ is small,
 $\frac{dk}{dt} > 0$, so $k$
 will increase; the equilibrium $k=0$ is \emph{unstable}.
 The graph of $k(t)$ will have an inflection point when $k$ reaches
-$\left(\frac{s}{3\lambda}\right)^{3/2}$ (where $dk/dt$ has its maximum).
+$\left(\frac{s}{3\lambda}\right)^{3/2}$
+(where right side of \eqref{eqn:solowcobb} has its maximum).
 $k$ will then converge asymptotically to the non-zero equilibrium.
 
 The equilibrium $k=(s/\lambda)^{3/2}$ is \emph{asymptotically stable}:
@@ -2482,11 +2509,41 @@ which capital remains proportional to the labor.
 \begin{exercises}
 \begin{exercise}
 Verify that the maximum value of the right side
-of \eqref{eqn:solowcobb) occurs
+of \eqref{eqn:solowcobb} occurs
 at $k=\left(\frac{s}{3\lambda}\right)^{3/2}$.
 \end{exercise}
 \begin{exercise}
-Another...
+Suppose that labor grows according to a logistic equation
+\begin{equation}
+  \frac{dL}{dt} = \lambda L \left(1-\frac{L}{M}\right)
+\end{equation}
+where $M$ is the carrying capacity for the labor population.
+Derive a new differential equation for $k(t)$.
+Is your new equation autonomous?
+If not, can you still determine the asymptotic
+behavior of the solutions as $t\rightarrow\infty$?
+\end{exercise}
+\begin{exercise}
+Suppose we include the fact the capital deteriorates
+over time.  We replace the assumption given
+in equation \eqref{EQN:DKDT} with
+\begin{equation}
+   \frac{dK}{dt} = -rK + sQ
+\end{equation}
+where $r > 0$.
+(This says that, if $Q=0$, then $K$ will decay and
+approach zero asymptotically.)
+Show that this leads to the differential equation
+\begin{equation}
+   \frac{dk}{dt} = s g(k) - (r+\lambda) k,
+\end{equation}
+where $k$ and $g(k)$ are defined
+in \eqref{eqn:solowdefk} and \eqref{eqn:solowdefg}, 
+respectively.
+Find the equilibrium solutions of this model, 
+and describe the behavior of all possible solutions
+(assumging $k(0)>0$).
+Compare to the Solow model.
 \end{exercise}
 \end{exercises}
 \newpage
