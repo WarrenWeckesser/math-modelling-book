@@ -1158,6 +1158,12 @@ Solve the following initial value problems (if possible).
 
 \newpage
 
+\section{Interacting Populations and ``The Law of Mass Action''}
+We begin by considering a model of the spread of
+a rumor.\index{rumor}
+
+\newpage
+
 \section{Systems of Differential Equations}
 
 A general form for a \emph{system} of $n$ first order differential
@@ -2336,25 +2342,25 @@ to the equation
    \label{EQN:DLDT}
 \end{equation}
 where $\lambda > 0$ is the per capita growth rate.  This is a
-first order equation for $L$ which we can solve to find 
-$L = L_0 e^{\lambda t}$.
+familiar first order equation for $L$ which we can solve to find 
+\begin{equation}
+    L = L_0 e^{\lambda t}.
+\label{eqn:solowLsol}
+\end{equation}
 
 If possible, we would like to combine \eqref{EQN:PROD},
-\eqref{EQN:DKDT}, and \eqref{EQN:DLDT} into a single
+\eqref{EQN:DKDT}, and \eqref{EQN:DLDT} (or \eqref{eqn:solowLsol})
+into a single
 equation that we may easily analyze. A natural first
 attempt is to substitute \eqref{EQN:PROD} into
-\eqref{EQN:DKDT} to obtain
+\eqref{EQN:DKDT} and use \eqref{eqn:solowLsol} to obtain
 \begin{equation}
-  \frac{dK}{dt} = sf(K,L)
+  \frac{dK}{dt} = sf(K,L_0e^{\lambda t})
 \label{eqn:solowfirstattempt}
 \end{equation}
-Since $L(t)$ is a known function,
-the only unknown function is $K(t)$.
-Thus this is
-a first order differential equation for $K(t)$.
-It is, however, nonautonomous. $L(t) = L_0 e^{\lambda t}$,
-so the right side depends on $t$ explicitly.
-We could still try to analyze this equation, but it would
+This is a first order differential equation for $K(t)$.
+It is, however, nonautonomous; the right side depends on $t$ explicitly.
+We could try to analyze this equation, but it would
 be nice if we could find an \emph{autonomous} first order
 differential equation.  It turns out we can derive an
 autonomous equation for 
@@ -2380,7 +2386,7 @@ and we use \eqref{EQN:DLDT}:
 \end{equation}
 If we subtract $\lambda\frac{K}{L}$ from both sides of
 \eqref{eqn:solowintermediate}, the left side becomes
-$\frac{d}{dt}\left(\frac{K}{L}\right)$, so we obtain
+$\frac{d}{dt}\left(\frac{K}{L}\right)$, and we obtain
 \begin{equation}
   \frac{d}{dt}\left(\frac{K}{L}\right) =
     sf\left(\frac{K}{L},1\right) - \lambda\frac{K}{L}
@@ -2436,9 +2442,11 @@ equation.
 
 \medskip
 \begin{example}
+\label{exm:solow}
 As an example, let's take the production function to be
 \begin{equation}
    f(K,L) = K^{1/3}L^{2/3}.
+\label{eqn:cobbexample}
 \end{equation}
 Then
 \begin{equation}
@@ -2483,19 +2491,6 @@ any solution that starts near the equilibrium will converge to the equilibrium
 as $t\rightarrow \infty$.
 In fact, \emph{all} solutions with $k(0)>0$ will converge asymptotically to this
 equilibrium.
-
-% A \emph{direction field}\index{direction field} of a first order differential equation is created by
-% taking a grid of $(t,k)$ values, evaluating the right side of the differential
-% equation at each point in the grid to find the slope of the solution $k(t)$
-% through that point, and then plotting a short line segment with that slope
-% at the point.
-% The following shows a direction field and some solutions
-% of \eqref{eqn:solowcobb} when $s=1$ and $\lambda=1$.
-% 
-% %\centerline{\includegraphics[width=4in,angle=270]{hw01n4dirfield.eps}}
-% \centerline{\fbox{DIRECTION FIELD HERE!}}
-% 
-% \vspace{0.25in}
 
 What does this mean in terms of the capital $K$ and the labor $L$?
 Since $k(t) = K(t)/L(t)$, and $L(t) = L_0e^{\lambda t}$, if $k(t)$ converges to an
@@ -2552,8 +2547,27 @@ in \eqref{eqn:solowdefk} and \eqref{eqn:solowdefg},
 respectively.
 Find the equilibrium solutions of this model, 
 and describe the behavior of all possible solutions
-(assumging $k(0)>0$).
+(assuming $k(0)>0$).
 Compare to the Solow model.
+\end{exercise}
+\begin{exercise}
+Find an explicit solution to equation
+\eqref{eqn:solowfirstattempt} when $f$ is given by
+\eqref{eqn:cobbexample}.  (The equation will be separable.)
+Then divide your solution by $L$ to obtain $k(t)$,
+and verify that $\lim_{t\rightarrow\infty} k(t) =
+\left(s/\lambda\right)^{3/2}$.
+\end{exercise}
+\begin{exercise}
+Consider a general Cobb-Douglas function with
+constant returns to scale
+\begin{equation}
+   f(K,L) = K^{\alpha}L^{1-\alpha}
+\end{equation}
+where $0 < \alpha < 1$.
+Repeat the analysis of Example \ref{exm:solow},
+but use this function in place of the
+specific function given in \eqref{eqn:cobbexample}.
 \end{exercise}
 \end{exercises}
 \newpage
