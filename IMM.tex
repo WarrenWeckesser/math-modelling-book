@@ -150,10 +150,10 @@ certain, as far as they are certain, they do not refer to reality.''}
 \hfill  --Albert Einstein
 \index{Einstein, Albert}
 
-\bigskip
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+\newpage
 
 \section{Modeling: An Introductory Example}
 
@@ -430,7 +430,7 @@ the population for this model. In all five cases,
 the initial population is 2.
 
 \begin{figure}
-\centerline{\includegraphics{matlab/StochModel.eps}}
+\centerline{\includegraphics[width=3.5in]{matlab/StochModel.eps}}
 \caption{Five instances of the population in 
 a stochastic model.}
 \label{fig:StochModel}
@@ -456,7 +456,7 @@ approximately 3.6\% of the time, the population
 is zero after five years.
 
 \begin{figure}
-\centerline{\includegraphics{matlab/StochDist.eps}}
+\centerline{\includegraphics[width=3.5in]{matlab/StochDist.eps}}
 \caption{Numerically computed population
 probability distribution for the population
 after five years.  This was computed by
@@ -1205,9 +1205,9 @@ been infected, but are susceptible to the disease.
 % so each person is susceptible, or infected.
 By assumptions \eqref{SI_assume_constant_N} 
 and \eqref{SI_assume_two_classes}, we have
-\[
+\begin{equation}
    S+I = N.
-\]
+\end{equation}
 So we suppose we have a population of interacting people,
 some of whom are infected.  How fast will the susceptible
 people become infected?  We can think of this in terms
@@ -1216,7 +1216,7 @@ the population, what is the probability that one is
 susceptible and the other is infected? The probability
 of picking a susceptible person is $S/N$, and the probability
 of picking an infective is $I/N$.  For large $N$ (i.e. for
-$N-1\approx N$), the probability that two random
+$N/(N-1)\approx 1$), the probability that two random
 people will consist of one susceptible and one infected
 is $2(S/N)(I/N) = rSI$, where $r$ is a constant.
 Of course, an infective coming into contact
@@ -1282,12 +1282,13 @@ use the fractions $s = S/N$ and $i = I/N$ as the dependent
 variables, rather than $S$ and $I$.  The resulting
 differential equation has the same form:
 \begin{equation}
-   \frac{di}{dt} = r(1-i)i
+   \frac{di}{dt} = \rho(1-i)i
 \end{equation}
-but $r$ is not the same. In fact, in this case
-we have
+where $\rho = r/N$.
+To emphasize several different aspects
+of this model, we may write
 \begin{equation}
-   r = 2c\gamma
+   \rho = \frac{2c\gamma}{N}
 \end{equation}
 where $0 < c \le 1$ is the infectiousness
 (or ``contagiousness'') of the disease, and 
@@ -6945,6 +6946,7 @@ row and second column of $B$, which is
 $\frac{3}{7} \approx 0.429$.
 \end{enumerate}
 
+\endappendix
 \backmatter
 
 \begin{thebibliography}{99}

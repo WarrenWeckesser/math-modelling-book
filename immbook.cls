@@ -966,6 +966,7 @@
   \@makeschapterhead{#1}\@afterheading}
 \newcommand\chaptername{Chapter}
 \newcommand\appendixname{Appendix}
+\newcommand\emptyname{}
 \def\@makechapterhead#1{\global\topskip 7.5pc\relax
   \begingroup
   \fontsize{\@xivpt}{18}\bfseries\centering
@@ -987,6 +988,10 @@
 \def\appendix{\par
   \c@chapter\z@ \c@section\z@
   \let\chaptername\appendixname
+  \def\thechapter{\@Alph\c@chapter}}
+\def\endappendix{\par
+  \c@chapter\z@ \c@section\z@
+  \let\chaptername\emptyname
   \def\thechapter{\@Alph\c@chapter}}
 \newcommand{\@pnumwidth}{1.6em}
 \newcommand{\@tocrmarg}{2.6em}
