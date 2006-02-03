@@ -1252,9 +1252,9 @@ is
 \begin{equation}
     2\left(\frac{S}{N}\right)\left(\frac{I}{N}\right) = \frac{2}{N^2}SI.
 \end{equation}
-We can think of this expression as having
-the units \emph{average number of SI interactions per
-interaction}.
+This expression gives
+the average number of SI interactions per
+interaction.
 By assumption (\ref{SI_assume_const_rate}),
 the quantity $\frac{2\gamma}{N^2}SI$
 gives the average number of SI interactions per unit time,
@@ -1332,6 +1332,7 @@ That is, we assume that when there are no mice, the
 differential equation for the fox population is
 \begin{equation}
    \frac{dy}{dt} = -\mu y
+\label{eqn:pred_alone}
 \end{equation}
 where $\mu > 0$.
 
@@ -1340,6 +1341,7 @@ the mice population grows
 according to a logistic equation:
 \begin{equation}
    \frac{dx}{dt} = rx\left(1-\frac{x}{K}\right)
+\label{eqn:prey_alone}
 \end{equation}
 where $r$ is the small population per capita growth rate
 of the mouse population and $K$ is the carrying capacity
@@ -1353,6 +1355,8 @@ In particular,
 \emph{the rate of interactions between
 mice and foxes is proportional to the product
 of the populations}.
+We modify equations \eqref{eqn:pred_alone}
+and \eqref{eqn:prey_alone} as follows:
 
 \begin{equation}
 \begin{split}
@@ -1368,7 +1372,9 @@ Since the foxes eat the mice, interactions results
 in a loss for $\frac{dx}{dt}$.
 The foxes, on the other hand, benefit from the interaction.
 Unlike the SI model, the cofficients $k_1$ and $k_2$
-are not equal.  The parameter $k_2$ determines
+are not equal; we do not assume that
+each mouse is converted to a fox one-for-one.
+The parameter $k_2$ determines
 how much benefit results from a fox capturing a mouse.
 For example, if $k_2$ is small, 
 the foxes each have to catch many mice in order to improve
