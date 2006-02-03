@@ -1178,76 +1178,111 @@ To develop a set of differential equations that model
 the spread of the disease, we must make some assumptions:
 \begin{enumerate}
 \item
-\label{SI_assume_large_N}
-The size of the population is (in some sense)
-large.
-\item
 \label{SI_assume_constant_N}
-The size of the population remains fixed.
+The size of the population, $N$, remains fixed.
+\item
+\label{SI_assume_large_N}
+The size of the population is
+large enough that the error made by approximating
+$1/(N-1)$ with $1/N$ is small. (As a percentage,
+this error is $100/N$, so, for example, when
+$N=10000$, the error is 0.01 percent.)
 \item
 \label{SI_assume_two_classes}
 We  consider just two classes
-of individuals: those who have been infected, and those who have
-not.  Each individual is in one of these two classes.
+of individuals: those who have the disease and are infective,
+and those who do 
+not have the disease but are susceptible to it.
+Each individual is in one of these two classes.
+(In this model, no one is immune, and once an individual
+has the disease, the individual remains infective.)
 \item
+\label{SI_assume_random}
 We assume that the disease spreads through
 interactions between pairs of individuals, and
 these interactions are random.
-Our model will not attempt to deal with the geographic spread
+(Our model will not attempt to deal with the geographic spread
 of the disease. It will only look at the total number of
-people infected within the given population.
+individuals infected within the given population.)
+An \emph{interaction} is modeled as making a random
+selection of
+two individuals from the population.
+If one is susceptible and one is infected, the
+susceptible \emph{might} become infected.
+We let $c$ be the fraction of 
+susceptible-infective (SI) interactions
+that actually result in the spread of the disease
+($0 < c \le 1$).
+(We can think of the units of $c$ as
+\emph{the average number of infections
+per SI interaction}.) 
 \item
+\label{SI_assume_const_rate}
 The rate of interactions within the population is constant.
+We let $\gamma$ be the interaction rate, with units of
+\emph{number of interactions per unit time}.
 \end{enumerate}
 
-Let $I(t)$ be the number of individuals infected at time $t$.
-(We'll often call this group the ``infectives''.)
-Let $S(t)$ be the number of individuals who have not
-been infected, but are susceptible to the disease.
-% In our simplest model, we will assume that no one is immune,
-% so each person is susceptible, or infected.
+Let $I(t)$ be the number of infectives at time $t$,
+and let $S(t)$ be the number of individuals who are susceptible.
 By assumptions \eqref{SI_assume_constant_N} 
 and \eqref{SI_assume_two_classes}, we have
 \begin{equation}
    S+I = N.
 \end{equation}
-So we suppose we have a population of interacting people,
-some of whom are infected.  How fast will the susceptible
-people become infected?  We can think of this in terms
-of probability.  If we pick two people at random from
+Given an initial number of infectives $I(0)$, we would like
+to know what will happen to $I(t)$.
+We will use the assumptions to formulate differential
+equations that model this process.
+
+If we pick two people at random from
 the population, what is the probability that one is
 susceptible and the other is infected? The probability
 of picking a susceptible person is $S/N$, and the probability
-of picking an infective is $I/N$.  For large $N$ (i.e. for
-$N/(N-1)\approx 1$), the probability that two random
+of picking an infective is $I/N$.
+(Assumption (\ref{SI_assume_large_N}) allows us to assume
+that these events are independents.
+If we really chose a susceptible with our first random
+selection, then the probability that the second individual
+will be an infective is $I/(N-1)$.  Since $N$ is large,
+we can approximate this by $I/N$.)
+The probability that two random
 people will consist of one susceptible and one infected
-is $2(S/N)(I/N) = rSI$, where $r$ is a constant.
-Of course, an infective coming into contact
-with a susceptible does not necessarily spread the disease
-to the susceptible.
-We can take the ``infectiousness'' of the disease into
-account by adjusting the constant $r$.
-The gist of this argument is that we expect the rate
-of change of $S$ (which is the same as the rate of
-the spread of the disease in this model) to be proportional
-to the \emph{product} $SI$.
-We assume $r>0$.  Then the equation that gives the
-rate of change of $S$ is
+is
 \begin{equation}
-  \frac{dS}{dt} = -r S I.
-\label{eqn:SI_S}
+    2\left(\frac{S}{N}\right)\left(\frac{I}{N}\right) = \frac{2}{N^2}SI.
 \end{equation}
-The minus sign accounts for this being a \emph{decrease}
-in the number of susceptibles.
-In this simplest model, the spread of the disease
-means people move from being susceptible to
-infected, so any loss in $S$ must have a corresponding
-gain in $I$.  Thus
+We can think of this expression as having
+the units \emph{average number of SI interactions per
+interaction}.
+By assumption (\ref{SI_assume_const_rate}),
+the quantity $\frac{2\gamma}{N^2}SI$
+gives the average number of SI interactions per unit time,
+and then by assumption (\ref{SI_assume_random}),
+the average number of infections per unit time is
+\begin{equation}
+   \frac{2c\gamma}{N^2}SI.
+\end{equation}
+This quantity determines the rate at which $I(t)$
+is increasing.
+For convenience, let
+\begin{equation}
+   r = \frac{2c\gamma}{N^2}
+\end{equation}
+Then the equation for $I(t)$ is
 \begin{equation}
   \frac{dI}{dt} = r S I.
 \label{eqn:SI_I}
 \end{equation}
-Equations \eqref{eqn:SI_S} and \eqref{eqn:SI_I}
+We have just two classes of individuals,
+the infectives and the susceptible,
+so any gain in $I$ must result in an equal
+loss in $S$.  Thus
+\begin{equation}
+  \frac{dS}{dt} = -r S I.
+\label{eqn:SI_S}
+\end{equation}
+Equations \eqref{eqn:SI_I} and \eqref{eqn:SI_S}
 constitute a \emph{system of differential equations}.
 Many dynamical processes are modeled with systems of differential
 equations; we'll see many more in this course.
@@ -1272,42 +1307,25 @@ $N-I$ to obtain
 \begin{equation}
   \frac{dI}{dt} = r(N-I)I.
 \end{equation}
-This is just another version of the logistic equation, 
-which we know how to solve.
-If $I(0)>0$, we know that $I(t)$ will approach the
+This is just another version of the logistic equation,
+with carrying capacity $N$.
+If $I(0)>0$,  $I(t)$ will approach the
 equilibrium $N$ as $t\rightarrow\infty$.
 Thus, this simple model predicts that
-everyone will become infected, no matter how small
+eventually everyone will become infected, no matter how small
 the initial population of infectives.
 
-In a model such as this one, it is common to
-use the fractions $s = S/N$ and $i = I/N$ as the dependent
-variables, rather than $S$ and $I$.  The resulting
-differential equation has the same form:
-\begin{equation}
-   \frac{di}{dt} = \rho(1-i)i
-\end{equation}
-where $\rho = r/N$.
-To emphasize several different aspects
-of this model, we may write
-\begin{equation}
-   \rho = \frac{2c\gamma}{N}
-\end{equation}
-where $0 < c \le 1$ is the infectiousness
-(or ``contagiousness'') of the disease, and 
-$\gamma$ is interaction rate.
 
 \medskip
 Many models of physical, social, or biological systems
-invovle interacting populations.
-For example, chemical reactions involve populations
-of reactants.  We consider another example, a model
-of the interaction of a predator and its prey.
+involve interacting populations.
+We consider another example, in which we model
+the interaction of a predator and its prey.
 
-\subsection*{Predator/Prey Model.}
+\subsection*{A Predator/Prey Model.}
 Let $x(t)$ be the population of, say, mice in a forest,
 and let $y(t)$ be the population of foxes.
-Suppose (perhaps unreasonably) that the mice
+Suppose that the mice
 are an essential component of the foxes diet; without
 mice, the foxes will eventually starve.
 That is, we assume that when there are no mice, the
@@ -1318,7 +1336,7 @@ differential equation for the fox population is
 where $\mu > 0$.
 
 We also assume that, in the absence of foxes,
-mice population grows
+the mice population grows
 according to a logistic equation:
 \begin{equation}
    \frac{dx}{dt} = rx\left(1-\frac{x}{K}\right)
@@ -1345,7 +1363,7 @@ of the populations}.
 \end{equation}
 
 The constants $k_1 > 0$ and $k_2 > 0$ determine how the
-interactions affect the mouse and populations, respectively.
+interactions affect the mouse and fox populations, respectively.
 Since the foxes eat the mice, interactions results
 in a loss for $\frac{dx}{dt}$.
 The foxes, on the other hand, benefit from the interaction.
@@ -1363,7 +1381,7 @@ is
 \begin{equation}
       r\left(1-\frac{x}{K}\right)-k_1 y,
 \end{equation}
-and we see increasing
+and we see that increasing
 $y$ lowers the per capita growth rate of the
 mice.
 The per capita growth rate of the foxes
