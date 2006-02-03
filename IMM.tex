@@ -486,7 +486,7 @@ simulations.}
 % solution is called an \emph{equilibrium solution}.\index{equilibrium}
 
 \section{Unconstrained Population Growth}
-
+\label{sec:UnconstrPopGrowth}
 % \noindent
 % \emph{``Population, when unchecked, increases in a geometrical ratio. 
 %       Subsistence increases only in an arithmetical ratio."}
@@ -553,6 +553,7 @@ Thus, if $r > 0$, the simple assumption given above results in
 
 \begin{exercises}
 \begin{exercise}
+\label{ex:UnconstrPopGrowth_halflife_formula}
 When the number of atoms in a radioactive sample is large,
 the following statement is found to be accurate:
 \emph{The amount of the radioactive isotope decays at 
@@ -572,6 +573,7 @@ to half the original amount.
 Use the above formula to express $r$ in terms of $h$.
 \end{exercise}
 \begin{exercise}
+\label{ex:UnconstrPopGrowth_americium}
 The radioactive element americium-241 has a half-life
 of 458 years.
 If a sample initially contains 3 mg of americium-241,
@@ -773,6 +775,7 @@ shows an example of a solution, for which $0 < p(0) < b/r$.
 
 \begin{exercises}
 \begin{exercise}
+\label{ex:AutFirstOrder_autclassify}
 Classify each of the following first order differential equations
 as autonomous or nonautonomous.
 
@@ -3414,6 +3417,7 @@ for $S$ and $I$, and then infer the behavior of $R$ afterwards.
 
 
 \section{The SIQR Model\index{SIQR model}}
+\section{The SEIR Model\index{SEIR model}}
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4280,7 +4284,25 @@ as the linear system without the constant vector added.
 
 \begin{exercises}
 \begin{exercise}
-An exercise...
+For each of the following affine systems, find the
+fixed point and classify its type and stability.
+\begin{enumerate}
+\item[(a)] $\ds \BX_{n+1} = \begin{bmatrix}
+                         2 & 2 \\
+                         1 & 2
+                     \end{bmatrix}
+                        \BX_n + \begin{bmatrix} 3 \\ 1 \end{bmatrix}$
+\item[(b)] $\ds \BX_{n+1} = \begin{bmatrix}
+                         2 & -2 \\
+                         1 & 2
+                     \end{bmatrix}
+                        \BX_n + \begin{bmatrix} 3 \\ 1 \end{bmatrix}$
+\item[(c)] $\ds \BX_{n+1} = \begin{bmatrix}
+                         1/2 & 1/2 \\
+                         1/4 & 1/2
+                     \end{bmatrix}
+                        \BX_n + \begin{bmatrix} 2 \\ 8 \end{bmatrix}$
+\end{enumerate}
 \end{exercise}
 \end{exercises}
 
@@ -6006,13 +6028,8 @@ Presumably if we played the game a lot more, the
 experimental results would approach the predicted results.
 
 
-\section{Monopoly (tm)}
-\section{Baseball}
-\section{Exercises}
-\label{sec:exercises_markov}
-\begin{enumerate}
-\item
-%Let
+\begin{exercises}
+\begin{exercise}
 \label{ex:markov1}
 Let
 \begin{equation}
@@ -6024,16 +6041,17 @@ Let
 \end{equation}
 be the transition matrix of a Markov chain.
 \begin{enumerate}
-\item
+\item[(a)]
 Draw the transition diagram that corresponds to this transition matrix.
-\item
+\item[(b)]
 Show that this Markov chain is regular.
-\item
+\item[(c)]
 Find the long-term probability distribution for the state of the Markov
 chain.
 \end{enumerate}
+\end{exercise}
 
-\item
+\begin{exercise}
 \label{ex:markov2}
 Consider the following transition diagram:
 
@@ -6042,15 +6060,15 @@ Consider the following transition diagram:
 \includegraphics[width=3in]{fig/trans_diag.eps}
 }
 \begin{enumerate}
-\item Find the transition matrix,
+\item[(a)] Find the transition matrix,
 and show that the Markov chain is regular.
-\item  Find the long term probability distribution of the states
+\item[(b)]  Find the long term probability distribution of the states
 $A$, $B$, and $C$.
 \end{enumerate}
-
+\end{exercise}
 
 %
-\item
+\begin{exercise}
 \label{ex:markov3}
 We consider a modification of the ``Coin and Die'' game.
 The rules for \emph{Coin} are the same:
@@ -6063,13 +6081,18 @@ The new rules for \emph{Die} are:
 \item If the die turns up \textbf{1 or 2}, \emph{Die} wins.
 \item If the die turns up \textbf{3}, \emph{Die} rolls again.
 \item If the die turns up \textbf{4, 5, or 6}, it is \emph{Coin}'s turn.
-\end{itemize}                                                                \begin{enumerate}
-\item If \emph{Coin} goes first, what is the probability that
+\end{itemize}
+\begin{enumerate}
+\item[(a)] If \emph{Coin} goes first, what is the probability that
 \emph{Coin} wins, and what is the expected number of turns?
-\item If \emph{Die} goes first, what is the probability that
+\item[(b)] If \emph{Die} goes first, what is the probability that
 \emph{Coin} wins, and what is the expected number of turns?
 \end{enumerate}
-\end{enumerate}
+\end{exercise}
+\end{exercises}
+
+\section{Monopoly (tm)}
+\section{Baseball}
 
 %
 \appendix
@@ -6786,7 +6809,39 @@ equation in Maxima.}
 \hfill        -- Charlie Brown (Charles Schulz)
 
 \bigskip
-\textbf{\ref{sec:exercises_markov} / \ref{ex:markov1}}
+\textbf{\ref{ex:UnconstrPopGrowth_halflife_formula}} $\ds r = \frac{\ln 2}{h}$
+
+\medskip
+\textbf{\ref{ex:UnconstrPopGrowth_americium}}
+Let $y(t)$ be the amount of americium-241
+(in mg) at time $t$ (in years). Then
+\[
+   y(t) = 3e^{\frac{(\ln 2)t}{458}}
+\]
+\begin{enumerate}
+\item[(a)] $y(10) \approx 2.9549$ mg.
+\item[(b)] $y(916) = 0.75$ mg. (Note that 916 is two halflives, so $y(916)$
+is one quarter of the initial amount.)
+\item[(c)] $y(10000) \approx 8.0244\times 10^{-7}$ mg.
+\end{enumerate}
+
+\medskip
+\textbf{\ref{ex:AutFirstOrder_autclassify}}
+\begin{tabbing}
+\hspace*{0.25in} \= \hspace*{1.5in} \= \hspace*{1.5in} \= \kill
+~ \> 
+(a) autonomous \>
+(b) nonautonomous \>
+(c) nonautonomous \\[2pt]
+~ \>
+(d) nonautonomous \>
+(e) autonomous \>
+(f) autonomous
+\end{tabbing}
+
+\newpage
+%\medskip
+\textbf{\ref{ex:markov1}}
 \begin{enumerate}
 \item[(a)] The transition diagram:
 
@@ -6846,8 +6901,8 @@ is
 \]
 \end{enumerate}
 
-\newpage
-\textbf{\ref{sec:exercises_markov} / \ref{ex:markov2}}
+% \newpage
+\textbf{\ref{ex:markov2}}
 \begin{enumerate}
 \item[(a)] The transition matrix is
 \[
@@ -6879,7 +6934,8 @@ Thus, in the long run, the probabilities of being in state A, B or C
 are $1/2$, $1/4$ and $1/4$, respectively.
 \end{enumerate}
 
-\textbf{\ref{sec:exercises_markov} / \ref{ex:markov3}}
+\medskip
+\textbf{\ref{ex:markov3}}
 The transition diagram for this version of the Coin and Die game is
 
 \medskip
