@@ -1,0 +1,3 @@
+To generate the plots, the commands:
+$ gnuplot logisticrhs.gnuplot
+$ gnuplot logisticsolutions.gnuplot

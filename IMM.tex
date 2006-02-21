@@ -469,8 +469,6 @@ simulations.}
 \chapter{Differential Equations}
 \index{differential equation}
 
-\centerline{(Draft version. \copyright ~ 2005, 2006 Warren Weckesser)}
-\bigskip
 
 % \section{Modeling with Differential Equations}
 % \emph{Start with an example; discuss significance of a
@@ -582,7 +580,8 @@ after (a) 10 years, (b) 916 years, (c) 10000 years.
 \end{exercise}
 \begin{exercise}
 \label{ex:NewtonsLawOfCooling}
-\emph{Newton's Law of Cooling} says that the rate of change
+\emph{Newton's Law of Cooling}\index{Newton's Law of Cooling}
+says that the rate of change
 of the temperature of an object is proportional
 to the difference between the temperature of the object
 and the ambient temperature of the air.
@@ -1453,6 +1452,1125 @@ of differential equations in later chapters.
 
 \subsection{Chemical Reactions and the Law of Mass Action}
 
+\emph{...to be written...}
+
+\newpage
+
+\section{Second Order Differential Equations}
+Recall that the \emph{order} of a differential equation
+is the order of the highest derivative in the equation.
+A general form of a second order differential equation is
+\begin{equation}
+   \frac{d^2y}{dt^2} = f\left(t,y,\frac{dy}{dt}\right)
+\label{eqn:generalsecondorder}
+\end{equation}
+It is an equation that relates a function to its first
+and second derivatives.  For example,
+\begin{equation}
+  \frac{d^2y}{dt^2} = -3\frac{dy}{dt}-2y
+  \label{eqn:linearexample} 
+\end{equation}
+says we want a function $y(t)$ with the property that its second derivative
+is equal to the given linear combination of the function and  its first derivative
+for all $t$.  You should verify that $y(t)=e^{-t}$ satisfies this equation,
+as does $y(t) = e^{-2t}$.
+
+A trivial second order differential equation is
+\begin{equation}
+   \frac{d^2y}{dt^2} = 0.
+   \label{eqn:trivial}
+\end{equation}
+This one we can solve by simply integrating twice%
+\footnote{Note that we can not solve \eqref{eqn:linearexample}
+by simply integrating. If we integrate once, we obtain
+$\frac{dy}{dt} = -3y -2\int y(t)dt$.  Since we don't know what
+$y(t)$ is (after all, $y(t)$ is what we are trying to find), we can not
+evaluate $\int y(t)\,dt$.  Except for trivial cases
+(such as \eqref{eqn:trivial}),
+integrating both sides of a differential
+equation transforms it into a new problem, but does not solve it.}:
+\begin{equation}
+  \frac{dy}{dt} = A, \quad y = At+B,
+\end{equation}
+where $A$ and $B$ are constants of integration.
+$y=At+B$ is a solution for any constants $A$ and $B$.
+For a first order differential equation, we know we need
+an initial condition $y(0)=y_0$ to determine the value of the
+arbitrary constant that shows up in the solution.  For a second order
+differential equation, there are generally two arbitrary constants, so
+we need \emph{two} initial conditions: $y(0)=y_0$, $y'(0) = v_0$.
+So a general form for a second order initial value problem is
+\begin{equation}
+   \frac{d^2y}{dt^2} = f\left(t,y,\frac{dy}{dt}\right)
+  \quad y(0) = y_0, \quad y'(0)=v_0.
+\end{equation}
+(With these initial conditions, you should verify that the solution
+to the trivial differential equation $\frac{d^2y}{dt^2}=0$ is $y(t)=v_0 t + x_0$.)
+In problems where $y(t)$ represents the position of an object,
+$y_0$ is the \emph{initial position}, and $v_0$ is the
+\emph{initial velocity}.
+
+We can always convert an equation such as
+\eqref{eqn:generalsecondorder}
+into a system of two first order equations.
+Let $v(t) = \frac{dy}{dt}$; then
+$\frac{dv}{dt} = \frac{d^2y}{dt^2}$, and the single second
+order equation becomes the system
+\begin{equation}
+\begin{split}
+   \frac{dy}{dt} & = v\\
+   \frac{dv}{dt} & = f(t,y,v)
+\end{split}
+\end{equation}
+\begin{example}
+Consider the second order differential equation
+\begin{equation}
+  \frac{d^2y}{dy^2} + \mu(y^2-1)\frac{dy}{dt} + k y = 0.
+\end{equation}
+Let $v = \frac{dy}{dt}$;
+then
+\begin{equation}
+   \frac{dv}{dt} = \frac{d^2y}{dt^2} = -\mu(y^2-1)\frac{dy}{dt} - ky.
+\end{equation}
+We replace $\frac{dy}{dt}$ with $v$ and obtain the system
+\begin{equation}
+\begin{split}
+   \frac{dy}{dt} & = v \\
+   \frac{dv}{dt} & =  -\mu(y^2-1)v - ky
+\end{split}
+\end{equation}
+\end{example}
+
+\newpage
+
+\section{Nondimensionalizing a Differential Equation}
+
+An important concept in mathematical modeling
+is that of \emph{dimensionless} or 
+\emph{nondimensional} variables.
+In this section, we show how to rewrite a differential
+equation in terms of nondimensional variables and parameters.
+We will use an example to illustrate the procedure.
+
+\subsection*{The projectile problem.}
+We consider the problem of determining the height of an object that is
+launched vertically from the surface of the earth with initial speed $v_0$.
+Let $t$ be the time, measured from the instant that the
+object is launched, let $x(t)$ be the height of the object above
+the surface of the earth, let $g$ be the gravitational acceleration,
+and let $R$ be the radius of the earth.
+Newton's laws may be used to derive the following differential equation
+for $x(t)$:
+\begin{equation}
+   \frac{d^2x}{dt^2} = -\frac{gR^2}{(x+R)^2}, \quad x(0)=0, \quad x'(0)=v_0.
+   \label{eqn:projectile}
+\end{equation}
+If we were going to perform computations with this equation and compare
+the solutions to actual experiments, we would need to work with
+a consistent set of units.  For example, we might measure time in
+seconds (sec), distance in meters (m), and mass in kilograms (kg).
+In this case, the units of $g$ are  m/sec$^2$.
+The quantities time, length and mass are \emph{dimensions}.
+For our equation to make sense, we must measure all dimensions
+with consistent units.  Note that the dimension of a variable
+is an inherent property of the variable, but the units are something
+we can choose. For example, $x$ is a length, but we might
+choose meters, miles, or even furlongs for its units.
+In the following, we will want to indicate the dimensions
+of all the variables and parameters in a problem.
+We'll use the symbols $\mathcal{L}$ for length,
+$\mathcal{T}$ for time, and $\mathcal{M}$ for mass.
+
+The idea is to measure our variables in ``units''
+that are instrinsic to the problem.  Units such as kilometers
+or miles are arbitrary. The following procedure
+will let us choose units that can simplify the problem.
+Specifically, this procedure usually reduces the number
+of parameters in the problem.
+
+\subsection*{Procedure for Nondimensionalizing a Differential Equation.}
+\begin{enumerate}
+\item List all the variables and parameters along with
+their dimensions.
+\item For each variable, say $x$, form a product
+(or quotient) $p$ of parameters that has the same
+dimensions as $x$, and define a new variable
+$y = x/p$. The new variable $y$ is a ``dimensionless'' variable.
+Its numerical value is the same no matter what
+system of units is used.
+\item Rewrite the differential equation in terms
+of the new variables.
+\item In the new differential equation, group the parameters
+into nondimensional combinations, and define a new set of
+nondimensional parameters expressed as the nondimensional
+combinations of the original parameters.
+(This will typically result in fewer parameters.)
+\end{enumerate}
+
+We'll apply this procedure to the projectile problem,
+but first we point out an important aspect of
+step 3.
+Time $t$ is one of the variables in the
+problem (usually we use it as the independent
+variable), so in step 2 we will create a nondimensional
+version of this variable, say $\tau$.
+Since the differential equation has derivatives
+with respect to $t$, and we want the new equation
+to be expressed in terms of $\tau$, we will have
+to use the chain rule to convert from $t$ to
+$\tau$. Suppose, for example, we have the dimensional variables
+$t$ and $x(t)$, and we define nondimensional
+variables $\tau = t/T$ and $y=x/P$.  How do we
+express $\frac{dx}{dt}$ and $\frac{d^2x}{dt^2}$
+in terms of $\tau$ and $y$?  First, write $y=x/P$
+a little more carefully as
+\begin{equation}
+   y(\tau) = \frac{x(T\tau)}{P} = \frac{x(t)}{P} 
+\end{equation}
+or
+\begin{equation}
+  x(t) = Py(t/T) = Py(\tau)
+\end{equation}
+Now take the derivative with respect to $t$ on both sides.
+We will have to use the chain rule on the right.
+\begin{equation}
+  \frac{dx(t)}{dt} = P \frac{d}{dt}\left(y(\tau)\right)= P \frac{dy}{d\tau} \frac{d\tau}{dt}
+      = \frac{P}{T}\frac{dy}{d\tau}
+  \label{eqn:tderiv}
+\end{equation}
+I included the $t$ and $\tau$ arguments in the first few expressions
+to remind you of what the arguments of $x$ and $y$ are, but from here
+on, I will suppress the arguments.
+The last equality in \eqref{eqn:tderiv}
+comes from $\frac{d\tau}{dt} = 1/T$, since $\tau = t/T$.
+We also find
+\begin{equation}
+  \frac{d^2x}{dt^2} = \frac{P}{T} \frac{d^2y}{d\tau^2}\frac{d\tau}{dt}
+     = \frac{P}{T^2}\frac{d^2y}{d\tau^2}
+\end{equation}
+Higher derivatives can be found the same way.
+
+Once we understand how this works, we can take advantage of a formal
+shortcut.  To express $\frac{dx}{dt}$ or $\frac{d^2x}{dt^2}$
+in terms of $\tau$ and $y$, where $t = T\tau$ and $x = Py$, simply
+substitute the variables in the expression for the derivative:
+\begin{equation}
+   \frac{dx}{dt} = \frac{d (Py)}{d(T\tau)} = \frac{P}{T}\frac{dy}{d\tau}
+\end{equation}
+and
+\begin{equation}
+   \frac{d^2x}{dt^2} = \frac{d^2(Py)}{d(T\tau)^2}
+      = \frac{P}{T^2}\frac{d^2y}{d\tau^2}
+\end{equation}
+This formal procedure seems fishy at first, but it is really just
+a shortcut for the chain rule.
+
+We'll now apply the nondimensionalization procedure
+to the projectile problem.
+
+\vspace{0.1cm}
+\noindent
+\emph{Step 1.}
+Table \ref{tbl:projectilevarlist} shows the result of
+step 1.
+(I've also included the meaning of each variable
+and parameter in the list.)
+\begin{table}
+\centerline{%
+\begin{tabular}{|c|l|l|}
+  \hline
+  \parbox{5em}{\T Variable or\\ Parameter \B} & Meaning & Dimension \T \B \\
+  \hline
+    $t$  & time since the launch of the object & $\mathcal{T}$ \T \B \\
+    $x$  & distance from the surface of the earth & $\mathcal{L}$ \\
+  \hline
+    $g$  & gravitational constant & $\mathcal{LT}^{-2}$ \T \B \\
+    $R$ &  radius of the earth & $\mathcal{L}$\\
+    $v_0$ & initial velocity & $\mathcal{LT}^{-1}$ \\
+  \hline
+\end{tabular}
+\vspace{0.25cm}
+}
+\caption{The list of variables and parameters for the projectile problem,
+along with their dimensions.
+$\mathcal{T}$ means \emph{time} and $\mathcal{L}$ means \emph{length}.}
+\label{tbl:projectilevarlist}
+\end{table}
+
+\vspace{0.1cm}
+\noindent
+\emph{Step 2.} The variable $t$ has dimension $\mathcal{T}$, so we must find
+a combination of the parameters that also has dimension $\mathcal{T}$.
+We see that $R/v_0$ is one such combination. We define
+\begin{equation}
+   \tau = \frac{t}{\left(R/v_0\right)} = \frac{v_0t}{R}
+\end{equation}
+The variable $x$ has dimension $\mathcal{L}$, and so does $R$, so we define
+\begin{equation}
+   y = \frac{x}{R}
+   \label{eqn:ydef}
+\end{equation}
+
+\vspace{0.1cm}
+\noindent
+\emph{Step 3.}
+We now express \eqref{eqn:projectile} in terms of the dimensionless variables
+$\tau$ and $y$.  We have $t = (R/v_0)\tau$ and $x = Ry$.
+Then, by using the shortcut discussed earlier, we have
+\begin{equation}
+   \frac{dx}{dt} = \frac{d(Ry)}{d\left((R/v_0)\tau\right)}
+      = v_0\frac{dy}{d\tau}
+   \label{eqn:firstderiv}
+\end{equation}
+and
+\begin{equation}
+   \frac{d^2x}{dt^2} = \frac{d^2 (Ry)}{d\left((R/v_0)\tau\right)^2}
+      = \frac{R}{(R/v_0)^2}\frac{d^2y}{d\tau^2}
+      = \frac{v_0^2}{R}\frac{d^2y}{d\tau^2}
+\end{equation}
+Also note that when we substitute $x = Ry$ into the right side of the
+differential equation in \eqref{eqn:projectile}, the $R$ factors in the
+numerator and denominator cancel.
+To convert the initial conditions, we use \eqref{eqn:ydef}
+to obtain $y(0) = x(0)/R = 0$, and we use \eqref{eqn:firstderiv}
+to obtain $\frac{dy}{d\tau}(0) = \left(\frac{dx}{dt}(0)\right)/v_0 = 1$.
+The result of all this is the new equation
+\begin{equation}
+   \frac{v_0^2}{R} \frac{d^2y}{d\tau^2} = -\frac{g}{(y+1)^2},
+      \quad y(0)=0, \quad y'(0)=1
+\end{equation}
+
+\vspace{0.1cm}
+\noindent
+\emph{Step 4.}
+Now we multiply both sides of the differential equation by
+$R/v_0^2$, and define $\beta$ as
+\begin{equation}
+   \beta = \frac{gR}{v_0^2}
+\end{equation}
+Note that $\beta$ is dimensionless.
+So our final, nondimensional problem is
+\begin{equation}
+   \frac{d^2y}{d\tau^2} = -\frac{\beta}{(y+1)^2},
+      \quad y(0)=0, \quad y'(0)=1
+\end{equation}
+Instead of three parameters, we have just one, and everything
+is dimensionless.
+This is, in fact, a general result.  When an equation
+is nondimensionalized, new parameters can be defined such
+that the equation depends only on the new parameters, which are
+all dimensionless.
+ 
+The fact that the new variables
+and parameters are all dimensionless means that the equation does not change
+if we change our coordinates, say from miles and hours to meters and seconds.
+Also, the fact that we ended up with just one parameter means that
+the original three parameters ($g$, $R$, and $v_0$) did not have
+independent effects on the behavior.  Any combinations of
+$g$, $R$ and $v_0$ that result in the same value of $\beta$
+will result in the same behavior of the solution.
+
+Let's go back and look at step 2 again.  We defined
+$y = x/R$.  This amounts to choosing the radius of the earth $R$
+as our fundamental unit of length.  Given the nature of the problem,
+this is a ``natural'' or ``intrinsic'' length scale, as opposed to
+miles or meters, which are completely arbitrary.
+
+We also defined $\tau = \frac{t}{R/v_0}$.
+Is there a natural or intrinsic meaning of $R/v_0$?
+You may recall that if an object moves at a constant velocity $v_0$,
+the distance that it travels in time $T$ is $v_0 T$.
+On the other hand, if the object travels a distance $R$
+with constant velocity $v_0$, the time required is $R/v_0$.
+Thus, the ``meaning'' of $R/v_0$ is the time it would take an
+object to travel the radius of the earth if it were moving at
+the constant speed $v_0$.
+Unlike seconds or hours, which are arbitrary,
+$R/v_0$ provides a unit of time
+that is defined in terms of parameters in the problem;
+it is an intrinsic time scale.
+
+\subsection*{Nondimensionalizing the Logistic Equation}
+Recall the logistic equation:
+\begin{equation}
+   \frac{dP}{dt} = r\left(1 - \frac{P}{K}\right)P,
+   \quad
+   P(0) = P_0,
+\label{eqn:logistic}
+\end{equation}
+where $r > 0$ and $K > 0$ are constants.
+We'll follow the steps outlined above to
+nondimensionalize this differential equation.
+Table~\ref{tbl:logisticvarlist} lists the variables and parameters.
+\begin{table}
+\centerline{%
+\begin{tabular}{|c|l|l|}
+  \hline
+  \parbox{5em}{\T Variable or\\ Parameter \B} & Meaning & Dimension \T \B \\
+  \hline
+    $t$  & time  & $\mathcal{T}$ \T \B \\
+    $P$  & size of the population & $\mathcal{N}$ \\
+  \hline
+    $r$  & \emph{per capita} growth rate of a small population & $\mathcal{T}^{-1}$ \T \B \\
+    $K$ &  carrying capacity & $\mathcal{N}$\\
+    $P_0$ & initial size of the population & $\mathcal{N}$ \\
+  \hline
+\end{tabular}
+\vspace{0.25cm}
+}
+\caption{The list of variables and parameters for the logistic equation,
+along with their dimensions.
+$\mathcal{T}$ means \emph{time} and $\mathcal{N}$ means an \emph{amount}
+or \emph{quantity}.}
+\label{tbl:logisticvarlist}
+\end{table}
+
+To create the nondimensional time variable $\tau$, we must
+divide $t$ by something that has the dimension $\mathcal{T}$.
+The only choice here is $1/r$, so
+we define
+\begin{equation}
+  \tau = \frac{t}{\left(\frac{1}{r}\right)} = rt.
+\end{equation}
+To create the nondimensional dependent variable $y$, we must
+divide $P$ by something that has the dimension $\mathcal{N}$.
+We have two choices here, $K$ or $P_0$.
+I'll use $K$, and leave the choice of $P_0$ as an exercise.
+We have
+\begin{equation}
+   y=\frac{P}{K}
+\end{equation}
+For convenience, we also rewrite the definitions of
+$\tau$ and $y$ as
+\begin{equation}
+  t = \frac{\tau}{r}, \quad\quad P = Ky.
+\end{equation}
+By the chain rule, we have
+\begin{equation}
+  \frac{dP}{dt} = \frac{d(Ky)}{d(\tau/r)}
+    = rK\frac{dy}{d\tau}.
+  \label{eqn:chainrule}
+\end{equation}
+Then substituting $\tau$ and $y$ into
+\eqref{eqn:logistic}
+gives
+\begin{equation}
+  rK\frac{dy}{d\tau} = r (1-y)Ky,  \quad y(0) = \frac{P_0}{K}.
+\end{equation}
+In the differential equation, the $rK$ factors cancel, so the only
+parameters left are in the initial condition.
+Note that the fraction $P_0/K$ is nondimensional.
+We define the new nondimensional initial condition
+\begin{equation}
+   y_0 = \frac{P_0}{K}
+\end{equation}
+to arrive at the nondimensional version of the logistic equation:
+\begin{equation}
+  \frac{dy}{d\tau} = (1-y)y, \quad  y(0) = y_0.
+\label{eqn:logisticnondim}
+\end{equation}
+Now, instead of three parameters, we have just \emph{one}
+nondimensional parameter.
+Figure~\ref{fig:logisticplot} shows the plot of $(1-y)y$, where we can see
+that there is a stable equilibrium at $y=1$.
+Solutions to the nondimensional equation are shown
+in Figure~\ref{fig:logisticsolutionsplot}.
+\begin{figure}
+\centerline{%
+\framebox{%
+\parbox{5.5in}{%
+\include{logisticplots2/logisticrhs}
+}}}
+\caption{The plot of $\frac{dy}{dt}$ as a function of $y$
+for the nondimensional logistic equation~\eqref{eqn:logisticnondim}.}
+\label{fig:logisticplot}
+\end{figure}
+\begin{figure}
+\centerline{%
+\framebox{%
+\parbox{5.5in}{%
+\include{logisticplots2/logisticsolutions}
+}}}
+\caption{The plot of solutions to the nondimensional
+logistic equation~\eqref{eqn:logisticnondim} for several different
+initial conditions.}
+\label{fig:logisticsolutionsplot}
+\end{figure}
+
+How do we interpret the meaning of the nondimensional
+variables?  We defined $y=P/K$, so this one is clear.
+$K$ is a natural unit for the size of the population;
+$y$ represents the population as a fraction of the
+carrying capacity.
+The carrying capacity determines an intrinsic
+unit of measurement for the population.
+
+Can we find a similar interpretation for $\tau$? We
+formed $\tau$ by dividing $t$ by $1/r$ because
+the dimension of $1/r$ is time. Is there some
+intrinsic ``meaning'' to $1/r$?  Consider
+a small population, where $P/K \ll 1$.  In this
+case, the differential equation is approximately
+\[
+   \frac{dP}{dt} = rP,
+\]
+and the solution is $P(t) = P_0 e^{rt}$.
+Then $P(1/r) = P_0 e$.
+Thus we can interpret $1/r$ as the time required
+for a small population to increase by
+a factor of $e$.  (This unit of time is similar
+to the ``half-life'' of radiactive materials.
+The half-life is time required for a given sample
+of the material to decay to half of the original
+amount.)
+
+
+\newpage
+
+~
+
+\newpage
+
+\section{Dimensional Analysis and the Buckingham Pi Theorem}
+
+In this section we see how dimensional analysis can be
+used to discover properties of a system
+without solving, or even  writing down,
+any differential equations.
+
+We begin with the notion of \emph{dimensional
+homogeneity}.
+An equation is \emph{dimensionally homogeneous}
+if it is true regardless of the system
+of units that is used to measure the parameters
+or variable in the equation.
+\begin{example}
+Consider the equation
+\begin{equation}
+   s = \frac{gt^2}{2}
+\label{eqn:freefall}
+\end{equation}
+This is equation for the
+distance $s$ that an object will fall when released
+at $t=0$ in a constant gravitational field.
+If we use units of feet for distance and seconds
+for time, then $g=32$ ft/sec$^2$.
+Suppose we convert to the units miles and hours
+for distance and time, respectively.
+We use a bar to indicate variables in the 
+new units.  We have $s = 5280\bar{s}$ (there
+are 5280 feet per mile), and $t = 3600\bar{t}$
+($3600$ seconds per hour).
+Finally we express $g$ in the new units:
+since $1 \,\textrm{ft} = (1/5280) \,\textrm{miles}$, and
+$1 \,\textrm{sec} = (1/3600) \,\textrm{hr}$, we have
+$g = 32$ ft/sec$^2$ becomes $\bar{g} = 32 (3600^2/5280)$
+miles/hr$^2$.
+Let's substitute the new variables into
+\eqref{eqn:freefall}:
+\begin{equation}
+\begin{split}
+   5280\bar{s} & = \frac{g\left(3600\bar{t}\right)^2}{2} \\
+   \bar{s} & = \frac{3600^2}{5280} \frac{g\bar{t}^2}{2} \\
+   \bar{s} & = \frac{\bar{g}\bar{t}^2}{2}
+\end{split}
+\end{equation}
+The new equation involving $\bar{s}$, $\bar{t}$ and $\bar{g}$
+is the same as the original equation.
+This is an example of a dimensionally homogeneous equation.
+\hfill$\Box$
+\end{example}
+
+\medskip
+The power of dimensional analyis is based on the
+fundamental observation that
+\emph{equations that arise from physical laws
+or real-world problems are dimensionally homogeneous}.
+The number of parameters in such an equation can generally
+be reduced, and this can lead to a better understanding
+of the system being studied.
+
+\subsection*{Example: Period of a Pendulum.}
+We consider a frictionless pendulum, as shown in
+Figure~\ref{fig:pendulum}.
+\begin{figure}
+\centerline{\includegraphics[width=2in]{fig/pendulum.eps}}
+\caption{A pendulum of length $l$, mass $m$, acted on
+by gravity, released from the initial angle
+$\theta_0$ with zero velocity.}
+\label{fig:pendulum}
+\end{figure}
+Table~\ref{tbl:pendulumparams} lists the parameters
+and their dimensions.
+(Note that angles, when expressed in radians,
+are actually dimensionless.)
+\begin{table}
+\centerline{%
+\begin{tabular}{|c|l|l|}
+  \hline
+  Parameter & Meaning & Dimension \T \B \\
+  \hline
+    $l$  & length of the pendulum  & $\mathcal{L}$ \T \B \\
+    $m$  & mass of the pendulum bob & $\mathcal{M}$ \\
+    $g$  & gravitational acceleration & $\mathcal{LT}^{-2}$ \T \B \\
+    $\theta_0$ &  initial angle & $1$ \\
+    $T$ & period of the oscillation & $\mathcal{T}$ \\
+  \hline
+\end{tabular}
+\vspace{0.25cm}
+}
+\caption{The list of variables and parameters for the logistic equation,
+along with their dimensions.
+$\mathcal{T}$ means \emph{time} and $\mathcal{N}$ means an \emph{amount}
+or \emph{quantity}.
+The initial angle $\theta_0$ is dimensionless.}
+\label{tbl:pendulumparams}
+\end{table}
+We consider an experiment in which we displace the pendulum
+by an angle $\theta_0$, and release it with no initial
+velocity.
+Since we are ignoring friction, we expect the pendulum
+to oscillate.  This oscillation will have some period
+$T$. (The periodic is the time required to complete one
+oscillation.)
+We would like to know how the period depends on
+the other parameters in the problem.
+First, we'll try to determine if all these parameters
+are really \emph{independent}.
+To do this, we'll try to find all the
+nontrivial different ways that they can be
+combined to form dimensionless products.
+Our goal is to find the \emph{dimensionless
+parameters}.
+
+Consider the product
+\begin{equation}
+   \pi = T^a l^b m^c g^d \theta_0^e
+\end{equation}
+We want to choose $a$, $b$, $c$, $d$ and $e$ so that
+the new parameter $\pi$ is dimensionless.
+(Note: $\pi$ is the name of a parameter.
+We are not using $\pi = 3.1415\ldots$.)
+The dimensions of $\pi$ are
+\begin{equation}
+  \mathcal{T}^a \mathcal{L}^b \mathcal{M}^c
+     \left(\mathcal{LT}^{-2}\right)^d
+     = \mathcal{T}^{a-2d}\mathcal{L}^{b+d}\mathcal{M}^c.
+\end{equation}
+We want $\pi$ to be dimensionless, so we want
+\begin{equation}
+\begin{split}
+  a-2d & = 0 \\
+  {b+d} & = 0 \\
+  c  & = 0
+\end{split}
+\end{equation}
+This is a linear equation for the unknown $a$, $b$, $c$, and
+$d$. Actually, $e$ is also an unknown, but it only shows
+up in the exponent of $\theta_0$, and $\theta_0$ is 
+already dimensionless, so we know $e$ is arbitrary.
+It is not difficult to solve the above system of
+equations, but I will still rewrite in matrix form, and
+I'll include $e$ in the system:
+\begin{equation}
+   \begin{bmatrix}
+       1 & 0 & 0 & -2 & 0 \\
+       0 & 1 & 0 & 1  & 0 \\
+       0 & 0 & 1 & 0  & 0 \\
+       0 & 0 & 0 & 0 & 0  \\
+   \end{bmatrix}
+   \begin{bmatrix}
+       a \\ b \\ c \\ d \\ e
+   \end{bmatrix}
+   =
+   \begin{bmatrix}
+       0 \\ 0 \\ 0 \\ 0
+   \end{bmatrix}
+   \label{eqn:linear}
+\end{equation}
+which we can write more concisely as
+\begin{equation}
+   A \pmb{\lambda} = \mathbf{0}
+\end{equation}
+where $A$ is the \emph{dimension matrix}
+and  $\pmb{\lambda}$ is the vector of the powers
+$a$, $b$, $c$, $d$, $e$.
+Each nontrivial solution to the
+linear algebra problem provides a way
+to combine the dimensional parameters
+into a nondimensional product.
+Note, however, that if
+$\pmb{\lambda} = \left[a,b,c,d,e\right]^{\textsf{T}}$ is a solution,
+then so is $r\left[a,b,c,d,e\right]^{\textsf{T}} = \left[ra,rb,rc,rd,re\right]^{\textsf{T}}$
+for any constant $r$.
+Since
+\begin{equation}
+  T^{ra}l^{rb} m^{rc} g^{rd} \theta_0^{re}
+   = \left(T^a l^b m^c g^d \theta_0^e\right)^r ,
+\end{equation}
+multiples of a solution to \eqref{eqn:linear}
+do not really identify new combinations of
+parameters.
+Thus, all we need is a set of
+\emph{linearly independent} solutions
+to \eqref{eqn:linear}.
+(To use the lingo from linear algebra, we need
+a \emph{basis for the null-space of $A$}.)
+In this case, we see that the system~\eqref{eqn:linear}
+is already in reduced row echelon form, and
+the solution can be written
+\begin{equation}
+  \pmb{\lambda} = c_1\begin{bmatrix} 2 \\ -1 \\ 0 \\ 1 \\ 0 \end{bmatrix} +
+      c_2 \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 1 \end{bmatrix} 
+\end{equation}
+where $c_1$ and $c_2$ are arbitrary.  Thus a basic for the
+null-space of $A$ is
+given by the two vector in the above solution.
+So one nondimensional parameter is
+\begin{equation}
+   \pi_1 = T^2 l^{-1} m^0 g^1 \theta_0^0
+         = \frac{gT^2}{l}
+\end{equation}
+and another (which we already knew) is
+\begin{equation}
+   \pi_2 = T^0 l^0 m^0 g^0 \theta_0^1
+         = \theta_0 .
+\end{equation}
+
+
+Presumably there \emph{is} some relationship
+among $l$, $m$, $g$, $\theta_0$, and the
+period $T$. We don't know what it is, so we'll
+just assume it can be written in the form
+\begin{equation}
+   f(T,l,m,g,\theta_0) = 0,
+   \label{eqn:assume}
+\end{equation}
+where $f$ is dimensionally homogeneous.
+The fundamental result that we will now use
+is known as the \emph{Buckingham Pi Theorem}.
+It says that a dimensionally homogeneous
+relation is equivalent to another relation
+expressed  in terms of only the independent
+nondimensional parameters $\pi_i$.
+For our example, the Buckingham Pi Theorem
+implies that there is a function $F$
+for which
+\begin{equation}
+   F(\pi_1,\pi_2) = 0.
+   \label{eqn:bpthmresult}
+\end{equation}
+Thus it must be possible to
+express the relation assumed in
+\eqref{eqn:assume} in the simpler form
+\begin{equation}
+    F\left(\frac{gT^2}{l},\theta_0\right) = 0.
+\end{equation}
+Equation \eqref{eqn:bpthmresult}
+is an implicit relation between $\pi_1$ and $\pi_2$.
+We expect that for most values of $\pi_1$ and
+$\pi_2$, we can solve for $\pi_1$ in terms
+of $\pi_2$.  That is, we can write
+\eqref{eqn:bpthmresult} as
+\begin{equation}
+    \pi_1 = h(\pi_2)
+    \label{eqn:bpthmsolved}
+\end{equation}
+where $h$ is some function.
+(In principle, the function $h$ exists,
+but the dimensional analysis performed here
+tells us nothing about the nature of $h$.)
+Substituting the formulas for $\pi_1$ and $\pi_2$
+into \eqref{eqn:bpthmsolved} gives
+\begin{equation}
+    \frac{gT^2}{l} = h(\theta_0),
+\end{equation}
+or
+\begin{equation}
+    T = \sqrt{\frac{l}{g} h(\theta_0)}
+      = \sqrt{\frac{l}{g}}\, \hat{h}(\theta_0)
+\end{equation}
+where $\hat{h}(\theta_0) = \sqrt{h(\theta_0)}$.
+With this result, we can predict how the period
+of the oscillation of the pendulum depends on
+the parameters $g$ and $l$, without actually
+solving (or even writing down) the differential
+equations that describe the motion.
+
+For example, suppose a pendulum of length $l_1$ has
+period $T_1$ when released from angle $\theta_0$.
+If the length is doubled and the pendulum
+is released from the same angle, the new period
+must be
+\begin{equation}
+   T_2 = \sqrt{\frac{l_2}{g}} \, \hat{h}(\theta_0)
+       = \sqrt{\frac{2l_1}{g}} \, \hat{h}(\theta_0)
+       = \sqrt{2}\sqrt{\frac{l_1}{g}} \, \hat{h}(\theta_0)
+       = \sqrt{2} \, T_1.
+\end{equation}
+Thus, doubling the length should cause the period
+to increase by a factor of $\sqrt{2}$.
+
+We can also compare the behavior of a pendulum
+on Earth to its behavior on Mars.
+The gravitational constant
+$g_M$ on Mars is roughly one-third that of Earth's
+gravitational consant $g_E$.
+If, for a given initial angle $\theta_0$ and length $l$,
+the period of the oscillation on Earth is $4$ seconds,
+then on Mars the period will be
+\begin{equation}
+\begin{split}
+    T_M = \sqrt{\frac{l}{g_M}} \, \hat{h}(\theta_0)
+        = \sqrt{\frac{l}{g_E/3}} \, \hat{h}(\theta_0)
+	= \sqrt{3}\, \sqrt{\frac{l}{g_E}} \, \hat{h}(\theta_0)
+	= \sqrt{3}\, T_E
+	& = \sqrt{3}\, 4 \\
+	& \approx 6.9 \; \textrm{seconds.}
+\end{split}
+\end{equation}
+
+\subsection*{Another Example: Periodic Drug Doses}
+We consider the concentration of a drug
+in the bloodstream of an individual when the drug is administered
+periodically.  We'll look at a simple model that involves
+both a differential equation and a discrete map.  We'll also
+see another example of using dimensional analysis.
+
+\subsection*{Clearing of a Drug from the Bloodstream}
+There is a variety of mechanisms for a drug to be cleared from the
+bloodstream. Organs in the body may actively absorb the drug, the drug
+may react with other chemicals in the bloodstream,
+or the drug may naturally breakdown
+into simpler components.
+The simplest model of how a drug is cleared from the bloodstream
+results from assuming that the rate of loss of the drug is
+proportional to the concentration of the drug. If $c(t)$ is the
+concentration of the drug at time $t$, the differential equation
+for this simple model is
+\begin{equation}
+  \frac{dc}{dt} = -r c,
+\label{eqn:decay}
+\end{equation}
+where $r>0$ is the proportionality constant that determines
+the rate of clearance.
+We know that the solution to this equation
+is $c(t) = c_0 e^{-rt}$, where $c_0$ is the concentration
+at time $t=0$.
+
+Equation~\eqref{eqn:decay}
+is the same as the equation for the decay of
+radioactive materials, so we can define the
+\emph{half-life} of the drug. This is the time
+required for the amount of the drug to be reduced
+to half the original amount.
+For example, according to an article on
+\textbf{Slate} by Sam Schechner\footnote{\texttt{http://slate.msn.com/id/2110979/}, Dec. 13, 2004}
+about the poisoning of Viktor Yushchenko, some isomers of 
+dioxin have a half-life of more than seven years.
+If a drug has a half-life of seven years, then
+\begin{equation}
+   c(7) = c_0e^{-7r} = \frac{c_0}{2},
+\end{equation}
+which implies
+\begin{equation}
+   r = \frac{\ln 2}{7} \approx 0.0990,
+\end{equation}
+where we assumed $t$ was measured in years, and therefore
+$r$ has the units of years$^{-1}$.
+\begin{question}
+Suppose a drug has a half-life of seven years.
+(a) How long will it take for the amount of the drug to
+be reduced to one-quarter of the original amount?
+(b) How long will it take to be reduced to one percent of the 
+original amount?
+
+\hfill \textbf{Answers:} (a) 14 years, (b) 46.5 years.
+\end{question}
+
+\subsection*{Administering a Drug with Periodic Doses}
+We now suppose that a drug is administered periodically.
+That is, every $h$ time units, a dose is administered that
+increases the concentration by $b$.
+(If the \emph{amount} administered is $a$, and the volume
+of the blood in bloodstream is $V$, then $b=a/V$.
+We will work with $b$ from here on.)
+We assume that the dose causes an instantaneous increase
+in the concentration.  This is probably a
+good assumption for a drug administered by an injection.
+Whether this is a good assumption for a drug taken
+orally depends on the properties of the drug.
+Alcohol, for example, enters the bloodstream fairly
+rapidly, so the instantaneous increase in concentration
+is probably a reasonable approximation for alcohol.
+
+We assume that the first dose is administered at time $t=0$, and
+the concentration of the drug in the bloodstream before then
+is zero.  At $t=0$ the concentration jumps to $b$, and then
+for $0 < t < h$, the concentration decays according
+to~\eqref{eqn:decay}.  At $t=h$, another dose is administered,
+and the concentration increases by $b$. The concentration then decays
+for $h < t < 2h$, and the process continues.
+We expect the plot of the concentration to look like
+the graph shown in Figure~\ref{fig:PeriodicDrugDosePlot}.
+\begin{figure}
+\centerline{%
+\includegraphics[angle=270,width=4.5in]{python_PeriodicDrugDose/PeriodicDrugDosePlot.eps}
+}
+\caption{A plot of the concentration $c(t)$ for a drug administered
+periodically.  In this example, $r=0.3$, $h=2$ and $b=1$.
+At $t=0, h, 2h, \ldots$, $c(t)$ increases by $b$; otherwise
+the concentration decays according to~\eqref{eqn:decay}.}
+\label{fig:PeriodicDrugDosePlot}
+\end{figure}
+
+We need some additional notation to describe the
+graph shown in the figure.
+Let
+\begin{equation}
+\begin{split}
+    c(h^{-})  & = \lim_{t\rightarrow h^{-}} c(t)
+                     \quad\quad \textrm{(the limit from below),} \\
+    c(h^{+})  & = \lim_{t\rightarrow h^{+}} c(t)
+                     \quad\quad \textrm{(the limit from above).}
+\end{split}
+\end{equation}
+and define
+\begin{equation}
+   x_n = c((nh)^{-}).
+\end{equation}
+Thus, $x_n$ is the concentration at the moment before
+a new dose is administered.
+It is clear the graph of $c(t)$ will consists of
+periods of decay, separated by jumps.  What we would like to
+know is what happens to $x_n$ as $n$ increases?
+Does $x_n$ increase without bound? Or does $x_n$ approach
+some value asymptotically?  If so, what value does is approach?
+
+\subsection*{Dimensional Analysis of $\pmb{x_{\infty}}$}
+We'll find the exact formula for $x_n$ in the next section.
+In this section, we
+assume that $x_n$ approaches a finite value $x_{\infty}$
+asymptotically as $n\rightarrow\infty$.
+We use dimensional analysis to determine
+(as far as possible) how $x_{\infty}$
+depends on the other parameters.
+
+We use the procedure that we saw for the period of the pendulum
+in an earlier lecture.  Our first task is to find all
+the \emph{independent} nondimensional parameters.
+We list all the relevant parameters along with their
+dimensions in Table~\ref{tbl:params}.
+\begin{table}
+\centerline{%
+\begin{tabular}{|c|l|l|}
+  \hline
+  Parameter & Meaning & Dimension \T \B \\
+  \hline
+    $r$  & proportionality constant for the clearance of the drug  & $\mathcal{T}^{-1}$ \T \B \\
+    $h$  & time period  & $\mathcal{T}$ \\
+    $b$  & instantaneous change in concentration due to each dose & $\mathcal{C}$ \T \B \\
+    $x_{\infty}$ &  asymptotic concentration just before the next dose  & $\mathcal{C}$ \\
+  \hline
+\end{tabular}
+\newline
+\vspace{0.2cm}
+}
+\caption{The list of variables and parameters along with their dimensions.
+$\mathcal{T}$ means \emph{time} and $\mathcal{C}$ means a
+\emph{concentration}.
+(In a problem with a wider variety of parameters, we might want to
+express concentration as an \emph{amount} $\mathcal{A}$ divided by
+a \emph{volume} $\mathcal{V}$ or even divided by the cube of a
+\emph{length} $\mathcal{L}$, but this is not necessary in this
+case.)}
+\label{tbl:params}
+\end{table}
+We see that $\pi_1=rh$
+and $\pi_2=x_{\infty}/b$
+are nondimensional combinations of the parameters.
+With a little thought, we could probably
+convince ourselves that these are the \emph{only} nontrivial
+(or independent) combinations.
+(For example, $rhb^2/x_{\infty}^2$ is nondimensional,
+but it is equivalent to
+$\pi_1/\pi_2^2$, so it is not really a ``new'' parameter.)
+However, for the sake of
+pedagogy, we will follow the formal procedure, and pretend
+we didn't see the ``obvious'' choices.
+
+We must choose exponents $\alpha$, $\beta$, $\gamma$ and $\delta$
+such that
+\begin{equation}
+   \pi = r^{\alpha} b^{\beta} h^{\gamma} x_{\infty}^{\delta}
+\label{eqn:nondimparam}
+\end{equation}
+is dimensionless.  Substituting in the dimensions from 
+Table~\ref{tbl:params}, we require
+\begin{equation}
+   \left(\mathcal{T}^{-1}\right)^{\alpha} \mathcal{C}^{\beta}
+       \mathcal{T}^{\gamma} \mathcal{C}^{\delta} = \mathcal{T}^0\mathcal{C}^0 = 1
+       \quad\implies\quad
+       \mathcal{T}^{-\alpha+\gamma}\mathcal{C}^{\beta+\delta}
+        = \mathcal{T}^{0}\mathcal{C}^{0}.
+\end{equation}
+This results in the linear system of equations
+\begin{equation}
+\begin{split}
+   -\alpha + \gamma & = 0, \\
+    \beta + \delta & = 0. \\
+\label{eqn:pdd:linearsys}
+\end{split}
+\end{equation}
+This is easy enough to solve: $\alpha = \gamma$ and $\beta = -\delta$,
+where $\gamma$ and $\delta$ are arbitrary. Equivalently, we can express
+this as
+\begin{equation}
+  \alpha = p, \quad \beta = -q, \quad \gamma = p, \quad \delta = q,
+\end{equation}
+where $p$ and $q$ are arbitrary parameters.
+In vector form,
+\begin{equation}
+\begin{bmatrix} \alpha \\ \beta \\ \gamma \\ \delta \end{bmatrix}
+  =
+\begin{bmatrix} p \\ -q \\ p \\ q \end{bmatrix}
+  =
+p\begin{bmatrix} 1 \\ 0 \\ 1 \\ 0 \end{bmatrix} +
+q\begin{bmatrix} 0 \\ -1 \\ 0 \\ 1 \end{bmatrix} .
+\end{equation}
+A \emph{basis} for the solution set of~\eqref{eqn:pdd:linearsys}
+is given by the vectors $\left\{[1,0,1,0],[0,-1,0,1]\right\}$ (written as
+row vectors for convenience).
+Each basis vector gives us exponents that we can plug into~\eqref{eqn:nondimparam} to form a nondimensional parameter.
+Thus we have found (as expected) that there are only two
+independent nondimensional parameters:
+\begin{equation}
+  \pi_1 = r^1 b^0 h^1 x_{\infty}^0 = rh, \quad \textrm{and}\quad
+  \pi_2 = r^0 b^{-1} h^0 x_{\infty}^1 = \frac{x_{\infty}}{b}. 
+\end{equation}
+
+Now we assume that there is some functional relationship
+among $r$, $h$, $b$ and $x_{\infty}$.  Since we don't know
+what it is, we'll assume the general form
+\begin{equation}
+  f(r,h,b,x_{\infty}) = 0.
+\end{equation}
+We expect $f$ to be dimensionally homogeneous; then the
+Buckingham Pi Theorem implies that there is an equivalent
+relationship of the form
+\begin{equation}
+   F(\pi_1, \pi_2) = 0.
+\label{eqn:F}
+\end{equation}
+Moreover, we expect that for most values of $\pi_1$
+and $\pi_2$, this equation can be solved for $\pi_2$
+in terms of $\pi_1$. That is, there is some function
+$G$ such that~\eqref{eqn:F} is equivalent to
+\begin{equation}
+   \pi_2 = G(\pi_1).
+\end{equation}
+Subsituting in the definitions of $\pi_1$ and $\pi_2$ gives
+\begin{equation}
+   \frac{x_{\infty}}{b} = G(rh),
+\end{equation}
+or
+\begin{equation}
+   x_{\infty} = bG(rh).
+\end{equation}
+This gives us the form of the equation that will result if
+we can solve for $x_{\infty}$ in terms of $r$, $h$ and $b$.
+That is, $x_{\infty}$ \emph{must} be
+a product of $b$ and some function of $rh$ only.
+%
+%
+\subsection*{Derivation of the Formula for $\pmb{x_{\infty}}$}
+In this section, we derive the actual formula for
+$x_n$. From that we obtain the formula for
+$x_{\infty}$.
+You may find it helpful to label the plot in
+Figure~\ref{fig:PeriodicDrugDosePlot} using the notation
+from the following discussion.
+
+The instant after the first dose, we have
+\begin{equation}
+  c(0^{+}) = b.
+\end{equation}
+Then, for $0 < t < h$, we have $c(t) = be^{-rt}$, so
+\begin{equation}
+  c(h^{-}) = be^{-rh}.
+\label{eqn:x_one}
+\end{equation}
+At $t=h$, the concentration increases by $b$, so
+\begin{equation}
+  c(h^{+}) = c(h^{-})+b = be^{-rh} + b = b\left(e^{-rh}+1\right)
+\end{equation}
+Then in the next interval, the solution again decays, and we have
+\begin{equation}
+  c((2h)^{-}) = c(h^{+})e^{-rh} = b\left(e^{-rh}+1\right) e^{-rh}
+     = b\left(e^{-2rh} + e^{-rh}\right)
+\label{eqn:x_two}
+\end{equation}
+and after the jump at $t=2h$ we have
+\begin{equation}
+  c((2h)^{+}) = c((2h)^{-})+b = b\left(e^{-2rh}+e^{-rh}\right) + b
+     = b\left( e^{-2rh} + e^{-rh}+1\right)
+\end{equation}
+Once again, in the next time interval, the solution decays and we have
+\begin{equation}
+  c((3h)^{-}) = c((2h)^{+})e^{-rh} = b\left( e^{-2rh} + e^{-rh}+1\right)e^{-rh}
+    = b\left( e^{-3rh} + e^{-2rh}+e^{-rh}\right)
+\label{eqn:x_three}
+\end{equation}
+Recall that we defined $x_n = c((nh)^{-})$.
+The process that we are describing defines a one dimensional mapping
+\begin{equation}
+   x_{n+1} = (x_n+b)e^{-rh}, \quad \textrm{with $x_0=0$.}
+\end{equation}
+Equations~\eqref{eqn:x_one}, \eqref{eqn:x_two} and
+\eqref{eqn:x_three} give the formulas for the first three
+iterations of this map.
+In general, we have
+\begin{equation}
+  x_n = c((nh)^{-}) = b\left( e^{-nrh} + e^{-(n-1)rh} + \cdots + e^{-rh}\right)
+        = b \sum_{k=1}^{n} e^{-krh}
+	= b \sum_{k=1}^{n} \rho^k,
+\label{eqn:xnsum}
+\end{equation}
+where $\rho = e^{-rh}$.
+(Note that, since $r>0$ and $h>0$, we have $0 < \rho < 1$.)
+The formula in Equation~\eqref{eqn:xnsum} is a geometric sum.
+By using Equation~\eqref{eqn:geomsumfromone} from the
+appendix, we obtain
+\begin{equation}
+  x_n = b \rho\left(\frac{1-\rho^n}{1-\rho}\right)
+      = be^{-rh}\left(\frac{1-e^{nrh}}{1-e^{-rh}}\right)
+\end{equation}
+Finally, since $\ds \lim_{n\rightarrow\infty} \rho^n = 0$, we have
+\begin{equation}
+  x_{\infty} = \frac{b\rho}{1-\rho}
+     = \frac{be^{-rh}}{1-e^{-rh}}. 
+\end{equation}
+(This agrees with the result of the
+dimensional analysis of the previous section.)
+
+The example shown earlier was for $r=0.3$, $h=2$ and $b=1$.
+With these values we find $x_{\infty} \approx 1.2164$.
+Figure~\ref{fig:PeriodicDrugDosePlotWithXinf}
+shows the result of ten periods for these parameters.
+The dashed line in this plot indicates $x_{\infty}$.
+\begin{figure}
+\centerline{%
+\includegraphics[angle=270,width=4.5in]{python_PeriodicDrugDose/PeriodicDrugDosePlotWithXinf.eps}
+}
+\caption{The graph of $c(t)$ for $r=0.3$, $h=2$, and $b=1$.
+The dashed line shows $x_{\infty} \approx 1.2164$.}
+\label{fig:PeriodicDrugDosePlotWithXinf}
+\end{figure}
+%
+
+\newpage
+
+~
 
 \newpage
 
@@ -2246,19 +3364,30 @@ systems with the following coefficient matrices.
 
 \smallskip
 % (I just made these up--I haven't worked out the solutions yet...)
-(1) $\ds A = \begin{bmatrix} 1 & 2 \\ -1 & 2 \end{bmatrix}$
+(a) $\ds A = \begin{bmatrix} 1 & 2 \\ -1 & 2 \end{bmatrix}$
 \hspace{1cm}
-(2) $\ds A = \begin{bmatrix} -1 & 3 \\ -3 & -1 \end{bmatrix}$
+(b) $\ds A = \begin{bmatrix} -1 & 3 \\ -3 & -1 \end{bmatrix}$
 \hspace{1cm}
-(3) $\ds A = \begin{bmatrix} 0 & 1 \\ -2 & -1 \end{bmatrix}$ 
+(c) $\ds A = \begin{bmatrix} 0 & 1 \\ -2 & -1 \end{bmatrix}$ 
 \end{exercise}
 \begin{exercise}
 Suppose $A$ has one zero eigenvalue and one nonzero eigenvalue.
 \begin{enumerate}
-\item What is the general solution?
-\item Describe the set of equilibrium solutions.
-\item Describe the phase portrait.
+\item[(a)] What is the general solution?
+\item[(b)] Describe the set of equilibrium solutions.
+\item[(c)] Describe the phase portrait.
 \end{enumerate}
+\end{exercise}
+\begin{exercise}
+Each of the following matrices has one zero eigenvalue.
+Find the general solution of the corresponding linear system of
+differential equations, and sketch the phase portrait.
+
+\smallskip
+% (I just made these up--I haven't worked out the solutions yet...)
+(a) $\ds A = \begin{bmatrix} 1 & 2 \\ 1 & 2 \end{bmatrix}$
+\hspace{1cm}
+(b) $\ds A = \begin{bmatrix} 0 & 2 \\ 0 & -1 \end{bmatrix}$
 \end{exercise}
 \end{exercises}
 %
@@ -2560,17 +3689,6 @@ to the Lorenz equations.
 Another exercise...
 \end{exercise}
 \end{exercises}
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-
-\chapter[Dimensional Analysis]{Dimensional Analysis and Nondimensionalization}
-\section{Dimensions and Units}
-\index{dimension}\index{unit}
-\section{Nondimensional Equations and Parameters}
-\index{nondimensional}
-\section{Exercises}
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -5034,361 +6152,8 @@ work of Gottman, Murray, \emph{et al}\cite{GM}.
 \section{Exercises}
 %
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\chapter{Hybrid Models}
-\section{Introduction}
-Often, models of dynamical systems lead to equations that combine
-both differential equations and discrete maps.
-\section{Periodic Drug Doses}
-
-In this section, we consider the concentration of a drug
-in the bloodstream of an individual when the drug is administered
-periodically.  We'll look at a simple model that involves
-both a differential equation and a discrete map.  We'll also
-see another example of using dimensional analysis.
-
-\subsection*{Clearing of a Drug from the Bloodstream}
-There is a variety of mechanisms for a drug to be cleared from the
-bloodstream. Organs in the body may actively absorb the drug, the drug
-may react with other chemicals in the bloodstream,
-or the drug may naturally breakdown
-into simpler components.
-The simplest model of how a drug is cleared from the bloodstream
-results from assuming that the rate of loss of the drug is
-proportional to the concentration of the drug. If $c(t)$ is the
-concentration of the drug at time $t$, the differential equation
-for this simple model is
-\begin{equation}
-  \frac{dc}{dt} = -r c,
-\label{eqn:decay}
-\end{equation}
-where $r>0$ is the proportionality constant that determines
-the rate of clearance\footnote{\emph{Note:} $r$
-is \emph{not} ``the rate at which the drug is cleared''.
-The rate at which the drug is cleared is $\frac{dc}{dt}$, which
-is changing over time.  Sometimes $r$ is called the
-\emph{rate constant}.}.
-We know that the solution to this equation
-is $c(t) = c_0 e^{-rt}$, where $c_0$ is the concentration
-at time $t=0$.
-
-Equation~\eqref{eqn:decay}
-is the same as the equation for the decay of
-radioactive materials, so we can define the
-\emph{half-life} of the drug. This is the time
-required for the amount of the drug to be reduced
-to half the original amount.
-For example, according to an article on
-\textbf{Slate} by Sam Schechner\footnote{\texttt{http://slate.msn.com/id/2110979/}, Dec. 13, 2004}
-about the poisoning of Viktor Yushchenko, some isomers of 
-dioxin have a half-life of more than seven years.
-If a drug has a half-life of seven years, then
-\begin{equation}
-   c(7) = c_0e^{-7r} = \frac{c_0}{2},
-\end{equation}
-which implies
-\begin{equation}
-   r = \frac{\ln 2}{7} \approx 0.0990,
-\end{equation}
-where we assumed $t$ was measured in years, and therefore
-$r$ has the units of years$^{-1}$.
-\begin{question}
-Suppose a drug has a half-life of seven years.
-(a) How long will it take for the amount of the drug to
-be reduced to one-quarter of the original amount?
-(b) How long will it take to be reduced to one percent of the 
-original amount?
-
-\hfill \textbf{Answers:} (a) 14 years, (b) 46.5 years.
-\end{question}
-
-\subsection*{Administering a Drug with Periodic Doses}
-We now suppose that a drug is administered periodically.
-That is, every $h$ time units, a dose is administered that
-increases the concentration by $b$.
-(If the \emph{amount} administered is $a$, and the volume
-of the blood in bloodstream is $V$, then $b=a/V$.
-We will work with $b$ from here on.)
-We assume that the dose causes an instantaneous increase
-in the concentration.  This is probably a
-good assumption for a drug administered by an injection.
-Whether this is a good assumption for a drug taken
-orally depends on the properties of the drug.
-Alcohol, for example, enters the bloodstream fairly
-rapidly, so the instantaneous increase in concentration
-is probably a reasonable approximation for alcohol.
-
-We assume that the first dose is administered at time $t=0$, and
-the concentration of the drug in the bloodstream before then
-is zero.  At $t=0$ the concentration jumps to $b$, and then
-for $0 < t < h$, the concentration decays according
-to~\eqref{eqn:decay}.  At $t=h$, another dose is administered,
-and the concentration increases by $b$. The concentration then decays
-for $h < t < 2h$, and the process continues.
-We expect the plot of the concentration to look like
-the graph shown in Figure~\ref{fig:PeriodicDrugDosePlot}.
-\begin{figure}
-\centerline{%
-\includegraphics[angle=270,width=4.5in]{python_PeriodicDrugDose/PeriodicDrugDosePlot.eps}
-}
-\caption{A plot of the concentration $c(t)$ for a drug administered
-periodically.  In this example, $r=0.3$, $h=2$ and $b=1$.
-At $t=0, h, 2h, \ldots$, $c(t)$ increases by $b$; otherwise
-the concentration decays according to~\eqref{eqn:decay}.}
-\label{fig:PeriodicDrugDosePlot}
-\end{figure}
-
-We need some additional notation to describe the
-graph shown in the figure.
-Let
-\begin{equation}
-\begin{split}
-    c(h^{-})  & = \lim_{t\rightarrow h^{-}} c(t)
-                     \quad\quad \textrm{(the limit from below),} \\
-    c(h^{+})  & = \lim_{t\rightarrow h^{+}} c(t)
-                     \quad\quad \textrm{(the limit from above).}
-\end{split}
-\end{equation}
-and define
-\begin{equation}
-   x_n = c((nh)^{-}).
-\end{equation}
-Thus, $x_n$ is the concentration at the moment before
-a new dose is administered.
-It is clear the graph of $c(t)$ will consists of
-periods of decay, separated by jumps.  What we would like to
-know is what happens to $x_n$ as $n$ increases?
-Does $x_n$ increase without bound? Or does $x_n$ approach
-some value asymptotically?  If so, what value does is approach?
-
-\subsection*{Dimensional Analysis of $\pmb{x_{\infty}}$}
-We'll find the exact formula for $x_n$ in the next section.
-In this section, we
-assume that $x_n$ approaches a finite value $x_{\infty}$
-asymptotically as $n\rightarrow\infty$.
-We use dimensional analysis to determine
-(as far as possible) how $x_{\infty}$
-depends on the other parameters.
-
-We use the procedure that we saw for the period of the pendulum
-in an earlier lecture.  Our first task is to find all
-the \emph{independent} nondimensional parameters.
-We list all the relevant parameters along with their
-dimensions in Table~\ref{tbl:params}.
-\begin{table}
-\centerline{%
-\begin{tabular}{|c|l|l|}
-  \hline
-  Parameter & Meaning & Dimension \T \B \\
-  \hline
-    $r$  & proportionality constant for the clearance of the drug  & $\mathcal{T}^{-1}$ \T \B \\
-    $h$  & time period  & $\mathcal{T}$ \\
-    $b$  & instantaneous change in concentration due to each dose & $\mathcal{C}$ \T \B \\
-    $x_{\infty}$ &  asymptotic concentration just before the next dose  & $\mathcal{C}$ \\
-  \hline
-\end{tabular}
-\newline
-\vspace{0.2cm}
-}
-\caption{The list of variables and parameters along with their dimensions.
-$\mathcal{T}$ means \emph{time} and $\mathcal{C}$ means a
-\emph{concentration}.
-(In a problem with a wider variety of parameters, we might want to
-express concentration as an \emph{amount} $\mathcal{A}$ divided by
-a \emph{volume} $\mathcal{V}$ or even divided by the cube of a
-\emph{length} $\mathcal{L}$, but this is not necessary in this
-case.)}
-\label{tbl:params}
-\end{table}
-We see that $\pi_1=rh$
-and $\pi_2=x_{\infty}/b$
-are nondimensional combinations of the parameters.
-With a little thought, we could probably
-convince ourselves that these are the \emph{only} nontrivial
-(or independent) combinations.
-(For example, $rhb^2/x_{\infty}^2$ is nondimensional,
-but it is equivalent to
-$\pi_1/\pi_2^2$, so it is not really a ``new'' parameter.)
-However, for the sake of
-pedagogy, we will follow the formal procedure, and pretend
-we didn't see the ``obvious'' choices.
-
-We must choose exponents $\alpha$, $\beta$, $\gamma$ and $\delta$
-such that
-\begin{equation}
-   \pi = r^{\alpha} b^{\beta} h^{\gamma} x_{\infty}^{\delta}
-\label{eqn:nondimparam}
-\end{equation}
-is dimensionless.  Substituting in the dimensions from 
-Table~\ref{tbl:params}, we require
-\begin{equation}
-   \left(\mathcal{T}^{-1}\right)^{\alpha} \mathcal{C}^{\beta}
-       \mathcal{T}^{\gamma} \mathcal{C}^{\delta} = \mathcal{T}^0\mathcal{C}^0 = 1
-       \quad\implies\quad
-       \mathcal{T}^{-\alpha+\gamma}\mathcal{C}^{\beta+\delta}
-        = \mathcal{T}^{0}\mathcal{C}^{0}.
-\end{equation}
-This results in the linear system of equations
-\begin{equation}
-\begin{split}
-   -\alpha + \gamma & = 0, \\
-    \beta + \delta & = 0. \\
-\label{eqn:pdd:linearsys}
-\end{split}
-\end{equation}
-This is easy enough to solve: $\alpha = \gamma$ and $\beta = -\delta$,
-where $\gamma$ and $\delta$ are arbitrary. Equivalently, we can express
-this as
-\begin{equation}
-  \alpha = p, \quad \beta = -q, \quad \gamma = p, \quad \delta = q,
-\end{equation}
-where $p$ and $q$ are arbitrary parameters.
-In vector form,
-\begin{equation}
-\begin{bmatrix} \alpha \\ \beta \\ \gamma \\ \delta \end{bmatrix}
-  =
-\begin{bmatrix} p \\ -q \\ p \\ q \end{bmatrix}
-  =
-p\begin{bmatrix} 1 \\ 0 \\ 1 \\ 0 \end{bmatrix} +
-q\begin{bmatrix} 0 \\ -1 \\ 0 \\ 1 \end{bmatrix} .
-\end{equation}
-A \emph{basis} for the solution set of~\eqref{eqn:pdd:linearsys}
-is given by the vectors $\left\{[1,0,1,0],[0,-1,0,1]\right\}$ (written as
-row vectors for convenience).
-Each basis vector gives us exponents that we can plug into~\eqref{eqn:nondimparam} to form a nondimensional parameter.
-Thus we have found (as expected) that there are only two
-independent nondimensional parameters:
-\begin{equation}
-  \pi_1 = r^1 b^0 h^1 x_{\infty}^0 = rh, \quad \textrm{and}\quad
-  \pi_2 = r^0 b^{-1} h^0 x_{\infty}^1 = \frac{x_{\infty}}{b}. 
-\end{equation}
-
-Now we assume that there is some functional relationship
-among $r$, $h$, $b$ and $x_{\infty}$.  Since we don't know
-what it is, we'll assume the general form
-\begin{equation}
-  f(r,h,b,x_{\infty}) = 0.
-\end{equation}
-We expect $f$ to be dimensionally homogeneous; then the
-Buckingham Pi Theorem implies that there is an equivalent
-relationship of the form
-\begin{equation}
-   F(\pi_1, \pi_2) = 0.
-\label{eqn:F}
-\end{equation}
-Moreover, we expect that for most values of $\pi_1$
-and $\pi_2$, this equation can be solved for $\pi_2$
-in terms of $\pi_1$. That is, there is some function
-$G$ such that~\eqref{eqn:F} is equivalent to
-\begin{equation}
-   \pi_2 = G(\pi_1).
-\end{equation}
-Subsituting in the definitions of $\pi_1$ and $\pi_2$ gives
-\begin{equation}
-   \frac{x_{\infty}}{b} = G(rh),
-\end{equation}
-or
-\begin{equation}
-   x_{\infty} = bG(rh).
-\end{equation}
-This gives us the form of the equation that will result if
-we can solve for $x_{\infty}$ in terms of $r$, $h$ and $b$.
-That is, $x_{\infty}$ \emph{must} be
-a product of $b$ and some function of $rh$ only.
-%
-%
-\subsection*{Derivation of the Formula for $\pmb{x_{\infty}}$}
-In this section, we derive the actual formula for
-$x_n$. From that we obtain the formula for
-$x_{\infty}$.
-You may find it helpful to label the plot in
-Figure~\ref{fig:PeriodicDrugDosePlot} using the notation
-from the following discussion.
-
-The instant after the first dose, we have
-\begin{equation}
-  c(0^{+}) = b.
-\end{equation}
-Then, for $0 < t < h$, we have $c(t) = be^{-rt}$, so
-\begin{equation}
-  c(h^{-}) = be^{-rh}.
-\label{eqn:x_one}
-\end{equation}
-At $t=h$, the concentration increases by $b$, so
-\begin{equation}
-  c(h^{+}) = c(h^{-})+b = be^{-rh} + b = b\left(e^{-rh}+1\right)
-\end{equation}
-Then in the next interval, the solution again decays, and we have
-\begin{equation}
-  c((2h)^{-}) = c(h^{+})e^{-rh} = b\left(e^{-rh}+1\right) e^{-rh}
-     = b\left(e^{-2rh} + e^{-rh}\right)
-\label{eqn:x_two}
-\end{equation}
-and after the jump at $t=2h$ we have
-\begin{equation}
-  c((2h)^{+}) = c((2h)^{-})+b = b\left(e^{-2rh}+e^{-rh}\right) + b
-     = b\left( e^{-2rh} + e^{-rh}+1\right)
-\end{equation}
-Once again, in the next time interval, the solution decays and we have
-\begin{equation}
-  c((3h)^{-}) = c((2h)^{+})e^{-rh} = b\left( e^{-2rh} + e^{-rh}+1\right)e^{-rh}
-    = b\left( e^{-3rh} + e^{-2rh}+e^{-rh}\right)
-\label{eqn:x_three}
-\end{equation}
-Recall that we defined $x_n = c((nh)^{-})$.
-The process that we are describing defines a one dimensional mapping
-\begin{equation}
-   x_{n+1} = (x_n+b)e^{-rh}, \quad \textrm{with $x_0=0$.}
-\end{equation}
-Equations~\eqref{eqn:x_one}, \eqref{eqn:x_two} and
-\eqref{eqn:x_three} give the formulas for the first three
-iterations of this map.
-In general, we have
-\begin{equation}
-  x_n = c((nh)^{-}) = b\left( e^{-nrh} + e^{-(n-1)rh} + \cdots + e^{-rh}\right)
-        = b \sum_{k=1}^{n} e^{-krh}
-	= b \sum_{k=1}^{n} \rho^k,
-\label{eqn:xnsum}
-\end{equation}
-where $\rho = e^{-rh}$.
-(Note that, since $r>0$ and $h>0$, we have $0 < \rho < 1$.)
-The formula in Equation~\eqref{eqn:xnsum} is a geometric sum.
-By using Equation~\eqref{eqn:geomsumfromone} from the
-appendix, we obtain
-\begin{equation}
-  x_n = b \rho\left(\frac{1-\rho^n}{1-\rho}\right)
-      = be^{-rh}\left(\frac{1-e^{nrh}}{1-e^{-rh}}\right)
-\end{equation}
-Finally, since $\ds \lim_{n\rightarrow\infty} \rho^n = 0$, we have
-\begin{equation}
-  x_{\infty} = \frac{b\rho}{1-\rho}
-     = \frac{be^{-rh}}{1-e^{-rh}}. 
-\end{equation}
-(This agrees with the result of the
-dimensional analysis of the previous section.)
-
-The example shown earlier was for $r=0.3$, $h=2$ and $b=1$.
-With these values we find $x_{\infty} \approx 1.2164$.
-Figure~\ref{fig:PeriodicDrugDosePlotWithXinf}
-shows the result of ten periods for these parameters.
-The dashed line in this plot indicates $x_{\infty}$.
-\begin{figure}
-\centerline{%
-\includegraphics[angle=270,width=4.5in]{python_PeriodicDrugDose/PeriodicDrugDosePlotWithXinf.eps}
-}
-\caption{The graph of $c(t)$ for $r=0.3$, $h=2$, and $b=1$.
-The dashed line shows $x_{\infty} \approx 1.2164$.}
-\label{fig:PeriodicDrugDosePlotWithXinf}
-\end{figure}
-%
-
-
-
-\section{Exercises}
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \chapter{A Brief Introduction to Probability}
 
@@ -6958,7 +7723,7 @@ $f(y) < 0$ if $-2 < y < 2$; and
 $f(y) > 0$ if $y > 2$.
 The graph of $f(y)$ looks something like this:
 
-\centerline{\includegraphics[width=4in]{AutonomousDegreeThreePlota.eps}}
+\centerline{\includegraphics[width=4in]{images/AutonomousDegreeThreePlota.eps}}
 
 The arrows on the $y$ axis indicate the whether
 $y(t)$ is increasing or decreasing.
@@ -6968,7 +7733,7 @@ $y(t)$ is increasing or decreasing.
 \item[(b)]
 Here is a rough sketch of several solutions:
 
-\centerline{\includegraphics[width=4in]{AutonomousDegreeThreePlotb.eps}}
+\centerline{\includegraphics[width=4in]{images/AutonomousDegreeThreePlotb.eps}}
 
 The horizontal lines $y=-4$, $y=-2$ and $y=2$ are the
 equlibrium solutions.  The other curves
