@@ -1475,6 +1475,31 @@ is equal to the given linear combination of the function and  its first derivati
 for all $t$.  You should verify that $y(t)=e^{-t}$ satisfies this equation,
 as does $y(t) = e^{-2t}$.
 
+Second order differential equations often arise in models
+of mechanical systems, because Newton's second law of motion
+relates the \emph{acceleration} of an object to the force applied
+to the object:
+\begin{equation}
+   F = ma,
+\end{equation}
+where $F$ is the forced applied to the object, $m$ is the
+mass of the object, and $a$ is the acceleration of the object.
+For example, in the simplest model of a spring, the force
+exerted on a mass suspended on spring is proportional to the
+displacement of the object from its rest position.
+If we choose coordinates $y(t)$ so that $y=0$ gives the
+rest position, the forced exerted on the object by
+the spring is $-ky$, where $k>0$ is the spring constant.
+In this case, Newton's second law may be written
+\begin{equation}
+   -ky = m\frac{d^2y}{dt^2},  
+\end{equation}
+or, as it is more frequently written,
+\begin{equation}
+   \frac{d^2y}{dt^2} + \frac{k}{m}y = 0.
+\end{equation}
+This is a second order differential equation for $y(t)$.
+
 A trivial second order differential equation is
 \begin{equation}
    \frac{d^2y}{dt^2} = 0.
@@ -1522,11 +1547,17 @@ order equation becomes the system
    \frac{dv}{dt} & = f(t,y,v)
 \end{split}
 \end{equation}
+(This reinforces the idea that the initial value problem
+for a second order differential equations requires
+two initial conditions.  We need starting values for
+both $y(t)$ and $v(t)$.)
 \begin{example}
 Consider the second order differential equation
 \begin{equation}
   \frac{d^2y}{dy^2} + \mu(y^2-1)\frac{dy}{dt} + k y = 0.
 \end{equation}
+We rewrite this equation as a system of two first order
+equations.
 Let $v = \frac{dy}{dt}$;
 then
 \begin{equation}
@@ -1540,6 +1571,13 @@ We replace $\frac{dy}{dt}$ with $v$ and obtain the system
 \end{split}
 \end{equation}
 \end{example}
+
+\begin{exercises}
+\begin{exercise}
+Convert the second order differential equation 
+in \eqref{eqn:linearexample} into a system of two first order equations.
+\end{exercise}
+\end{exercises}
 
 \newpage
 
@@ -1871,6 +1909,11 @@ to arrive at the nondimensional version of the logistic equation:
 \end{equation}
 Now, instead of three parameters, we have just \emph{one}
 nondimensional parameter.
+In a sense, all versions of the logistic equation
+(as written in \eqref{eqn:logistic_again})
+behave the same; changing $r$ or $K$ simply amounts to
+changing the units of measurement.
+
 Figure~\ref{fig:logisticplot} shows the plot of $(1-y)y$, where we can see
 that there is a stable equilibrium at $y=1$.
 Solutions to the nondimensional equation are shown
@@ -1919,8 +1962,8 @@ Then $P(1/r) = P_0 e$.
 Thus we can interpret $1/r$ as the time required
 for a small population to increase by
 a factor of $e$.  (This unit of time is similar
-to the ``half-life'' of radiactive materials.
-The half-life is time required for a given sample
+to the ``half-life'' of radioactive materials.
+The half-life is the time required for a given sample
 of the material to decay to half of the original
 amount.)
 
@@ -1939,6 +1982,7 @@ used to discover properties of a system
 without solving, or even  writing down,
 any differential equations.
 
+\subsection{Dimensional Homogeneity.}
 We begin with the notion of \emph{dimensional
 homogeneity}.
 An equation is \emph{dimensionally homogeneous}
@@ -1991,7 +2035,7 @@ The number of parameters in such an equation can generally
 be reduced, and this can lead to a better understanding
 of the system being studied.
 
-\subsection*{Example: Period of a Pendulum.}
+\subsection{The Period of a Pendulum.}
 We consider a frictionless pendulum, as shown in
 Figure~\ref{fig:pendulum}.
 \begin{figure}
@@ -2020,10 +2064,11 @@ are actually dimensionless.)
 \end{tabular}
 \vspace{0.25cm}
 }
-\caption{The list of variables and parameters for the logistic equation,
+\caption{The list of variables and parameters for the pendulum,
 along with their dimensions.
-$\mathcal{T}$ means \emph{time} and $\mathcal{N}$ means an \emph{amount}
-or \emph{quantity}.
+$\mathcal{L}$ means \emph{length},
+$\mathcal{M}$ means \emph{mass}, and
+$\mathcal{T}$ means \emph{time}.
 The initial angle $\theta_0$ is dimensionless.}
 \label{tbl:pendulumparams}
 \end{table}
@@ -2032,7 +2077,7 @@ by an angle $\theta_0$, and release it with no initial
 velocity.
 Since we are ignoring friction, we expect the pendulum
 to oscillate.  This oscillation will have some period
-$T$. (The periodic is the time required to complete one
+$T$. (The period is the time required to complete one
 oscillation.)
 We would like to know how the period depends on
 the other parameters in the problem.
@@ -2071,7 +2116,7 @@ $d$. Actually, $e$ is also an unknown, but it only shows
 up in the exponent of $\theta_0$, and $\theta_0$ is 
 already dimensionless, so we know $e$ is arbitrary.
 It is not difficult to solve the above system of
-equations, but I will still rewrite in matrix form, and
+equations, but I will still rewrite it in matrix form, and
 I'll include $e$ in the system:
 \begin{equation}
    \begin{bmatrix}
@@ -2091,17 +2136,17 @@ I'll include $e$ in the system:
 \end{equation}
 which we can write more concisely as
 \begin{equation}
-   A \pmb{\lambda} = \mathbf{0}
+   A \BP = \mathbf{0}
 \end{equation}
 where $A$ is the \emph{dimension matrix}
-and  $\pmb{\lambda}$ is the vector of the powers
+and  $\BP$ is the vector of the powers
 $a$, $b$, $c$, $d$, $e$.
 Each nontrivial solution to the
 linear algebra problem provides a way
 to combine the dimensional parameters
 into a nondimensional product.
 Note, however, that if
-$\pmb{\lambda} = \left[a,b,c,d,e\right]^{\textsf{T}}$ is a solution,
+$\BP = \left[a,b,c,d,e\right]^{\textsf{T}}$ is a solution,
 then so is $r\left[a,b,c,d,e\right]^{\textsf{T}} = \left[ra,rb,rc,rd,re\right]^{\textsf{T}}$
 for any constant $r$.
 Since
@@ -2121,12 +2166,12 @@ In this case, we see that the system~\eqref{eqn:linear_sys_for_nondim_params}
 is already in reduced row echelon form, and
 the solution can be written
 \begin{equation}
-  \pmb{\lambda} = c_1\begin{bmatrix} 2 \\ -1 \\ 0 \\ 1 \\ 0 \end{bmatrix} +
+  \BP = c_1\begin{bmatrix} 2 \\ -1 \\ 0 \\ 1 \\ 0 \end{bmatrix} +
       c_2 \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 1 \end{bmatrix} 
 \end{equation}
-where $c_1$ and $c_2$ are arbitrary.  Thus a basic for the
+where $c_1$ and $c_2$ are arbitrary.  Thus a basis for the
 null-space of $A$ is
-given by the two vector in the above solution.
+given by the two vectors in the above solution.
 So one nondimensional parameter is
 \begin{equation}
    \pi_1 = T^2 l^{-1} m^0 g^1 \theta_0^0
@@ -2231,7 +2276,7 @@ then on Mars the period will be
 \end{split}
 \end{equation}
 
-\subsection*{Another Example: Periodic Drug Doses}
+\subsection{Another Example: Periodic Drug Doses}
 We consider the concentration of a drug
 in the bloodstream of an individual when the drug is administered
 periodically.  We'll look at a simple model that involves
@@ -2267,7 +2312,8 @@ required for the amount of the drug to be reduced
 to half the original amount.
 For example, according to an article on
 \textbf{Slate} by Sam Schechner\footnote{\texttt{http://slate.msn.com/id/2110979/}, Dec. 13, 2004}
-about the poisoning of Viktor Yushchenko, some isomers of 
+about the poisoning of Ukrainian president
+Viktor Yushchenko, some isomers of 
 dioxin have a half-life of more than seven years.
 If a drug has a half-life of seven years, then
 \begin{equation}
@@ -2316,7 +2362,7 @@ We expect the plot of the concentration to look like
 the graph shown in Figure~\ref{fig:PeriodicDrugDosePlot}.
 \begin{figure}
 \centerline{%
-\includegraphics[angle=270,width=4.5in]{python_PeriodicDrugDose/PeriodicDrugDosePlot.eps}
+\includegraphics[angle=270,width=4in]{python_PeriodicDrugDose/PeriodicDrugDosePlot.eps}
 }
 \caption{A plot of the concentration $c(t)$ for a drug administered
 periodically.  In this example, $r=0.3$, $h=2$ and $b=1$.
@@ -2325,22 +2371,8 @@ the concentration decays according to~\eqref{eqn:decay}.}
 \label{fig:PeriodicDrugDosePlot}
 \end{figure}
 
-We need some additional notation to describe the
-graph shown in the figure.
-Let
-\begin{equation}
-\begin{split}
-    c(h^{-})  & = \lim_{t\rightarrow h^{-}} c(t)
-                     \quad\quad \textrm{(the limit from below),} \\
-    c(h^{+})  & = \lim_{t\rightarrow h^{+}} c(t)
-                     \quad\quad \textrm{(the limit from above).}
-\end{split}
-\end{equation}
-and define
-\begin{equation}
-   x_n = c((nh)^{-}).
-\end{equation}
-Thus, $x_n$ is the concentration at the moment before
+
+Let $x_n$ be the concentration at the moment before
 a new dose is administered.
 It is clear the graph of $c(t)$ will consists of
 periods of decay, separated by jumps.  What we would like to
@@ -2482,15 +2514,59 @@ This gives us the form of the equation that will result if
 we can solve for $x_{\infty}$ in terms of $r$, $h$ and $b$.
 That is, $x_{\infty}$ \emph{must} be
 a product of $b$ and some function of $rh$ only.
+
+This problem is actually simple enough that we can
+solve for $x_{\infty}$ exactly.
+In the steady-state behavior of $c(t)$, the decrease
+in the concentration during the time interval
+between doses must be exactly $b$.
+For convenience, let us shift our time axis
+so that the concentration has just jumped to 
+$c_{\textrm{max}}$ at $t=0$.
+Then $c(h) = c_{\textrm{max}}e^{-rh}$, and the change in the
+concentration is
+\begin{equation}
+   c(0)-c(h) = c_{\textrm{max}}-c_{\textrm{max}}e^{-rh} = c_{\textrm{max}}(1-e^{-rh}).
+\end{equation}
+This must equal $b$:
+\begin{equation}
+   c_{\textrm{max}}(1-e^{-rh})=b \implies
+        c_{\textrm{max}} = \frac{b}{1-e^{-rh}} 
+\end{equation}
+Finally, since $x_{\infty}$ is the concentration at the
+end of the $h$ time interval (just before the next dose),
+we have
+\begin{equation}
+   x_{\infty} = c_{\textrm{max}}-b = \frac{b e^{-rh}}{1-e^{-rh}}.
+\end{equation}
+As expected, the formula has the form $bG(rh)$.
+In this case, $G(u) = \frac{e^{-u}}{1-e^{-u}}$.
 %
-%
-\subsection*{Derivation of the Formula for $\pmb{x_{\infty}}$}
-In this section, we derive the actual formula for
-$x_n$. From that we obtain the formula for
-$x_{\infty}$.
+\subsection*{Derivation of the Formula for $\pmb{x_{n}}$}%
+In this section,%
+\footnote{This section is not an integral part of the
+discussion of dimensional analysis.}
+we derive the actual formula for
+$x_n$. 
 You may find it helpful to label the plot in
 Figure~\ref{fig:PeriodicDrugDosePlot} using the notation
 from the following discussion.
+
+We need some additional notation to describe the
+graph shown in the figure.
+Let
+\begin{equation}
+\begin{split}
+    c(h^{-})  & = \lim_{t\rightarrow h^{-}} c(t)
+                     \quad\quad \textrm{(the limit from below),} \\
+    c(h^{+})  & = \lim_{t\rightarrow h^{+}} c(t)
+                     \quad\quad \textrm{(the limit from above).}
+\end{split}
+\end{equation}
+and define
+\begin{equation}
+   x_n = c((nh)^{-}).
+\end{equation}
 
 The instant after the first dose, we have
 \begin{equation}
@@ -2551,8 +2627,6 @@ Finally, since $\ds \lim_{n\rightarrow\infty} \rho^n = 0$, we have
   x_{\infty} = \frac{b\rho}{1-\rho}
      = \frac{be^{-rh}}{1-e^{-rh}}. 
 \end{equation}
-(This agrees with the result of the
-dimensional analysis of the previous section.)
 
 The example shown earlier was for $r=0.3$, $h=2$ and $b=1$.
 With these values we find $x_{\infty} \approx 1.2164$.
