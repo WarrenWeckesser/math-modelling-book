@@ -1796,7 +1796,7 @@ Recall the logistic equation:
    \frac{dP}{dt} = r\left(1 - \frac{P}{K}\right)P,
    \quad
    P(0) = P_0,
-\label{eqn:logistic}
+\label{eqn:logistic_again}
 \end{equation}
 where $r > 0$ and $K > 0$ are constants.
 We'll follow the steps outlined above to
@@ -1852,7 +1852,7 @@ By the chain rule, we have
   \label{eqn:chainrule}
 \end{equation}
 Then substituting $\tau$ and $y$ into
-\eqref{eqn:logistic}
+\eqref{eqn:logistic_again}
 gives
 \begin{equation}
   rK\frac{dy}{d\tau} = r (1-y)Ky,  \quad y(0) = \frac{P_0}{K}.
@@ -1932,6 +1932,7 @@ amount.)
 \newpage
 
 \section{Dimensional Analysis and the Buckingham Pi Theorem}
+\index{Buckingham Pi Theorem}
 
 In this section we see how dimensional analysis can be
 used to discover properties of a system
@@ -2086,7 +2087,7 @@ I'll include $e$ in the system:
    \begin{bmatrix}
        0 \\ 0 \\ 0 \\ 0
    \end{bmatrix}
-   \label{eqn:linear}
+   \label{eqn:linear_sys_for_nondim_params}
 \end{equation}
 which we can write more concisely as
 \begin{equation}
@@ -2108,15 +2109,15 @@ Since
   T^{ra}l^{rb} m^{rc} g^{rd} \theta_0^{re}
    = \left(T^a l^b m^c g^d \theta_0^e\right)^r ,
 \end{equation}
-multiples of a solution to \eqref{eqn:linear}
+multiples of a solution to \eqref{eqn:linear_sys_for_nondim_params}
 do not really identify new combinations of
 parameters.
 Thus, all we need is a set of
 \emph{linearly independent} solutions
-to \eqref{eqn:linear}.
+to \eqref{eqn:linear_sys_for_nondim_params}.
 (To use the lingo from linear algebra, we need
 a \emph{basis for the null-space of $A$}.)
-In this case, we see that the system~\eqref{eqn:linear}
+In this case, we see that the system~\eqref{eqn:linear_sys_for_nondim_params}
 is already in reduced row echelon form, and
 the solution can be written
 \begin{equation}
@@ -2148,7 +2149,7 @@ just assume it can be written in the form
 \end{equation}
 where $f$ is dimensionally homogeneous.
 The fundamental result that we will now use
-is known as the \emph{Buckingham Pi Theorem}.
+is known as the \emph{Buckingham Pi Theorem}.\index{Buckingham Pi Theorem}
 It says that a dimensionally homogeneous
 relation is equivalent to another relation
 expressed  in terms of only the independent
@@ -2456,7 +2457,7 @@ what it is, we'll assume the general form
   f(r,h,b,x_{\infty}) = 0.
 \end{equation}
 We expect $f$ to be dimensionally homogeneous; then the
-Buckingham Pi Theorem implies that there is an equivalent
+Buckingham Pi Theorem\index{Buckingham Pi Theorem} implies that there is an equivalent
 relationship of the form
 \begin{equation}
    F(\pi_1, \pi_2) = 0.
@@ -2570,7 +2571,18 @@ The dashed line shows $x_{\infty} \approx 1.2164$.}
 
 \newpage
 
-~
+\begin{exercises}
+\begin{exercise}
+\label{ex:Nondim_lrgmP}
+Find a set of independent nondimensional parameters for the following
+dimensional parameters.  The dimension of each parameter
+is given in parentheses.
+
+\centerline{$\ell$ ($\mathcal{L}$), $r$ ($\mathcal{T}^{-1}$),
+$g$ ($\mathcal{LT}^{-2}$), $m$ ($\mathcal{M}$),
+$P$ ($\mathcal{M}\mathcal{L}^{-1}\mathcal{T}^{-2}$)}
+\end{exercise}
+\end{exercises}
 
 \newpage
 
@@ -7773,6 +7785,17 @@ choose the negative sign.  The solution to the initial value problem is
 \]
 (Note that this solution is only defined for $t < 1/8$.  The
 solution has a vertical asymptote at $t=1/8$.)
+
+\medskip
+\textbf{\ref{ex:Nondim_lrgmP}}
+There are two independent nondimensional parameters.
+For example,
+\[
+   \pi_1 = \frac{g}{\ell r^2}, \quad \pi_2 = \frac{\ell P}{mr^2}
+\]
+(Other nondimensional parameters are possible, but there
+must still be just two independent nondimensional parameters.)
+
 
 \newpage
 %\medskip
