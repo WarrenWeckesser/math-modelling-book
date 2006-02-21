@@ -580,6 +580,19 @@ If a sample initially contains 3 mg of americium-241,
 find the amount of americium-241 that remains
 after (a) 10 years, (b) 916 years, (c) 10000 years.
 \end{exercise}
+\begin{exercise}
+\label{ex:NewtonsLawOfCooling}
+\emph{Newton's Law of Cooling} says that the rate of change
+of the temperature of an object is proportional
+to the difference between the temperature of the object
+and the ambient temperature of the air.
+
+Express this statement as a differential equation.
+Use $k>0$ for the proportionality constant, and define
+\emph{with complete sentences}
+any other variables or constants that you use in the equation.
+
+\end{exercise}
 \end{exercises}
 
 \newpage
@@ -806,7 +819,31 @@ and several more non-equilibrium solutions to show all the possible behaviors.
 of $y$ as well as positive.)
 \end{enumerate}
 \end{exercise}
-
+\begin{exercise}
+\label{ex:AutonomousDegreeThree}
+Consider the first order autonomous differential equation
+\[
+   \frac{dy}{dt} = (y-2)(y^2+6y+8).
+\]
+\begin{enumerate}
+\item[(a)] Find the equilibrium solutions, 
+sketch the graph  of the right side of the equation as a function
+of $y$, and use this graph to sketch the ``phase line''
+(i.e. on the $y$ axis, add arrows between the equilibria
+that indicate whether $y(t)$ is increasing or decreasing).
+\item[(b)] In one set of axes, sketch several solutions ($y(t)$ vs. $t$), including
+all equilibrium solutions.
+(Other than the equilibria,
+you do not have to find the solutions analytically.)
+Be careful with your sketch and check that:
+curves that should not cross do not
+cross; curves that should be increasing functions of $t$
+are increasing; and curves that should be decreasing functions
+of $t$ are decreasing. Label the axes appropriately.
+\item[(c)] If $y(0) = 1$, determine $\ds \lim_{t \rightarrow \infty} y(t)$
+and $\ds \lim_{t\rightarrow -\infty} y(t)$.
+\end{enumerate}
+\end{exercise}
 \begin{exercise}
 For each of the following differential equations
 of the form $y' = f(y)$,
@@ -973,6 +1010,13 @@ a constant.
 \item[(d)] $\ds y' = e^{-rt}y$, ~~ $(r > 0)$, \hspace{0.25cm}
                                        $y(0)=1$.
 \end{enumerate}
+\end{exercise}
+\begin{exercise}
+\label{ex:SolveFirstOrderYCubed}
+Solve the following initial value problem.
+\[
+  \frac{dy}{dt} = y^3, \quad y(0)=-2.
+\]
 \end{exercise}
 \end{exercises}
 %
@@ -1166,10 +1210,11 @@ Solve the following initial value problems (if possible).
 In this section we consider a model of the spread of a disease.
 This model illustrates a common method of
 modeling the interaction of two populations.
+We then discuss two more models the involve the
+interaction of two populations.
 
 
-
-\subsection*{The SI Model.}
+\subsection{The SI Model.}
 We consider the spread of a
 disease in a population.
 (The model will be the same if, instead of a disease,
@@ -1219,7 +1264,7 @@ per SI interaction}.)
 \item
 \label{SI_assume_const_rate}
 The rate of interactions within the population is constant.
-We let $\gamma$ be the interaction rate, with units of
+We let $\rho$ be the interaction rate, with units of
 \emph{number of interactions per unit time}.
 \end{enumerate}
 
@@ -1256,18 +1301,18 @@ This expression gives
 the average number of SI interactions per
 interaction.
 By assumption (\ref{SI_assume_const_rate}),
-the quantity $\frac{2\gamma}{N^2}SI$
+the quantity $\frac{2\rho}{N^2}SI$
 gives the average number of SI interactions per unit time,
 and then by assumption (\ref{SI_assume_random}),
 the average number of infections per unit time is
 \begin{equation}
-   \frac{2c\gamma}{N^2}SI.
+   \frac{2c\rho}{N^2}SI.
 \end{equation}
 This quantity determines the rate at which $I(t)$
 is increasing.
 For convenience, let
 \begin{equation}
-   r = \frac{2c\gamma}{N^2}
+   r = \frac{2c\rho}{N^2}
 \end{equation}
 Then the equation for $I(t)$ is
 \begin{equation}
@@ -1319,10 +1364,10 @@ the initial population of infectives.
 \medskip
 Many models of physical, social, or biological systems
 involve interacting populations.
-We consider another example, in which we model
-the interaction of a predator and its prey.
+We consider two more examples that involve interacting
+populations.
 
-\subsection*{A Predator/Prey Model.}
+\subsection{A Predator/Prey Model.}
 Let $x(t)$ be the population of, say, mice in a forest,
 and let $y(t)$ be the population of foxes.
 Suppose that the mice
@@ -1405,6 +1450,9 @@ of differential equations
 to a single equation.
 We will learn more about the analysis of systems
 of differential equations in later chapters.
+
+\subsection{Chemical Reactions and the Law of Mass Action}
+
 
 \newpage
 
@@ -6856,6 +6904,28 @@ is one quarter of the initial amount.)
 \end{enumerate}
 
 \medskip
+\textbf{\ref{ex:NewtonsLawOfCooling}}
+Let $t$ be time;
+let $h(t)$ be the temperature of the object
+at time $t$;
+let $A$ be the ambient temperature;
+and let $k$ be the proportionality constant in
+Newton's Law of Cooling.
+Then, since ``\emph{the rate of change of the temperature of the
+object}'' is $\frac{dh}{dt}$, and ``\emph{the difference
+between the temperature of the object and the ambient
+temperature}'' is $h-A$, the differential equation is
+\[
+   \frac{dh}{dt} = - k (h-A).
+\]
+The minus sign is necessary for the equation to agree with
+our physical intuition: if $h>A$, the object is warmer than the ambient
+temperature, and it should cool off. This means $h(t)$ should
+decrease, so $\frac{dh}{dt}$ must be negative.  We assumed
+$k>0$, so the equation requires the minus sign.
+
+
+\medskip
 \textbf{\ref{ex:AutFirstOrder_autclassify}}
 \begin{tabbing}
 \hspace*{0.25in} \= \hspace*{1.5in} \= \hspace*{1.5in} \= \kill
@@ -6868,6 +6938,76 @@ is one quarter of the initial amount.)
 (e) autonomous \>
 (f) autonomous
 \end{tabbing}
+
+\medskip
+\textbf{\ref{ex:AutonomousDegreeThree}}
+\begin{enumerate}
+\item[(a)]
+Let $f(y) = (y-2)(y^2+6y+8)$.
+To find the equilibrium solutions, we must solve
+$f(y)=0$; that is,
+\[
+   (y-2)(y^2+6y+8) = 0.
+\]
+This polynomial factors as $(y-2)(y+2)(y+4)$, so the
+equilibrium solutions are $y(t)=2$, $y(t)=-2$ and $y(t)=-4$.
+The polynomial is a cubic, and the coefficient of $y^3$ is 1,
+so we have: $f(y) < 0$ if $y < -4$;
+$f(y) > 0$ if $-4 < y < -2$;
+$f(y) < 0$ if $-2 < y < 2$; and
+$f(y) > 0$ if $y > 2$.
+The graph of $f(y)$ looks something like this:
+
+\centerline{\includegraphics[width=4in]{AutonomousDegreeThreePlota.eps}}
+
+The arrows on the $y$ axis indicate the whether
+$y(t)$ is increasing or decreasing.
+(This is the ``phase line'' for the differential equation.)
+
+%\newpage
+\item[(b)]
+Here is a rough sketch of several solutions:
+
+\centerline{\includegraphics[width=4in]{AutonomousDegreeThreePlotb.eps}}
+
+The horizontal lines $y=-4$, $y=-2$ and $y=2$ are the
+equlibrium solutions.  The other curves
+(not including the axes, of course) are rough sketches
+of additional solutions.
+Each solution has a different initial condition.
+\item[(c)]
+If $y(0)=1$, then $\ds \lim_{t\rightarrow\infty} y(t) = -2$
+and $\ds \lim_{t\rightarrow -\infty} y(t) = 2$.
+A rough sketch of this solution is included above.
+\end{enumerate}
+
+\medskip
+\textbf{\ref{ex:SolveFirstOrderYCubed}}
+This equation is separable.  Separating gives
+\[
+   y^{-3}dy = dt,
+\]
+and integrating gives
+\[
+  -y^{-2}/2 = t + c.
+\]
+We use the initial condition $y(0)=-2$ to determine $c$.
+We have
+\[
+  c = -(-2)^{-2}/2 = -1/8.
+\]
+Now solving for $y$ gives
+\[
+  y = \frac{1}{\pm\sqrt{-2t+1/4}}.
+\]
+Because of the $\pm$, this is actually two solutions, and we must again use
+the initial condition to determine the sign.  Since we want $y(0)=-2$, we must
+choose the negative sign.  The solution to the initial value problem is
+\[
+  y = \frac{-1}{\sqrt{-2t+1/4}}.
+\]
+(Note that this solution is only defined for $t < 1/8$.  The
+solution has a vertical asymptote at $t=1/8$.)
 
 \newpage
 %\medskip
