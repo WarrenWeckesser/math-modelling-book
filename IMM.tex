@@ -4555,6 +4555,7 @@ battle.
 \medskip
 \begin{exercises}
 \begin{exercise}
+\label{ex:lanchester_ants}
 An army of $50,000$ red ants is in a battle
 with an army of $35,000$ larger and stronger black ants.
 The sizes and strengths of the two types of ants
@@ -7874,6 +7875,32 @@ For example,
 (Other nondimensional parameters are possible, but there
 must still be just two independent nondimensional parameters.)
 
+
+\newpage
+%\medskip
+\textbf{\ref{ex:lanchester_ants}}
+\begin{enumerate}
+\item[(a)] Since $\alpha = 3\beta$, $\alpha > \beta$.
+We are told that the black ants are larger and stronger than
+the red ants, so the size of the black colony must be $y$,
+and the size of the red colony is $x$.
+\item[(b)] We have
+\[
+   \beta x^2 - 3\beta y^2 = \beta x_0^2 -3\beta y_0^2.
+\]
+We see that we can divide by $\beta$ on both sides.
+Putting in the initial sizes of the colonies gives
+\[
+   x^2-3y^2 = (50000)^2-3(35000)^2 < 0.
+\]
+The right side is negative, so the curve must cross the $y$
+axis.  When $x=0$, we find
+\[
+  y = \sqrt{\frac{3(35000)^2-(50000)^2}{3}} \approx 20000.
+\]
+So there will be approximately $20,000$ ants remaining the
+the black colony.
+\end{enumerate}
 
 \newpage
 %\medskip
