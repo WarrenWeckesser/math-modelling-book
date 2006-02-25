@@ -71,5 +71,8 @@ Subdirectory matlab:
    >> poploop(5,43)
    >> popstats(50000)
 
+   >> LanchesterExamplePlots
+   creates "LanchesterExamplePlots.eps"
+
 Subdirectory python
    $ python SIRscript.py
