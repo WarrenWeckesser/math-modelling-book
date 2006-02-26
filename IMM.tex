@@ -1037,7 +1037,7 @@ Solve the following initial value problem.
 \newpage
 
 \section{Linear First Order Differential Equations (*)}
-
+\label{sec:LinearFirstOrder}
 If the first order differential equation has the form
 \begin{equation}
     y'(t) = p(t) y + g(t),
@@ -2720,7 +2720,23 @@ the vector function
 $\BX(t)$ such that its velocity matches the given vector field
 at all points along the curve.
 
-\subsection*{The Phase Plane.}\index{phase plane}
+We state without proof the following theorems.
+\begin{theorem}
+Uniqueness...
+\end{theorem}
+This theorem means that trajectories in phase
+space do not cross each other.
+
+\begin{exercises}
+\begin{exercise}
+An exercise...
+\end{exercise}
+\end{exercises}
+%
+\newpage
+%
+\section{Phase Plane Analysis\index{phase plane}}
+
 In the two dimensional autonomous case, the phase space
 is called the \emph{phase plane}.
 The system of equations can be rewritten as
@@ -2729,6 +2745,11 @@ The system of equations can be rewritten as
     \frac{dx}{dt} & = f(x,y) \\
     \frac{dy}{dt} & = g(x,y)
 \end{split}
+\end{equation}
+or
+\begin{equation}
+  \frac{d\BX}{dt} = \BF(\BX), \quad \BX \in \mathbb{R}^2, \quad
+      \BF : \mathbb{R}^2 \rightarrow \mathbb{R}^2.
 \end{equation}
 \begin{xexample}
 \textbf{The SI Components of the SIR Model.}
@@ -2748,34 +2769,8 @@ relation $S+I+R=N$, where $N$ is the (constant) size
 of the total population.
 \end{xexample}
 
-We state without proof the following theorems.
-\begin{theorem}
-Uniqueness...
-\end{theorem}
-This theorem means that trajectories in phase
-space do not cross each other.
 
-\begin{exercises}
-\begin{exercise}
-An exercise...
-\end{exercise}
-\end{exercises}
 %
-%
-\section{Phase Plane Analysis\index{phase plane}}
-
-The system of differential equations is
-\begin{equation}
-\begin{split}
-   \frac{dx}{dt} & = f(x,y) \\
-   \frac{dy}{dt} & = g(x,y)
-\end{split}
-\end{equation}
-or
-\begin{equation}
-  \frac{d\BX}{dt} = \BF(\BX), \quad \BX \in \mathbb{R}^2, \quad
-      \BF : \mathbb{R}^2 \rightarrow \mathbb{R}^2.
-\end{equation}
 
 The basic steps are
 \begin{enumerate}
@@ -2837,6 +2832,7 @@ differential equations
   \frac{dx}{dt} & = ax + by \\
   \frac{dy}{dt} & = cx + dy
 \end{split}
+\label{eqn:linearsys_scalar_eqns}
 \end{equation}
 or equivalently,
 \begin{equation}
@@ -2847,22 +2843,77 @@ or equivalently,
 \label{eqn:linearsys}
 \end{equation}
 
+
+\begin{xexample}
+Before discussing a general technique for
+solving such systems, we consider this example:
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = 3x + y \\
+  \frac{dy}{dt} & = -y
+\end{split}
+\label{eqn:linearsys_ex}
+\end{equation}
+The $x$ variable does not appear in the second equation,
+so we can it solve for $y(t)$ without knowing $x(t)$. We find
+\begin{equation}
+y(t) = c_1 e^{-t},
+\label{eqn:linearsys_ex_sol1}
+\end{equation}
+where $c_1$ is an arbitrary constant.
+Then the first equation is
+\begin{equation}
+  \frac{dx}{dt} = -3x + c_1 e^{-t}.
+\end{equation}
+This is a linear first order differential equation; it may be
+solved by using the method discussed in Section~\ref{sec:LinearFirstOrder}.
+We find the solution to be
+\begin{equation}
+   x(t) = c_2 e^{-3t} + \frac{c_1}{2}e^{-t}
+\label{eqn:linearsys_ex_sol2}
+\end{equation}
+where $c_2$ is an arbitrary constant.
+Let's write our solutions \eqref{eqn:linearsys_ex_sol1}
+and \eqref{eqn:linearsys_ex_sol2} as a vector:
+\begin{equation}
+  \BX(t) = \begin{bmatrix}
+                x(t) \\ y(t)
+           \end{bmatrix}
+         =
+           \begin{bmatrix}
+               c_2 e^{-3t} + \frac{c_1}{2} e^{-t} \\
+               c_1 e^{-t}
+           \end{bmatrix}
+         =
+           c_2 \begin{bmatrix}
+               1 \\ 0
+           \end{bmatrix} e^{-3t}
+           + c_1 \begin{bmatrix}
+               \frac{1}{2} \\
+               1
+           \end{bmatrix} e^{-t}
+\label{eqn:linearsys_ex_vecsol}
+\end{equation}
+Because the second equation of this example was
+\emph{decoupled} from the first, we were able to
+find the solution by solving two first order differential equations.
+Unfortunately, this method won't work for the general problem.
+\end{xexample}
+
 \subsection*{Solving the System}
-To solve this system, we first recall that the solution to the
+To motivate our method for
+solving \eqref{eqn:linearsys},
+we first recall that the solution to the
 single equation
 \begin{equation}
   \frac{dx}{dt} = a x
 \end{equation}
 is $x(t) = c e^{at}$: a constant multiplied by
-an exponential.  We also recall that the last problem of Homework 2
-was a linear system, and the solution to that problem can be
-written in vector form as
-\begin{equation}
- \BX(t) = \begin{bmatrix} \frac{y_0}{2} \\ y_0 \end{bmatrix} e^{-t}
-            +\begin{bmatrix} -\frac{y_0}{2}+x_0 \\ 0 \end{bmatrix} e^{-3t}
-\end{equation}
-This solution is a combination of constant vectors
-multiplied by an exponential.
+an exponential.  We also 
+note that the solution to
+the example problem \eqref{eqn:linearsys_ex} that is given
+by \eqref{eqn:linearsys_ex_vecsol} is a linear combination of solutions
+of the form $\BV e^{\lambda t}$, where $\BV$ is constant vector.
 This suggests that to solve~\eqref{eqn:linearsys},
 we look for a solution of the form
 \begin{equation}
@@ -2928,8 +2979,11 @@ pairs}.
 Finally, it is not hard to verify that if $\BX_1(t)$ and
 $\BX_2(t)$ are solutions to \eqref{eqn:linearsys}, then
 so is $c_1 \BX_1(t) + c_2\BX_2(t)$ for any constants
-$c_1$ and $c_2$.  Equation \eqref{eqn:linearsys} is
-a pair of coupled first order equation, so we expect the
+$c_1$ and $c_2$.
+(This is the \emph{principle of superposition} for linear
+systems.)
+  Equation \eqref{eqn:linearsys} is
+a pair of coupled first order equations, so we expect the
 general solution to have two arbitrary constants.
 In fact, the general solution must have the form
 \begin{equation}
@@ -2983,6 +3037,8 @@ and imaginary parts are equal, so this equation implies
   \frac{d\BP}{dt} = A\BP \quad \textrm{and} \quad
   \frac{d\BQ}{dt} = A\BQ.
 \end{equation}
+In other words, $\BP(t)$ and $\BQ(t)$ are solutions
+to the system of differential equations.
 
 Now consider the complex solution
 \begin{equation}
@@ -2991,7 +3047,9 @@ Now consider the complex solution
 \end{equation}
 To separate this into its real and imaginary parts, we use
 \emph{Euler's formula}\index{Euler's formula}:
-$e^{i\theta} = \cos\theta + i \sin\theta$.
+\begin{equation}
+e^{i\theta} = \cos\theta + i \sin\theta.
+\end{equation}
 Then
 \begin{equation}
 \begin{split}
@@ -3462,12 +3520,18 @@ in the examples) to sketch the phase portraits for the linear
 systems with the following coefficient matrices.
 
 \smallskip
-% (I just made these up--I haven't worked out the solutions yet...)
-(a) $\ds A = \begin{bmatrix} 1 & 2 \\ -1 & 2 \end{bmatrix}$
+(a) $\ds \; A = \begin{bmatrix} 1 & 2 \\ -1 & 1 \end{bmatrix}$
 \hspace{1cm}
-(b) $\ds A = \begin{bmatrix} -1 & 3 \\ -3 & -1 \end{bmatrix}$
+(b) $\ds \; A = \begin{bmatrix} -2 & 3 \\ -2 & -4 \end{bmatrix}$
 \hspace{1cm}
-(c) $\ds A = \begin{bmatrix} 0 & 1 \\ -2 & -1 \end{bmatrix}$ 
+(c) $\ds \; A = \begin{bmatrix} -4 & -1/2 \\ -1 & -2 \end{bmatrix}$ 
+
+\smallskip
+(d) $\ds \; A = \begin{bmatrix} 3 & 1 \\ -1 & -3 \end{bmatrix}$ 
+\hspace{0.75cm}
+(e) $\ds \; A = \begin{bmatrix} 0 & 6 \\ 3/2 & 0 \end{bmatrix}$
+\hspace{1.2cm}
+(f) $\ds \; A = \begin{bmatrix} 1 & -1 \\ 0 & 1/2 \end{bmatrix}$ 
 \end{exercise}
 \begin{exercise}
 Suppose $A$ has one zero eigenvalue and one nonzero eigenvalue.
@@ -3483,13 +3547,15 @@ Find the general solution of the corresponding linear system of
 differential equations, and sketch the phase portrait.
 
 \smallskip
-% (I just made these up--I haven't worked out the solutions yet...)
-(a) $\ds A = \begin{bmatrix} 1 & 2 \\ 1 & 2 \end{bmatrix}$
+(a) $\ds \; A = \begin{bmatrix} 1 & 2 \\ 1 & 2 \end{bmatrix}$
 \hspace{1cm}
-(b) $\ds A = \begin{bmatrix} 0 & 2 \\ 0 & -1 \end{bmatrix}$
+(b) $\ds \; A = \begin{bmatrix} 0 & 2 \\ 0 & -1 \end{bmatrix}$
+\hspace{1cm}
+(c) $\ds \; A = \begin{bmatrix} 1 & 1 \\ -2 & -2 \end{bmatrix}$
 \end{exercise}
 \end{exercises}
 %
+\newpage
 %
 \section{Nonlinear Systems}
 We consider the general form of an autonomous
