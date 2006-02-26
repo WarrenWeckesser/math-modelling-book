@@ -64,6 +64,19 @@ Colgate University\\
 \newtheorem{example}{Example}[section]
 \newtheorem{definition}{Definition}[section]
 %
+%
+\newenvironment{xexample}%
+{%
+
+\medskip\noindent\addtocounter{example}{1}$\blacksquare$ \textsc{Example \theexample}\hspace*{1em}%
+}%
+{%
+~\hfill$\square$
+
+\medskip
+}
+%
+%
 \newenvironment{exercises}%
 {%
 \medskip\hrule\medskip\noindent\textbf{Exercises}%
@@ -751,7 +764,7 @@ the equilibrium solutions (where $f(y)=0$), and determine the
 behavior of non-equilibrium solutions based on the graph
 of $f(y)$.
 
-\begin{example}
+\begin{xexample}
 Consider the equation
 \begin{equation}
 \frac{dp}{dt} = -rp + b.
@@ -782,7 +795,7 @@ $p(t)$ will approach $b/r$ asymptotically from above.
 
 The plot on the right in Figure~\ref{fig:auton_example_plots}
 shows an example of a solution, for which $0 < p(0) < b/r$.
-\end{example}
+\end{xexample}
 
 \newpage
 
@@ -944,7 +957,7 @@ be useful in some cases.
 
 Note that all autonomous first order differential equations are separable.
 
-\begin{example}
+\begin{xexample}
 We'll apply the method to
 \begin{equation}
    \frac{dp}{dt} = r p
@@ -973,10 +986,10 @@ solution
    p(t) = Ce^{rt},
 \end{equation}
 where $C$ is an arbitrary constant.
-To satisfy an initial condition $p(0)=P_0$, we let $C=P_0$.
-\end{example}
+To satisfy the initial condition $p(0)=P_0$, we let $C=P_0$.
+\end{xexample}
 
-\begin{example}
+\begin{xexample}
 Now consider a population model in which the per capita growth
 rate varies periodically, perhaps because of seasonal variation.
 The differential equation is
@@ -997,7 +1010,7 @@ The final concise formula for the solution is
    p(t) = Ce^{rt + (a/\omega)\sin(\omega t)}
 \end{equation}
 where $C$ is an arbitrary constant.
-\end{example}
+\end{xexample}
 %
 \begin{exercises}
 \begin{exercise}
@@ -1090,7 +1103,7 @@ to \eqref{eqn:linear}:
 \label{eqn:linearsolution}
 \end{equation}
 
-\begin{example}
+\begin{xexample}
 Consider the initial value problem
 \begin{equation}
    y' = 2y + 3, \quad y(0) = 5.
@@ -1122,8 +1135,8 @@ So the solution to the initial value problem is
 \end{equation}
 You should check the answer by substituting it back
 into \eqref{eqn:linearexample1}.
-\end{example}
-\begin{example}
+\end{xexample}
+\begin{xexample}
 \begin{equation}
    y' = -\frac{y}{t} + t, \quad y(1) = 2.
 \end{equation}
@@ -1161,9 +1174,9 @@ Thus the solution to the initial value problem is
 \begin{equation}
    y(t) = \frac{t^2}{3} + \frac{5}{3t}.
 \end{equation}
-\end{example}
+\end{xexample}
 
-\begin{example}
+\begin{xexample}
 Consider the differential equation
 \begin{equation}
     y' = 2ty + 3.
@@ -1188,7 +1201,7 @@ Because the integral of $e^{-t^2}$ appears frequently in mathematics,
 it has been given a name.
 You may have seen the \emph{error function}
 $\textrm{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-s^2}\,ds$.}
-\end{example}
+\end{xexample}
 
 \begin{exercises}
 \begin{exercise}
@@ -1552,7 +1565,7 @@ order equation becomes the system
 for a second order differential equations requires
 two initial conditions.  We need starting values for
 both $y(t)$ and $v(t)$.)
-\begin{example}
+\begin{xexample}
 Consider the second order differential equation
 \begin{equation}
   \frac{d^2y}{dy^2} + \mu(y^2-1)\frac{dy}{dt} + k y = 0.
@@ -1571,7 +1584,7 @@ We replace $\frac{dy}{dt}$ with $v$ and obtain the system
    \frac{dv}{dt} & =  -\mu(y^2-1)v - ky
 \end{split}
 \end{equation}
-\end{example}
+\end{xexample}
 
 \begin{exercises}
 \begin{exercise}
@@ -1990,7 +2003,7 @@ An equation is \emph{dimensionally homogeneous}
 if it is true regardless of the system
 of units that is used to measure the parameters
 or variable in the equation.
-\begin{example}
+\begin{xexample}
 Consider the equation
 \begin{equation}
    s = \frac{gt^2}{2}
@@ -2024,8 +2037,7 @@ Let's substitute the new variables into
 The new equation involving $\bar{s}$, $\bar{t}$ and $\bar{g}$
 is the same as the original equation.
 This is an example of a dimensionally homogeneous equation.
-\hfill$\Box$
-\end{example}
+\end{xexample}
 
 \medskip
 The power of dimensional analyis is based on the
@@ -2718,7 +2730,7 @@ The system of equations can be rewritten as
     \frac{dy}{dt} & = g(x,y)
 \end{split}
 \end{equation}
-\begin{example}
+\begin{xexample}
 \textbf{The SI Components of the SIR Model.}
 We have previously seen the SIR model of the spread of
 a disease in a population:
@@ -2734,7 +2746,7 @@ We can analyze the first two equations as a two dimensional
 system, and then infer the values of $R$ from the
 relation $S+I+R=N$, where $N$ is the (constant) size
 of the total population.
-\end{example}
+\end{xexample}
 
 We state without proof the following theorems.
 \begin{theorem}
@@ -3222,7 +3234,7 @@ of the eigenvalue closest to zero}.
 
 \newpage
 
-\begin{example}
+\begin{xexample}
 \[
   \frac{d\BX}{dt} = A \BX, \quad \textrm{where} \quad
     A = \begin{bmatrix}
@@ -3332,11 +3344,11 @@ of two of the spiral trajectories.
 \noindent
 \centerline{\includegraphics[width=3in]{matlab/LinPhPortExample1.eps}}
 \end{enumerate}
-\end{example}
+\end{xexample}
 
 \newpage
 
-\begin{example}
+\begin{xexample}
 We consider the linear system of differential equations
 with
 \[
@@ -3384,11 +3396,11 @@ Here is the phase portrait:
 \noindent
 \centerline{\includegraphics[width=3in]{matlab/LinPhPortExample2.eps}}
 \end{enumerate}
-\end{example}
+\end{xexample}
 
 \newpage
 
-\begin{example}
+\begin{xexample}
 We'll look at one more example, this time with
 \[
    A = \begin{bmatrix}
@@ -3439,7 +3451,7 @@ Here is the phase portrait:
 \noindent
 \centerline{\includegraphics[width=3in]{matlab/LinPhPortExample3.eps}}
 \end{enumerate}
-\end{example}
+\end{xexample}
 %
 \newpage
 
@@ -3617,7 +3629,7 @@ If any eigenvalue has a positive real part,
 then $\BX_0$ is unstable.
 \end{theorem}
 
-\begin{example}
+\begin{xexample}
 The system of differential equations
 \begin{equation}
 \begin{split}
@@ -3674,10 +3686,10 @@ at $(0,0)$.  They are almost the same.  If we zoomed
 in closer, they would appear even more similar.}
 \label{fig:nonlinexample1compare}
 \end{figure}
-\end{example}
+\end{xexample}
 %
 %
-\begin{example}
+\begin{xexample}
 The system of differential equations
 \begin{equation}
 \begin{split}
@@ -3725,7 +3737,7 @@ the linearization can not tell us if these trajectories
 actually form closed curves.
 The trajectories might, in fact, slowly spiral
 towards or away from $(1,1)$.
-\end{example}
+\end{xexample}
 %
 \begin{exercises}
 \begin{exercise}
@@ -3750,12 +3762,12 @@ Another exercise...
 \[
   \dot{\BX} = \BF(\BX)
 \]
-\begin{example}
+\begin{xexample}
 \emph{Do a 3D example: solve for equilibria, find the
 Jacobian, determine stability.  At least one point
 should require numerical evaluation of the equilibrium
 and of the eigenvalues of the Jacobian.}
-\end{example}
+\end{xexample}
 %
 
 \section{The Saddle-Node Bifurcation}
@@ -3950,7 +3962,7 @@ equation.
 }
 
 \medskip
-\begin{example}
+\begin{xexample}
 \label{exm:solow}
 As an example, let's take the production function to be
 \begin{equation}
@@ -4012,7 +4024,7 @@ exponentially along with the labor.
 If, for example, the capital is too low, it will rapidly increase until it becomes
 approximately proportional to the labor, and then it will settle into a long term behavior in
 which capital remains proportional to the labor.
-\end{example}
+\end{xexample}
 %
 \begin{exercises}
 \begin{exercise}
@@ -4555,7 +4567,7 @@ easily determine which army will win, and what the
 size of the winning army will be at the end of the
 battle.
 
-\begin{example}
+\begin{xexample}
 \label{exm:Lanchester}
 Suppose we have two armies, with $\alpha=1.0$,
 $\beta = 1.5$, and $x_0=10,000$.
@@ -4598,15 +4610,13 @@ The armies will wipe each other out when
 \end{equation}
 Plots of the three curves in the $xy$ plane for each of these
 cases are shown in Figure~\ref{fig:LanchesterExamplePlots}.
-\hfill$\square$
 \begin{figure}
 \centerline{\includegraphics[width=2in]{matlab/LanchesterExamplePlots.eps}}
 \caption{Plots of the three curves discussed in
 Example~\ref{exm:Lanchester}.}
 \label{fig:LanchesterExamplePlots}
 \end{figure}
-
-\end{example}
+\end{xexample}
 
 Equation \eqref{eqn:lanchester_eigenspace} gives an asymptote
 of the family of hyperbolas.
@@ -5142,7 +5152,7 @@ fixed point $x^*$ of \eqref{eqn:onedmap}.
 (ii) If $|f'(x^*)| > 1$, then $x^*$ is a source.
 \end{theorem}
 
-\begin{example}
+\begin{xexample}
 Consider again the logistic map \eqref{eqn:logisticmap}
 with $r=2.8$.  The graph is shown in
 Figure~\ref{fig:logisticmap_example}, and earlier we found the
@@ -5161,7 +5171,7 @@ At $x^*_2$, we have $f'(1.8/2.8) = -0.8$,
 so by Theorem 1,
 $x^*_2$ is a sink.
 \end{itemize}
-\end{example}
+\end{xexample}
 
 \bigskip
 If $|f'(x^*)|=1$, we can not make any conclusions about the
@@ -5699,7 +5709,7 @@ If $A$ has some complex eigenvalues (which must occur in
 complex conjugate pairs), real solutions can be derived
 by using the same technique that we derived for the
 two dimensional linear map.
-\begin{example}
+\begin{xexample}
 Consider the linear map \eqref{eqn:linearmapmdim} with
 \begin{equation}
    A = \begin{bmatrix}
@@ -5744,7 +5754,7 @@ The general solution is
 \end{equation}
 Since $|\lambda_j| < 1$ for $j=1,2,3$, the origin is an
 asymptotically stable fixed point.
-\end{example}
+\end{xexample}
 
 
 \subsection*{Converting Higher Order Maps to First Order Systems.}
@@ -5755,7 +5765,7 @@ but also on the states at steps $n-1$, $n-2$, etc.
 Here we give some examples of
 converting such a map into a higher dimensional map in which the state at
 step $n+1$ depends only on the state at step $n$.
-\begin{example}
+\begin{xexample}
 Suppose we have the map
 \begin{equation}
    x_{n+1} = f(x_{n},x_{n-1},x_{n-2}).
@@ -5778,8 +5788,8 @@ The map can now be written
 \end{equation}
 The state of the system is now described by a three dimensional vector,
 and the state at step $n+1$ is a function of the state at step $n$ only.
-\end{example}
-\begin{example}
+\end{xexample}
+\begin{xexample}
 Now consider the system
 \begin{equation}
 \begin{split}
@@ -5810,7 +5820,7 @@ the new state vector is $(x_n,y_n,a_n,b_n,c_n)$, and the map is
    c_{n+1} & = y_n.
 \end{split}
 \end{equation}
-\end{example}
+\end{xexample}
 
 \begin{exercises}
 \begin{exercise}
@@ -5885,7 +5895,7 @@ are \emph{decoupled}\index{decoupled} from $\BP$.
 To reorder the variables, we can use a permutation matrix
 $P$, in which each row and each column contains exactly
 one one, and all other entries are zero.
-\begin{example}
+\begin{xexample}
 The matrix 
 \begin{equation}
   A = \begin{bmatrix}
@@ -5915,7 +5925,7 @@ we convert \eqref{eqn:pf:linmap} into
          0 & 0 & 1 & 1
        \end{bmatrix}.
 \end{equation}
-\end{example}
+\end{xexample}
 \begin{theorem}
 An $n\times n$ nonnegative matrix $A$ is 
 irreducible if and only if
@@ -6151,7 +6161,7 @@ in the case $|f'(x^*)|=1$.  The above results are a generalization
 of that phenomena to higher dimensions.
 
 
-\begin{example}
+\begin{xexample}
 In this rather long example, we determine
 how the stability of a fixed point depends on a parameter.
 Consider the map
@@ -6301,7 +6311,7 @@ Lower left: $\beta=0.25$, saddle.
 Lower right: $\beta=3.5$, source.}
 \label{fig:LinearizationFPExamples}
 \end{figure}
-\end{example}
+\end{xexample}
 
 \section{The Saddle-Node Bifurcation for Maps}
 
@@ -7339,7 +7349,7 @@ So to find the inverse of a $2x2$ matrix,
 \emph{interchange the diagonal elements}, \emph{change the sign of the off-diagonal elements}, and
 \emph{divide by the determinant}.
 
-\begin{example}
+\begin{xexample}
 \[
   A = \begin{bmatrix}
           1 & 7 \\ -3 & 4
@@ -7349,7 +7359,7 @@ So to find the inverse of a $2x2$ matrix,
                           4 & -7 \\ 3 & 1
                        \end{bmatrix}
 \]
-\end{example}
+\end{xexample}
 
 \noindent
 \textbf{Eigenvalues and eigenvectors.}
@@ -7429,7 +7439,7 @@ a corresponding eigenvector.
 This works even when the eigenvalue is complex.
 It will give a correct complex eigenvector.
 
-\begin{example}
+\begin{xexample}
 \[
    A = \begin{bmatrix} 1 & 2 \\ 3 & -4 \end{bmatrix}
 \]
@@ -7480,9 +7490,9 @@ or, if we want to minimize the number of minus signs,
 \[
   \BV_2 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}
 \]
-\end{example}
+\end{xexample}
 
-\begin{example}
+\begin{xexample}
 \[
    A = \begin{bmatrix} -1 & -3 \\ 4 & 3 \end{bmatrix}
 \]
@@ -7523,7 +7533,7 @@ then want to express $\BV_1$ as
 \]
 so $\BA = \begin{bmatrix} 3 \\ -2\end{bmatrix}$
 and $\BB = \begin{bmatrix} 0 \\ -2\sqrt{2} \end{bmatrix}$.)
-\end{example}
+\end{xexample}
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -7772,15 +7782,15 @@ program.
 are Mathematica (tm), Axiom or Yacas.)
 \section{Maple (tm)}
 \textbf{Solving first order differential equations.}
-\begin{example}
+\begin{xexample}
 We'll solve
 \[
    y' = -y + 3
 \]
-\end{example}
+\end{xexample}
 \section{Maxima (tm)}
 \textbf{Solving first order differential equations.}
-\begin{example}
+\begin{xexample}
 We'll solve
 \[
    y' = -y + 3
@@ -7808,7 +7818,7 @@ which we can rewrite as
 equation in Maxima.}
 \label{fig:maxima_example_firstorderde}
 \end{figure}
-\end{example}
+\end{xexample}
 %
 \chapter[Hints and Solutions]{Hints and Solutions for Selected Exercises}
 
