@@ -2849,7 +2849,7 @@ Before discussing a general technique for
 solving such systems, we consider this example:
 \begin{equation}
 \begin{split}
-  \frac{dx}{dt} & = 3x + y \\
+  \frac{dx}{dt} & = -3x + y \\
   \frac{dy}{dt} & = -y
 \end{split}
 \label{eqn:linearsys_ex}
@@ -3011,9 +3011,8 @@ $\BV_1=\BA+i\BB$ (where $\BA$ and $\BB$ are real vectors).
 If we use the formula for real eigenvalues,
 we obtain
 \begin{equation}
- \BX = c_1 \BV_1 e^{\lambda_1 t} + c_2 \BV_1^* e^{\lambda_1^* t} 
+ \BX = c_1 \BV_1 e^{\lambda_1 t} + c_2 \BV_1^* e^{\lambda_1^* t}. 
 \end{equation}
-where $z^*$ denotes the complex conjugate of $z$.
 This expression is a solution to the differential equations.
 However, for arbitrary $c_1$ and $c_2$, this expression will
 generally be complex-valued, and we want a \emph{real-valued}
@@ -3172,7 +3171,7 @@ We can say a little more about cases (1) and (2).
 Consider the sink, where $\lambda_1 < \lambda_2 < 0$.
 We can write the general solution as
 \begin{equation}
-\BX(t) = e^{\lambda_2 t}\left[c_1\BV_1 e^{(\lambda_1-\lambda_2)t} + c_2\BV_2\right] 
+\BX(t) = e^{\lambda_2 t}\left[c_1\BV_1 e^{(\lambda_1-\lambda_2)t} + c_2\BV_2\right] . 
 \end{equation} 
 Suppose $c_2\ne 0$.
 Since $\lambda_1-\lambda_2 < 0$, the first term in the
@@ -3334,7 +3333,6 @@ summarizes the results.
 \caption{Results for Example \ref{exm:linearsys_ex_parameter}.}
 \label{tbl:linearsys_ex_paramresults}
 \end{table}
-
 \end{xexample}
 
 \subsection*{Sketching Phase Portraits for Planar Linear Systems}
@@ -3371,7 +3369,7 @@ so $ax+by=0$. Along this line, the vector field is vertical, so trajectories
 must have a vertical tangent when they cross this line.
 
 The $y$ \emph{nullcline} is the line where $\frac{dy}{dt}=0$, so
-$cx+dy=0$.  Along this line,the vector field is horizontal, so
+$cx+dy=0$.  Along this line, the vector field is horizontal, so
 trajectories must have a horizontal tangent when they cross this line.
  
 \item Indicate the direction of the vector field on the $x$ and $y$ axes.
@@ -3384,7 +3382,10 @@ will approach the origin \emph{tangent to the eigenvector
 of the eigenvalue closest to zero}.
 \item Use the above information to sketch several representative trajectories.
 \end{enumerate}
-
+The following examples demonstrate this procedure.
+(In the examples, the general solution will be found in step (2),
+even though this isn't strictly necessary if you only want to
+sketch the phase portrait.)
 \newpage
 
 \begin{xexample}
