@@ -2912,7 +2912,7 @@ is $x(t) = c e^{at}$: a constant multiplied by
 an exponential.  We also 
 note that the solution to
 the example problem \eqref{eqn:linearsys_ex} that is given
-by \eqref{eqn:linearsys_ex_vecsol} is a linear combination of solutions
+by \eqref{eqn:linearsys_ex_vecsol} is a linear combination of functions
 of the form $\BV e^{\lambda t}$, where $\BV$ is constant vector.
 This suggests that to solve~\eqref{eqn:linearsys},
 we look for a solution of the form
@@ -3062,10 +3062,14 @@ Then
          + i \left[e^{\mu t}\left(\BA\sin\omega t + \BB\cos\omega t\right) \right]
 \end{split} 
 \end{equation}
-The real part of this solution is 
-$\BU(t) = e^{\mu t}\left(\BA\cos\omega t - \BB\sin\omega t \right)$
+The real part of this solution is
+\begin{equation} 
+\BU(t) = e^{\mu t}\left(\BA\cos\omega t - \BB\sin\omega t \right)
+\end{equation}
 and the imaginary part (i.e. the coefficient of $i$) is
-$\BW(t) = e^{\mu t}\left(\BA\sin\omega t + \BB\cos\omega t\right)$.
+\begin{equation}
+\BW(t) = e^{\mu t}\left(\BA\sin\omega t + \BB\cos\omega t\right).
+\end{equation}
 Each of these is real-valued, and by the observation given
 above, each is a solution to the differential equations.
 We may then write the general solution as
@@ -3096,20 +3100,22 @@ say the equilibrium is
 \item If all solutions in sufficiently small neighborhoods
 of the equilibrium remain close to the equilibrium, we say
 the equilibrium is \emph{stable}\index{stable}.
-
 Note that asymptotic stability implies stability.
 \item If every neighborhood of the equilibrium contains solutions
 arbitrarily close to the equilibrium that leave the neighborhood, we say the equilibrium is \emph{unstable}\index{unstable}. 
 \end{itemize}
+To determine how to classify the equilibrium, we consider
+the real and complex cases separately.
 
 \subsection*{Real, distinct eigenvalues.}
 Let $\lambda_1$ and $\lambda_2$ be real eigenvalues,
 $\lambda_1\ne\lambda_2$, and let $\BV_1$ and $\BV_2$
-be respective eigenvectors.  We consider the following
+be respective eigenvectors.  We have the following
 cases.
 \begin{enumerate}
 \item $\pmb{\lambda_1 < \lambda_2 < 0}$.
 
+\noindent
 When both eigenvalues are negative, it is clear from
 \eqref{eqn:gensolreal}
 that
@@ -3118,11 +3124,15 @@ that
 \]
 All trajectories approach $\BZero$ asymptotically.
 
+\noindent
 The equilibrium $\BZero$ is called a \emph{sink.}
 It is \emph{asymptotically stable}.
 
+\smallskip
+
 \item $\pmb{0 < \lambda_1 < \lambda _2}$.
 
+\noindent
 In this case, all solutions diverge from the origin.
 However, for any solution $\BX(t)$, we have
 \[
@@ -3131,11 +3141,15 @@ However, for any solution $\BX(t)$, we have
 so all solutions 
 converge to $\BZero$ backwards in time.
 
+\noindent
 The equilibrium $\BZero$ is called a \emph{source.}
 It is \emph{unstable}.
 
+\smallskip
+
 \item $\pmb{\lambda_1 < 0 < \lambda_2}$.
 
+\noindent
 Looking at \eqref{eqn:gensolreal}, we see that if $c_2=0$, the solution
 will converge to $\BZero$ as $t\rightarrow\infty$.
 If $c_2\ne 0$, then eventually the term $c_2\BV_2e^{\lambda_2 t}$ will
@@ -3143,14 +3157,18 @@ dominate, and the solution will grow exponentially.
 Thus, there are solutions that converge to $\BZero$, but ``most''
 (i.e. those with $c_2\ne 0$) will not.
 
+\noindent
 The equilibrium $\BZero$ is called a \emph{saddle point}, 
 and it is \emph{unstable}.
-\item Zero eigenvalue.  It is also possible that
+
+\smallskip
+
+\item \textbf{Zero eigenvalue}.  It is also possible that
 one of the eigenvalues is zero.  The analysis
 of this case is left as an exercise.
 \end{enumerate}
 
-We can say a little more about cases 1 and 2.
+We can say a little more about cases (1) and (2).
 Consider the sink, where $\lambda_1 < \lambda_2 < 0$.
 We can write the general solution as
 \begin{equation}
@@ -3217,25 +3235,31 @@ sign of $\mu$.
 We have the following subcases.
 \begin{enumerate}
 
-\item $\pmb{\mu < 0}$.
+\item[$\pmb{\mu < 0}$]
 
 In this case, the amplitude of the oscillation decays
 exponentially.
 The trajectories spiral into the origin as $t$ increases,
 and $\ds\lim_{t\rightarrow\infty} \BX(t) = \BZero$.
 
+\noindent
 The equilibrium $\BZero$ is called a \emph{spiral sink.}
 It is \emph{asymptotically stable}.
 
-\item $\pmb{\mu = 0}$.
+\smallskip
+
+\item[$\pmb{\mu = 0}$]
 
 Since $e^{0}=1$, the solution is periodic.
 In the phase plane, the trajectories are ellipses.
 
+\noindent
 The equilibrium $\BZero$ is called a \emph{center}, and it is
 \emph{stable}.
 
-\item $\pmb{\mu > 0}$.
+\smallskip
+
+\item[$\pmb{\mu > 0}$]
 
 In this case, the amplitude of the oscillation grows
 exponentially.
@@ -3243,14 +3267,74 @@ The trajectories spiral out of the origin as $t$ increases.
 Considering backwards time, we have
 $\ds \lim_{t\rightarrow-\infty} \BX(t) = \BZero$.
 
+\noindent
 The equilibrium $\BZero$ is called a \emph{spiral source.}
 It is \emph{unstable}.
 \end{enumerate}
 
 \begin{xexample}
+\label{exm:linearsys_ex_parameter}
+We consider the linear system
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = x + b y \\
+  \frac{dy}{dt} & = -x- 2y
+\end{split}
+\label{eqn:linearsys_ex_parameter}
+\end{equation}
 In this example, the linear system depends on a parameter
-$\beta$.  We will determine how the classification and
-stability of the equilibrium $\BZero$ depends on $\beta$.
+$b$.  We will determine how the classification and
+stability of the equilibrium $\BZero$ depends on $b$.
+
+The coefficient matrix is
+\begin{equation}
+    A = \begin{bmatrix}
+            1 & b \\
+           -1 & -2
+        \end{bmatrix}
+\end{equation}
+The eigenvalues of this matrix are
+\begin{equation}
+\lambda_1 = \frac{-1+\sqrt{9-4b}}{2}, \quad \lambda_2= \frac{-1-\sqrt{9-4b}}{2}.
+\end{equation}
+We first note that these eigenvalues are complex
+if
+\begin{equation}
+  9-4b < 0 \implies b > \frac{9}{4}
+\end{equation}
+In this case, we have $\mu = -1/2$, so the equilibrium is
+a \emph{spiral sink}.
+
+Next we note that $\lambda_2 < 0$ for any $b < 9/4$.
+The classification of $\BZero$ depends on the sign of
+$\lambda_1$.  We'll find where $\lambda_1 = 0$:
+\begin{equation}
+  \lambda_1 = 0 \implies  \frac{-1+\sqrt{9-4b}}{2}=0
+    \implies b = 2.
+\end{equation}
+We have $\lambda_1 < 0$ if $2 < b < 9/4$, and
+$\lambda_1 > 0$ if $b < 2$.
+Table~\ref{tbl:linearsys_ex_paramresults}
+summarizes the results.
+\begin{table}
+\centerline{%
+\begin{tabular}{|c|c|c|c|}
+\hline
+ Range of $b$ \T & Eigenvalues & Classification & Stability \\
+\hline
+ $b < 2$\T & Real: $\lambda_1 > 0$, $\lambda_2 < 0$ & saddle & unstable \\
+\hline
+ $2 < b < 9/4$ \T & Real: $\lambda_1 < 0$, $\lambda_2 < 0$ & sink & asymptotically stable \\
+\hline
+ $b > 9/4$ \T & Complex: $\mu < 0$ & spiral sink & asymptotically stable \\
+\hline
+\end{tabular}
+\vspace{0.25cm}
+}
+\caption{Results for Example \ref{exm:linearsys_ex_parameter}.}
+\label{tbl:linearsys_ex_paramresults}
+\end{table}
+
 \end{xexample}
 
 \subsection*{Sketching Phase Portraits for Planar Linear Systems}
