@@ -4816,6 +4816,7 @@ remain in the winning colony?
 \end{enumerate}
 \end{exercise}
 \begin{exercise}
+\label{ex:lanchester_general}
 In the year 17**, a general is facing an impending battle.
 Across the valley from his encampment, the opposing
 army has $10,000$ soldiers, but the general has only $6,500$.
@@ -8156,6 +8157,60 @@ So there will be approximately $20,000$ ants remaining in
 the black colony.
 \end{enumerate}
 
+\textbf{\ref{ex:lanchester_general}}
+The equation that we will use is \eqref{eqn:lanchester_hyperbola}.
+With $\alpha=\beta$,
+we can cancel these constants to obtain
+\[
+   x^2 - y^2 = x_0^2 - y_0^2
+\]
+\begin{enumerate}
+\item[(a)]
+We first determine the results of the battles between the general's
+5000 reinforcements and the opposing army's 2000 reinforcements.
+We have $x_0=5000$ and $y_0=2000$.
+Since $5000^2 - 2000^2 > 0$, the hyperbola crosses the $x$
+axis.  We find the size of the surviving army by finding this
+$x$-intercept (where $y=0$):
+\[
+   x = \sqrt{5000^2-2000^2} \approx 4582
+\]
+This is the number of reinforcements that survive to join
+the general's main army of 6500, resulting in a total
+of 11082 in the general's army.
+
+We now have a battle with $x_0 = 11082$ and $y_0 = 10000$.
+The general
+will again win, and the size of his army after the main battle
+will be
+\[
+   x = \sqrt{11082^2 - 10000^2} \approx 4776.
+\]
+\item[(b)]
+If the main battle begins before the general's reinforcements arrive,
+the sizes of the armies remain on the curve
+\[
+   x^2 - y^2 = 6500^2 - 10000^2.
+\]
+Since the line $y=x$ is the set of initial conditions
+that lead to mutual annihilation, the latest that the 
+reinforcements can arrive is when the coordinates of a point
+on the above hyperbola are such that $x+4582 = y$.
+That is,
+\[
+   x^2- (x+4582)^2 = 6500^2 - 10000^2
+\]
+which we solve for $x$ to find
+\[
+   x \approx 4011
+\]
+If the general's army falls below this size before the
+reinforcements arrive, he will still lose the battle.
+The question actually asked for the losses that the
+general could sustain and still win the battle
+when the reinforcements arrive, so the final answer
+to this question is $6500-4011 = 2489$.
+\end{enumerate}
 \newpage
 %\medskip
 \textbf{\ref{ex:markov1}}
