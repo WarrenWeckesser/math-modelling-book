@@ -5820,6 +5820,69 @@ as the linear system without the constant vector added.
 
 \begin{exercises}
 \begin{exercise}
+For each of the following matrices, classify the
+type and stability of the fixed points $\BZero$
+for the discrete system $\BX(n+1) = A\BX(n)$.
+\begin{enumerate}
+\item[(a)]
+$\ds A  =  \begin{bmatrix}
+              0 & 1/2 \\
+              1 & 0
+           \end{bmatrix}$
+\item[(b)]
+$\ds A  =  \begin{bmatrix}
+              1/4 & 0 \\
+              1/2 & 1/2
+           \end{bmatrix}$
+\item[(c)]
+$\ds A  =  \begin{bmatrix}
+              1/4 & 1 \\
+              -1/2 & 0
+           \end{bmatrix}$
+\item[(d)]
+$\ds A  =  \begin{bmatrix}
+              1 & 2 \\
+              -1 & 3
+           \end{bmatrix}$
+\item[(e)]
+$\ds A  =  \begin{bmatrix}
+              1/4 & 1/4 \\
+              -15/4 & 1/4
+           \end{bmatrix}$
+\item[(e)]
+$\ds A  =  \begin{bmatrix}
+              3 & -3 \\
+              1/4 & 1
+           \end{bmatrix}$
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
+For each of the following matrices,
+use a computer program to find the
+eigenvalues of the matrix, and classify the
+type and stability of the fixed points $\BZero$
+for the discrete system $\BX(n+1) = A\BX(n)$.
+
+\begin{enumerate}
+\item[(a)]
+$\ds A  =  \begin{bmatrix}
+              0    &  2 & 1 & 1 \\
+              0.75 &  0 & 0 & 0 \\
+              0    &  1 & 0 & 0 \\
+              0    &  0 & 1 & 0
+              
+           \end{bmatrix}$
+\item[(a)]
+$\ds A  =  \begin{bmatrix}
+              .3   &  .2 & .1 & .1 \\
+              0 &  .2 &  .3 & 0 \\
+              0    &  0 & .7 & .3 \\
+              0.1    &  0 & 0.5 & 0.3
+              
+           \end{bmatrix}$
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
 For each of the following affine systems, find the
 fixed point and classify its type and stability.
 \begin{enumerate}
@@ -5841,6 +5904,8 @@ fixed point and classify its type and stability.
 \end{enumerate}
 \end{exercise}
 \end{exercises}
+
+\newpage
 
 \section{Higher Dimensional Maps}
 %
@@ -6001,6 +6066,8 @@ Convert the map
 into a higher dimensional first order map.
 \end{exercise}
 \end{exercises}
+
+\newpage
 
 \section{The Perron-Frobenius Theorem}\index{Perron-Frobenius Theorem}
 Many modeling problems result in linear maps
@@ -6479,6 +6546,26 @@ Lower right: $\beta=3.5$, source.}
 \label{fig:LinearizationFPExamples}
 \end{figure}
 \end{xexample}
+
+\begin{exercises}
+\begin{exercise}
+Consider the nonlinear map
+\begin{split}
+  x(n+1) & = x(n) + \frac{y(n)}{2} \\
+  y(n+1) & = bx(n) + \frac{(y(n)-1)^3}{12}
+\end{split}
+\begin{enumerate}
+\item[(a)]
+Show that this map has a single fixed point
+(the location of which depends on $b$).
+\item[(b)]
+Determine how the classification and stability
+of the fixed point depends on $b$.
+\end{enumerate}
+\end{exercise}
+\end{exercises}
+
+\newpage
 
 \section{The Saddle-Node Bifurcation for Maps}
 
