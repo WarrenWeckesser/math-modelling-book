@@ -27,15 +27,10 @@ hold on
 AddAxes0(A)
 
 axis off
-text(1,-0.06,'1','fontsize',12);
-text(-1,-0.06,'-1','fontsize',12);
-text(0.03,1-0.02,'1','fontsize',12);
-text(0.03,-1,'-1','fontsize',12);
-
-%maxstep = 0.08;
-%opts = odeset('MaxStep',maxstep);
-%Tf = 20;
-%Tb = -20;
+% text(1,-0.06,'1','fontsize',12);
+% text(-1,-0.06,'-1','fontsize',12);
+% text(0.03,1-0.02,'1','fontsize',12);
+% text(0.03,-1,'-1','fontsize',12);
 
 N = 13;
 

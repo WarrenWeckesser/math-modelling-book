@@ -5243,7 +5243,7 @@ and cobweb diagrams for the various cases.
 %
 %
 \subsection*{Fixed Points, Stability, Linearization}
-A \emph{fixed point} of the map \eqref{eqn:onedmap}
+A \emph{fixed point}\index{fixed point} of the map \eqref{eqn:onedmap}
 is a point $x^*$ where $f(x^*)=x^*$.
 If $x_0=x^*$, then $x_n=x^*$ for all $n>0$, so the fixed points
 of $f$ are the constant solutions to \eqref{eqn:onedmap}.
@@ -5412,37 +5412,37 @@ do not converge to stable fixed points or periodic solutions.}
 We consider the linear maps of the plane
 \begin{equation}
 \begin{split}
-  x_{n+1} & = a_{11}x_n + a_{12}y_n \\
-  y_{n+1} & = a_{21}x_n + a_{22}y_n
+  x(n+1) & = a_{11}x(n) + a_{12}y(n) \\
+  y(n+1) & = a_{21}x(n) + a_{22}y(n)
 \end{split}
 \end{equation}
 with a given starting point $(x_0,y_0)$,
 or equivalently,
 \begin{equation}
-  \BX_{n+1} = A\BX_n, \quad \textrm{where} \quad
-     \BX_n = \begin{bmatrix} x_n \\ y_n \end{bmatrix},
+  \BX(n+1) = A\BX(n), \quad \textrm{where} \quad
+     \BX(n) = \begin{bmatrix} x(n) \\ y(n) \end{bmatrix},
      \quad
      A = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix},
 \label{eqn:linearmap}
 \end{equation}
 and the starting vector is
-$\ds \BX_0 = \begin{bmatrix} x_0 \\ y_0 \end{bmatrix}$.
+$\ds \BX(0) = \BX_0 = \begin{bmatrix} x_0 \\ y_0 \end{bmatrix}$.
 %
 %
 \subsection*{Solving the System}
-We note if $\BX_0 = \begin{bmatrix}0 \\ 0\end{bmatrix} \equiv \BZero$, then $\BX_n = \BZero$ for all $n>0$ is a solution to \eqref{eqn:linearmap}.
-Such a constant solution is called a \emph{fixed point}
+We note if $\BX_0 = \begin{bmatrix}0 \\ 0\end{bmatrix} \equiv \BZero$, then $\BX(n) = \BZero$ for all $n>0$ is a solution to \eqref{eqn:linearmap}.
+Such a constant solution is called a \emph{fixed point}\index{fixed point}
 of the map.
 
 More generally, we can ``solve'' this system by simply iterating the
 map:
 \begin{equation}
 \begin{split}
-  \BX_1 & = A\BX_0 \\
-  \BX_2 & = A\BX_1 = A^2\BX_0 \\
-  \BX_3 & = A\BX_2 = A^3\BX_0 \\
+  \BX(1) & = A\BX_0 \\
+  \BX(2) & = A\BX(1) = A^2\BX_0 \\
+  \BX(3) & = A\BX(2) = A^3\BX_0 \\
         & \vdots \\
-  \BX_n & = A^n\BX_0
+  \BX(n) & = A^n\BX_0
 \end{split}
 \end{equation}
 This is a solution, but it doesn't tell us much about the
@@ -5454,11 +5454,11 @@ method we used to solve linear systems of differential equations.
 In the case of a linear map, we propose a solution of the
 form
 \begin{equation}
-   \BX_n = \lambda^n \BV
+   \BX(n) = \lambda^n \BV
 \label{eqn:solutionguess}
 \end{equation}
 where $\lambda$ is a number and $\BV$ is a constant vector.
-We already know that $\BX_n\equiv\BZero$ is a solution, so without
+We already know that $\BX(n)\equiv\BZero$ is a solution, so without
 loss of generality we assume that $\lambda\ne 0$ and
 $\BV \ne \BZero$.
 
@@ -5506,7 +5506,7 @@ will converge to the origin.
 }
 \caption{%
 The plot on the left shows several iterations of the
-solution $\BX_n = \lambda_1^n\BV_1$ of the linear map
+solution $\BX(n) = \lambda_1^n\BV_1$ of the linear map
 for $A$ given in \eqref{eqn:example1}.
 The trajectory begins at
 $\BX_0 = \BV_1$.
@@ -5525,7 +5525,7 @@ by taking linear combinations of these two special solutions.
 That is, at least when $\lambda_1$ and $\lambda_2$ are real and
 distinct eigenvalues, the general solution is
 \begin{equation}
-   \BX_n = c_1 \lambda_1^n \BV_1 + c_2 \lambda_2^n \BV_2.
+   \BX(n) = c_1 \lambda_1^n \BV_1 + c_2 \lambda_2^n \BV_2.
 \end{equation}
 The constant $c_1$ and $c_2$ are chosen so that
 the initial condition is satisfied. That is, 
@@ -5566,7 +5566,7 @@ as $n$ increases.
 }
 \caption{%
 The plot on the left shows several iterations of the
-solution $\BX_n = \lambda_1^n\BV_1$ of the linear map
+solution $\BX(n) = \lambda_1^n\BV_1$ of the linear map
 for $A$ given in \eqref{eqn:example2}.
 The trajectory begins at
 $\BX_0 = \BV_1$.
@@ -5592,7 +5592,7 @@ $\lambda_1$ and $\lambda_2$, with eigenvectors
 $\BV_1$ and $\BV_2$.
 \begin{itemize}
 \item If $|\lambda_1|<1$ and $|\lambda_2|<1$, then
-$\BX_n\rightarrow\BZero$ as $n$ increases.  We say
+$\BX(n)\rightarrow\BZero$ as $n$ increases.  We say
 $\BZero$ is a \emph{sink} or \emph{attractor}; also
 $\BZero$ is \emph{asymptotically stable}.
 \item If one eigenvalue, say $\lambda_1$ has magnitude less than
@@ -5619,7 +5619,7 @@ of differential equations with complex eigenvalues.
 Let $\lambda_1=\mu + i\omega$,
 with eigenvector $\BV_1 = \BA + i \BB$.
 A \emph{complex-valued} solution is
-$\BX_n = (\lambda_1)^n\BV_1$.
+$\BX(n) = (\lambda_1)^n\BV_1$.
 We'll write this as the sum of a real and imaginary part;
 the real and imaginary parts of this solution are also solutions,
 so they will give us a \emph{real-valued} set of solutions
@@ -5662,41 +5662,60 @@ and
 \end{equation}
 The real and imaginary parts of this solution are
 \begin{equation}
-  u_n = r^n(\BA\cos(n\theta)-\BB\sin(n\theta))
+  u(n) = r^n(\BA\cos(n\theta)-\BB\sin(n\theta))
   \quad \textrm{and} \quad
-  w_n = r^n(\BA\sin(n\theta)+\BB\cos(n\theta)),
+  w(n) = r^n(\BA\sin(n\theta)+\BB\cos(n\theta)),
 \end{equation}
 respectively.
 Each of these is solution to linear map, and
 we can use these to write the general solution as
 \begin{equation}
-  \BX_n =    c_1 r^n(\BA\cos(n\theta)-\BB\sin(n\theta))
+  \BX(n) =    c_1 r^n(\BA\cos(n\theta)-\BB\sin(n\theta))
            + c_2 r^n(\BA\sin(n\theta)+\BB\cos(n\theta))
 \end{equation}
 Note that the terms in parentheses give vectors that
 rotate by $\theta$ for each increase of $n$ by one.
 We have the following possibilities
-for the behavior of $\BX_n$:
+for the behavior of $\BX(n)$:
 \begin{itemize}
 \item
 If $r < 1$, then $r^n \rightarrow 0$ as $n$ increases,
-and therefore $\BX_n\rightarrow \BZero$.
+and therefore $\BX(n)\rightarrow \BZero$.
 In this case, we say that $\BZero$ is a \emph{spiral sink}.
 An example is shown on the left in Figure~\ref{fig:Lin2DMapExampleComplex1}.
 \item
-If $r=1$, then in the long run $\BX_n$ does not approach
+If $r=1$, then in the long run $\BX(n)$ does not approach
 $\BZero$ or go off to infinity. Instead, it remains on an ellipse.
-(However, $\BX_n$ is \emph{not} periodic unless
+(However, $\BX(n)$ is \emph{not} periodic unless
 $\frac{\theta}{2\pi}$ is a rational number.)
 When $r=1$ we say that $\BZero$ is a \emph{center}.
 Examples are shown in Figure~\ref{fig:Lin2DMapExampleComplexrz}.
 \item
-If $r > 1$, then $r^n$ grows exponentially, so $\BX_n$
+If $r > 1$, then $r^n$ grows exponentially, so $\BX(n)$
 spirals away from the origin.  We say that $\BZero$ is 
 a \emph{spiral source}.
 An example is shown on the right in 
 Figure~\ref{fig:Lin2DMapExampleComplex1}.
 \end{itemize}
+
+\begin{xexample}
+We consider the system with
+\begin{equation}
+  A = \begin{bmatrix} 1/2 & -1/2\\ 1/2 & 1/2\end{bmatrix}.
+\end{equation}
+We find $\lambda = 1/2 \pm i/2$, and $r = \sqrt{1/2} < 1$.
+The origin is a spiral sink.
+See Figure~\ref{fig:Lin2DMapExampleComplex1}.
+\end{xexample}
+
+\begin{xexample}
+\begin{equation}
+  A = \begin{bmatrix} 1/2 & -3/2\\ 3/2 & 1\end{bmatrix}.
+\end{equation}
+We find $\lambda = 3/4 \pm i\sqrt{35}/4$, and $r = \sqrt{11/4} > 1$.
+The origin is a spiral source.
+See Figure~\ref{fig:Lin2DMapExampleComplex1}
+\end{xexample}
 
 \begin{figure}
 \centerline{%
@@ -5707,10 +5726,10 @@ Figure~\ref{fig:Lin2DMapExampleComplex1}.
 Examples with complex eigenvalues.
 On the left:
 %$A = \begin{bmatrix} 1/2 & -1/2\\ 1/2 & 1/2\end{bmatrix}$,
-%$\lambda = 1/2 \pm i/2$, $r = \sqrt{1/2} < 1$.
+$\lambda = 1/2 \pm i/2$, $r = \sqrt{1/2} < 1$.
 On the right:
 %$A = \begin{bmatrix} 1/2 & -3/2\\ 3/2 & 1\end{bmatrix}$,
-%$\lambda = 3/4 \pm i\sqrt{35}/4$, $r = \sqrt{11/4} > 1$.
+$\lambda = 3/4 \pm i\sqrt{35}/4$, $r = \sqrt{11/4} > 1$.
 }
 \label{fig:Lin2DMapExampleComplex1}
 \end{figure}
@@ -5721,14 +5740,15 @@ On the right:
 \includegraphics{matlab/Lin2DMapExampleComplexrz2.eps}
 }
 \caption{%
-Examples with complex eigenvalues.
-On the left:
-%$A = \begin{bmatrix} 13/15 & 8/15\\ -4/3 & 1/3\end{bmatrix}$,
-%$\lambda = 3/5\pm i4/5$, $r = 1$.
-On the right:
+Examples with complex eigenvalues with $r=1$.
+On the left,
+%$A = \begin{bmatrix} 13/15 & 8/15 \\ -4/3 & 1/3 \end{bmatrix}$,
+%$\lambda = \frac{3}{5}\pm \frac{4}{5}i$,
+$\theta = \tan^{-1}(4/3)\approx 0.9273$ radians.
+On the right,
 %$A = \frac{1}{6}\begin{bmatrix} 3+\sqrt{3} & 2\sqrt{3}\\ -5\sqrt{3} &  3-\sqrt{3}\end{bmatrix}$,
 %$\lambda = 1/2 \pm i\sqrt{3}/2$, $r = 1$,
-%$\theta=\pi/3$.
+$\theta=\pi/3$.
 }
 \label{fig:Lin2DMapExampleComplexrz}
 \end{figure}
@@ -5751,11 +5771,11 @@ We only consider the case in which the eigenvalues are distinct.
 \item If the eigenvalues of $A$ are real and distinct, then the
 general solution is
 \begin{equation}
-   \BX_n = c_1 \lambda_1^n \BV_1 + c_2 \lambda_2^n \BV_2
+   \BX(n) = c_1 \lambda_1^n \BV_1 + c_2 \lambda_2^n \BV_2
 \end{equation}
 \item If the eigenvalues are complex, then
 \begin{equation}
-  \BX_n =    c_1 r^n(\BA\cos(n\theta)-\BB\sin(n\theta))
+  \BX(n) =    c_1 r^n(\BA\cos(n\theta)-\BB\sin(n\theta))
            + c_2 r^n(\BA\sin(n\theta)+\BB\cos(n\theta))
 \end{equation}
 \end{itemize}
@@ -5776,7 +5796,7 @@ $\BZero$ is a \emph{source} or \emph{repellor}.
 We point out here that it is no harder to solve the
 system
 \begin{equation}
-  \BX_{n+1} = A\BX_n + \BG,
+  \BX(n+1) = A\BX(n) + \BG,
   \label{eqn:affine}
 \end{equation}
 where $\BG$ is a constant vector.
@@ -5795,21 +5815,21 @@ The fixed point satisfies the equation
        \BX^* & = -(A-I)^{-1}\BG.
 \end{split}
 \end{equation}
-Then define $\BY_n$ so $\BX_n = \BX^* + \BY_n$,
+Then define $\BY(n)$ so $\BX(n) = \BX^* + \BY(n)$,
 and \eqref{eqn:affine} becomes
 \begin{equation}
 \begin{split}
-  \BX^* + \BY_{n+1} & = A\BX^* + A\BY_n +\BG \\
-  \BY_{n+1} & = A\BY_n + (A-I)\BX^* + \BG \\
-            & = A\BY_n + (A-I)\left(-(A-I)^{-1}\BG\right)+\BG \\
-	    & = A\BY_n -\BG+\BG \\
-	    & = A\BY_n.
+  \BX^* + \BY(n+1) & = A\BX^* + A\BY(n) +\BG \\
+  \BY(n+1) & = A\BY(n) + (A-I)\BX^* + \BG \\
+            & = A\BY(n) + (A-I)\left(-(A-I)^{-1}\BG\right)+\BG \\
+	    & = A\BY(n) -\BG+\BG \\
+	    & = A\BY(n).
 \end{split}
 \end{equation}
-So by changing coordinates to $\BY_n$, we obtain
+So by changing coordinates to $\BY(n)$, we obtain
 the linear system
 \begin{equation}
-  \BY_{n+1} = A\BY_n .
+  \BY(n+1) = A\BY(n) .
 \end{equation}
 We saw the same idea when we added a constant vector to a
 linear system of differential equations.
@@ -5886,21 +5906,21 @@ $\ds A  =  \begin{bmatrix}
 For each of the following affine systems, find the
 fixed point and classify its type and stability.
 \begin{enumerate}
-\item[(a)] $\ds \BX_{n+1} = \begin{bmatrix}
+\item[(a)] $\ds \BX(n+1) = \begin{bmatrix}
                          2 & 2 \\
                          1 & 2
                      \end{bmatrix}
-                        \BX_n + \begin{bmatrix} 3 \\ 1 \end{bmatrix}$
-\item[(b)] $\ds \BX_{n+1} = \begin{bmatrix}
+                        \BX(n) + \begin{bmatrix} 3 \\ 1 \end{bmatrix}$
+\item[(b)] $\ds \BX(n+1) = \begin{bmatrix}
                          2 & -2 \\
                          1 & 2
                      \end{bmatrix}
-                        \BX_n + \begin{bmatrix} 3 \\ 1 \end{bmatrix}$
-\item[(c)] $\ds \BX_{n+1} = \begin{bmatrix}
+                        \BX(n) + \begin{bmatrix} 3 \\ 1 \end{bmatrix}$
+\item[(c)] $\ds \BX(n+1) = \begin{bmatrix}
                          1/2 & 1/2 \\
                          1/4 & 1/2
                      \end{bmatrix}
-                        \BX_n + \begin{bmatrix} 2 \\ 8 \end{bmatrix}$
+                        \BX(n) + \begin{bmatrix} 2 \\ 8 \end{bmatrix}$
 \end{enumerate}
 \end{exercise}
 \end{exercises}
@@ -5912,14 +5932,14 @@ fixed point and classify its type and stability.
 Most of what we have discussed so far applies to
 higher dimensional maps of the form
 \begin{equation}
-  \BX_{n+1} = \BF(\BX_n)
+  \BX(n+1) = \BF(\BX(n))
 \end{equation}
 where $\BX \in \Real^n$. etc...
 
 \subsection*{Linear $m$ dimensional maps.}
 A linear $m$-dimensional map with constant coefficients has the form
 \begin{equation}
-  \BX_{n+1} = A\BX_{n}
+  \BX(n+1) = A\BX(n)
 \label{eqn:linearmapmdim}\cdot
 \end{equation}
 where $\BX\in \Real^m$ and $A$ is an $m\times m$ matrix.
@@ -5932,7 +5952,7 @@ In particular, if $A$ has $m$ distinct real eigenvalues
 $\lambda_j$, with corresponding eigenvectors
 $\BV_j$, the general solution is
 \begin{equation}
-   \BX_n = c_1 \lambda_1^n \BV_1 + c_2 \lambda_2^n \BV_2
+   \BX(n) = c_1 \lambda_1^n \BV_1 + c_2 \lambda_2^n \BV_2
                  + \cdots + c_m \lambda_m^n\BV_m.
 \label{eqn:linearmdimreal}
 \end{equation}
@@ -5980,7 +6000,7 @@ $\omega = \frac{\sqrt{7}}{4}$, so
 $r = \frac{\sqrt{2}}{2} \approx 0.707$ and $\theta = \tan^{-1}(\sqrt{7}) \approx 1.21$.
 The general solution is
 \begin{equation}
-  \BX_n = c_1 \lambda_1^n \BV_1 +
+  \BX(n) = c_1 \lambda_1^n \BV_1 +
           c_2 r^n\left(\BA\cos(n\theta) - \BB\sin(n\theta)\right) +
           c_3 r^n\left(\BA\sin(n\theta) + \BB\cos(n\theta)\right) 
 \end{equation}
@@ -6000,22 +6020,22 @@ step $n+1$ depends only on the state at step $n$.
 \begin{xexample}
 Suppose we have the map
 \begin{equation}
-   x_{n+1} = f(x_{n},x_{n-1},x_{n-2}).
+   x(n+1) = f(x(n),x(n-1),x(n-2)).
 \end{equation}
 We define
 \begin{equation}
 \begin{split}
-   a_{n+1} & = x_{n}, \\
-   b_{n+1} & = a_{n}. \\
+   a(n+1) & = x(n), \\
+   b(n+1) & = a(n). \\
 \end{split}
 \end{equation}
-Then we have $x_{n-1} = a_{n}$ and $x_{n-2} = b_{n}$.
+Then we have $x(n-1) = a(n)$ and $x(n-2) = b(n)$.
 The map can now be written
 \begin{equation}
 \begin{split}
-   x_{n+1} & = f(x_{n},a_{n},b_{n}), \\
-   a_{n+1} & = x_{n}, \\
-   b_{n+1} & = a_{n}. \\
+   x(n+1) & = f(x(n),a(n),b(n)), \\
+   a(n+1) & = x(n), \\
+   b(n+1) & = a(n). \\
 \end{split}
 \end{equation}
 The state of the system is now described by a three dimensional vector,
@@ -6025,31 +6045,31 @@ and the state at step $n+1$ is a function of the state at step $n$ only.
 Now consider the system
 \begin{equation}
 \begin{split}
-   x_{n+1} & = f(x_{n},x_{n-1},x_{n-2},y_{n},y_{n-1}), \\
-   y_{n+1} & = g(x_{n},x_{n-1},x_{n-2},y_{n},y_{n-1}). \\
+   x(n+1) & = f(x(n),x(n-1),x(n-2),y(n),y(n-1)), \\
+   y(n+1) & = g(x(n),x(n-1),x(n-2),y(n),y(n-1)). \\
 \end{split}
 \end{equation}
 We define
 \begin{equation}
 \begin{split}
-   a_{n+1} & = x_{n}, \\
-   b_{n+1} & = a_{n}, \\
-   c_{n+1} & = y_{n}. \\
+   a(n+1) & = x(n), \\
+   b(n+1) & = a(n), \\
+   c(n+1) & = y(n). \\
 \end{split}
 \end{equation}
 
-Then we have $x_{n-1} = a_{n}$, $x_{n-2} = b_{n}$,
-and $y_{n-1} = c_{n}$.
+Then we have $x(n-1) = a(n)$, $x(n-2) = b(n)$,
+and $y(n-1) = c(n)$.
 
 With these definitions,
-the new state vector is $(x_n,y_n,a_n,b_n,c_n)$, and the map is
+the new state vector is $(x(n),y(n),a(n),b(n),c(n))$, and the map is
 \begin{equation}
 \begin{split}
-   x_{n+1} & = f(x_n,a_n,b_n,y_n,c_n), \\
-   y_{n+1} & = g(x_n,a_n,b_n,y_n,c_n), \\
-   a_{n+1} & = x_n, \\
-   b_{n+1} & = a_n, \\
-   c_{n+1} & = y_n.
+   x(n+1) & = f(x(n),a(n),b(n),y(n),c(n)), \\
+   y(n+1) & = g(x(n),a(n),b(n),y(n),c(n)), \\
+   a(n+1) & = x(n), \\
+   b(n+1) & = a(n), \\
+   c(n+1) & = y(n).
 \end{split}
 \end{equation}
 \end{xexample}
@@ -6059,8 +6079,8 @@ the new state vector is $(x_n,y_n,a_n,b_n,c_n)$, and the map is
 Convert the map
 \begin{equation}
 \begin{split}
-   x_{n+1} & = f(x_n,y_{n-1}) \\
-   y_{n+1} & = g(x_n,x_{n-1},y_{n})
+   x(n+1) & = f(x(n),y(n-1)) \\
+   y(n+1) & = g(x(n),x(n-1),y(n))
 \end{split}
 \end{equation}
 into a higher dimensional first order map.
@@ -6550,10 +6570,12 @@ Lower right: $\beta=3.5$, source.}
 \begin{exercises}
 \begin{exercise}
 Consider the nonlinear map
+\begin{equation}
 \begin{split}
   x(n+1) & = x(n) + \frac{y(n)}{2} \\
   y(n+1) & = bx(n) + \frac{(y(n)-1)^3}{12}
 \end{split}
+\end{equation}
 \begin{enumerate}
 \item[(a)]
 Show that this map has a single fixed point
