@@ -3901,24 +3901,26 @@ The trajectories might, in fact, slowly spiral
 towards or away from $(1,1)$.
 \end{xexample}
 %
-\begin{exercises}
-\begin{exercise}
-An exercise...
-\end{exercise}
-\end{exercises}
+\newpage
+%
+% \begin{exercises}
+% \begin{exercise}
+% An exercise...
+% \end{exercise}
+% \end{exercises}
 %
 \section{Periodic Solutions}
 It is possible that solutions can oscillate...
-\begin{exercises}
-\begin{exercise}
-An exercise...
-\end{exercise}
-\begin{exercise}
-Another exercise...
-\end{exercise}
-\end{exercises}
-
-\newpage
+% \begin{exercises}
+% \begin{exercise}
+% An exercise...
+% \end{exercise}
+% \begin{exercise}
+% Another exercise...
+% \end{exercise}
+% \end{exercises}
+% 
+% \newpage
 
 \section{Higher Dimensional Systems}
 \[
@@ -4607,14 +4609,14 @@ given in~\eqref{eqn:compspecexample}.
 Thus, this population model
 predicts that the two species will co-exist in 
 a stable equilibrium.
-(But different parameters values can lead to different
+(Different parameters values may lead to different
 conclusions.)
 
-\begin{exercises}
-\begin{exercise}
-An exercise...
-\end{exercise}
-\end{exercises}
+% \begin{exercises}
+% \begin{exercise}
+% An exercise...
+% \end{exercise}
+% \end{exercises}
 %
 \newpage
 %
@@ -5088,7 +5090,7 @@ of $p$.
 % \end{equation}
 Consider how the behavior of the solution
 to \eqref{eqn:psol} depends on $a$.
-\begin{enumerate}
+\begin{itemize}
 \item If $a > 1$, then $a^n > 0$, and $a^n$ increases without
 bound as $n$ increases. So $p(n)$ grows exponentially.
 \item If $a = 1$, then $a^n=1$ for all $n$, so $p(n) = p(0)$.
@@ -5104,7 +5106,7 @@ between $p(0)$ and $-p(0)$.
 \item If $a < -1$, then $a^n$ alternates sign,
 and $|a^n|$ increases without bound as $n$ increases.
 So $p(n)$ alternates sign while $|p(n)|$ grows exponentially.
-\end{enumerate}
+\end{itemize}
 Overall, the magnitude of $p(n)$ \emph{grows if} $|a| > 1$,
 and \emph{decays if} $|a| < 1$.
 Figures~\ref{fig:linearcases_pos}
@@ -5438,6 +5440,31 @@ The origin is a spiral source.
 See the plot on the right in Figure~\ref{fig:Lin2DMapExampleComplex1}
 \end{xexample}
 
+\begin{xexample}
+\begin{equation}
+A = \begin{bmatrix} 13/15 & 8/15 \\ -4/3 & 1/3 \end{bmatrix}.
+\end{equation}
+We find $\lambda = \frac{3}{5}\pm \frac{4}{5}i$, $r=1$,
+and $\theta = \tan^{-1}(4/3)\approx 0.9273$ radians.
+Since $\theta$ is not a rational multiple of $2\pi$,
+the iterates $\BX(n)$ will never repeat.
+The first few iterations of a solution are shown
+on the left
+in Figure~\ref{fig:Lin2DMapExampleComplexrz}
+\end{xexample}
+
+\begin{xexample}
+\begin{equation}
+A = \frac{1}{6}\begin{bmatrix} 3+\sqrt{3} & 2\sqrt{3}\\ -5\sqrt{3} &  3-\sqrt{3}\end{bmatrix},
+\end{equation}
+We find $\lambda = 1/2 \pm i\sqrt{3}/2$, $r = 1$, and
+$\theta=\pi/3$.
+Since $6\theta = 2\pi$, solutions repeat after six iterations.
+See the plot on the right in Figure~\ref{fig:Lin2DMapExampleComplexrz}.
+\end{xexample}
+
+
+
 \begin{figure}
 \centerline{%
 \includegraphics{matlab/Lin2DMapExampleComplex1.eps}
@@ -5500,6 +5527,7 @@ general solution is
 \begin{equation}
   \BX(n) =    c_1 r^n(\BA\cos(n\theta)-\BB\sin(n\theta))
            + c_2 r^n(\BA\sin(n\theta)+\BB\cos(n\theta))
+\label{eqn:linear2dcomplexgensol}
 \end{equation}
 \end{itemize}
 
@@ -5514,6 +5542,10 @@ $\BZero$ is \emph{unstable}.
 \item If both $|\lambda_1| > 1$ and $|\lambda_2|>1$, then
 $\BZero$ is a \emph{source} or \emph{repellor}.
 \end{itemize}
+
+\medskip
+
+\hrule
 
 \medskip
 \subsection*{Affine 2D Systems}
@@ -5533,13 +5565,13 @@ the matrix $A-I$ is invertible.  The case
 where $A-I$ is singular is left as an exercise.)
 The fixed point satisfies the equation
 \begin{equation}
-\begin{split}
-   A\BX^* + \BG & = \BX^* \\
-   (A-I)\BX^* & = -\BG \\
-       \BX^* & = -(A-I)^{-1}\BG.
-\end{split}
+   A\BX^* + \BG  = \BX^*
 \end{equation}
-Then define $\BY(n)$ so $\BX(n) = \BX^* + \BY(n)$,
+which we solve to find
+\begin{equation}
+   \BX^*  = -(A-I)^{-1}\BG.
+\end{equation}
+Define $\BY(n)$ so $\BX(n) = \BX^* + \BY(n)$,
 and \eqref{eqn:affine} becomes
 \begin{equation}
 \begin{split}
@@ -5562,10 +5594,12 @@ moves the equilibrium or fixed point, but
 the dynamics around that point are the same
 as the linear system without the constant vector added.
 
+\newpage
+
 \begin{exercises}
 \begin{exercise}
 For each of the following matrices, classify the
-type and stability of the fixed points $\BZero$
+type and stability of the fixed point $\BZero$
 for the discrete system $\BX(n+1) = A\BX(n)$.
 \begin{enumerate}
 \item[(a)]
@@ -5601,31 +5635,30 @@ $\ds A  =  \begin{bmatrix}
 \end{enumerate}
 \end{exercise}
 \begin{exercise}
-For each of the following matrices,
-use a computer program to find the
-eigenvalues of the matrix, and classify the
-type and stability of the fixed points $\BZero$
-for the discrete system $\BX(n+1) = A\BX(n)$.
-
+For each of the following, find the solution to the
+system $\BX(n+1)=A\BX(n)$, $\BX(0)=\BX_0$.
 \begin{enumerate}
 \item[(a)]
 $\ds A  =  \begin{bmatrix}
-              0    &  2 & 1 & 1 \\
-              0.75 &  0 & 0 & 0 \\
-              0    &  1 & 0 & 0 \\
-              0    &  0 & 1 & 0
-              
-           \end{bmatrix}$
-\item[(a)]
+              0 & 1/2 \\
+              1 & 0
+           \end{bmatrix}$, \hspace*{.25cm} 
+$\ds \BX_0 = \begin{bmatrix} 1 \\ 3 \end{bmatrix}$.
+\item[(b)]
 $\ds A  =  \begin{bmatrix}
-              .3   &  .2 & .1 & .1 \\
-              0 &  .2 &  .3 & 0 \\
-              0    &  0 & .7 & .3 \\
-              0.1    &  0 & 0.5 & 0.3
-              
-           \end{bmatrix}$
+              1/4 & 0 \\
+              1/2 & 1/2
+           \end{bmatrix}$, \hspace*{.25cm}
+$\ds \BX_0 = \begin{bmatrix} -1 \\ 1 \end{bmatrix}$.
+\item[(b)]
+$\ds A  =  \begin{bmatrix}
+              1/4 & 1 \\
+              -1/2 & 0
+           \end{bmatrix}$, \hspace*{.25cm} 
+$\ds \BX_0 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$.
 \end{enumerate}
 \end{exercise}
+
 \begin{exercise}
 For each of the following affine systems, find the
 fixed point and classify its type and stability.
@@ -5669,10 +5702,9 @@ A linear $m$-dimensional map with constant coefficients has the form
 where $\BX\in \Real^m$ and $A$ is an $m\times m$ matrix.
 Such a problem can be completely solved, but we will not
 derive the method here in its full generality here.
-We will point out that in
-many cases, the methods discussed earlier for the
-``typical'' two dimensional linear map also apply here.
-In particular, if $A$ has $m$ distinct real eigenvalues
+The method discussed earlier for the
+``typical'' two dimensional linear map also applies here.
+That is, if $A$ has $m$ distinct real eigenvalues
 $\lambda_j$, with corresponding eigenvectors
 $\BV_j$, the general solution is
 \begin{equation}
@@ -5685,6 +5717,25 @@ If $A$ has some complex eigenvalues (which must occur in
 complex conjugate pairs), real solutions can be derived
 by using the same technique that we derived for the
 two dimensional linear map.
+That is, the two complex terms in \eqref{eqn:linearmdimreal}
+are replaced by the two real term given in
+\eqref{eqn:linear2dcomplexgensol}.
+
+\medskip
+\noindent
+\textbf{Stability of $\BZero$.}
+Suppose the $m\times m$ matrix $A$ has $m$ distinct eigenvalues $\lambda_j$.
+\begin{itemize}
+\item If $|\lambda_j| < 1$ for all $j$, then
+$\BZero$ is asymptotically stable.
+\item If $|\lambda_j| = 1$ for all $j$, then
+$\BZero$ is stable (but not asymptotically stable).
+\item If $|\lambda_j| > 1$ for at least one $j$,
+then $\BZero$ is unstable.
+\end{itemize}
+
+
+
 \begin{xexample}
 Consider the linear map \eqref{eqn:linearmapmdim} with
 \begin{equation}
@@ -5728,10 +5779,11 @@ The general solution is
           c_2 r^n\left(\BA\cos(n\theta) - \BB\sin(n\theta)\right) +
           c_3 r^n\left(\BA\sin(n\theta) + \BB\cos(n\theta)\right) 
 \end{equation}
-Since $|\lambda_j| < 1$ for $j=1,2,3$, the origin is an
+Since
+$|\lambda_j| < 1$ for $j=1,2,3$,
+the origin is an
 asymptotically stable fixed point.
 \end{xexample}
-
 
 \subsection*{Converting Higher Order Maps to First Order Systems.}
 
@@ -5798,6 +5850,8 @@ the new state vector is $(x(n),y(n),a(n),b(n),c(n))$, and the map is
 \end{equation}
 \end{xexample}
 
+\newpage
+
 \begin{exercises}
 \begin{exercise}
 Find the general solution to the linear map with coefficient matrix
@@ -5818,6 +5872,31 @@ Find the general solution to the linear map with coefficient matrix
               2         &  0  &  \frac{1}{2}
        \end{bmatrix}
 \end{equation}
+\end{exercise}
+\begin{exercise}
+For each of the following matrices,
+use a computer program to find the
+eigenvalues of the matrix, and determine
+the stability of the fixed point $\BZero$
+for the discrete system $\BX(n+1) = A\BX(n)$.
+\begin{enumerate}
+\item[(a)]
+$\ds A  =  \begin{bmatrix}
+              0    &  2 & 1 & 1 \\
+              0.75 &  0 & 0 & 0 \\
+              0    &  1 & 0 & 0 \\
+              0    &  0 & 1 & 0
+              
+           \end{bmatrix}$
+\item[(a)]
+$\ds A  =  \begin{bmatrix}
+              .3   &  .2 & .1 & .1 \\
+              0 &  .2 &  .3 & 0 \\
+              0    &  0 & .7 & .3 \\
+              0.1    &  0 & 0.5 & 0.3
+              
+           \end{bmatrix}$
+\end{enumerate}
 \end{exercise}
 \begin{exercise}
 Find the general solution to the linear map with coefficient matrix
