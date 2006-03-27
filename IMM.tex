@@ -4957,33 +4957,34 @@ for $S$ and $I$, and then infer the behavior of $R$ afterwards.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\chapter{Discrete Maps}
+\chapter{Linear Discrete Maps}
 %
-\section{Modeling with Discrete Maps}
+% \section{Modeling with Discrete Maps}
 %
-\emph{To do:} Introduce modeling with maps;
-define the \emph{order}\index{order} of a map; ...
+% \emph{To do:} Introduce modeling with maps;
+% define the \emph{order}\index{order} of a map; ...
 \section{One-Dimensional Maps}
 \label{sec:OneDimMaps}
 We begin with the simplest model of population growth.
 Suppose, for example, a population increases by 15 percent each
 year.
-Let $p_n$ be the population at the end of year $n$, and assume that
-$p_0$ is given.
+Let $p(n)$ be the population at the end of year $n$, and assume that
+$p(0)$ is given.
 Then an increase of 15 percent each year gives
 \begin{equation}
-  p_{n+1} = 1.15p_n.
+  p(n+1) = 1.15p(n).
   \label{eqn:pop}
 \end{equation}
-If $p_0=100$, then $p_1 = 1.15(100) = 115$,
-$p_2 = 1.15(115) = 132.3$, $p_3 = 1.15(132.3) = 152.1$, and so on. 
+If $p(0)=100$, then $p(1) = 1.15(100) = 115$,
+$p(2) = 1.15(115) = 132.3$, $p(3) = 1.15(132.3) = 152.1$, and so on. 
 Table~\ref{tbl:popdata} shows the first nine iterations of
 this process.
+The data is plotted in Figure~\ref{fig:popdataplot}.
 \begin{table}[h]
 \centerline{%
 \begin{tabular}{|c|l|c|l|}
 \hline
- $n$  &  $p_n$ & $n$ & $p_n$ \\ 
+ $n$  &  $p(n)$ & $n$ & $p(n)$ \\ 
 \hline
   0  & 100.0  & 5 & 201.1 \\ 
 \hline
@@ -4999,27 +5000,27 @@ this process.
 \vspace{0.25cm}
 }
 \caption{Iteration of the map~\eqref{eqn:pop}, with
-$p_0=100$.}
+$p(0)=100$.}
 \label{tbl:popdata}
 \end{table}
-The data is plotted in Figure~\ref{fig:popdataplot}.
+
 \begin{figure}
 \centerline{%
-\includegraphics{matlab_map1d/popdataplot.eps}
+\includegraphics[width=3.25in]{matlab_map1d/popdataplot.eps}
 }
 \caption{Plot of the data for the simple population growth
 model~\eqref{eqn:pop}.  The data is in Table~\ref{tbl:popdata}.}
 \label{fig:popdataplot}
 \end{figure}
 
-We derive a formula for $p_n$ by noting that
+We derive a formula for $p(n)$ by noting that
 \begin{equation}
 \begin{split}
-   p_1 & = 1.15p_0 \\
-   p_2 & = 1.15p_1 = (1.15)^2 p_0 \\
-   p_3 & = 1.15p_2 = (1.15)^3 p_0 \\
+   p(1) & = 1.15p(0) \\
+   p(2) & = 1.15p_1 = (1.15)^2 p(0) \\
+   p(3) & = 1.15p_2 = (1.15)^3 p(0) \\
        & \vdots \\
-   p_n & = (1.15)^n p_0
+   p(n) & = (1.15)^n p(0)
 \end{split}
 \end{equation}
 Thus we have the familiar ``exponential growth'' of the
@@ -5028,11 +5029,11 @@ population.
 More generally, the same argument shows that the solution
 to
 \begin{equation}
-   p_{n+1} = a p_n,
+   p(n+1) = a p(n),
 \end{equation}
-given $p_0$, is
+given $p(0)$, is
 \begin{equation}
-   p_n = a^k p_0.
+   p(n) = a^k p(0).
 \label{eqn:psol}
 \end{equation}
 
@@ -5056,180 +5057,65 @@ The term $e^r$ is analogous to $a$, and $t$ is analogous to $n$.
 
 Let's rewrite \eqref{eqn:pop} as
 \begin{equation}
-  p_{n+1} = (1 + 0.15)p_n = p_n + 0.15p_n
+  p(n+1) = (1 + 0.15)p(n) = p(n) + 0.15p(n)
 \end{equation}
 or
 \begin{equation}
-  p_{n+1} - p_{n} = 0.15p_n .
+  p(n+1) - p(n) = 0.15p(n) .
 \end{equation}
 This form of the equation expresses the
 \emph{discrete change} in
-$p_n$ as a function of $p_n$.
+$p(n)$ as a function of $p(n)$.
 (Such an equation is often called a \emph{difference equation}.)
 Compare this to equation~\eqref{eqn:contpop}, which gives the
 \emph{instantaneous rate of change} of $p$ as a function
 of $p$.
 
-\subsection*{One-dimensional Maps}
-The general one-dimensional map has the form
-\begin{equation}
-   x_{n+1} = f(x_n), \quad \textrm{given $x_0$}.
-\label{eqn:onedmap}
-\end{equation}
-We'll develop several tools for studying such maps.
 
-
-\subsection*{``Cobwebbing'': The Graphical Iteration Procedure}
-There is a simple graphical procedure for generating the
-iterations of a one-dimensional map.
-As an example, we consider the logistic map
-\begin{equation}
-   x_{n+1} = rx_n(1-x_n)
-\label{eqn:logisticmap}
-\end{equation}
-where $r > 0$ is a constant.
-Table~\ref{tbl:data} shows the first few iterates in the
-sequence that results when
-$r=2.8$ and $x_0=0.1$.
-\begin{table}
-\centerline{%
-\begin{tabular}{|c|l|c|l|}
-\hline
- $n$  &  $x_n$ & $n$ & $x_n$ \\ 
-\hline
-  0  &  0.1    & 5 & 0.6771 \\ 
-\hline
-  1 &  0.2520  & 6 & 0.6122 \\ 
-\hline
-  2 &  0.5278  & 7 & 0.6648 \\ 
-\hline
-  3 &  0.6978  & 8 & 0.6240 \\ 
-\hline
-  4 &  0.5904  & 9 & 0.6570 \\ 
-\hline
-\end{tabular}
-\vspace{0.25cm}
-}
-\caption{Iteration of the logistic map~\eqref{eqn:logisticmap}, with
-$r=2.8$ and $x_0=0.1$.}
-\label{tbl:data}
-\end{table}
-%
-Figure~\ref{fig:logistic_ts} shows the plot of $x_n$ as a function
-of $n$.
-%
-\begin{figure}
-\centerline{\includegraphics{matlab_map1d/logisticmap_timeseries.eps}}
-\caption{The first several iterates of the logistic map~\eqref{eqn:logisticmap}
-with $r=2.8$ and $x_0=0.1$. This is a plot of the data shown
-in Table~\ref{tbl:data}.}
-\label{fig:logistic_ts}
-\end{figure}
-%
-
-The graphical technique for finding the iterations of this map
-begins by plotting the graph of the $f(x) = rx(1-x)$, as in
-Figure~\ref{fig:logisticmap_example} (where $r=2.8$).
-Given $x_0$, we draw a line from the $x=x_0$ on the $x$
-axis up the the graph of $x_0$ to obtain $x_1$.
-To obtain $x_2$, we need to go to $x=x_1$ on the $x$ axis.
-This can be done by drawing a line horizontally from
-$(x_0,x_1)$ to the line $y=x$.
-See the upper left plot of Figure~\ref{fig:cobwebsequence}.
-To find $x_2$, we again draw a line vertically
-at $x=x_1$ to the graph, and from the graph we draw a 
-line horizontally to $y=x$.
-See the upper right plot of Figure~\ref{fig:cobwebsequence}.
-We continue this process to generate further iterations,
-as in the lower left and right plots of
-Figure~\ref{fig:cobwebsequence}.
-In these plots, I've included vertical lines from the $x$ axis
-up to the graph, but we don't really need these lines.
-In practice, the procedure is: 
-draw a line vertically
-to the graph, then 
-draw a line horizontally to $y=x$,  and then repeat
-the process.
-An example is shown in Figure~\ref{fig:cobwebfinal}.
-
-\begin{figure}
-\centerline{\includegraphics[width=3in]{matlab_map1d/logisticmap_example.eps}}
-\caption{A graph of the logistic map $rx(1-x)$ for $r=2.8$.}
-\label{fig:logisticmap_example}
-\end{figure}
-%
-\begin{figure}
-\centerline{%
-\includegraphics[width=2.65in]{matlab_map1d/logisticmap_cobweb1.eps}
-\includegraphics[width=2.65in]{matlab_map1d/logisticmap_cobweb2.eps}
-}
-\centerline{%
-\includegraphics[width=2.65in]{matlab_map1d/logisticmap_cobweb3.eps}
-\includegraphics[width=2.65in]{matlab_map1d/logisticmap_cobweb4.eps}
-}
-\caption{A sequence of plots that illustrate
-``cobwebbing''. The initial point is $x_0=0.1$.}
-\label{fig:cobwebsequence}
-\end{figure}
-%
-\begin{figure}
-\centerline{%
-\includegraphics[width=3.25in]{matlab_map1d/logisticmap_cobwebfinal.eps}
-}
-\caption{When cobwebbing, we usually don't bother dropping
-lines down to the horizontal axis. After the first vertical
-line is drawn from $(x_0,x_0)$ to the graph, we draw
-a line horizontally to the line
-$y=x$, and then another line vertically to graph, and repeat.
-This cobweb plot shows
-the same data listed in Table~\ref{tbl:data} and plotted in
-Figure~\ref{fig:logistic_ts}.}
-\label{fig:cobwebfinal} 
-\end{figure}
-%
 %\newpage
-\subsection*{Linear Maps}
-
-A \emph{linear} one-dimensional map is
-\begin{equation}
-   x_{n+1} = a x_n
-\end{equation}
-where $a$ is a constant.
-(The population model \eqref{eqn:pop}
-is an example.)
-The solution is
-\begin{equation}
-   x_n = a^n x_0.
-\end{equation}
-Let's look at how the behavior of the solution
-depends on $a$.
+% \subsection*{Linear Maps}
+% 
+% A \emph{linear} one-dimensional map is
+% \begin{equation}
+%    x_{n+1} = a x_n
+% \end{equation}
+% where $a$ is a constant.
+% (The population model \eqref{eqn:pop}
+% is an example.)
+% The solution is
+% \begin{equation}
+%    x_n = a^n x_0.
+% \end{equation}
+Consider how the behavior of the solution
+to \eqref{eqn:psol} depends on $a$.
 \begin{enumerate}
 \item If $a > 1$, then $a^n > 0$, and $a^n$ increases without
-bound as $n$ increases. So $x_n$ grows exponentially.
-\item If $a = 1$, then $a^n=1$ for all $n$, so $x_n = x_0$.
+bound as $n$ increases. So $p(n)$ grows exponentially.
+\item If $a = 1$, then $a^n=1$ for all $n$, so $p(n) = p(0)$.
 \item If $0 < a < 1$, then $a^n > 0$, and $a^n$ approaches
-zero as $n$ increases; $x_n$ decays to zero monotonically.
-\item If $a=0$, then $x_n=0$ for all $n > 0$.
+zero as $n$ increases; $p(n)$ decays to zero monotonically.
+\item If $a=0$, then $p(n)=0$ for all $n > 0$.
 \item If $-1 < a < 0$, then $a^n$ alternates sign, and
 $a^n$ approaches zero as $n$ increases;
-$x_n$  decays to zero while alternating sign.
+$p(n)$  decays to zero while alternating sign.
 \item If $a = -1$, then $a^n = (-1)^n$, which is $1$ if $n$
-is even and $-1$ if $n$ is odd.  Thus $x_n$ alternates
-between $x_0$ and $-x_0$.
+is even and $-1$ if $n$ is odd.  Thus $p(n)$ alternates
+between $p(0)$ and $-p(0)$.
 \item If $a < -1$, then $a^n$ alternates sign,
 and $|a^n|$ increases without bound as $n$ increases.
-So $x_n$ alternates sign while $|x_n|$ grows exponentially.
+So $p(n)$ alternates sign while $|p(n)|$ grows exponentially.
 \end{enumerate}
-Overall, the magnitude of $x_n$ \emph{grows if} $|a| > 1$,
+Overall, the magnitude of $p(n)$ \emph{grows if} $|a| > 1$,
 and \emph{decays if} $|a| < 1$.
 Figures~\ref{fig:linearcases_pos}
-and \ref{fig:linearcases_neg} show sample plots of $x_n$
-and cobweb diagrams for the various cases.
+and \ref{fig:linearcases_neg} show sample plots of $p(n)$
+% and cobweb diagrams
+for the various cases.
 \begin{figure}
 \centerline{%
 \includegraphics[width=4.25in]{matlab_map1d/linearcases_pos.eps}
 }
-\caption{Examples of linear maps, $a \ge 0$. In all cases, $x_0=10$.}
+\caption{Examples of linear maps, $a \ge 0$. In all cases, $p(0)=10$.}
 \label{fig:linearcases_pos}
 \end{figure}
 %
@@ -5237,177 +5123,13 @@ and cobweb diagrams for the various cases.
 \centerline{%
 \includegraphics[width=4.25in]{matlab_map1d/linearcases_neg.eps}
 }
-\caption{Examples of linear maps, $a < 0$. In all cases, $x_0=10$.}
+\caption{Examples of linear maps, $a < 0$. In all cases, $p(0)=10$.}
 \label{fig:linearcases_neg}
 \end{figure}
 %
-%
-\subsection*{Fixed Points, Stability, Linearization}
-A \emph{fixed point}\index{fixed point} of the map \eqref{eqn:onedmap}
-is a point $x^*$ where $f(x^*)=x^*$.
-If $x_0=x^*$, then $x_n=x^*$ for all $n>0$, so the fixed points
-of $f$ are the constant solutions to \eqref{eqn:onedmap}.
-
-In the logistic map shown in Figure~\ref{fig:logisticmap_example},
-we see there are two
-points where $f(x)=x$.  These are the points
-where the graph of $f$ crosses the line $y=x$.
-For the example shown in Figure~\ref{fig:logisticmap_example},
-the graph is $f(x) = 2.8x(1-x)$, so to find the fixed points,
-we must solve
-\begin{equation}
-  2.8x(1-x) = x \implies -2.8x^2 + 1.8x = 0
-  \implies x = 0 \;\textrm{or}\; x = \frac{1.8}{2.8}
-\end{equation}
-So the two fixed points are $x=0$ and $x=\frac{1.8}{2.8}\approx 0.643$.
-
-\begin{definition}
-The fixed point $x^*$ is a \emph{sink} or \emph{attractor}
-if there is a neighborhood $N$ of $x^*$ such that
-$x_n\rightarrow x^*$ for all $x_0$ in $N$.
-We also say $x^*$ is \emph{asymptotically stable}.
-\end{definition}
-\begin{definition}
-The fixed point $x^*$ is a \emph{source} or \emph{repellor}
-if there is a neighborhood $N$ of $x^*$ such that if $x_0$
-is in $N$, then $x_n$ eventually leaves $N$.
-\end{definition}
-\begin{definition}
-The fixed point $x^*$ is \emph{unstable} if for every
-neighborhood $N$ of $x^*$, there are points arbitrarily close
-to $x^*$ whose iterates leave $N$.
-\end{definition}
-
-\vspace{0.2cm}
-Note that a source is unstable, but an unstable fixed point
-is not necessarily a source.  See, for example,
-Figure~\ref{fig:noconclusion1}.
-
-\noindent
-\textbf{Behavior near a fixed point: the linearization.}
-Let $x^*$ be a fixed point of \eqref{eqn:onedmap}.
-If $x$ is close to $x^*$,
-we can approximate $f(x)$ with the tangent line at $x^*$:
-\begin{equation}
-   f(x) \approx f(x^*) + f'(x^*)(x-x^*).
-\end{equation}
-Let $u_n = x_n-x^*$ (i.e. $x_n = x^* + u_n$).
-Then, by replacing $x_n$ with $x^*+u_n$
-in \eqref{eqn:onedmap}, we obtain
-\begin{equation}
-  x^* + u_{n+1} = f(x^*+u_n) \approx f(x^*)+f'(x^*)u_n.
-\end{equation}
-Since $f(x^*)=x^*$, we can cancel $x^*$ on the left
-and $f(x^*)$ on the right.
-We are left with the
-\emph{linearization of the map at } $x^*$:
-\begin{equation}
-  u_{n+1} = f'(x^*)u_n
-\end{equation}
-This is a linear map.
-We have already seen how the solution to the linear
-map depends on $a=f'(x^*)$; see Figures~\ref{fig:linearcases_pos}
-and \ref{fig:linearcases_neg}.
-However, the linearization is just an approximation
-to the actual map~\eqref{eqn:onedmap}.
-The following theorem tells us when the linear approximation
-is ``good enough'' to classify the stability of the
-fixed point $x^*$ of \eqref{eqn:onedmap}.
-
-\begin{theorem}
-(i) If $|f'(x^*)| < 1$, then $x^*$ is a sink.
-(ii) If $|f'(x^*)| > 1$, then $x^*$ is a source.
-\end{theorem}
-
-\begin{xexample}
-Consider again the logistic map \eqref{eqn:logisticmap}
-with $r=2.8$.  The graph is shown in
-Figure~\ref{fig:logisticmap_example}, and earlier we found the
-fixed points to be $x^*_1=0$ and $x^*_2=\frac{1.8}{2.8}$.
-We find
-\begin{equation}
-  f'(x) = 2.8(1-2x).
-\end{equation}
-We use Theorem 1 to determine the stability of the fixed points.
-\begin{itemize}
-\item
-At $x^*_1$, we have $f'(0) = 2.8 > 1$, so by Theorem 1,
-$x^*_1$ is a source.
-\item
-At $x^*_2$, we have $f'(1.8/2.8) = -0.8$,
-so by Theorem 1,
-$x^*_2$ is a sink.
-\end{itemize}
-\end{xexample}
-
-\bigskip
-If $|f'(x^*)|=1$, we can not make any conclusions about the
-stability of the fixed point.  Examples demonstrating why this
-is the case are shown in Figures~\ref{fig:noconclusion2},
-\ref{fig:noconclusion3}
-and \ref{fig:noconclusion1}.
-%
-\begin{figure}
-\centerline{%
-\includegraphics[width=2.25in]{matlab_map1d/noconclusion2.eps}%
-}
-\caption{An example that shows why we can not determine
-the stability of a fixed point based on the linearization
-when
-$|f'(x^*)|=1$.  The fixed point is $x^*=0$, and $f'(x^*)=1$.
-In this case, $x^*$ is a source.}
-\label{fig:noconclusion2}
-\end{figure}
-%
-\begin{figure}
-\centerline{%
-\includegraphics[width=2.25in]{matlab_map1d/noconclusion3.eps}%
-}
-\caption{An example that shows why we can not determine
-the stability of a fixed point based on the linearization
-when
-$|f'(x^*)|=1$.  The fixed point is $x^*=0$, and $f'(x^*)=1$.
-In this case, $x^*$ is a sink.}
-\label{fig:noconclusion3}
-\end{figure}
-%
-\begin{figure}
-\centerline{%
-\includegraphics[width=2.25in]{matlab_map1d/noconclusion1.eps}%
-}
-\caption{Another example that shows why we can not determine
-the stability of a fixed point based on the linearization
-when
-$|f'(x^*)|=1$.  In this case, $x^*=1/2$ is a fixed point,
-and $f'(x^*)=1$.
-The iterations of points close to but less than $x^*$
-converge to $x^*$, but iterations of points that are
-greater than $x^*$ diverge from $x^*$.
-In this case, $x^*$ is unstable (but it is not a source).
-}
-\label{fig:noconclusion1}
-\end{figure}
-
-%
-\section{A Bit of Chaos}
-We give a brief demonstration of \emph{chaos}.\index{chaos}
-A thorough analysis of this phenomenon would lead us too far
-astray, but it is important to know that chaos is a possible
-(and, in fact, common) behavior of even very simple
-discrete maps.
-As an example, we consider
-\begin{equation}
-   x_{n+1} = 4x_n(1-x_n).
-\end{equation}
-This is the logistic map with the parameter set to 4.
-
-\emph{Describe solutions; philosophical implications: solutions
-do not converge to stable fixed points or periodic solutions.}
-%
-%
 
 \newpage
-\section{Linear 2D Maps}
+\section{Two-Dimensional Maps}
 
 We consider the linear maps of the plane
 \begin{equation}
@@ -5753,6 +5475,8 @@ $\theta=\pi/3$.
 \label{fig:Lin2DMapExampleComplexrz}
 \end{figure}
 
+\newpage
+
 \subsection*{Summary for the 2D Linear Maps.}
 We summarize the general solution and stability results
 for the two-dimensional linear maps~\eqref{eqn:linearmap}.
@@ -5792,6 +5516,7 @@ $\BZero$ is \emph{unstable}.
 $\BZero$ is a \emph{source} or \emph{repellor}.
 \end{itemize}
 
+\medskip
 \subsection*{Affine 2D Systems}
 We point out here that it is no harder to solve the
 system
@@ -5927,16 +5652,16 @@ fixed point and classify its type and stability.
 
 \newpage
 
-\section{Higher Dimensional Maps}
+\section{Higher Dimensional Linear Maps}
 %
-Most of what we have discussed so far applies to
-higher dimensional maps of the form
-\begin{equation}
-  \BX(n+1) = \BF(\BX(n))
-\end{equation}
-where $\BX \in \Real^n$. etc...
+% Most of what we have discussed so far applies to
+% higher dimensional maps of the form
+% \begin{equation}
+%   \BX(n+1) = \BF(\BX(n))
+% \end{equation}
+% where $\BX \in \Real^n$. etc...
 
-\subsection*{Linear $m$ dimensional maps.}
+% \subsection*{Linear $m$ dimensional maps.}
 A linear $m$-dimensional map with constant coefficients has the form
 \begin{equation}
   \BX(n+1) = A\BX(n)
@@ -6020,20 +5745,20 @@ step $n+1$ depends only on the state at step $n$.
 \begin{xexample}
 Suppose we have the map
 \begin{equation}
-   x(n+1) = f(x(n),x(n-1),x(n-2)).
+   x(n+1) = 3x(n)-x(n-1)+2x(n-2).
 \end{equation}
 We define
 \begin{equation}
 \begin{split}
-   a(n+1) & = x(n), \\
-   b(n+1) & = a(n). \\
+   a(n) & = x(n-1), \\
+   b(n) & = a(n-1) = x(n-2). \\
 \end{split}
 \end{equation}
-Then we have $x(n-1) = a(n)$ and $x(n-2) = b(n)$.
+% Then we have $x(n-1) = a(n)$ and $x(n-2) = b(n)$.
 The map can now be written
 \begin{equation}
 \begin{split}
-   x(n+1) & = f(x(n),a(n),b(n)), \\
+   x(n+1) & = 3x(n)-a(n)+2b(n)), \\
    a(n+1) & = x(n), \\
    b(n+1) & = a(n). \\
 \end{split}
@@ -6045,28 +5770,28 @@ and the state at step $n+1$ is a function of the state at step $n$ only.
 Now consider the system
 \begin{equation}
 \begin{split}
-   x(n+1) & = f(x(n),x(n-1),x(n-2),y(n),y(n-1)), \\
-   y(n+1) & = g(x(n),x(n-1),x(n-2),y(n),y(n-1)). \\
+   x(n+1) & = x(n)+x(n-1)+3x(n-2)-y(n),-2y(n-1), \\
+   y(n+1) & = -x(n)-3x(n-1)-5x(n-2)+2y(n)+y(n-1). \\
 \end{split}
 \end{equation}
 We define
 \begin{equation}
 \begin{split}
-   a(n+1) & = x(n), \\
-   b(n+1) & = a(n), \\
-   c(n+1) & = y(n). \\
+   a(n) & = x(n-1), \\
+   b(n) & = a(n-1) x(n-2), \\
+   c(n) & = y(n-1). \\
 \end{split}
 \end{equation}
 
-Then we have $x(n-1) = a(n)$, $x(n-2) = b(n)$,
-and $y(n-1) = c(n)$.
+% Then we have $x(n-1) = a(n)$, $x(n-2) = b(n)$,
+% and $y(n-1) = c(n)$.
 
 With these definitions,
 the new state vector is $(x(n),y(n),a(n),b(n),c(n))$, and the map is
 \begin{equation}
 \begin{split}
-   x(n+1) & = f(x(n),a(n),b(n),y(n),c(n)), \\
-   y(n+1) & = g(x(n),a(n),b(n),y(n),c(n)), \\
+   x(n+1) & = x(n) + a(n) + 3b(n) - y(n) - 2c(n), \\
+   y(n+1) & = -x(n) - 3a(n) - 5b(n) + 2y(n) + c(n), \\
    a(n+1) & = x(n), \\
    b(n+1) & = a(n), \\
    c(n+1) & = y(n).
@@ -6076,11 +5801,50 @@ the new state vector is $(x(n),y(n),a(n),b(n),c(n))$, and the map is
 
 \begin{exercises}
 \begin{exercise}
+Find the general solution to the linear map with coefficient matrix
+\begin{equation}
+   A = \begin{bmatrix}
+            \frac{1}{2} &  1  &  0 \\
+              0         & -\frac{1}{2}  &  0 \\
+              0         &  1  &  2
+       \end{bmatrix}
+\end{equation}
+\end{exercise}
+\begin{exercise}
+Find the general solution to the linear map with coefficient matrix
+\begin{equation}
+   A = \begin{bmatrix}
+            \frac{1}{2} &  0  &  -2 \\
+              0         & -\frac{1}{2}  &  0 \\
+              2         &  0  &  \frac{1}{2}
+       \end{bmatrix}
+\end{equation}
+\end{exercise}
+\begin{exercise}
+Find the general solution to the linear map with coefficient matrix
+\begin{equation}
+   A = \begin{bmatrix}
+              0    &  2 &  2   &  1 \\
+              0.25 &  0 &  0   &  0 \\
+              0    &  1 &  0   &  0 \\
+              0    &  0 &  0.5 &  0
+       \end{bmatrix}
+\end{equation}
+(You may use a computer to find the eigenvalues and eigenvectors.)
+\end{exercise}
+\begin{exercise}
+Convert the map
+\begin{equation}
+   x(n+1) = x(n)/2 + x(n-1)/4
+\end{equation}
+into a higher dimensional first order map.
+\end{exercise}
+\begin{exercise}
 Convert the map
 \begin{equation}
 \begin{split}
-   x(n+1) & = f(x(n),y(n-1)) \\
-   y(n+1) & = g(x(n),x(n-1),y(n))
+   x(n+1) & = 3x(n)-5y(n-1) \\
+   y(n+1) & = x(n)-x(n-1)+2y(n)
 \end{split}
 \end{equation}
 into a higher dimensional first order map.
@@ -6328,6 +6092,299 @@ for the populations of each stage.
 \noindent
 \emph{These models are analyzed using the same techniques
 as for the Leslie models.}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Nonlinear Maps}
+\subsection*{One-dimensional Maps}
+The general one-dimensional map has the form
+\begin{equation}
+   x_{n+1} = f(x_n), \quad \textrm{given $x_0$}.
+\label{eqn:onedmap}
+\end{equation}
+We'll develop several tools for studying such maps.
+
+
+\subsection*{``Cobwebbing'': The Graphical Iteration Procedure}
+There is a simple graphical procedure for generating the
+iterations of a one-dimensional map.
+As an example, we consider the logistic map
+\begin{equation}
+   x_{n+1} = rx_n(1-x_n)
+\label{eqn:logisticmap}
+\end{equation}
+where $r > 0$ is a constant.
+Table~\ref{tbl:data} shows the first few iterates in the
+sequence that results when
+$r=2.8$ and $x_0=0.1$.
+\begin{table}
+\centerline{%
+\begin{tabular}{|c|l|c|l|}
+\hline
+ $n$  &  $x_n$ & $n$ & $x_n$ \\ 
+\hline
+  0  &  0.1    & 5 & 0.6771 \\ 
+\hline
+  1 &  0.2520  & 6 & 0.6122 \\ 
+\hline
+  2 &  0.5278  & 7 & 0.6648 \\ 
+\hline
+  3 &  0.6978  & 8 & 0.6240 \\ 
+\hline
+  4 &  0.5904  & 9 & 0.6570 \\ 
+\hline
+\end{tabular}
+\vspace{0.25cm}
+}
+\caption{Iteration of the logistic map~\eqref{eqn:logisticmap}, with
+$r=2.8$ and $x_0=0.1$.}
+\label{tbl:data}
+\end{table}
+%
+Figure~\ref{fig:logistic_ts} shows the plot of $x_n$ as a function
+of $n$.
+%
+\begin{figure}
+\centerline{\includegraphics{matlab_map1d/logisticmap_timeseries.eps}}
+\caption{The first several iterates of the logistic map~\eqref{eqn:logisticmap}
+with $r=2.8$ and $x_0=0.1$. This is a plot of the data shown
+in Table~\ref{tbl:data}.}
+\label{fig:logistic_ts}
+\end{figure}
+%
+
+The graphical technique for finding the iterations of this map
+begins by plotting the graph of the $f(x) = rx(1-x)$, as in
+Figure~\ref{fig:logisticmap_example} (where $r=2.8$).
+Given $x_0$, we draw a line from the $x=x_0$ on the $x$
+axis up the the graph of $x_0$ to obtain $x_1$.
+To obtain $x_2$, we need to go to $x=x_1$ on the $x$ axis.
+This can be done by drawing a line horizontally from
+$(x_0,x_1)$ to the line $y=x$.
+See the upper left plot of Figure~\ref{fig:cobwebsequence}.
+To find $x_2$, we again draw a line vertically
+at $x=x_1$ to the graph, and from the graph we draw a 
+line horizontally to $y=x$.
+See the upper right plot of Figure~\ref{fig:cobwebsequence}.
+We continue this process to generate further iterations,
+as in the lower left and right plots of
+Figure~\ref{fig:cobwebsequence}.
+In these plots, I've included vertical lines from the $x$ axis
+up to the graph, but we don't really need these lines.
+In practice, the procedure is: 
+draw a line vertically
+to the graph, then 
+draw a line horizontally to $y=x$,  and then repeat
+the process.
+An example is shown in Figure~\ref{fig:cobwebfinal}.
+
+\begin{figure}
+\centerline{\includegraphics[width=3in]{matlab_map1d/logisticmap_example.eps}}
+\caption{A graph of the logistic map $rx(1-x)$ for $r=2.8$.}
+\label{fig:logisticmap_example}
+\end{figure}
+%
+\begin{figure}
+\centerline{%
+\includegraphics[width=2.65in]{matlab_map1d/logisticmap_cobweb1.eps}
+\includegraphics[width=2.65in]{matlab_map1d/logisticmap_cobweb2.eps}
+}
+\centerline{%
+\includegraphics[width=2.65in]{matlab_map1d/logisticmap_cobweb3.eps}
+\includegraphics[width=2.65in]{matlab_map1d/logisticmap_cobweb4.eps}
+}
+\caption{A sequence of plots that illustrate
+``cobwebbing''. The initial point is $x_0=0.1$.}
+\label{fig:cobwebsequence}
+\end{figure}
+%
+\begin{figure}
+\centerline{%
+\includegraphics[width=3.25in]{matlab_map1d/logisticmap_cobwebfinal.eps}
+}
+\caption{When cobwebbing, we usually don't bother dropping
+lines down to the horizontal axis. After the first vertical
+line is drawn from $(x_0,x_0)$ to the graph, we draw
+a line horizontally to the line
+$y=x$, and then another line vertically to graph, and repeat.
+This cobweb plot shows
+the same data listed in Table~\ref{tbl:data} and plotted in
+Figure~\ref{fig:logistic_ts}.}
+\label{fig:cobwebfinal} 
+\end{figure}
+%
+
+
+%
+\subsection*{Fixed Points, Stability, Linearization}
+A \emph{fixed point}\index{fixed point} of the map \eqref{eqn:onedmap}
+is a point $x^*$ where $f(x^*)=x^*$.
+If $x_0=x^*$, then $x_n=x^*$ for all $n>0$, so the fixed points
+of $f$ are the constant solutions to \eqref{eqn:onedmap}.
+
+In the logistic map shown in Figure~\ref{fig:logisticmap_example},
+we see there are two
+points where $f(x)=x$.  These are the points
+where the graph of $f$ crosses the line $y=x$.
+For the example shown in Figure~\ref{fig:logisticmap_example},
+the graph is $f(x) = 2.8x(1-x)$, so to find the fixed points,
+we must solve
+\begin{equation}
+  2.8x(1-x) = x \implies -2.8x^2 + 1.8x = 0
+  \implies x = 0 \;\textrm{or}\; x = \frac{1.8}{2.8}
+\end{equation}
+So the two fixed points are $x=0$ and $x=\frac{1.8}{2.8}\approx 0.643$.
+
+\begin{definition}
+The fixed point $x^*$ is a \emph{sink} or \emph{attractor}
+if there is a neighborhood $N$ of $x^*$ such that
+$x_n\rightarrow x^*$ for all $x_0$ in $N$.
+We also say $x^*$ is \emph{asymptotically stable}.
+\end{definition}
+\begin{definition}
+The fixed point $x^*$ is a \emph{source} or \emph{repellor}
+if there is a neighborhood $N$ of $x^*$ such that if $x_0$
+is in $N$, then $x_n$ eventually leaves $N$.
+\end{definition}
+\begin{definition}
+The fixed point $x^*$ is \emph{unstable} if for every
+neighborhood $N$ of $x^*$, there are points arbitrarily close
+to $x^*$ whose iterates leave $N$.
+\end{definition}
+
+\vspace{0.2cm}
+Note that a source is unstable, but an unstable fixed point
+is not necessarily a source.  See, for example,
+Figure~\ref{fig:noconclusion1}.
+
+
+
+
+
+\noindent
+\textbf{Behavior near a fixed point: the linearization.}
+Let $x^*$ be a fixed point of \eqref{eqn:onedmap}.
+If $x$ is close to $x^*$,
+we can approximate $f(x)$ with the tangent line at $x^*$:
+\begin{equation}
+   f(x) \approx f(x^*) + f'(x^*)(x-x^*).
+\end{equation}
+Let $u_n = x_n-x^*$ (i.e. $x_n = x^* + u_n$).
+Then, by replacing $x_n$ with $x^*+u_n$
+in \eqref{eqn:onedmap}, we obtain
+\begin{equation}
+  x^* + u_{n+1} = f(x^*+u_n) \approx f(x^*)+f'(x^*)u_n.
+\end{equation}
+Since $f(x^*)=x^*$, we can cancel $x^*$ on the left
+and $f(x^*)$ on the right.
+We are left with the
+\emph{linearization of the map at } $x^*$:
+\begin{equation}
+  u_{n+1} = f'(x^*)u_n
+\end{equation}
+This is a linear map.
+We have already seen how the solution to the linear
+map depends on $a=f'(x^*)$; see Figures~\ref{fig:linearcases_pos}
+and \ref{fig:linearcases_neg}.
+However, the linearization is just an approximation
+to the actual map~\eqref{eqn:onedmap}.
+The following theorem tells us when the linear approximation
+is ``good enough'' to classify the stability of the
+fixed point $x^*$ of \eqref{eqn:onedmap}.
+
+\begin{theorem}
+(i) If $|f'(x^*)| < 1$, then $x^*$ is a sink.
+(ii) If $|f'(x^*)| > 1$, then $x^*$ is a source.
+\end{theorem}
+
+\begin{xexample}
+Consider again the logistic map \eqref{eqn:logisticmap}
+with $r=2.8$.  The graph is shown in
+Figure~\ref{fig:logisticmap_example}, and earlier we found the
+fixed points to be $x^*_1=0$ and $x^*_2=\frac{1.8}{2.8}$.
+We find
+\begin{equation}
+  f'(x) = 2.8(1-2x).
+\end{equation}
+We use Theorem 1 to determine the stability of the fixed points.
+\begin{itemize}
+\item
+At $x^*_1$, we have $f'(0) = 2.8 > 1$, so by Theorem 1,
+$x^*_1$ is a source.
+\item
+At $x^*_2$, we have $f'(1.8/2.8) = -0.8$,
+so by Theorem 1,
+$x^*_2$ is a sink.
+\end{itemize}
+\end{xexample}
+
+\bigskip
+If $|f'(x^*)|=1$, we can not make any conclusions about the
+stability of the fixed point.  Examples demonstrating why this
+is the case are shown in Figures~\ref{fig:noconclusion2},
+\ref{fig:noconclusion3}
+and \ref{fig:noconclusion1}.
+%
+\begin{figure}
+\centerline{%
+\includegraphics[width=2.25in]{matlab_map1d/noconclusion2.eps}%
+}
+\caption{An example that shows why we can not determine
+the stability of a fixed point based on the linearization
+when
+$|f'(x^*)|=1$.  The fixed point is $x^*=0$, and $f'(x^*)=1$.
+In this case, $x^*$ is a source.}
+\label{fig:noconclusion2}
+\end{figure}
+%
+\begin{figure}
+\centerline{%
+\includegraphics[width=2.25in]{matlab_map1d/noconclusion3.eps}%
+}
+\caption{An example that shows why we can not determine
+the stability of a fixed point based on the linearization
+when
+$|f'(x^*)|=1$.  The fixed point is $x^*=0$, and $f'(x^*)=1$.
+In this case, $x^*$ is a sink.}
+\label{fig:noconclusion3}
+\end{figure}
+%
+\begin{figure}
+\centerline{%
+\includegraphics[width=2.25in]{matlab_map1d/noconclusion1.eps}%
+}
+\caption{Another example that shows why we can not determine
+the stability of a fixed point based on the linearization
+when
+$|f'(x^*)|=1$.  In this case, $x^*=1/2$ is a fixed point,
+and $f'(x^*)=1$.
+The iterations of points close to but less than $x^*$
+converge to $x^*$, but iterations of points that are
+greater than $x^*$ diverge from $x^*$.
+In this case, $x^*$ is unstable (but it is not a source).
+}
+\label{fig:noconclusion1}
+\end{figure}
+
+
+%
+\section{A Bit of Chaos}
+We give a brief demonstration of \emph{chaos}.\index{chaos}
+A thorough analysis of this phenomenon would lead us too far
+astray, but it is important to know that chaos is a possible
+(and, in fact, common) behavior of even very simple
+discrete maps.
+As an example, we consider
+\begin{equation}
+   x_{n+1} = 4x_n(1-x_n).
+\end{equation}
+This is the logistic map with the parameter set to 4.
+
+\emph{Describe solutions; philosophical implications: solutions
+do not converge to stable fixed points or periodic solutions.}
+%
 
 \section{Linearization and Stability of Fixed Points}
 %

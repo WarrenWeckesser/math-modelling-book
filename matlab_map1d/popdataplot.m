@@ -17,7 +17,7 @@ function popdataplot
 
     axis([0 N-1 0 400])
     xlabel('n','fontsize',12,'fontweight','bold')
-    ylabel('p_n','fontsize',12,'fontweight','bold')
+    ylabel('p(n)','fontsize',12,'fontweight','bold')
     grid on
     set(gca,'fontsize',12,'fontweight','bold')
     x
