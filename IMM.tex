@@ -14,6 +14,7 @@
 %
 \newcommand{\BA}{\vec{\textbf{a}}}
 \newcommand{\BB}{\vec{\textbf{b}}}
+\newcommand{\BE}{\vec{\textbf{e}}}
 \newcommand{\BF}{\vec{\textbf{f}}}
 \newcommand{\BG}{\vec{\textbf{g}}}
 \newcommand{\BP}{\vec{\textbf{p}}}
@@ -5931,21 +5932,95 @@ into a higher dimensional first order map.
 
 \newpage
 
-\section{The Perron-Frobenius Theorem}\index{Perron-Frobenius Theorem}
+\section{Nonnegative Matrices and the Perron-Frobenius Theorem}\index{Perron-Frobenius Theorem}
 Many modeling problems result in linear maps
 in which all the entries of the matrix
 are nonnegative.
 In this section we discuss some of the theory
 associated with such linear maps.
 
-\emph{more discussion...}
+\begin{definition}
+An $m\times m$ matrix $A$ with entries $a_{ij}$ 
+is called \emph{positive} if $a_{ij} > 0$ for
+all entries in $A$.  We will write this as
+$A > 0$.\index{positive matrix}
+
+An $m\times m$ matrix $A$ with entries $a_{ij}$ 
+is called \emph{nonnegative} if $a_{ij} \ge 0$ for
+all entries in $A$.  We will write this as
+$A \ge 0$.\index{nonegative matrix}
+\end{definition}
+
+We state the following fundamental theorem without
+proof.
+\begin{theorem}
+\textrm{\textbf{[Perron's Theorem for Positive Matrices]}}.
+\index{Perron's Theorem}
+Suppose $A$ is positive.
+Then
+\begin{enumerate}
+\item $A$ has a real eigenvalue $\lambda_1>0$ with 
+a positive eigenvector $\BV_1$.
+\item $\lambda_1$ is a ``simple'' eigenvalue
+(i.e. $\lambda_1$ is a simple--not repeated--root
+of the characteristic polynomial of $A$),
+\item $|\lambda_j| < \lambda_1$ for all other eigenvalues
+$\lambda_j$.
+\item The columns of
+$\left(\frac{1}{\lambda_1}A\right)^n$ converge to
+multiples of $\BV_1$ as $n\rightarrow\infty$.
+\end{enumerate}
+\end{theorem}
+Why is this interesting?  The theorem says, in effect,
+that $A$ has a ``dominant'' eigenvalue.  Suppose, for
+convenience, that all the eigenvalues of $A$ are real
+and distinct.  Then the solution to the iteration
+$\BX(n+1) = A\BX(n)$ is
+\begin{equation}
+\begin{split}
+  \BX(n) & = c_1 \lambda_1^n \BV_1 + c_2 \lambda_2^n \BV_2
+                 + \cdots + c_m \lambda_m^n \BV_m \\
+           & = \lambda_1^n \left( c_1 \BV_1 
+	      + c_2 \left(\frac{\lambda_2}{\lambda_1}\right)^n \BV_2
+                 + \cdots 
+              + c_m \left(\frac{\lambda_m}{\lambda_1}\right)^n \BV_m \right) \\
+\end{split} 
+\end{equation}
+As $n$ increases, the expressions
+$\left(\frac{\lambda_j}{\lambda_1}\right)^n$
+converge to zero, since $|\lambda_j| < \lambda_1$.
+Thus, for large enough $n$, we have
+\begin{equation}
+   \BX(n) \approx c_1 \lambda_1^n \BV_1
+\end{equation}
+This means we can predict the long-term behavior
+by find the dominant eigenvalue and its (positive)
+eigenvector.
+
+The theorem just given is for \emph{positive} matrices.
+The matrices that arise in modeling problems, while
+nonnegative, are often not positive, so the theorem
+as stated will not be applicable.
+There is a class of nonnegative matrices for which the
+theorem \emph{does} apply.
 
 \begin{definition}
-A square $n\times n$ matrix $A$ is \emph{reducible}\index{reducible matrix}
+A nonnegative matrix $A$ is called
+\emph{primitive}\index{primitive matrix}
+if $A^k$ is positive for some integer $k > 0$.
+\end{definition}
+
+
+
+\medskip
+The following definition is a bit obtuse, but we will
+carify it shortly.
+\begin{definition}
+An $m\times m$ matrix $A$ is \emph{reducible}\index{reducible matrix}
 if the indices $1$, $2$, $\ldots$, $n$
 can be divided into two disjoint nonempty sets
 $i_1$, $i_2$, $\ldots$, $i_{\mu}$ and
-$j_1$, $j_2$, $\ldots$, $j_{\nu}$ (with $\mu+\nu = n$) such that
+$j_1$, $j_2$, $\ldots$, $j_{\nu}$ (with $\mu+\nu = m$) such that
 $a_{(i_{\alpha},j_{\beta})} =0$
 for $\alpha=1, 2, \ldots, \mu$ and
 $\beta = 1, 2, \ldots, \nu$.
@@ -6063,8 +6138,9 @@ If $A$ is an $n\times n$ nonnegative primitive matrix then
 The only difference in the conclusions of the two theorems
 is that in the second version, the inequality in the first
 conclusion is a strict inequality.
-
 %
+%
+\newpage
 %
 \section{Age-Structured Populations and Leslie Matrix Models}
 \index{Leslie matrix}
@@ -6145,7 +6221,10 @@ asymptotically.
 \noindent
 \emph{Discuss how, in the long term, the population
 distribution is determined by the dominant eigenvalue.}
-
+%
+%
+\newpage
+%
 \section{Stage-Structured Lefkovitch Models}
 \index{Lefkovitch models}
 Leslie models assume that development and maturity
@@ -6170,8 +6249,156 @@ for the populations of each stage.
 \noindent
 \emph{These models are analyzed using the same techniques
 as for the Leslie models.}
-
+%
+%
 \newpage
+%
+\section{Stochastic Matrices}
+\begin{definition}
+An $m\times m$ matrix $A$ is called \emph{stochastic}\index{stochastic matrix}
+if $A \ge 0$ and the sum of the entries
+of each column of $A$ is one.
+(Such a Matrix is also called a \emph{Markov matrix}.\index{Markov matrix})
+\end{definition}
+\begin{xexample}
+The following matrices are stochastic:
+\begin{equation}
+  A = \begin{bmatrix}
+          0.9 & 0.2 \\ 0.1 & 0.8
+      \end{bmatrix},
+  \quad
+  B = \begin{bmatrix}
+          0 & 1 & 0.2 \\ 0.5 & 0 & 0.2 \\ 0.5 & 0 & 0.6
+      \end{bmatrix}
+\end{equation}
+\end{xexample}
+Stochastic matrices are an important special class of
+nonnegative matrices.
+\begin{theorem}
+Let $A$ be a stochastic matrix. Then
+\begin{enumerate}
+\item $\lambda_1 = 1$ is an eigenvalue of $A$,
+and this eigenvalue has a positive eigenvector.
+\item $|\lambda_j| \le 1$ for all eigenvalues $\lambda_j$.
+\end{enumerate}
+\end{theorem}
+%
+%\emph{Partial Proof.}
+Let's look at two proofs of the statement that
+$\lambda_1=1$ is an eigenvalue of $A$.
+
+\emph{Proof that $\lambda_1=1$ is an eigenvalue, version 1:}
+Since the sums of the columns of $A$ are all one,
+the sums of the columns of $A-I$ are all zero.
+This implies that the rows of $A-I$ are linearly
+dependent, which then implies that
+$A-I$ is singular.  This is precisely the condition
+for one to be an eigenvalue of $A$.
+
+\emph{Proof that $\lambda_1=1$ is an eigenvalue, version 2:}
+Let
+\begin{equation}
+   \BE = \begin{bmatrix} 1 \\ 1 \\ \vdots \\ 1\end{bmatrix}
+\end{equation}
+Then it is easily verified that
+\begin{equation}
+  A^{\textsf{T}}\BE = \BE
+\end{equation}
+which shows that one is an eigenvalue of $A$, with
+eigenvector $\BE$.
+Since, in general, $A$ and $A^{\textsf{T}}$ have the
+same eigenvalues, one is also an eigenvalue of $A$.
+\hfill $\qed$
+
+Before proving that all the eigenvalues of a stochastic
+matrix have magnitude less than or equal to one, we
+define some convenient notation.
+
+\begin{definition}
+We define the ``1-norm''\index{1-norm} of an $m$-dimensional vector
+$\BX$, written
+$\|\BX\|_1$.  The definition is
+\begin{equation}
+  \| \BX \|_1 = |x_1| + |x_2| + \cdots + |x_m|.
+\end{equation}
+\end{definition}
+The 1-norm is, in fact, a \emph{norm},\index{norm} because it
+satisfies these properties:
+\begin{enumerate}
+\item $\|\BX\|_1 \ge 0$, and $\|\BX\|_1 = 0$ if and only
+if $\BX = \BZero$.
+\item $\|\lambda \BX\|_1 = |\lambda|\|\BX\|_1$ for any
+scalar $\lambda$.
+\item $\|\BX+\BY\|_1 \le \|\BX\|_1 + \|\BY\|_1$
+(the triangle inequality).\index{triangle inequality}
+\end{enumerate}
+
+We'll use the 1-norm in the following.
+
+\emph{Proof that $|\lambda_j|\le 1$ for a stochastic matrix $A$.}
+Let $\BU_j$ be the $j$th column of $A$.
+By assumption, $\|\BU_j\|_1 = 1$.
+We recall from Linear Algebra that
+$A\BX$ is a linear combination of the columns of $A$, with
+coefficients given by the elements of $\BX$:
+\begin{equation}
+  A\BX = x_1 \BU_1 + x_2\BU_2 + \cdots + x_m \BU_m.
+\end{equation}
+Then
+\begin{equation}
+\begin{split}
+  \|A\BX\|_1 & = \|x_1\BU_1 + x_2 \BU_2 + \cdots + x_m\BU_m\|_1 \\
+             & \le \|x_1 \BU_1\|_1 + \|x_2 \BU_2\|_1 + \cdots + \| x_m \BU_m\|_1 \\
+	     & = |x_1|\|\BU_1\|_1 + |x_2|\|\BU_2\|_1 + \cdots + |x_m|\|\BU_m\|_1 \\
+	     & = |x_1| + |x_2| + \cdots + |x_m| \\
+	     & = \|\BX\|_1.
+\end{split}
+\end{equation}
+So
+\begin{equation}
+\|A\BX\|_1 \le \|\BX\|_1
+\end{equation}
+for any $\BX$.  If
+\begin{equation}
+  A\BX = \lambda \BX,
+\end{equation}
+this implies
+\begin{equation}
+  \|\lambda\BX\|_1 \le \|\BX\|_1,
+\end{equation}
+and since
+\begin{equation}
+  \|\lambda \BX\|_1 = |\lambda|\|\BX\|_1,
+\end{equation}
+we have
+\begin{equation}
+ |\lambda| \|\BX\|_1 \le \|\BX\|_1
+ \quad
+ \implies
+ \quad
+ |\lambda| \le 1.
+\end{equation}
+\begin{xexample}
+Let $A$ and $B$ be the matrices given in the previous example.
+For $A$, we find $\lambda_1 = 1$ and $\lambda_2 = 0.7$.
+For $B$, we find $\lambda_1 = 1$,
+$\lambda_2 = (-1+\sqrt{6})/5 \approx 0.2899$,
+and $\lambda_3 = (-1-\sqrt{6})/5 \approx -0.6899$.
+\end{xexample}
+\begin{xexample}
+The matrix
+\begin{equation}
+  P = \begin{bmatrix}
+          0 & 1 \\
+	  1 & 0
+      \end{bmatrix}
+\end{equation}
+is stochastic. We find that the eigenvalues
+are $\lambda_1 = 1$ and $\lambda_2 = -1$.
+Note that the magnitude of both eigenvalues is 1.
+\end{xexample}
+\newpage
+%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
