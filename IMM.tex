@@ -5993,7 +5993,7 @@ On the other hand, consider the nonnegative matrix
              0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0
        \end{bmatrix}
 \end{equation}
-The eigenvalues of $C$ are
+The eigenvalues of $B$ are
 \begin{equation}
   \lambda_1 = 1, \quad
   \lambda_2 =  (-1+\sqrt{3}\,i)/2, \quad
@@ -6043,10 +6043,10 @@ We find
        \end{bmatrix}, \quad
    B^3 = \begin{bmatrix}
              1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
-       \end{bmatrix} = I, \quad \textrm{and}
+       \end{bmatrix} = I, \quad \textrm{and} \quad
    B^4 = B.
 \end{equation}
-Therefore $B^k$ can never be positive.  $B$ is not primitive.
+Therefore $B^k$ can never be positive;  $B$ is not primitive.
 $C$, however, is primitive. We find $C^4$ has a single zero
 entry (in the third row and third column), and
 \begin{equation}
@@ -6063,19 +6063,19 @@ proof.
 \begin{theorem}
 \textrm{\textbf{[Perron-Frobenius Theorem for Primitive Matrices]}}.
 \index{Perron-Frobenius Theorem}
-Suppose $A$ is an $m\times m$ positive matrix, and $A$ is primitive.
+Suppose $A$ is an $m\times m$ nonnegative matrix, and $A$ is primitive.
 Then
 \begin{enumerate}
 \item $A$ has a real eigenvalue $\lambda_1>0$ with 
 a positive eigenvector $\BV_1$.
-\item $\lambda_1$ is a ``simple'' eigenvalue
+\item $\lambda_1$ is a simple eigenvalue
 (i.e. $\lambda_1$ is a simple--not repeated--root
 of the characteristic polynomial of $A$),
 \item $|\lambda_j| < \lambda_1$ for all other eigenvalues
 $\lambda_j$.
-\item The columns of
-$\left(\frac{1}{\lambda_1}A\right)^n$ converge to
-multiples of $\BV_1$ as $n\rightarrow\infty$.
+% \item The columns of
+% $\left(\frac{1}{\lambda_1}A\right)^n$ converge to
+% multiples of $\BV_1$ as $n\rightarrow\infty$.
 \end{enumerate}
 \end{theorem}
 
@@ -6125,7 +6125,7 @@ The following definition is a bit obtuse, but we will
 carify it shortly.
 \begin{definition}
 An $m\times m$ matrix $A$ is \emph{reducible}\index{reducible matrix}
-if the indices $1$, $2$, $\ldots$, $n$
+if the indices $1$, $2$, $\ldots$, $m$
 can be divided into two disjoint nonempty sets
 $i_1$, $i_2$, $\ldots$, $i_{\mu}$ and
 $j_1$, $j_2$, $\ldots$, $j_{\nu}$ (with $\mu+\nu = m$) such that
@@ -6146,30 +6146,31 @@ into
    \BY(n+1) = B\BY(n),
 \label{eqn:pf:reduced}
 \end{equation}
-where
+where $B$ can be partitioned as
 \begin{equation}
    B = \begin{bmatrix}
             B_{11} & B_{12} \\
             \textbf{0} & B_{22}
        \end{bmatrix}
 \end{equation}
+$B_{11}$ is  $\mu\times\mu$ and $B_{22}$ is $\nu\times\nu$. 
 In other words, by defining
 \begin{equation}
-   \BY = \begin{bmatrix} \BP \\ \BQ,
+   \BY = \begin{bmatrix} \BU \\ \BW,
          \end{bmatrix}
 \end{equation}
-where $\BP \in \Real^{\mu}$ and $\BQ \in \Real^{\nu}$,
+where $\BU \in \Real^{\mu}$ and $\BW \in \Real^{\nu}$,
 we may rewrite
 \eqref{eqn:pf:reduced} as
 \begin{equation}
 \begin{split}
-   \BP(n+1) & = B_{11}\BP(n) + B_{12} \BQ(n) \\
-   \BQ(n+1) & = \quad\quad\quad\quad\quad B_{22} \BQ(n).
+   \BU(n+1) & = B_{11}\BU(n) + B_{12} \BW(n) \\
+   \BW(n+1) & = \quad\quad\quad\quad\quad B_{22} \BW(n).
 \end{split}
 \end{equation}
-Note that the equation for $\BQ$ does not depend
-on $\BP$; we say that the dynamics for $\BQ$
-are \emph{decoupled}\index{decoupled} from $\BP$.
+Note that the equation for $\BW$ does not depend
+on $\BU$; we say that the dynamics for $\BW$
+are \emph{decoupled}\index{decoupled} from $\BU$.
 
 To reorder the variables, we can use a permutation matrix
 $P$, in which each row and each column contains exactly
@@ -6221,25 +6222,68 @@ irreducible if and only if
 Finally, we state a variation of the Perron-Frobenius Theorem
 for irreducible matrices.
 \begin{theorem}
-\textbf{[Perron-Frobenius Theorem for Irreducible Matrices]}\index{Perron-Frobenius Theorem}
-If $A$ is $m\times m$, nonnegative,
-and irreducible, then
+\textrm{\textbf{[Perron-Frobenius Theorem for Irreducible Matrices]}}.
+\index{Perron-Frobenius Theorem}
+Suppose $A$ is an $m\times m$ nonnegative matrix, and $A$ is irreducible.
+Then
 \begin{enumerate}
-\item one of its eigenvalues is positive and greater
-  than or equal to (in absolute value) all other
-  eigenvalues;
-\item there is a positive eigenvector corresponding to that eigenvalue;
-  and
-\item that eigenvalue is a simple root of the characteristic equation of $A$.
+\item $A$ has a real eigenvalue $\lambda_1>0$ with 
+a positive eigenvector $\BV_1$.
+\item $\lambda_1$ is a simple eigenvalue.
+\item $|\lambda_j| \le \lambda_1$ for all other eigenvalues
+$\lambda_j$.
 \end{enumerate}
 \end{theorem}
+% \begin{theorem}
+% \textbf{[Perron-Frobenius Theorem for Irreducible Matrices]}\index{Perron-Frobenius Theorem}
+% If $A$ is $m\times m$, nonnegative,
+% and irreducible, then
+% \begin{enumerate}
+% \item one of its eigenvalues is positive and greater
+%   than or equal to (in absolute value) all other
+%   eigenvalues;
+% \item there is a positive eigenvector corresponding to that eigenvalue;
+%   and
+% \item that eigenvalue is a simple root of the characteristic equation of $A$.
+% \end{enumerate}
+% \end{theorem}
 
 
 The only difference in the conclusions of the two versions
 of the Perron-Frobenius Theorem
-is that in version for primitive matrices, the inequality in the first
+is that in version for primitive matrices, the inequality in the third
 conclusion is a strict inequality.
-%
+For an irreducible matrix, there may be other eigenvalues $\lambda_j$
+for which $|\lambda_j| = \lambda_1$.
+
+\begin{xexample}
+Earlier we discussed the matrix
+\begin{equation}
+   B = \begin{bmatrix}
+             0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0
+       \end{bmatrix}
+\end{equation}
+This matrix is not primitive, but it is irreducible:
+\begin{equation}
+  (I+B)^2 = \begin{bmatrix}
+                1 & 1 & 2 \\ 2 & 1 & 1 \\ 1 & 2 & 1
+            \end{bmatrix}
+          > 0.
+\end{equation}
+The Perron-Frobenius Theorem implies that this matrix
+has a simple real eigenvalue $\lambda_1 >0$, and all
+other eigenvalues have magnitude not greater than $\lambda_1$.
+Indeed, this is what we found earlier.
+Recall that
+the eigenvalues of $B$ are
+\begin{equation}
+  \lambda_1 = 1, \quad
+  \lambda_2 =  (-1+\sqrt{3}\,i)/2, \quad
+  \lambda_3 =  (-1-\sqrt{3}\,i)/2.
+\end{equation}
+We see that $|\lambda_j| = 1 = \lambda_1$.
+\end{xexample}
+
 %
 \newpage
 %
