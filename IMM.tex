@@ -5951,12 +5951,119 @@ all entries in $A$.  We will write this as
 $A \ge 0$.\index{nonegative matrix}
 \end{definition}
 
+We apply the same terminology to vectors. For example,
+$\BX = \begin{bmatrix} 1 \\ 2\end{bmatrix}$ is positive, and
+$\BY = \begin{bmatrix} 3 \\ 0\end{bmatrix}$ is nonnegative.
+
+Consider, for example,
+\begin{equation}
+   A = \begin{bmatrix}
+             4 & 1 & 1 \\ 1 & 2 & 1 \\ 1 & 1 & 2
+       \end{bmatrix}
+\end{equation}
+$A$ is a positive matrix.
+The eignenvalues of $A$, listed in order of decreasing magnitute,
+are
+\begin{equation}
+   \lambda_1 = 5, \quad
+   \lambda_2 = 2, \quad
+   \lambda_3 = 1
+\end{equation}
+with associated eigenvectors
+\begin{equation}
+   \BV_1 = \begin{bmatrix} 2 \\ 1 \\ 1 \end{bmatrix}, \;
+   \BV_2 = \begin{bmatrix} -1 \\ 1 \\ 1 \end{bmatrix}, \;
+   \BV_3 = \begin{bmatrix} 0 \\ -1 \\ 1 \end{bmatrix}.
+\end{equation}
+The solution to the map $\BX(n+1) = A\BX(n)$ is
+\begin{equation}
+   \BX(n) = c_1 \lambda_1^n \BV_1 + c_2 \lambda_2^n\BV_2 + c_3 \lambda_3^n\BV_3
+\end{equation}
+As $n$ increases, $\lambda_1^n$ will grow much faster than
+$\lambda_2^n$ and $\lambda_3^n$, and so the first term in the
+solution will eventually ``dominate'' the solution,
+and eventually (if $c_1\ne 0$),
+\begin{equation}
+   \BX(n) \approx c_1 \lambda_1^n \BV_1
+\end{equation}
+
+On the other hand, consider the nonnegative matrix
+\begin{equation}
+   B = \begin{bmatrix}
+             0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0
+       \end{bmatrix}
+\end{equation}
+The eigenvalues of $C$ are
+\begin{equation}
+  \lambda_1 = 1, \quad
+  \lambda_2 =  (-1+\sqrt{3}\,i)/2, \quad
+  \lambda_3 =  (-1-\sqrt{3}\,i)/2.
+\end{equation}
+We see that $|\lambda_j| = 1$,
+therefore $|\lambda_j^n| = 1$ for each eigenvalue for all $n$.
+None of the terms in the solution grows to dominate the others.
+
+Here is one more example:
+\begin{equation}
+   C = \begin{bmatrix}
+             0 & \frac{1}{10} & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0
+       \end{bmatrix}
+\end{equation}
+$C$ is almost the same as $B$, but the entry
+in the first row and second column has been changed to 1/10.
+The expressions for the exact values of the eigenvalues
+of $C$ are complicated, but we find the approximate
+values to be
+\begin{equation}
+  \lambda_1 \approx 1.033, \quad
+  \lambda_2 \approx  -0.5167+0.8371i \quad
+  \lambda_3 \approx  -0.5167-0.8371i,
+\end{equation}
+and $|\lambda_2| = |\lambda_3| \approx 0.9837$.
+For $C$, $\lambda_1$ is the dominant eigenvalue, and for large
+$n$, the part of the solution associated with this eigenvalue
+will grow to dominate the solution.
+
+We would like to know, in general, when a nonnegative matrix
+has a dominant eigenvalue.
+One class of matrices for which this is true is the
+\emph{primitive} matrices.
+
+\begin{definition}
+A nonnegative matrix $A$ is called
+\emph{primitive}\index{primitive matrix}
+if $A^k$ is positive for some integer $k > 0$.
+\end{definition}
+Consider the matrices $A$, $B$, and $C$ discussed earlier.
+$A$ is positive, therefore $A$ is automatically primitive ($k=1$).
+We find
+\begin{equation}
+   B^2 = \begin{bmatrix}
+             0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0
+       \end{bmatrix}, \quad
+   B^3 = \begin{bmatrix}
+             1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+       \end{bmatrix} = I, \quad \textrm{and}
+   B^4 = B.
+\end{equation}
+Therefore $B^k$ can never be positive.  $B$ is not primitive.
+$C$, however, is primitive. We find $C^4$ has a single zero
+entry (in the third row and third column), and
+\begin{equation}
+  C^5 = \begin{bmatrix}
+           0.2 & 1.001 & 0.01 \\
+           0.01  & 0.2 & 1 \\
+           1 & 0.01 & 0.1
+        \end{bmatrix}
+\end{equation}
+
+
 We state the following fundamental theorem without
 proof.
 \begin{theorem}
-\textrm{\textbf{[Perron's Theorem for Positive Matrices]}}.
-\index{Perron's Theorem}
-Suppose $A$ is positive.
+\textrm{\textbf{[Perron-Frobenius Theorem for Primitive Matrices]}}.
+\index{Perron-Frobenius Theorem}
+Suppose $A$ is an $m\times m$ positive matrix, and $A$ is primitive.
 Then
 \begin{enumerate}
 \item $A$ has a real eigenvalue $\lambda_1>0$ with 
@@ -5971,8 +6078,21 @@ $\left(\frac{1}{\lambda_1}A\right)^n$ converge to
 multiples of $\BV_1$ as $n\rightarrow\infty$.
 \end{enumerate}
 \end{theorem}
+
+% 
+% \begin{theorem}
+% \textbf{[Perron-Frobenius Theorem for Primitive Matrices]}\index{Perron-Frobenius Theorem}
+% If $A$ is an $n\times n$ nonnegative primitive matrix then
+% \begin{enumerate}
+% \item one of its eigenvalues is positive and greater than (in absolute value) all other eigenvalues;
+% \item there is a positive eigenvector corresponding to that eigenvalue; and
+% \item that eigenvalue is a simple root of the characteristic equation of $A$.
+% \end{enumerate}
+% \end{theorem}
+
 Why is this interesting?  The theorem says, in effect,
-that $A$ has a ``dominant'' eigenvalue.  Suppose, for
+that any primitive matrix $A$ has a ``dominant'' eigenvalue.
+Suppose, for
 convenience, that all the eigenvalues of $A$ are real
 and distinct.  Then the solution to the iteration
 $\BX(n+1) = A\BX(n)$ is
@@ -5994,25 +6114,13 @@ Thus, for large enough $n$, we have
    \BX(n) \approx c_1 \lambda_1^n \BV_1
 \end{equation}
 This means we can predict the long-term behavior
-by find the dominant eigenvalue and its (positive)
+by finding the dominant eigenvalue and its (positive)
 eigenvector.
 
-The theorem just given is for \emph{positive} matrices.
-The matrices that arise in modeling problems, while
-nonnegative, are often not positive, so the theorem
-as stated will not be applicable.
-There is a class of nonnegative matrices for which the
-theorem \emph{does} apply.
-
-\begin{definition}
-A nonnegative matrix $A$ is called
-\emph{primitive}\index{primitive matrix}
-if $A^k$ is positive for some integer $k > 0$.
-\end{definition}
-
-
-
 \medskip
+
+There is a variation of this theorem for a different
+class of matrices.
 The following definition is a bit obtuse, but we will
 carify it shortly.
 \begin{definition}
@@ -6097,19 +6205,24 @@ we convert \eqref{eqn:pf:linmap} into
        \end{bmatrix}.
 \end{equation}
 \end{xexample}
+
+The following theorem, which we state without proof, provides
+a test for irreducibility.
 \begin{theorem}
-An $n\times n$ nonnegative matrix $A$ is 
+An $m\times m$ nonnegative matrix $A$ is 
 irreducible if and only if
 \begin{equation}
-   (I+A)^{n-1} > 0.
+   (I+A)^{m-1} > 0.
 \end{equation}
 \end{theorem}
-(A web page refers to page 6 of:
-Varga, Richard S. 1962. Matrix Iterative Analysis. Englewood Cliffs N.J.: Prentice-Hall.)
+% (A web page refers to page 6 of:
+% Varga, Richard S. 1962. Matrix Iterative Analysis. Englewood Cliffs N.J.: Prentice-Hall.)
 
+Finally, we state a variation of the Perron-Frobenius Theorem
+for irreducible matrices.
 \begin{theorem}
 \textbf{[Perron-Frobenius Theorem for Irreducible Matrices]}\index{Perron-Frobenius Theorem}
-If $A$ is $n\times n$, nonnegative,
+If $A$ is $m\times m$, nonnegative,
 and irreducible, then
 \begin{enumerate}
 \item one of its eigenvalues is positive and greater
@@ -6121,22 +6234,10 @@ and irreducible, then
 \end{enumerate}
 \end{theorem}
 
-\begin{definition}
-A nonnegative $n\times n$ matrix $A$ is called
-\emph{primitive}\index{primitive matrix} is $A^k > 0$ for some integer $k$.
-\end{definition}
 
-\begin{theorem}
-\textbf{[Perron-Frobenius Theorem for Primitive Matrices]}\index{Perron-Frobenius Theorem}
-If $A$ is an $n\times n$ nonnegative primitive matrix then
-\begin{enumerate}
-\item one of its eigenvalues is positive and greater than (in absolute value) all other eigenvalues;
-\item there is a positive eigenvector corresponding to that eigenvalue; and
-\item that eigenvalue is a simple root of the characteristic equation of $A$.
-\end{enumerate}
-\end{theorem}
-The only difference in the conclusions of the two theorems
-is that in the second version, the inequality in the first
+The only difference in the conclusions of the two versions
+of the Perron-Frobenius Theorem
+is that in version for primitive matrices, the inequality in the first
 conclusion is a strict inequality.
 %
 %
