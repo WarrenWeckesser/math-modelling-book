@@ -1,0 +1,145 @@
+
+\chapter{Mathematical Topics}
+%
+%
+\section{Complex Numbers}
+%
+\[
+    i = \sqrt{-1}
+\]
+Let $z=x+iy$
+
+\medskip
+\noindent
+Complex conjugate:
+\[
+   \overline{z} = x-iy.
+\]
+Magnitude or modulus:
+\[
+   \| z \| = \sqrt{x^2+y^2}
+\]
+Note
+\[
+   z \overline{z} = x^2+y^2 = \| z \|^2
+\]
+\[
+   \frac{1}{z} = \frac{\overline{z}}{\|z\|^2}
+\]
+Euler's formula\index{Euler's formula}
+\begin{equation}
+   e^{i\theta} = \cos\theta + i \sin\theta
+   \label{eqn:EULER}
+\end{equation}
+%
+\section{Geometric Sum, Geometric Series}
+\index{geometric series}
+\index{geometric sum}
+
+\subsection*{Geometric Sum}
+We derive the formula for the
+geometric sum:
+\begin{equation}
+  \sum_{k=0}^{n} r^k = \frac{1- r^{n+1}}{1-r}.
+\label{eqn:geometricsum}
+\end{equation}
+
+Let
+\begin{equation}
+  S = \sum_{k=0}^{n} r^k
+\end{equation}
+We multiply both sides by $r$, and then manipulate
+the right side so that it is expressed in terms of $S$:
+\begin{equation}
+\begin{split}
+  r S & = r \sum_{k=0}^{n}r^k \\
+     & = \sum_{k=0}^{n}r^{k+1} \\
+     & = \sum_{k=1}^{n+1}r^k \\
+     & = r^{n+1} - 1 + \sum_{k=0}^{n}r^k \\
+     & = r^{n+1} - 1 + S \\
+\end{split}
+\label{eqn:derivation}
+\end{equation}
+Now solve for $S$ to obtain
+\begin{equation}
+   S = \frac{1-r^{n+1}}{1-r} .
+\end{equation}
+
+\medskip
+\noindent
+If the starting index is $1$ instead of $0$,
+we can derive a formula by using the previous
+result:
+\begin{equation}
+\begin{split}
+  \sum_{k=1}^{n} r^k & = \sum_{k=0}^{n-1}r^{k+1} \\
+      & = r \sum_{k=0}^{n-1} r^{k} \\
+      & = r\left(\frac{1-r^n}{1-r}\right).
+\end{split}
+\label{eqn:geomsumfromone}
+\end{equation}
+% \begin{question}
+% Derive this result by using the same method as in
+% Equation~\eqref{eqn:derivation}.
+% \end{question}
+
+\subsection*{Geometric Series.}
+If $0 < r < 1$, then
+\begin{equation}
+   \sum_{k=0}^{\infty} r^k = \frac{1}{1-r}
+\end{equation}
+\noindent
+\emph{Proof.}
+\[
+  \sum_{k=0}^{\infty} r^k
+    = \lim_{n\rightarrow\infty} \sum_{k=0}^{n} r^n
+    = \lim_{n\rightarrow\infty} \frac{1-r^{n+1}}{1-r}
+    = \frac{1}{1-r}.
+\]
+%
+\section{Cobb-Douglas Function}
+%
+\label{sec:cobbdouglas}
+A function that often arises in economics
+is the \emph{Cobb-Douglas function}:\index{Cobb-Douglas function}
+\begin{equation}
+  f(x,y) = cx^{\alpha}y^{\beta}
+\end{equation}
+When $\alpha+\beta=1$, the function is said to have
+\emph{constant returns to scale},\index{constant returns to scale}
+and in this case it may
+be written
+\begin{equation}
+  f(x,y) = cx^{\alpha}y^{1-\alpha}
+\end{equation}
+The mathematical term for \emph{constant returns to scale}
+is \emph{linearly homogeneous}.\index{homogeneous, linearly}
+It is easy to verify:
+\begin{equation}
+  f(kx,ky) = c(kx)^{\alpha}(ky)^{1-\alpha}
+     = k^{\alpha}k^{1-\alpha} c x^{\alpha}y^{1-\alpha}
+     = k c x^{\alpha}y^{1-\alpha}
+     = k f(x,y).
+\end{equation}
+%
+\section{A Few Calculus Reminders}
+
+A function $f$ is \emph{continuous}\index{continuous} at at point $a$ if
+\[
+  \lim_{x\rightarrow a} f(x) = f(a).
+\]
+%
+We say $f$ is \emph{continuous on the interval} $(a,b)$ if
+$f$ is continuous at each point in the interval.
+%
+\section{Partial Derivatives}
+\label{sec:PartialDerivs}
+The \emph{partial derivative of $f(x,y)$ with respect to $x$},
+written $f_x(x,y)$ or $\frac{\partial f}{\partial x}$, is
+defined to be
+\[
+   f_x(x,y) = \lim_{h\rightarrow 0} \frac{f(x+h,y)}{h}.
+\]
+There is a corresponding definition for $f_y(x,y)$,
+and the generalizations to more variables
+(such as $f_y(w,x,y,z)$) should be clear.

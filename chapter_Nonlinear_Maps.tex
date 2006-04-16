@@ -1,0 +1,562 @@
+
+\chapter{Nonlinear Maps}
+\subsection*{One-dimensional Maps}
+The general one-dimensional map has the form
+\begin{equation}
+   x_{n+1} = f(x_n), \quad \textrm{given $x_0$}.
+\label{eqn:onedmap}
+\end{equation}
+We'll develop several tools for studying such maps.
+
+
+\subsection*{``Cobwebbing'': The Graphical Iteration Procedure}
+There is a simple graphical procedure for generating the
+iterations of a one-dimensional map.
+As an example, we consider the logistic map
+\begin{equation}
+   x_{n+1} = rx_n(1-x_n)
+\label{eqn:logisticmap}
+\end{equation}
+where $r > 0$ is a constant.
+Table~\ref{tbl:data} shows the first few iterates in the
+sequence that results when
+$r=2.8$ and $x_0=0.1$.
+\begin{table}
+\centerline{%
+\begin{tabular}{|c|l|c|l|}
+\hline
+ $n$  &  $x_n$ & $n$ & $x_n$ \\ 
+\hline
+  0  &  0.1    & 5 & 0.6771 \\ 
+\hline
+  1 &  0.2520  & 6 & 0.6122 \\ 
+\hline
+  2 &  0.5278  & 7 & 0.6648 \\ 
+\hline
+  3 &  0.6978  & 8 & 0.6240 \\ 
+\hline
+  4 &  0.5904  & 9 & 0.6570 \\ 
+\hline
+\end{tabular}
+\vspace{0.25cm}
+}
+\caption{Iteration of the logistic map~\eqref{eqn:logisticmap}, with
+$r=2.8$ and $x_0=0.1$.}
+\label{tbl:data}
+\end{table}
+%
+Figure~\ref{fig:logistic_ts} shows the plot of $x_n$ as a function
+of $n$.
+%
+\begin{figure}
+\centerline{\includegraphics{matlab_map1d/logisticmap_timeseries.eps}}
+\caption{The first several iterates of the logistic map~\eqref{eqn:logisticmap}
+with $r=2.8$ and $x_0=0.1$. This is a plot of the data shown
+in Table~\ref{tbl:data}.}
+\label{fig:logistic_ts}
+\end{figure}
+%
+
+The graphical technique for finding the iterations of this map
+begins by plotting the graph of the $f(x) = rx(1-x)$, as in
+Figure~\ref{fig:logisticmap_example} (where $r=2.8$).
+Given $x_0$, we draw a line from the $x=x_0$ on the $x$
+axis up the the graph of $x_0$ to obtain $x_1$.
+To obtain $x_2$, we need to go to $x=x_1$ on the $x$ axis.
+This can be done by drawing a line horizontally from
+$(x_0,x_1)$ to the line $y=x$.
+See the upper left plot of Figure~\ref{fig:cobwebsequence}.
+To find $x_2$, we again draw a line vertically
+at $x=x_1$ to the graph, and from the graph we draw a 
+line horizontally to $y=x$.
+See the upper right plot of Figure~\ref{fig:cobwebsequence}.
+We continue this process to generate further iterations,
+as in the lower left and right plots of
+Figure~\ref{fig:cobwebsequence}.
+In these plots, I've included vertical lines from the $x$ axis
+up to the graph, but we don't really need these lines.
+In practice, the procedure is: 
+draw a line vertically
+to the graph, then 
+draw a line horizontally to $y=x$,  and then repeat
+the process.
+An example is shown in Figure~\ref{fig:cobwebfinal}.
+
+\begin{figure}
+\centerline{\includegraphics[width=3in]{matlab_map1d/logisticmap_example.eps}}
+\caption{A graph of the logistic map $rx(1-x)$ for $r=2.8$.}
+\label{fig:logisticmap_example}
+\end{figure}
+%
+\begin{figure}
+\centerline{%
+\includegraphics[width=2.65in]{matlab_map1d/logisticmap_cobweb1.eps}
+\includegraphics[width=2.65in]{matlab_map1d/logisticmap_cobweb2.eps}
+}
+\centerline{%
+\includegraphics[width=2.65in]{matlab_map1d/logisticmap_cobweb3.eps}
+\includegraphics[width=2.65in]{matlab_map1d/logisticmap_cobweb4.eps}
+}
+\caption{A sequence of plots that illustrate
+``cobwebbing''. The initial point is $x_0=0.1$.}
+\label{fig:cobwebsequence}
+\end{figure}
+%
+\begin{figure}
+\centerline{%
+\includegraphics[width=3.25in]{matlab_map1d/logisticmap_cobwebfinal.eps}
+}
+\caption{When cobwebbing, we usually don't bother dropping
+lines down to the horizontal axis. After the first vertical
+line is drawn from $(x_0,x_0)$ to the graph, we draw
+a line horizontally to the line
+$y=x$, and then another line vertically to graph, and repeat.
+This cobweb plot shows
+the same data listed in Table~\ref{tbl:data} and plotted in
+Figure~\ref{fig:logistic_ts}.}
+\label{fig:cobwebfinal} 
+\end{figure}
+%
+
+
+%
+\subsection*{Fixed Points, Stability, Linearization}
+A \emph{fixed point}\index{fixed point} of the map \eqref{eqn:onedmap}
+is a point $x^*$ where $f(x^*)=x^*$.
+If $x_0=x^*$, then $x_n=x^*$ for all $n>0$, so the fixed points
+of $f$ are the constant solutions to \eqref{eqn:onedmap}.
+
+In the logistic map shown in Figure~\ref{fig:logisticmap_example},
+we see there are two
+points where $f(x)=x$.  These are the points
+where the graph of $f$ crosses the line $y=x$.
+For the example shown in Figure~\ref{fig:logisticmap_example},
+the graph is $f(x) = 2.8x(1-x)$, so to find the fixed points,
+we must solve
+\begin{equation}
+  2.8x(1-x) = x \implies -2.8x^2 + 1.8x = 0
+  \implies x = 0 \;\textrm{or}\; x = \frac{1.8}{2.8}
+\end{equation}
+So the two fixed points are $x=0$ and $x=\frac{1.8}{2.8}\approx 0.643$.
+
+\begin{definition}
+The fixed point $x^*$ is a \emph{sink} or \emph{attractor}
+if there is a neighborhood $N$ of $x^*$ such that
+$x_n\rightarrow x^*$ for all $x_0$ in $N$.
+We also say $x^*$ is \emph{asymptotically stable}.
+\end{definition}
+\begin{definition}
+The fixed point $x^*$ is a \emph{source} or \emph{repellor}
+if there is a neighborhood $N$ of $x^*$ such that if $x_0$
+is in $N$, then $x_n$ eventually leaves $N$.
+\end{definition}
+\begin{definition}
+The fixed point $x^*$ is \emph{unstable} if for every
+neighborhood $N$ of $x^*$, there are points arbitrarily close
+to $x^*$ whose iterates leave $N$.
+\end{definition}
+
+\vspace{0.2cm}
+Note that a source is unstable, but an unstable fixed point
+is not necessarily a source.  See, for example,
+Figure~\ref{fig:noconclusion1}.
+
+
+
+
+
+\noindent
+\textbf{Behavior near a fixed point: the linearization.}
+Let $x^*$ be a fixed point of \eqref{eqn:onedmap}.
+If $x$ is close to $x^*$,
+we can approximate $f(x)$ with the tangent line at $x^*$:
+\begin{equation}
+   f(x) \approx f(x^*) + f'(x^*)(x-x^*).
+\end{equation}
+Let $u_n = x_n-x^*$ (i.e. $x_n = x^* + u_n$).
+Then, by replacing $x_n$ with $x^*+u_n$
+in \eqref{eqn:onedmap}, we obtain
+\begin{equation}
+  x^* + u_{n+1} = f(x^*+u_n) \approx f(x^*)+f'(x^*)u_n.
+\end{equation}
+Since $f(x^*)=x^*$, we can cancel $x^*$ on the left
+and $f(x^*)$ on the right.
+We are left with the
+\emph{linearization of the map at } $x^*$:
+\begin{equation}
+  u_{n+1} = f'(x^*)u_n
+\end{equation}
+This is a linear map.
+We have already seen how the solution to the linear
+map depends on $a=f'(x^*)$; see Figures~\ref{fig:linearcases_pos}
+and \ref{fig:linearcases_neg}.
+However, the linearization is just an approximation
+to the actual map~\eqref{eqn:onedmap}.
+The following theorem tells us when the linear approximation
+is ``good enough'' to classify the stability of the
+fixed point $x^*$ of \eqref{eqn:onedmap}.
+
+\begin{theorem}
+(i) If $|f'(x^*)| < 1$, then $x^*$ is a sink.
+(ii) If $|f'(x^*)| > 1$, then $x^*$ is a source.
+\end{theorem}
+
+\begin{xexample}
+Consider again the logistic map \eqref{eqn:logisticmap}
+with $r=2.8$.  The graph is shown in
+Figure~\ref{fig:logisticmap_example}, and earlier we found the
+fixed points to be $x^*_1=0$ and $x^*_2=\frac{1.8}{2.8}$.
+We find
+\begin{equation}
+  f'(x) = 2.8(1-2x).
+\end{equation}
+We use Theorem 1 to determine the stability of the fixed points.
+\begin{itemize}
+\item
+At $x^*_1$, we have $f'(0) = 2.8 > 1$, so by Theorem 1,
+$x^*_1$ is a source.
+\item
+At $x^*_2$, we have $f'(1.8/2.8) = -0.8$,
+so by Theorem 1,
+$x^*_2$ is a sink.
+\end{itemize}
+\end{xexample}
+
+\bigskip
+If $|f'(x^*)|=1$, we can not make any conclusions about the
+stability of the fixed point.  Examples demonstrating why this
+is the case are shown in Figures~\ref{fig:noconclusion2},
+\ref{fig:noconclusion3}
+and \ref{fig:noconclusion1}.
+%
+\begin{figure}
+\centerline{%
+\includegraphics[width=2.25in]{matlab_map1d/noconclusion2.eps}%
+}
+\caption{An example that shows why we can not determine
+the stability of a fixed point based on the linearization
+when
+$|f'(x^*)|=1$.  The fixed point is $x^*=0$, and $f'(x^*)=1$.
+In this case, $x^*$ is a source.}
+\label{fig:noconclusion2}
+\end{figure}
+%
+\begin{figure}
+\centerline{%
+\includegraphics[width=2.25in]{matlab_map1d/noconclusion3.eps}%
+}
+\caption{An example that shows why we can not determine
+the stability of a fixed point based on the linearization
+when
+$|f'(x^*)|=1$.  The fixed point is $x^*=0$, and $f'(x^*)=1$.
+In this case, $x^*$ is a sink.}
+\label{fig:noconclusion3}
+\end{figure}
+%
+\begin{figure}
+\centerline{%
+\includegraphics[width=2.25in]{matlab_map1d/noconclusion1.eps}%
+}
+\caption{Another example that shows why we can not determine
+the stability of a fixed point based on the linearization
+when
+$|f'(x^*)|=1$.  In this case, $x^*=1/2$ is a fixed point,
+and $f'(x^*)=1$.
+The iterations of points close to but less than $x^*$
+converge to $x^*$, but iterations of points that are
+greater than $x^*$ diverge from $x^*$.
+In this case, $x^*$ is unstable (but it is not a source).
+}
+\label{fig:noconclusion1}
+\end{figure}
+
+
+%
+\section{A Bit of Chaos}
+We give a brief demonstration of \emph{chaos}.\index{chaos}
+A thorough analysis of this phenomenon would lead us too far
+astray, but it is important to know that chaos is a possible
+(and, in fact, common) behavior of even very simple
+discrete maps.
+As an example, we consider
+\begin{equation}
+   x_{n+1} = 4x_n(1-x_n).
+\end{equation}
+This is the logistic map with the parameter set to 4.
+
+\emph{Describe solutions; philosophical implications: solutions
+do not converge to stable fixed points or periodic solutions.}
+%
+
+\section{Linearization and Stability of Fixed Points}
+%
+In this section we discuss the \emph{linearization}\index{linearization}
+of a map at a fixed point. 
+We will focus on two-dimensional systems, but the
+techniques used here also work in $n$ dimensions.
+While there are a few differences, the steps that
+we follow here are fundamentally the same as those
+in Section~\ref{sec:DELinearization}.
+
+A two-dimensional map has the form
+\begin{equation}
+\begin{split}
+  x_{n+1} & = f(x_n,y_n) \\
+  y_{n+1} & = g(x_n,y_n)
+\end{split}
+\label{eqn:map}
+\end{equation}
+The constant solutions to this system are called the fixed points
+of the map.
+They satisfy the equations
+\begin{equation}
+    f(x^*,y^*) = x^*, \quad g(x^*,y^*) = x^*.
+\end{equation}
+
+Replacing $f(x,y)$ with its tangent plane
+approximation at $(x^*,y^*)$ converts the first equation in~\eqref{eqn:map}
+to
+\begin{equation}
+  x_{n+1} = f(x^*,y^*) + f_x(x^*,y^*)(x_n-x^*) + f_y(x^*,y^*)(y_n-y^*).
+\label{eqn:mapapprox1}
+\end{equation}
+We define $u_n = x_n - x^*$ and
+$v_n = y_n - y^*$.  Then $x_{n+1} = u_{n+1} + x^*$, and~\eqref{eqn:mapapprox1}
+becomes
+\begin{equation}
+   u_{n+1} + x^* = f(x^*,y^*) + f_x(x^*,y^*)u_n + f_y(x^*,y^*)v_n
+\end{equation}
+At a fixed point, $f(x^*,y^*) = x^*$, so we can cancel the $x^*$ on the
+left with the $f(x^*,y^*)$ on the right.  Applying the same arguments
+to the equation for $y_{n+1}$ results in the system
+\begin{equation}
+\begin{split}
+   u_{n+1} & = f_x(x^*,y^*)u_n + f_y(x^*,y^*)v_n \\
+   v_{n+1} & = g_x(x^*,y^*)u_n + g_y(x^*,y^*)v_n \\
+\end{split}
+\end{equation}
+This is the linearization\index{linearization}
+of~\eqref{eqn:map} at $(x^*,y^*)$.
+By defining the vector $\BU_n = \begin{bmatrix} u_n \\ v_n \end{bmatrix}$,
+we can write the system in matrix form as
+\begin{equation}
+  \BU_{n+1} = J\BU_n,
+\label{eqn:linearizedmap}
+\end{equation}
+where
+\begin{equation}
+   J = \begin{bmatrix}
+             f_x(x^*,y^*) & f_y(x^*,y^*) \\
+	     g_x(x^*,y^*) & g_y(x^*,y^*)
+       \end{bmatrix}
+\label{eqn:mapjac}
+\end{equation}
+is the Jacobian matrix\index{Jacobian matrix}.
+(Note that this is the same matrix used in the linearization
+at an equilibrium point of a system of differential equations.)
+
+\noindent
+\textbf{What does the linearization tell us about the original system?}
+We have the following result:
+\emph{If neither eigenvalue has magnitude equal to $1$,
+then the behavior of the system \eqref{eqn:map}
+near $(x^*,y^*)$ is qualitatively the same as the behavior of the
+linear approximation \eqref{eqn:linearizedmap}.}
+The classification of the fixed point of the nonlinear map
+is the same as the classification of the origin in the linearization.
+
+In a one-dimensional map $x_{n+1} = f(x_n)$, with a fixed
+point $x^*$, the 
+Jacobian ``matrix'' is simply $f'(x^*)$.  We saw examples
+in Section~\ref{sec:OneDimMaps} that showed why we could not determine
+the stability of a fixed point based on just the linearization
+in the case $|f'(x^*)|=1$.  The above results are a generalization
+of that phenomena to higher dimensions.
+
+
+\begin{xexample}
+In this rather long example, we determine
+how the stability of a fixed point depends on a parameter.
+Consider the map
+\begin{equation}
+\begin{split}
+  x_{n+1} & = (1- x_n)x_n + b y_n \\
+  y_{n+1} & = \frac{y_n}{2} + x_n
+\end{split}
+\label{eqn:linearizationexample}
+\end{equation}
+where $b$ is a constant.
+This is a map of the form shown in~\eqref{eqn:map}, with
+\begin{equation}
+   f(x,y) = (1-x)x+by \quad \textrm{and} \quad g(x,y) = \frac{y}{2}+x.
+\end{equation}
+To find the fixed points, we must solve
+\begin{equation}
+   (1 - x)x + by = x, \quad \textrm{and} \quad \frac{y}{2}+x = y.
+\end{equation}
+From the second equation we have $y = 2x$; putting this into the first equation
+leads to
+\begin{equation}
+   x^2-2bx = 0
+\end{equation}
+and the solutions are
+\begin{equation}
+  x = 0 \quad \textrm{or} \quad x= 2b.
+\end{equation}
+Thus the fixed points are
+$(0,0)$ and $(2b,4b)$.
+In this example, we'll focus on the behavior near $(0,0)$.
+
+The Jacobian matrix 
+at a fixed point $(x^*,y^*)$ is
+\begin{equation}
+   J = \begin{bmatrix}
+          f_x(x^*,y^*) & f_y(x^*,y^*) \\
+	  g_x(x^*,y^*) & g_y(x^*,y^*) 
+       \end{bmatrix}
+     = \begin{bmatrix}
+          1-2x^* & b \\
+	   1    & \frac{1}{2}
+       \end{bmatrix}
+\end{equation}
+At the fixed point $(0,0)$, we find
+\begin{equation}
+  J = \begin{bmatrix}
+          1 & b \\
+	  1 & \frac{1}{2}
+      \end{bmatrix}
+\end{equation}
+The eigenvalues of the Jacobian are
+\begin{equation}
+  \lambda_1 = \frac{3}{4} - \frac{1}{2} \sqrt{\frac{1}{4}+4b}, \quad
+  \lambda_2 = \frac{3}{4} + \frac{1}{2} \sqrt{\frac{1}{4}+4b}.
+\label{eqn:exeigvals}
+\end{equation}
+The first thing to determine is whether the eigenvalues are
+complex or real.  The eigenvalues are complex if
+\begin{equation}
+  \frac{1}{4} + 4b < 0 \implies b < -\frac{1}{16}.
+\end{equation}
+So we have complex eigenvalues if $b < -\frac{1}{16}$ and real
+eigenvalues if $b \ge -\frac{1}{16}$.
+We treat each case separately.
+
+When $b < -\frac{1}{16}$, the eigenvalues are
+\begin{equation}
+   \lambda = \frac{3}{4} \pm \frac{i}{2}\sqrt{-\frac{1}{4}-4b}
+\end{equation}
+To classify the fixed point and determine its stability,
+we must determine whether the magnitude of the eigenvalues
+are greater than or less than one.  To do this, we'll find the
+value(s) of $b$, if any, where $|\lambda| = 1$.
+(Note that this is equivalent to $|\lambda|^2 = 1$.)
+We have
+\begin{equation}
+\begin{split}
+  1 & = |\lambda|^2 \\
+    & = \left(\frac{3}{4}\right)^2 + \left(\frac{1}{2}\sqrt{-\frac{1}{4}-4b} \right)^2 \\
+    & = \frac{1}{2} - b
+\end{split}
+\end{equation}
+which gives $b=-\frac{1}{2}$.
+So we have the following:
+\begin{itemize}
+\item
+If $b < -\frac{1}{2}$, then $|\lambda| > 1$, and $(0,0)$ is a spiral source.
+\item
+If $-\frac{1}{2} < b < -\frac{1}{16}$, then $|\lambda| < 1$, and $(0,0)$
+is a spiral sink.
+\end{itemize}
+Next we consider $b > -\frac{1}{16}$, where the eigenvalues are real.
+From~\eqref{eqn:exeigvals} we observe that $\lambda_1 < \frac{3}{4}$,
+and $\lambda_2 > \frac{3}{4}$, so we only need to determine
+if $\lambda_1 < -1$ or  $\lambda_2 > 1$.
+First, consider
+\begin{equation}
+\begin{split}
+   \lambda_1 & = -1 \\
+   \frac{3}{4} - \frac{1}{2} \sqrt{\frac{1}{4}+4b} & = -1 \\
+   \frac{1}{4}+4b & = \frac{49}{4} \\
+   b & = 3
+\end{split}
+\end{equation}
+So $\lambda_1 < -1$ if $b > 3$.
+
+Next consider
+\begin{equation}
+\begin{split}
+   \lambda_2 & = 1 \\
+   \frac{3}{4} + \frac{1}{2} \sqrt{\frac{1}{4}+4b} & = 1 \\
+   \frac{1}{4}+4b & = \frac{1}{4} \\
+   b & = 0
+\end{split}
+\end{equation}
+So $\lambda_2 < 1$ if $-\frac{1}{16} < b < 0$.
+Thus, we have
+\begin{itemize}
+\item
+If $-\frac{1}{16} < b < 0$, we have $-1 < \lambda_1 < 1$ and $\frac{3}{4} < \lambda_2 < 1$, so
+$(0,0)$ is a sink.
+\item
+If $0 < b < 3$, then $-1 < \lambda_1 < 1$ but $\lambda_2 > 1$, so 
+$(0,0)$ is a saddle.
+\item
+If $b > 3$, then $\lambda_1 < -1$ and $\lambda_2 > 1$, so
+$(0,0)$ is a source.
+\end{itemize}
+The five bulleted statements above give all the cases for the
+fixed point $(0,0)$.
+Figure~\ref{fig:LinearizationFPExamples} shows trajectories
+near the fixed point $(0,0)$ for several values of $\beta$.
+\begin{figure}
+\centerline{%
+\includegraphics[width=2.5in]{matlab/LinearizationFPExample_n1.25.eps}
+\includegraphics[width=2.5in]{matlab/LinearizationFPExample_n0.25.eps}
+}
+\centerline{%
+\includegraphics[width=2.5in]{matlab/LinearizationFPExample_p0.25.eps}
+\includegraphics[width=2.5in]{matlab/LinearizationFPExample_p3.50.eps}
+}
+\caption{Trajectories near $(0,0)$ of system
+\eqref{eqn:linearizationexample}. Upper left: $\beta=-1.25$, spiral source.
+Upper right: $\beta=-0.25$, spiral sink.
+Lower left: $\beta=0.25$, saddle.
+Lower right: $\beta=3.5$, source.}
+\label{fig:LinearizationFPExamples}
+\end{figure}
+\end{xexample}
+
+\begin{exercises}
+\begin{exercise}
+Consider the nonlinear map
+\begin{equation}
+\begin{split}
+  x(n+1) & = x(n) + \frac{y(n)}{2} \\
+  y(n+1) & = bx(n) + \frac{(y(n)-1)^3}{12}
+\end{split}
+\end{equation}
+\begin{enumerate}
+\item[(a)]
+Show that this map has a single fixed point
+(the location of which depends on $b$).
+\item[(b)]
+Determine how the classification and stability
+of the fixed point depends on $b$.
+\end{enumerate}
+\end{exercise}
+\end{exercises}
+
+\newpage
+
+\section{The Saddle-Node Bifurcation for Maps}
+
+\section{The Hopf Bifurcation for Maps}
+
+\section{The Period-Doubling Bifurcation for Maps}
+
+\section{Marital Relationships: Gottman and Murray's Model}
+The model discussed in this section is based on the
+work of Gottman, Murray, \emph{et al}\cite{GM}.
+\section{Exercises}
+%
+%

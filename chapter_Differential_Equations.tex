@@ -1,0 +1,3475 @@
+
+\chapter{Differential Equations}
+\index{differential equation}
+
+
+% \section{Modeling with Differential Equations}
+% \emph{Start with an example; discuss significance of a
+% relationship between and function and its derivative...}
+% %
+% The general form of a first order (autonomous) differential
+% equation is
+% \[
+%    \frac{dy}{dt} = f(y)
+% \]
+% \noindent
+% If  $f'(y_{0})=0$, then $y(t)=y_{0}$ is a solution.  Such a constant
+% solution is called an \emph{equilibrium solution}.\index{equilibrium}
+
+\section{Unconstrained Population Growth}
+\label{sec:UnconstrPopGrowth}
+% \noindent
+% \emph{``Population, when unchecked, increases in a geometrical ratio. 
+%       Subsistence increases only in an arithmetical ratio."}
+% 
+% \hfill    -- Thomas Robert Malthus
+% 
+% \bigskip
+The simplest assumption for modeling the growth of a population
+with a continuous time model is
+\begin{quote}
+\emph{The rate of change of the population is proportional to the current population level.}
+\end{quote} 
+Let $t$ be time, and let $p(t)$ be the population at time $t$.
+For now we'll assume that some convenient system of units is used;
+we'll have more to say about units later.
+We also assume that $p$ is ``large'' in some sense, so that it is reasonable
+to treat $p$ as a real number, not an integer.
+If, for example, the population was just three rabbits, the following
+models would not provide good
+approximations to the actual growth of the population.
+If the population is measured in thousands of rabbits,
+then $p(0)=3.12$ makes sense,
+and the following models are more reasonable.
+
+We convert the above assumption into an equation involving $t$
+and $p$.
+The ``rate of change of the population'' is the derivative, $\frac{dp}{dt}$, and the
+current population is $p(t)$, so the mathematical version of the above
+assumption is
+\begin{equation}
+  \frac{dp}{dt} = rp
+\label{eqn:growth}
+\end{equation}
+where $r$ is the constant of proportionality.
+(Note that I have suppressed the argument of $p$ for brevity.)
+This is a \emph{first order differential equation}.
+(The \emph{order}\index{order} of a differential equation is the order of the
+highest derivative in the equation.)
+
+Frequently, the question we ask is ``What is the population at time $t$
+if the population is $P_0$ at time $t=0$?''  That is, we impose the
+condition that $p(0)=P_0$.  This is called an
+\emph{initial condition}, and the problem of solving the differential
+equation with a given initial condition is called an
+\emph{initial value problem}.
+
+To solve this equation, we must find a \emph{function} $p(t)$
+that satisfies the equation.  In this case, the solution\footnote{%
+``Who has not been amazed to learn that the function $y = e^x$, like a 
+      phoenix rising from its own ashes, is its own derivative?'' 
+       -- Francois le Lionnais
+}
+is
+\begin{equation}
+  p(t) = P_0 e^{rt}
+\end{equation}
+(Let's check:  $\frac{dp}{dt} = rP_0e^{rt} = r p(t)$, so  it solves the differential
+equation, and $p(0) = P_0e^0 = P_0$, so it also satisfies the initial condition.)
+Thus, if $r > 0$, the simple assumption given above results in
+\emph{exponential growth}.\index{exponential growth}
+(If $r < 0$, we obtain \emph{exponential decay}.\index{exponential decay})
+
+\newpage
+
+\begin{exercises}
+\begin{exercise}
+\label{ex:UnconstrPopGrowth_halflife_formula}
+When the number of atoms in a radioactive sample is large,
+the following statement is found to be accurate:
+\emph{The amount of the radioactive isotope decays at 
+a rate that is proportional to the amount present.}
+Let $y(t)$ be the amount of the isotope at time $t$.
+The differential equation for $y$ is generally written
+\[
+   y'(t) = -ry
+\]
+where we assume $r > 0$.  The solution is
+\[
+   y(t) = y_0 e^{-rt}.
+\]
+The \emph{half-life}\index{half-life} $h$ of a radioactive
+isotope is the time required for the amount to be reduced
+to half the original amount.
+Use the above formula to express $r$ in terms of $h$.
+\end{exercise}
+\begin{exercise}
+\label{ex:UnconstrPopGrowth_americium}
+The radioactive element americium-241 has a half-life
+of 458 years.
+If a sample initially contains 3 mg of americium-241,
+find the amount of americium-241 that remains
+after (a) 10 years, (b) 916 years, (c) 10000 years.
+\end{exercise}
+\begin{exercise}
+\label{ex:NewtonsLawOfCooling}
+\emph{Newton's Law of Cooling}\index{Newton's Law of Cooling}
+says that the rate of change
+of the temperature of an object is proportional
+to the difference between the temperature of the object
+and the ambient temperature of the air.
+
+Express this statement as a differential equation.
+Use $k>0$ for the proportionality constant, and define
+\emph{with complete sentences}
+any other variables or constants that you use in the equation.
+
+\end{exercise}
+\end{exercises}
+
+\newpage
+
+\section{The Logistic Equation\index{logistic equation}}
+
+For a population with unlimited resources, exponential growth
+is a pretty accurate description of what happens.
+However, no environment can support exponential growth forever.
+Eventually the food runs out, or there is simply not enough space
+for a larger population.
+Presumably there is a maximum population level that the environment
+can sustain.  This level is called the
+\emph{carrying capacity}\index{carrying capacity}
+of the environment. If the population is larger than the
+carrying capacity, overcrowding or a lack of food results in a
+\emph{decreasing} population.
+We'll modify the growth equation
+\eqref{eqn:growth} to take this into account.
+
+The right side of the equation gives the rate of change of $p$
+as a function of $p$.
+If we divide the the right side by $p$, we obtain the
+\emph{per capita growth rate},
+\index{growth rate, per capita}
+For the initial assumption,
+the per capita growth rate  is just the constant $r$.
+To incorporate the assumption of a carrying capacity, we will assume that the
+per capita growth rate depends on $p$.
+When $p$ is near zero, we assume that there
+are plenty of resources for the population to grow, so the
+per capita growth rate should be
+near $r$.  As the population becomes bigger, the per capita growth rate
+should decrease: with fewer resources available to each individual,
+we assume that the reproductive ability of each individual decreases.
+The per capita growth rate
+should be zero when the population is at the carrying capacity.
+If the population exceeds the carrying capacity, the growth rate should
+be negative. In this case, conditions are so bad that the death rate
+exceeds the birth rate.
+
+The simplest formula for such a
+per capita growth rate is a straight line that has
+the value $r$ when $p=0$ and the value $0$ when $p=K$, as shown in
+Figure~\ref{fig:growthrate}.
+\begin{figure}
+\centerline{\includegraphics[width=2.25in]{matlab/logistic_percapita_growthrate.eps}} 
+\caption{Per capita growth rate for the logistic equation.}
+\label{fig:growthrate}
+\end{figure} 
+The equation that we obtain is
+\begin{equation}
+  \frac{dp}{dt} = r\left(1-\frac{p}{K}\right)p
+\label{eqn:logistic}
+\end{equation}
+This first order differential equation is commonly called the \emph{logistic equation}.\index{logistic equation}
+(It is also known as the
+\emph{Verhulst equation}.\index{Verhulst equation})
+Later we'll see how to find the exact solutions to this equation.
+For now, we'll learn as much as we can about its solutions without actually solving the
+equation.  To do this, we plot the right side of \eqref{eqn:logistic} as a function of $p$.
+The graph is shown in Figure~\ref{fig:logisticrhs}.
+\begin{figure}
+\centerline{\includegraphics[width=2.25in]{matlab/logistic_growthrate.eps}} 
+\caption{A plot of $\frac{dp}{dt}$ as a function of $p$ for the logistic
+equation \eqref{eqn:logistic}.}
+\label{fig:logisticrhs}
+\end{figure}
+We can use the information in Figure~\ref{fig:logisticrhs} to determine the
+behavior of solutions to \eqref{eqn:logistic}.
+Suppose, for example, that the population is initially ``small''.
+(In this case, small means ``a small fraction of $K$''.)
+Then the graph in Figure~\ref{fig:logisticrhs} tells us that
+$\frac{dp}{dt}$ is also small but positive.  In other words, the slope
+of $p(t)$ is small and positive.  This means that $p(t)$ is an increasing
+function of $t$, so in a little while, $p$ will be larger.  Looking back to
+Figure~\ref{fig:logisticrhs}, we see that this means $\frac{dp}{dt}$ will be
+larger than it was before, and therefore the slope of $p(t)$ has increased.
+So initially, $p(t)$ will grow faster and faster.  This is not surprising, since
+when $p$ is small, $p^2$ is very small, and if we ignore the $p^2$ term in the
+logistic equation, we obtain $\frac{dp}{dt} \approx rp$.  So when the
+population is small, the growth is almost exponential.
+
+Eventually the population will reach $K/2$.  This is the population
+level at which the population grows the fastest.
+When the population reaches this level, further increases in the
+population result in \emph{lower} growth rates.
+If $K/2 < p(t) < K$, we see in
+Figure~\ref{fig:logisticrhs} that $\frac{dp}{dt}$ is positive, but it is
+decreasing as $p$ increases.  In the next moment, $p$ will be larger,
+but then the slope of $p(t)$ will be smaller.
+As $p$ gets closer to $K$, the slope gets smaller.
+In fact, $p(t)$ will approach $K$ asymptotically, but never reach it.
+A graph of a solution to the logistic equation~\eqref{eqn:logistic} is
+shown in Figure~\ref{fig:logisticsol}.
+\begin{figure}
+\centerline{\includegraphics[width=2.25in]{matlab/logistic_solution.eps}} 
+\caption{The graph of $p(t)$, a solution to the logistic
+equation \eqref{eqn:logistic}.}
+\label{fig:logisticsol}
+\end{figure}
+
+
+Note that if the initial population is exactly $K$, then
+$\frac{dp}{dt} = 0$.  The constant function $p(t)=K$ is an
+exact solution to the differential equation.
+We call a constant solution an
+\emph{equilibrium solution}.\index{equilibrium solution}
+
+\newpage
+
+\begin{exercises}
+\begin{exercise}
+Does the logistic equation \eqref{eqn:logistic} have any other
+equilibrium solutions?
+\end{exercise}
+\begin{exercise}
+Describe (and sketch) the solution that
+results when the initial population is greater than $K$.
+Use Figure \ref{fig:logisticrhs} to explain your answer.
+Is the solution $p(t)$ increasing or decreasing?
+Is the graph of $p(t)$ concave up or concave down?
+What happens to $p(t)$ as $t\rightarrow\infty$?
+\end{exercise}
+\begin{exercise}
+Find a formula for the maximum rate of change
+of $p(t)$ if $0 < p(t) < K$.
+\end{exercise}
+\end{exercises}
+
+\newpage
+
+\section{Autonomous First Order Differential Equations}
+The method for analyzing solutions to the logistic equation can be
+applied to any first order equation of the form
+\begin{equation}
+   \frac{dy}{dt} = f(y)
+\end{equation}
+where $f(y)$ is a given function.
+In particular, we assume that $t$ does \emph{not} appear explicitly
+in $f$.  Such an equation is called \emph{autonomous}.\index{autonomous}
+When $t$ appears explicitly in the right side of the equation,
+we say the equation is \emph{nonautonomous}.\index{nonautonomous}
+For example, the equation
+\begin{equation}
+  \frac{dp}{dt} = (r+a \sin(\omega t))p
+\end{equation}
+is nonautonomous, since $t$ appears explicitly in the right side of the
+equation (in the argument of the sine function).
+In this case, the explicit time dependence might model a growth
+rate with seasonal dependence.
+
+The basic procedure to analyze an autonomous
+first order differential equation is to sketch the graph of $f(y)$, identify
+the equilibrium solutions (where $f(y)=0$), and determine the
+behavior of non-equilibrium solutions based on the graph
+of $f(y)$.
+
+\begin{xexample}
+Consider the equation
+\begin{equation}
+\frac{dp}{dt} = -rp + b.
+\label{eqn:auton_example}
+\end{equation}
+Suppose $r > 0$ and $b > 0$.
+Then the graph of the right side of the equation looks like
+the left plot in Figure~\ref{fig:auton_example_plots}.
+\begin{figure}
+\centerline{\includegraphics[width=1.75in]{matlab/auton_example_rhsplot.eps}\hspace{0.25in}\includegraphics[width=1.75in]{matlab/auton_example_solplot.eps}}
+\caption{The left plot shows the graph of the right side of \eqref{eqn:auton_example}.
+The right plot shows an example of a solution.}
+\label{fig:auton_example_plots}
+\end{figure}
+Since $\frac{dp}{dt} = 0$ when $p = b/r$, we have an
+equilibrium solution $p(t) = b/r$.
+
+For $p < b/r$, $\frac{dp}{dt} > 0$, and for
+$p > b/r$, $\frac{dp}{dt} < 0$.
+So if $p(t) < b/r$, $p(t)$ is an increasing function of
+$t$.  As $p$ increases, $\frac{dp}{dt}$ decreases; the closer
+$p$ is to $b/r$, the closer $\frac{dp}{dt}$
+is to zero.
+This suggests that $p(t)$ will approach $b/r$ asymptotically
+from below as $t\rightarrow\infty$.
+A similar argument shows that if $p(t) > b/r$,
+$p(t)$ will approach $b/r$ asymptotically from above.
+
+The plot on the right in Figure~\ref{fig:auton_example_plots}
+shows an example of a solution, for which $0 < p(0) < b/r$.
+\end{xexample}
+
+\newpage
+
+\begin{exercises}
+\begin{exercise}
+\label{ex:AutFirstOrder_autclassify}
+Classify each of the following first order differential equations
+as autonomous or nonautonomous.
+
+\medskip
+\begin{tabbing}
+\hspace*{0.25in} \= \hspace*{1.5in} \= \hspace*{1.5in} \= \kill
+~ \> 
+(a) $\ds \frac{dy}{dt} = y - y^3$ \>
+(b) $\ds \frac{dx}{dt} = x\cos(t)$ \>
+(c) $\ds \frac{dy}{dt} = 3t$ \\[2pt]
+~ \>
+(d) $\ds y'(t) = 3y(t) + t^2$ \>
+(e) $\ds q'(t) = q(t) + 1$ \>
+(f) $\ds \frac{dy}{dt} = \frac{\pi y}{y^2+1}$
+\end{tabbing}
+\end{exercise}
+\begin{exercise}
+Consider the differential equation
+\[
+   \frac{dy}{dt} = y(y-1)(y-2)
+\]
+\begin{enumerate}
+\item[(a)] Find the equilibrium solutions.\\
+\item[(b)] Sketch $\frac{dy}{dt}$ as a function of $y$.\\
+\item[(c)] In one set of axes, sketch several solutions $y(t)$. Include the equilibrium solutions,
+and several more non-equilibrium solutions to show all the possible behaviors.
+(Since this is not necessarily a population model, you should consider negative values
+of $y$ as well as positive.)
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
+\label{ex:AutonomousDegreeThree}
+Consider the first order autonomous differential equation
+\[
+   \frac{dy}{dt} = (y-2)(y^2+6y+8).
+\]
+\begin{enumerate}
+\item[(a)] Find the equilibrium solutions, 
+sketch the graph  of the right side of the equation as a function
+of $y$, and use this graph to sketch the ``phase line''
+(i.e. on the $y$ axis, add arrows between the equilibria
+that indicate whether $y(t)$ is increasing or decreasing).
+\item[(b)] In one set of axes, sketch several solutions ($y(t)$ vs. $t$), including
+all equilibrium solutions.
+(Other than the equilibria,
+you do not have to find the solutions analytically.)
+Be careful with your sketch and check that:
+curves that should not cross do not
+cross; curves that should be increasing functions of $t$
+are increasing; and curves that should be decreasing functions
+of $t$ are decreasing. Label the axes appropriately.
+\item[(c)] If $y(0) = 1$, determine $\ds \lim_{t \rightarrow \infty} y(t)$
+and $\ds \lim_{t\rightarrow -\infty} y(t)$.
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
+For each of the following differential equations
+of the form $y' = f(y)$,
+determine the equilibrium solutions, sketch $f(y)$ as a function
+of $y$, and sketch the solutions where $y(0)=1/2$, $y(0)=1$, and
+$y(0)=3/2$.
+\begin{tabbing}
+\hspace*{0.25in} \= \hspace*{1.75in} \= \hspace*{1.5in} \= \kill
+~ \> 
+(a) $\ds y' = -2y + 1$ \>
+(b) $\ds y' = y(2-y)$ \>
+(c) $\ds y' = \sin(\pi y)$ \\[2pt]
+~ \>
+(d) $\ds y' = y^{1/2} - y$ ~~ $(y \ge 0)$ \>
+(e) $\ds y' = (y-1)^2$ \>
+(f) $\ds y' = (y-1)^3$
+\end{tabbing}
+\end{exercise}
+% \begin{exercise}
+% \emph{...a question in which a description must be converted to
+% a differential equation...}
+% \end{exercise}
+% \begin{exercise}
+% \emph{...another...}
+% \end{exercise}
+\end{exercises}
+
+\newpage
+
+\section{Separable First Order Differential Equations (*)}
+
+In this section and the next, we discuss
+two techniques for solving certain first order
+differential equations.
+The general form for a first order differential equation is
+\begin{equation}
+   y'(t) = f(t,y)
+\end{equation}
+In this section we discuss \emph{separable} equations,
+and in the next we discuss \emph{linear} equations.
+
+\medskip
+If $f$ can be ``separated'' into a quotient of a function of $t$ and a function
+of $y$ as
+\begin{equation}
+   f(t,y) = \frac{h(t)}{g(y)},
+\end{equation}
+there is a chance that the solutions can
+be found analytically.
+The differential equation may be written
+\begin{equation}
+  g(y(t))y'(t) = h(t).
+\label{eqn:separated}
+\end{equation}
+(I have chosen to \emph{not} suppress the $t$ dependence of
+$y$ for the moment.)
+We now integrate both sides:
+\begin{equation}
+    \int_0^t g(y(s))y'(s) \, ds = \int_0^t h(s) \, ds
+\label{eqn:integrated}
+\end{equation}
+The right side is an integral of a known function.
+To deal with the left side, we first let $p(y) = \int_{y_0}^y g(z) dz$.
+Then  we use the chain rule:
+\begin{equation}
+   \frac{d}{dt} p(y(t)) = p'(y)y'(t) = g(y)y'(t).
+\end{equation}
+Thus, on the left side of \eqref{eqn:integrated}, we have
+\begin{equation}
+  \int_0^t g(y)y'(s)\,ds = \int_0^t \left(\frac{d}{ds} p(y(s))\right)\, ds = p(y(t)) = 
+    \int_{y_0}^y g(z) \, dz
+\end{equation}
+This means we can try to solve an equation of the form
+\begin{equation}
+   \frac{dy}{dt} = \frac{h(t)}{g(y)}
+\end{equation}
+with the following formal procedure:
+\begin{enumerate}
+\item Treat the derivative $\frac{dy}{dt}$ as a fraction and rewrite the differential equation
+as
+\begin{equation}
+   g(y)dy = h(t)dt.
+\end{equation}
+\item Integrate with respect to $y$ on the left and with respect to $t$ on the right.
+The constants of integration can be combined into one constant on the right after
+integrating.
+\item Solve for $y$.
+\end{enumerate}
+The \emph{real} short summary is:
+\begin{quote}
+  \emph{Separate}, \emph{Integrate}, \emph{Isolate} (i.e. solve for $y$).
+\end{quote}
+Note that even if $f$ can be separated into $h(t)/g(y)$, there are two potential obstacles
+to this method. First, it might not be possible to evaluate the integrals.
+Second, it might not be possible to solve for $y$ after integrating.
+In this case, we have an implicit equation relating $y$ and $t$, which can still
+be useful in some cases.
+
+Note that all autonomous first order differential equations are separable.
+
+\begin{xexample}
+We'll apply the method to
+\begin{equation}
+   \frac{dp}{dt} = r p
+\end{equation}
+In this case, separating gives
+\begin{equation}
+   \frac{dp}{p} = r dt,
+\end{equation}
+but note that we have assumed that $p\ne 0$.
+Integrating gives
+\begin{equation}
+   \ln | p | = rt+C_0
+\end{equation}
+Exponentiate both sides to obtain
+\begin{equation}
+  |p| = e^{rt+C_0} = C_1e^{rt}, \quad \textrm{where} \quad C_1 = e^{C_0}.
+\end{equation}
+Note that $C_1 > 0$.
+For $p > 0$, we have $|p|=p$, so $p=C_1e^{rt}$.
+If $p < 0$, $|p| = -p$, so $p = -C_1e^{rt}$.
+This is the same as saying the constant in front of $e^{rt}$ is negative.
+Also note that $p(t)=0$ is an equilibrium solution.
+We can combine the three cases $p>0$, $p=0$ and $p<0$ into one
+solution
+\begin{equation}
+   p(t) = Ce^{rt},
+\end{equation}
+where $C$ is an arbitrary constant.
+To satisfy the initial condition $p(0)=P_0$, we let $C=P_0$.
+\end{xexample}
+
+\begin{xexample}
+Now consider a population model in which the per capita growth
+rate varies periodically, perhaps because of seasonal variation.
+The differential equation is
+\begin{equation}
+   \frac{dp}{dt} = (r + a\cos(\omega t))p
+\end{equation}
+Separating gives
+\begin{equation}
+  \frac{dp}{p} = \left( r+a\cos(\omega t) \right) dt
+\end{equation}
+and integrating gives
+\begin{equation}
+  \ln | p | = rt + \frac{a}{\omega} \sin(\omega t) + C_0
+\end{equation}
+From here, the work is similar to the previous example.
+The final concise formula for the solution is
+\begin{equation}
+   p(t) = Ce^{rt + (a/\omega)\sin(\omega t)}
+\end{equation}
+where $C$ is an arbitrary constant.
+\end{xexample}
+%
+\begin{exercises}
+\begin{exercise}
+Solve the initial value problems.
+\begin{enumerate}
+\item[(a)] $\ds y' = -y/(t^2+1)$, \hspace{0.25cm} $y(0)=5$.
+\item[(b)] $\ds y' = -\left(2-e^{-t}\right)y$, \hspace{0.25cm} $y(0)=3$.
+\item[(c)] $\ds y' = (t+1)y^2$, \hspace{0.25cm} $y(0)=y_0$, where $y_0$ is
+a constant.
+\item[(d)] $\ds y' = e^{-rt}y$, ~~ $(r > 0)$, \hspace{0.25cm}
+                                       $y(0)=1$.
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
+\label{ex:SolveFirstOrderYCubed}
+Solve the following initial value problem.
+\[
+  \frac{dy}{dt} = y^3, \quad y(0)=-2.
+\]
+\end{exercise}
+\end{exercises}
+%
+
+\newpage
+
+\section{Linear First Order Differential Equations (*)}
+\label{sec:LinearFirstOrder}
+If the first order differential equation has the form
+\begin{equation}
+    y'(t) = p(t) y + g(t),
+\label{eqn:linear}
+\end{equation}
+it is called a \emph{linear} equation.
+We can always express the solution to such an equation
+in terms of integrals.  The only obstacle will be
+evaluating the integrals.
+
+To derive the solution, we first move $p(t)y$ to the left:
+\begin{equation}
+    y'(t) - p(t) y =  g(t),
+\label{eqn:intermediateA}
+\end{equation}
+The left side looks vaguely like the result of applying the
+product rule of differentiation to a product of $y$ and something else.
+If $\mu(t)$ is some function, then $(\mu y)' = \mu y' + \mu' y$,
+which suggests that we multiply \eqref{eqn:intermediateA}
+by $\mu$ (whatever it is)
+to obtain
+\begin{equation}
+    \mu y'(t) - \mu p(t) y =  \mu g(t),
+\label{eqn:intermediateB}
+\end{equation}
+and then determine what $\mu(t)$ should
+be by solving $\mu' = -\mu p(t)$.
+This is a separable equation; a solution is
+\begin{equation}
+   \mu(t) = e^{-\int p(t)\, dt}.
+\end{equation}
+We could include an arbitrary multiple of this function
+by multiplying it by an arbitrary constant $C$, but
+since \emph{any} such $\mu(t)$ will work for us, we
+might as well choose $C=1$.
+(Equivalently, when we find the integral
+$\int p(t)\,dt$, we choose the constant of integration
+to be zero.)
+
+With this choice of $\mu$, 
+\eqref{eqn:intermediateB} becomes
+\begin{equation}
+    (\mu y)' =  \mu g(t).
+\label{eqn:intermediateC}
+\end{equation}
+Integrating both sides gives%
+\footnote{Note that I have explicitly included the integration
+constant $C$ on the right.  Normally, when we write an indefinite
+integral $\int q(t)\, dt$, the constant of integration is implicitly
+assumed to be part of the result. For example, $\int 2x\,dx = x^2+C$.
+However, it is a common mistake to \emph{forget} the constant, so
+I choose to include it explicitly.}
+\begin{equation}
+    \mu y =  \int \mu g(t) \, dt + C
+\label{eqn:intermediateD}
+\end{equation}
+and so we have the following solution
+to \eqref{eqn:linear}:
+\begin{equation}
+    y =  \frac{1}{\mu}\left(\int \mu g(t) \, dt + C\right)
+    \quad \textrm{where} \quad
+    \mu(t) = e^{-\int p(t)\, dt}.
+\label{eqn:linearsolution}
+\end{equation}
+
+\begin{xexample}
+Consider the initial value problem
+\begin{equation}
+   y' = 2y + 3, \quad y(0) = 5.
+\label{eqn:linearexample1}
+\end{equation}
+This problem is linear, with $p(t)=2$ and $g(t) = 3$.
+(It is also separable, so there is more than one way
+to solve this problem.)
+The integrating factor is
+\begin{equation}
+   \mu(t) = e^{-\int p(t)\,dt} = e^{-\int 2\, dt}
+      = e^{-2t},
+\end{equation}
+and the solution is
+\begin{equation}
+\begin{split}
+   y(t) & = e^{2t} \left( \int \left(e^{-2t}\right)\left(3\right)\,dt + C\right) \\
+        & = e^{2t} \left( -\frac{3}{2} e^{-2t} +C \right) \\
+	& = -\frac{3}{2} + Ce^{2t}.
+\end{split}
+\end{equation}
+To satisfy the initial condition $y(0)=5$, we have
+\begin{equation}
+   y(0) = -\frac{3}{2} + C = 5 \implies C = \frac{13}{2} .
+\end{equation}
+So the solution to the initial value problem is
+\begin{equation}
+   y(t) = -\frac{3}{2} + \frac{13}{2}e^{2t}.
+\end{equation}
+You should check the answer by substituting it back
+into \eqref{eqn:linearexample1}.
+\end{xexample}
+\begin{xexample}
+\begin{equation}
+   y' = -\frac{y}{t} + t, \quad y(1) = 2.
+\end{equation}
+In this case, $p(t) = -1/t$ and $g(t) = t$.
+Note that the initial condition is given at
+$t=1$ rather than the usual $t=0$.  Nothing
+is wrong or difficult about that. We just have
+to remember to evaluate the solution at $t=1$
+when we solve for the constant to make
+the solution satisfy the initial condition.
+Also, since we can not divide by zero, we will
+assume that we are only interested in the solution
+where $t > 0$.
+
+The integrating factor is
+\begin{equation}
+   \mu(t) = e^{-\int p(t)\,dt} = e^{\int \frac{1}{t}\, dt}
+      = e^{\ln |t|} = e^{\ln t} = t,
+\end{equation}
+where, because we assume $t>0$,  we used $|t|=t$.
+The solution is
+\begin{equation}
+\begin{split}
+   y(t) & = \frac{1}{\mu} \left( \int \mu g(t)\,dt + C\right) \\
+        & = \frac{1}{t} \left( \int t^2 \,dt+C\right) \\
+	& = \frac{1}{t} \left( \frac{t^3}{3} + C \right)\\
+	& = \frac{t^2}{3} + \frac{C}{t}
+\end{split}
+\end{equation}
+To satisfy the initial condition $y(1)=2$, we have
+\begin{equation}
+   y(1) = \frac{1}{3} + C = 2 \implies C = \frac{5}{3}.
+\end{equation}
+Thus the solution to the initial value problem is
+\begin{equation}
+   y(t) = \frac{t^2}{3} + \frac{5}{3t}.
+\end{equation}
+\end{xexample}
+
+\begin{xexample}
+Consider the differential equation
+\begin{equation}
+    y' = 2ty + 3.
+\end{equation}
+The differential equation is linear, with $p(t) = 2t$ and $g(t)=3$.
+The integrating factor is
+\begin{equation}
+   \mu(t) = e^{-\int p(t)\,dt} = e^{-\int 2t\, dt}
+      = e^{-t^2},
+\end{equation}
+and the solution is
+\begin{equation}
+\begin{split}
+   y(t) & = e^{t^2} \left( \int \left(e^{-t^2}\right)\left(3\right)\,dt + C\right) \\
+        & = e^{t^2} \left( 3\int e^{-t^2}\,dt+C\right)
+\end{split}
+\end{equation}
+There is no analytical expression for the integral $\int e^{-t^2}\, dt$,
+so this is the best we can do.%
+\footnote{%
+Because the integral of $e^{-t^2}$ appears frequently in mathematics,
+it has been given a name.
+You may have seen the \emph{error function}
+$\textrm{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-s^2}\,ds$.}
+\end{xexample}
+
+\begin{exercises}
+\begin{exercise}
+Solve the following initial value problems (if possible).
+\begin{enumerate}
+\item[(a)] $\ds y' = 2y+t$, \hspace{0.25cm} $y(0)=10$
+\item[(b)] $\ds y' = -\frac{y}{2} + \sin(t)$, \hspace{0.25cm} $y(0)=0$
+\item[(c)] $\ds y' = -y + e^{-2t}$, \hspace{0.25cm} $y(0)=1$
+\item[(d)] $\ds y' = -y + e^{-t}$, \hspace{0.25cm} $y(0)=1$
+\end{enumerate}
+\end{exercise}
+\end{exercises}
+
+
+\newpage
+
+\section{Interacting Populations and SI Model of Epidemiology}
+
+In this section we consider a model of the spread of a disease.
+This model illustrates a common method of
+modeling the interaction of two populations.
+We then discuss two more models the involve the
+interaction of two populations.
+
+
+\subsection{The SI Model.}
+We consider the spread of a
+disease in a population.
+(The model will be the same if, instead of a disease,
+we imagine the spread of a rumor or a joke.)
+To develop a set of differential equations that model
+the spread of the disease, we must make some assumptions:
+\begin{enumerate}
+\item
+\label{SI_assume_constant_N}
+The size of the population, $N$, remains fixed.
+\item
+\label{SI_assume_large_N}
+The size of the population is
+large enough that the error made by approximating
+$1/(N-1)$ with $1/N$ is small. (As a percentage,
+this error is $100/N$, so, for example, when
+$N=10000$, the error is 0.01 percent.)
+\item
+\label{SI_assume_two_classes}
+We  consider just two classes
+of individuals: those who have the disease and are infective,
+and those who do 
+not have the disease but are susceptible to it.
+Each individual is in one of these two classes.
+(In this model, no one is immune, and once an individual
+has the disease, the individual remains infective.)
+\item
+\label{SI_assume_random}
+We assume that the disease spreads through
+interactions between pairs of individuals, and
+these interactions are random.
+(Our model will not attempt to deal with the geographic spread
+of the disease. It will only look at the total number of
+individuals infected within the given population.)
+An \emph{interaction} is modeled as making a random
+selection of
+two individuals from the population.
+If one is susceptible and one is infected, the
+susceptible \emph{might} become infected.
+We let $c$ be the fraction of 
+susceptible-infective (SI) interactions
+that actually result in the spread of the disease
+($0 < c \le 1$).
+(We can think of the units of $c$ as
+\emph{the average number of infections
+per SI interaction}.) 
+\item
+\label{SI_assume_const_rate}
+The rate of interactions within the population is constant.
+We let $\rho$ be the interaction rate, with units of
+\emph{number of interactions per unit time}.
+\end{enumerate}
+
+Let $I(t)$ be the number of infectives at time $t$,
+and let $S(t)$ be the number of individuals who are susceptible.
+By assumptions \eqref{SI_assume_constant_N} 
+and \eqref{SI_assume_two_classes}, we have
+\begin{equation}
+   S+I = N.
+\end{equation}
+Given an initial number of infectives $I(0)$, we would like
+to know what will happen to $I(t)$.
+We will use the assumptions to formulate differential
+equations that model this process.
+
+If we pick two people at random from
+the population, what is the probability that one is
+susceptible and the other is infected? The probability
+of picking a susceptible person is $S/N$, and the probability
+of picking an infective is $I/N$.
+(Assumption (\ref{SI_assume_large_N}) allows us to assume
+that these events are independents.
+If we really chose a susceptible with our first random
+selection, then the probability that the second individual
+will be an infective is $I/(N-1)$.  Since $N$ is large,
+we can approximate this by $I/N$.)
+The probability that two random
+people will consist of one susceptible and one infected
+is
+\begin{equation}
+    2\left(\frac{S}{N}\right)\left(\frac{I}{N}\right) = \frac{2}{N^2}SI.
+\end{equation}
+This expression gives
+the average number of SI interactions per
+interaction.
+By assumption (\ref{SI_assume_const_rate}),
+the quantity $\frac{2\rho}{N^2}SI$
+gives the average number of SI interactions per unit time,
+and then by assumption (\ref{SI_assume_random}),
+the average number of infections per unit time is
+\begin{equation}
+   \frac{2c\rho}{N^2}SI.
+\end{equation}
+This quantity determines the rate at which $I(t)$
+is increasing.
+For convenience, let
+\begin{equation}
+   r = \frac{2c\rho}{N^2}
+\end{equation}
+Then the equation for $I(t)$ is
+\begin{equation}
+  \frac{dI}{dt} = r S I.
+\label{eqn:SI_I}
+\end{equation}
+We have just two classes of individuals,
+the infectives and the susceptible,
+so any gain in $I$ must result in an equal
+loss in $S$.  Thus
+\begin{equation}
+  \frac{dS}{dt} = -r S I.
+\label{eqn:SI_S}
+\end{equation}
+Equations \eqref{eqn:SI_I} and \eqref{eqn:SI_S}
+constitute a \emph{system of differential equations}.
+Many dynamical processes are modeled with systems of differential
+equations; we'll see many more in this course.
+In fact, this is a \emph{nonlinear} system.
+Typically, nonlinear systems
+that arise in the real world can not be solved analytically.
+It turns out that this particular system can be solved.
+
+First, we check that the total population remains constant by adding these
+two equations.  We find
+\begin{equation}
+  \frac{dS}{dt} + \frac{dI}{dt} = 0
+\end{equation}
+and integrating from $0$ to $t$ gives
+\begin{equation}
+  S(t) + I(t) = S(0)+I(0).
+\end{equation}
+The initial population was $N$, so we have
+$S(t)+I(t)=N$.
+This means we can replace $S$ in \eqref{eqn:SI_I} with
+$N-I$ to obtain
+\begin{equation}
+  \frac{dI}{dt} = r(N-I)I.
+\end{equation}
+This is just another version of the logistic equation,
+with carrying capacity $N$.
+If $I(0)>0$,  $I(t)$ will approach the
+equilibrium $N$ as $t\rightarrow\infty$.
+Thus, this simple model predicts that
+eventually everyone will become infected, no matter how small
+the initial population of infectives.
+
+
+\medskip
+Many models of physical, social, or biological systems
+involve interacting populations.
+We consider two more examples that involve interacting
+populations.
+
+\subsection{A Predator/Prey Model.}
+Let $x(t)$ be the population of, say, mice in a forest,
+and let $y(t)$ be the population of foxes.
+Suppose that the mice
+are an essential component of the foxes diet; without
+mice, the foxes will eventually starve.
+That is, we assume that when there are no mice, the
+differential equation for the fox population is
+\begin{equation}
+   \frac{dy}{dt} = -\mu y
+\label{eqn:pred_alone}
+\end{equation}
+where $\mu > 0$.
+
+We also assume that, in the absence of foxes,
+the mice population grows
+according to a logistic equation:
+\begin{equation}
+   \frac{dx}{dt} = rx\left(1-\frac{x}{K}\right)
+\label{eqn:prey_alone}
+\end{equation}
+where $r$ is the small population per capita growth rate
+of the mouse population and $K$ is the carrying capacity
+of the mouse population (in the absence of foxes).
+
+We model the interaction of these populations
+with assumptions similar to those of the SI model.
+(However, in this case the total size of the population
+does not remain constant.)
+In particular,
+\emph{the rate of interactions between
+mice and foxes is proportional to the product
+of the populations}.
+We modify equations \eqref{eqn:pred_alone}
+and \eqref{eqn:prey_alone} as follows:
+
+\begin{equation}
+\begin{split}
+   \frac{dx}{dt} & = rx\left(1-\frac{x}{K}\right) - k_1xy \\
+   \frac{dy}{dt} & = -\mu y + k_2xy
+\end{split}
+\label{eqn:predprey_interaction_system}
+\end{equation}
+
+The constants $k_1 > 0$ and $k_2 > 0$ determine how the
+interactions affect the mouse and fox populations, respectively.
+Since the foxes eat the mice, interactions results
+in a loss for $\frac{dx}{dt}$.
+The foxes, on the other hand, benefit from the interaction.
+Unlike the SI model, the coefficients $k_1$ and $k_2$
+are not equal; we do not assume that
+each mouse is converted to a fox one-for-one.
+The parameter $k_2$ determines
+how much benefit results from a fox capturing a mouse.
+For example, if $k_2$ is small, 
+the foxes each have to catch many mice in order to improve
+the growth rate by a significant amount.
+
+We can interpret these equations in terms of the
+per capita growth rates of the mice and foxes.
+For the mice, the per capita growth rate
+is
+\begin{equation}
+      r\left(1-\frac{x}{K}\right)-k_1 y,
+\end{equation}
+and we see that increasing
+$y$ lowers the per capita growth rate of the
+mice.
+The per capita growth rate of the foxes
+is
+\begin{equation}
+-\mu + k_2 x.
+\end{equation}
+This shows that in order
+for the fox population to grow, the mouse 
+population must be larger than $\mu/k_2$.
+
+Unlike the SI model, we can not reduce the system
+of differential equations
+\eqref{eqn:predprey_interaction_system}
+to a single equation.
+We will learn more about the analysis of systems
+of differential equations in later chapters.
+
+\subsection{Chemical Reactions and the Law of Mass Action}
+
+\emph{...to be written...}
+
+\newpage
+
+\section{Second Order Differential Equations}
+Recall that the \emph{order} of a differential equation
+is the order of the highest derivative in the equation.
+A general form of a second order differential equation is
+\begin{equation}
+   \frac{d^2y}{dt^2} = f\left(t,y,\frac{dy}{dt}\right)
+\label{eqn:generalsecondorder}
+\end{equation}
+It is an equation that relates a function to its first
+and second derivatives.  For example,
+\begin{equation}
+  \frac{d^2y}{dt^2} = -3\frac{dy}{dt}-2y
+  \label{eqn:linearexample} 
+\end{equation}
+says we want a function $y(t)$ with the property that its second derivative
+is equal to the given linear combination of the function and  its first derivative
+for all $t$.  You should verify that $y(t)=e^{-t}$ satisfies this equation,
+as does $y(t) = e^{-2t}$.
+
+Second order differential equations often arise in models
+of mechanical systems, because Newton's second law of motion
+relates the \emph{acceleration} of an object to the force applied
+to the object:
+\begin{equation}
+   F = ma,
+\end{equation}
+where $F$ is the forced applied to the object, $m$ is the
+mass of the object, and $a$ is the acceleration of the object.
+For example, in the simplest model of a spring, the force
+exerted on a mass suspended on spring is proportional to the
+displacement of the object from its rest position.
+If we choose coordinates $y(t)$ so that $y=0$ gives the
+rest position, the forced exerted on the object by
+the spring is $-ky$, where $k>0$ is the spring constant.
+In this case, Newton's second law may be written
+\begin{equation}
+   -ky = m\frac{d^2y}{dt^2},  
+\end{equation}
+or, as it is more frequently written,
+\begin{equation}
+   \frac{d^2y}{dt^2} + \frac{k}{m}y = 0.
+\end{equation}
+This is a second order differential equation for $y(t)$.
+
+A trivial second order differential equation is
+\begin{equation}
+   \frac{d^2y}{dt^2} = 0.
+   \label{eqn:trivial}
+\end{equation}
+This one we can solve by simply integrating twice%
+\footnote{Note that we can not solve \eqref{eqn:linearexample}
+by simply integrating. If we integrate once, we obtain
+$\frac{dy}{dt} = -3y -2\int y(t)dt$.  Since we don't know what
+$y(t)$ is (after all, $y(t)$ is what we are trying to find), we can not
+evaluate $\int y(t)\,dt$.  Except for trivial cases
+(such as \eqref{eqn:trivial}),
+integrating both sides of a differential
+equation transforms it into a new problem, but does not solve it.}:
+\begin{equation}
+  \frac{dy}{dt} = A, \quad y = At+B,
+\end{equation}
+where $A$ and $B$ are constants of integration.
+$y=At+B$ is a solution for any constants $A$ and $B$.
+For a first order differential equation, we know we need
+an initial condition $y(0)=y_0$ to determine the value of the
+arbitrary constant that shows up in the solution.  For a second order
+differential equation, there are generally two arbitrary constants, so
+we need \emph{two} initial conditions: $y(0)=y_0$, $y'(0) = v_0$.
+So a general form for a second order initial value problem is
+\begin{equation}
+   \frac{d^2y}{dt^2} = f\left(t,y,\frac{dy}{dt}\right)
+  \quad y(0) = y_0, \quad y'(0)=v_0.
+\end{equation}
+(With these initial conditions, you should verify that the solution
+to the trivial differential equation $\frac{d^2y}{dt^2}=0$ is $y(t)=v_0 t + x_0$.)
+In problems where $y(t)$ represents the position of an object,
+$y_0$ is the \emph{initial position}, and $v_0$ is the
+\emph{initial velocity}.
+
+We can always convert an equation such as
+\eqref{eqn:generalsecondorder}
+into a system of two first order equations.
+Let $v(t) = \frac{dy}{dt}$; then
+$\frac{dv}{dt} = \frac{d^2y}{dt^2}$, and the single second
+order equation becomes the system
+\begin{equation}
+\begin{split}
+   \frac{dy}{dt} & = v\\
+   \frac{dv}{dt} & = f(t,y,v)
+\end{split}
+\end{equation}
+(This reinforces the idea that the initial value problem
+for a second order differential equations requires
+two initial conditions.  We need starting values for
+both $y(t)$ and $v(t)$.)
+\begin{xexample}
+Consider the second order differential equation
+\begin{equation}
+  \frac{d^2y}{dy^2} + \mu(y^2-1)\frac{dy}{dt} + k y = 0.
+\end{equation}
+We rewrite this equation as a system of two first order
+equations.
+Let $v = \frac{dy}{dt}$;
+then
+\begin{equation}
+   \frac{dv}{dt} = \frac{d^2y}{dt^2} = -\mu(y^2-1)\frac{dy}{dt} - ky.
+\end{equation}
+We replace $\frac{dy}{dt}$ with $v$ and obtain the system
+\begin{equation}
+\begin{split}
+   \frac{dy}{dt} & = v \\
+   \frac{dv}{dt} & =  -\mu(y^2-1)v - ky
+\end{split}
+\end{equation}
+\end{xexample}
+
+\begin{exercises}
+\begin{exercise}
+Convert the second order differential equation 
+in \eqref{eqn:linearexample} into a system of two first order equations.
+\end{exercise}
+\end{exercises}
+
+\newpage
+
+\section{Nondimensionalizing a Differential Equation}
+
+An important concept in mathematical modeling
+is that of \emph{dimensionless} or 
+\emph{nondimensional} variables.
+In this section, we show how to rewrite a differential
+equation in terms of nondimensional variables and parameters.
+We will use an example to illustrate the procedure.
+
+\subsection*{The projectile problem.}
+We consider the problem of determining the height of an object that is
+launched vertically from the surface of the earth with initial speed $v_0$.
+Let $t$ be the time, measured from the instant that the
+object is launched, let $x(t)$ be the height of the object above
+the surface of the earth, let $g$ be the gravitational acceleration,
+and let $R$ be the radius of the earth.
+Newton's laws may be used to derive the following differential equation
+for $x(t)$:
+\begin{equation}
+   \frac{d^2x}{dt^2} = -\frac{gR^2}{(x+R)^2}, \quad x(0)=0, \quad x'(0)=v_0.
+   \label{eqn:projectile}
+\end{equation}
+If we were going to perform computations with this equation and compare
+the solutions to actual experiments, we would need to work with
+a consistent set of units.  For example, we might measure time in
+seconds (sec), distance in meters (m), and mass in kilograms (kg).
+In this case, the units of $g$ are  m/sec$^2$.
+The quantities time, length and mass are \emph{dimensions}.
+For our equation to make sense, we must measure all dimensions
+with consistent units.  Note that the dimension of a variable
+is an inherent property of the variable, but the units are something
+we can choose. For example, $x$ is a length, but we might
+choose meters, miles, or even furlongs for its units.
+In the following, we will want to indicate the dimensions
+of all the variables and parameters in a problem.
+We'll use the symbols $\mathcal{L}$ for length,
+$\mathcal{T}$ for time, and $\mathcal{M}$ for mass.
+
+The idea is to measure our variables in ``units''
+that are intrinsic to the problem.  Units such as kilometers
+or miles are arbitrary. The following procedure
+will let us choose units that can simplify the problem.
+Specifically, this procedure usually reduces the number
+of parameters in the problem.
+
+\subsection*{Procedure for Nondimensionalizing a Differential Equation.}
+\begin{enumerate}
+\item List all the variables and parameters along with
+their dimensions.
+\item For each variable, say $x$, form a product
+(or quotient) $p$ of parameters that has the same
+dimensions as $x$, and define a new variable
+$y = x/p$. The new variable $y$ is a ``dimensionless'' variable.
+Its numerical value is the same no matter what
+system of units is used.
+\item Rewrite the differential equation in terms
+of the new variables.
+\item In the new differential equation, group the parameters
+into nondimensional combinations, and define a new set of
+nondimensional parameters expressed as the nondimensional
+combinations of the original parameters.
+(This will typically result in fewer parameters.)
+\end{enumerate}
+
+We'll apply this procedure to the projectile problem,
+but first we point out an important aspect of
+step 3.
+Time $t$ is one of the variables in the
+problem (usually we use it as the independent
+variable), so in step 2 we will create a nondimensional
+version of this variable, say $\tau$.
+Since the differential equation has derivatives
+with respect to $t$, and we want the new equation
+to be expressed in terms of $\tau$, we will have
+to use the chain rule to convert from $t$ to
+$\tau$. Suppose, for example, we have the dimensional variables
+$t$ and $x(t)$, and we define nondimensional
+variables $\tau = t/T$ and $y=x/P$.  How do we
+express $\frac{dx}{dt}$ and $\frac{d^2x}{dt^2}$
+in terms of $\tau$ and $y$?  First, write $y=x/P$
+a little more carefully as
+\begin{equation}
+   y(\tau) = \frac{x(T\tau)}{P} = \frac{x(t)}{P} 
+\end{equation}
+or
+\begin{equation}
+  x(t) = Py(t/T) = Py(\tau)
+\end{equation}
+Now take the derivative with respect to $t$ on both sides.
+We will have to use the chain rule on the right.
+\begin{equation}
+  \frac{dx(t)}{dt} = P \frac{d}{dt}\left(y(\tau)\right)= P \frac{dy}{d\tau} \frac{d\tau}{dt}
+      = \frac{P}{T}\frac{dy}{d\tau}
+  \label{eqn:tderiv}
+\end{equation}
+I included the $t$ and $\tau$ arguments in the first few expressions
+to remind you of what the arguments of $x$ and $y$ are, but from here
+on, I will suppress the arguments.
+The last equality in \eqref{eqn:tderiv}
+comes from $\frac{d\tau}{dt} = 1/T$, since $\tau = t/T$.
+We also find
+\begin{equation}
+  \frac{d^2x}{dt^2} = \frac{P}{T} \frac{d^2y}{d\tau^2}\frac{d\tau}{dt}
+     = \frac{P}{T^2}\frac{d^2y}{d\tau^2}
+\end{equation}
+Higher derivatives can be found the same way.
+
+Once we understand how this works, we can take advantage of a formal
+shortcut.  To express $\frac{dx}{dt}$ or $\frac{d^2x}{dt^2}$
+in terms of $\tau$ and $y$, where $t = T\tau$ and $x = Py$, simply
+substitute the variables in the expression for the derivative:
+\begin{equation}
+   \frac{dx}{dt} = \frac{d (Py)}{d(T\tau)} = \frac{P}{T}\frac{dy}{d\tau}
+\end{equation}
+and
+\begin{equation}
+   \frac{d^2x}{dt^2} = \frac{d^2(Py)}{d(T\tau)^2}
+      = \frac{P}{T^2}\frac{d^2y}{d\tau^2}
+\end{equation}
+This formal procedure seems fishy at first, but it is really just
+a shortcut for the chain rule.
+
+We'll now apply the nondimensionalization procedure
+to the projectile problem.
+
+\vspace{0.1cm}
+\noindent
+\emph{Step 1.}
+Table \ref{tbl:projectilevarlist} shows the result of
+step 1.
+(I've also included the meaning of each variable
+and parameter in the list.)
+\begin{table}
+\centerline{%
+\begin{tabular}{|c|l|l|}
+  \hline
+  \parbox{5em}{\T Variable or\\ Parameter \B} & Meaning & Dimension \T \B \\
+  \hline
+    $t$  & time since the launch of the object & $\mathcal{T}$ \T \B \\
+    $x$  & distance from the surface of the earth & $\mathcal{L}$ \\
+  \hline
+    $g$  & gravitational constant & $\mathcal{LT}^{-2}$ \T \B \\
+    $R$ &  radius of the earth & $\mathcal{L}$\\
+    $v_0$ & initial velocity & $\mathcal{LT}^{-1}$ \\
+  \hline
+\end{tabular}
+\vspace{0.25cm}
+}
+\caption{The list of variables and parameters for the projectile problem,
+along with their dimensions.
+$\mathcal{T}$ means \emph{time} and $\mathcal{L}$ means \emph{length}.}
+\label{tbl:projectilevarlist}
+\end{table}
+
+\vspace{0.1cm}
+\noindent
+\emph{Step 2.} The variable $t$ has dimension $\mathcal{T}$, so we must find
+a combination of the parameters that also has dimension $\mathcal{T}$.
+We see that $R/v_0$ is one such combination. We define
+\begin{equation}
+   \tau = \frac{t}{\left(R/v_0\right)} = \frac{v_0t}{R}
+\end{equation}
+The variable $x$ has dimension $\mathcal{L}$, and so does $R$, so we define
+\begin{equation}
+   y = \frac{x}{R}
+   \label{eqn:ydef}
+\end{equation}
+
+\vspace{0.1cm}
+\noindent
+\emph{Step 3.}
+We now express \eqref{eqn:projectile} in terms of the dimensionless variables
+$\tau$ and $y$.  We have $t = (R/v_0)\tau$ and $x = Ry$.
+Then, by using the shortcut discussed earlier, we have
+\begin{equation}
+   \frac{dx}{dt} = \frac{d(Ry)}{d\left((R/v_0)\tau\right)}
+      = v_0\frac{dy}{d\tau}
+   \label{eqn:firstderiv}
+\end{equation}
+and
+\begin{equation}
+   \frac{d^2x}{dt^2} = \frac{d^2 (Ry)}{d\left((R/v_0)\tau\right)^2}
+      = \frac{R}{(R/v_0)^2}\frac{d^2y}{d\tau^2}
+      = \frac{v_0^2}{R}\frac{d^2y}{d\tau^2}
+\end{equation}
+Also note that when we substitute $x = Ry$ into the right side of the
+differential equation in \eqref{eqn:projectile}, the $R$ factors in the
+numerator and denominator cancel.
+To convert the initial conditions, we use \eqref{eqn:ydef}
+to obtain $y(0) = x(0)/R = 0$, and we use \eqref{eqn:firstderiv}
+to obtain $\frac{dy}{d\tau}(0) = \left(\frac{dx}{dt}(0)\right)/v_0 = 1$.
+The result of all this is the new equation
+\begin{equation}
+   \frac{v_0^2}{R} \frac{d^2y}{d\tau^2} = -\frac{g}{(y+1)^2},
+      \quad y(0)=0, \quad y'(0)=1
+\end{equation}
+
+\vspace{0.1cm}
+\noindent
+\emph{Step 4.}
+Now we multiply both sides of the differential equation by
+$R/v_0^2$, and define $\beta$ as
+\begin{equation}
+   \beta = \frac{gR}{v_0^2}
+\end{equation}
+Note that $\beta$ is dimensionless.
+So our final, nondimensional problem is
+\begin{equation}
+   \frac{d^2y}{d\tau^2} = -\frac{\beta}{(y+1)^2},
+      \quad y(0)=0, \quad y'(0)=1
+\end{equation}
+Instead of three parameters, we have just one, and everything
+is dimensionless.
+This is, in fact, a general result.  When an equation
+is nondimensionalized, new parameters can be defined such
+that the equation depends only on the new parameters, which are
+all dimensionless.
+ 
+The fact that the new variables
+and parameters are all dimensionless means that the equation does not change
+if we change our coordinates, say from miles and hours to meters and seconds.
+Also, the fact that we ended up with just one parameter means that
+the original three parameters ($g$, $R$, and $v_0$) did not have
+independent effects on the behavior.  Any combinations of
+$g$, $R$ and $v_0$ that result in the same value of $\beta$
+will result in the same behavior of the solution.
+
+Let's go back and look at step 2 again.  We defined
+$y = x/R$.  This amounts to choosing the radius of the earth $R$
+as our fundamental unit of length.  Given the nature of the problem,
+this is a ``natural'' or ``intrinsic'' length scale, as opposed to
+miles or meters, which are completely arbitrary.
+
+We also defined $\tau = \frac{t}{R/v_0}$.
+Is there a natural or intrinsic meaning of $R/v_0$?
+You may recall that if an object moves at a constant velocity $v_0$,
+the distance that it travels in time $T$ is $v_0 T$.
+On the other hand, if the object travels a distance $R$
+with constant velocity $v_0$, the time required is $R/v_0$.
+Thus, the ``meaning'' of $R/v_0$ is the time it would take an
+object to travel the radius of the earth if it were moving at
+the constant speed $v_0$.
+Unlike seconds or hours, which are arbitrary,
+$R/v_0$ provides a unit of time
+that is defined in terms of parameters in the problem;
+it is an intrinsic time scale.
+
+\subsection*{Nondimensionalizing the Logistic Equation}
+Recall the logistic equation:
+\begin{equation}
+   \frac{dP}{dt} = r\left(1 - \frac{P}{K}\right)P,
+   \quad
+   P(0) = P_0,
+\label{eqn:logistic_again}
+\end{equation}
+where $r > 0$ and $K > 0$ are constants.
+We'll follow the steps outlined above to
+nondimensionalize this differential equation.
+Table~\ref{tbl:logisticvarlist} lists the variables and parameters.
+\begin{table}
+\centerline{%
+\begin{tabular}{|c|l|l|}
+  \hline
+  \parbox{5em}{\T Variable or\\ Parameter \B} & Meaning & Dimension \T \B \\
+  \hline
+    $t$  & time  & $\mathcal{T}$ \T \B \\
+    $P$  & size of the population & $\mathcal{N}$ \\
+  \hline
+    $r$  & \emph{per capita} growth rate of a small population & $\mathcal{T}^{-1}$ \T \B \\
+    $K$ &  carrying capacity & $\mathcal{N}$\\
+    $P_0$ & initial size of the population & $\mathcal{N}$ \\
+  \hline
+\end{tabular}
+\vspace{0.25cm}
+}
+\caption{The list of variables and parameters for the logistic equation,
+along with their dimensions.
+$\mathcal{T}$ means \emph{time} and $\mathcal{N}$ means an \emph{amount}
+or \emph{quantity}.}
+\label{tbl:logisticvarlist}
+\end{table}
+
+To create the nondimensional time variable $\tau$, we must
+divide $t$ by something that has the dimension $\mathcal{T}$.
+The only choice here is $1/r$, so
+we define
+\begin{equation}
+  \tau = \frac{t}{\left(\frac{1}{r}\right)} = rt.
+\end{equation}
+To create the nondimensional dependent variable $y$, we must
+divide $P$ by something that has the dimension $\mathcal{N}$.
+We have two choices here, $K$ or $P_0$.
+I'll use $K$, and leave the choice of $P_0$ as an exercise.
+We have
+\begin{equation}
+   y=\frac{P}{K}
+\end{equation}
+For convenience, we also rewrite the definitions of
+$\tau$ and $y$ as
+\begin{equation}
+  t = \frac{\tau}{r}, \quad\quad P = Ky.
+\end{equation}
+By the chain rule, we have
+\begin{equation}
+  \frac{dP}{dt} = \frac{d(Ky)}{d(\tau/r)}
+    = rK\frac{dy}{d\tau}.
+  \label{eqn:chainrule}
+\end{equation}
+Then substituting $\tau$ and $y$ into
+\eqref{eqn:logistic_again}
+gives
+\begin{equation}
+  rK\frac{dy}{d\tau} = r (1-y)Ky,  \quad y(0) = \frac{P_0}{K}.
+\end{equation}
+In the differential equation, the $rK$ factors cancel, so the only
+parameters left are in the initial condition.
+Note that the fraction $P_0/K$ is nondimensional.
+We define the new nondimensional initial condition
+\begin{equation}
+   y_0 = \frac{P_0}{K}
+\end{equation}
+to arrive at the nondimensional version of the logistic equation:
+\begin{equation}
+  \frac{dy}{d\tau} = (1-y)y, \quad  y(0) = y_0.
+\label{eqn:logisticnondim}
+\end{equation}
+Now, instead of three parameters, we have just \emph{one}
+nondimensional parameter.
+In a sense, all versions of the logistic equation
+(as written in \eqref{eqn:logistic_again})
+behave the same; changing $r$ or $K$ simply amounts to
+changing the units of measurement.
+
+Figure~\ref{fig:logisticplot} shows the plot of $(1-y)y$, where we can see
+that there is a stable equilibrium at $y=1$.
+Solutions to the nondimensional equation are shown
+in Figure~\ref{fig:logisticsolutionsplot}.
+\begin{figure}
+\centerline{%
+\framebox{%
+\parbox{5.5in}{%
+%\include{logisticplots2/logisticrhs}
+}}}
+\caption{The plot of $\frac{dy}{dt}$ as a function of $y$
+for the nondimensional logistic equation~\eqref{eqn:logisticnondim}.}
+\label{fig:logisticplot}
+\end{figure}
+\begin{figure}
+\centerline{%
+\framebox{%
+\parbox{5.5in}{%
+%\include{logisticplots2/logisticsolutions}
+}}}
+\caption{The plot of solutions to the nondimensional
+logistic equation~\eqref{eqn:logisticnondim} for several different
+initial conditions.}
+\label{fig:logisticsolutionsplot}
+\end{figure}
+
+How do we interpret the meaning of the nondimensional
+variables?  We defined $y=P/K$, so this one is clear.
+$K$ is a natural unit for the size of the population;
+$y$ represents the population as a fraction of the
+carrying capacity.
+The carrying capacity determines an intrinsic
+unit of measurement for the population.
+
+Can we find a similar interpretation for $\tau$? We
+formed $\tau$ by dividing $t$ by $1/r$ because
+the dimension of $1/r$ is time. Is there some
+intrinsic ``meaning'' to $1/r$?  Consider
+a small population, where $P/K \ll 1$.  In this
+case, the differential equation is approximately
+\[
+   \frac{dP}{dt} = rP,
+\]
+and the solution is $P(t) = P_0 e^{rt}$.
+Then $P(1/r) = P_0 e$.
+Thus we can interpret $1/r$ as the time required
+for a small population to increase by
+a factor of $e$.  (This unit of time is similar
+to the ``half-life'' of radioactive materials.
+The half-life is the time required for a given sample
+of the material to decay to half of the original
+amount.)
+
+
+\newpage
+
+~
+
+\newpage
+
+\section{Dimensional Analysis and the Buckingham Pi Theorem}
+\index{Buckingham Pi Theorem}
+
+In this section we see how dimensional analysis can be
+used to discover properties of a system
+without solving, or even  writing down,
+any differential equations.
+
+\subsection{Dimensional Homogeneity.}
+We begin with the notion of \emph{dimensional
+homogeneity}.
+An equation is \emph{dimensionally homogeneous}
+if it is true regardless of the system
+of units that is used to measure the parameters
+or variable in the equation.
+\begin{xexample}
+Consider the equation
+\begin{equation}
+   s = \frac{gt^2}{2}
+\label{eqn:freefall}
+\end{equation}
+This is equation for the
+distance $s$ that an object will fall when released
+at $t=0$ in a constant gravitational field.
+If we use units of feet for distance and seconds
+for time, then $g=32$ ft/sec$^2$.
+Suppose we convert to the units miles and hours
+for distance and time, respectively.
+We use a bar to indicate variables in the 
+new units.  We have $s = 5280\bar{s}$ (there
+are 5280 feet per mile), and $t = 3600\bar{t}$
+($3600$ seconds per hour).
+Finally we express $g$ in the new units:
+since $1 \,\textrm{ft} = (1/5280) \,\textrm{miles}$, and
+$1 \,\textrm{sec} = (1/3600) \,\textrm{hr}$, we have
+$g = 32$ ft/sec$^2$ becomes $\bar{g} = 32 (3600^2/5280)$
+miles/hr$^2$.
+Let's substitute the new variables into
+\eqref{eqn:freefall}:
+\begin{equation}
+\begin{split}
+   5280\bar{s} & = \frac{g\left(3600\bar{t}\right)^2}{2} \\
+   \bar{s} & = \frac{3600^2}{5280} \frac{g\bar{t}^2}{2} \\
+   \bar{s} & = \frac{\bar{g}\bar{t}^2}{2}
+\end{split}
+\end{equation}
+The new equation involving $\bar{s}$, $\bar{t}$ and $\bar{g}$
+is the same as the original equation.
+This is an example of a dimensionally homogeneous equation.
+\end{xexample}
+
+\medskip
+The power of dimensional analysis is based on the
+fundamental observation that
+\emph{equations that arise from physical laws
+or real-world problems are dimensionally homogeneous}.
+The number of parameters in such an equation can generally
+be reduced, and this can lead to a better understanding
+of the system being studied.
+
+\subsection{The Period of a Pendulum.}
+We consider a frictionless pendulum, as shown in
+Figure~\ref{fig:pendulum}.
+\begin{figure}
+\centerline{\includegraphics[width=2in]{fig/pendulum.eps}}
+\caption{A pendulum of length $l$, mass $m$, acted on
+by gravity, released from the initial angle
+$\theta_0$ with zero velocity.}
+\label{fig:pendulum}
+\end{figure}
+Table~\ref{tbl:pendulumparams} lists the parameters
+and their dimensions.
+(Note that angles, when expressed in radians,
+are actually dimensionless.)
+\begin{table}
+\centerline{%
+\begin{tabular}{|c|l|l|}
+  \hline
+  Parameter & Meaning & Dimension \T \B \\
+  \hline
+    $l$  & length of the pendulum  & $\mathcal{L}$ \T \B \\
+    $m$  & mass of the pendulum bob & $\mathcal{M}$ \\
+    $g$  & gravitational acceleration & $\mathcal{LT}^{-2}$ \T \B \\
+    $\theta_0$ &  initial angle & $1$ \\
+    $T$ & period of the oscillation & $\mathcal{T}$ \\
+  \hline
+\end{tabular}
+\vspace{0.25cm}
+}
+\caption{The list of variables and parameters for the pendulum,
+along with their dimensions.
+$\mathcal{L}$ means \emph{length},
+$\mathcal{M}$ means \emph{mass}, and
+$\mathcal{T}$ means \emph{time}.
+The initial angle $\theta_0$ is dimensionless.}
+\label{tbl:pendulumparams}
+\end{table}
+We consider an experiment in which we displace the pendulum
+by an angle $\theta_0$, and release it with no initial
+velocity.
+Since we are ignoring friction, we expect the pendulum
+to oscillate.  This oscillation will have some period
+$T$. (The period is the time required to complete one
+oscillation.)
+We would like to know how the period depends on
+the other parameters in the problem.
+First, we'll try to determine if all these parameters
+are really \emph{independent}.
+To do this, we'll try to find all the
+nontrivial different ways that they can be
+combined to form dimensionless products.
+Our goal is to find the \emph{dimensionless
+parameters}.
+
+Consider the product
+\begin{equation}
+   \pi = T^a l^b m^c g^d \theta_0^e
+\end{equation}
+We want to choose $a$, $b$, $c$, $d$ and $e$ so that
+the new parameter $\pi$ is dimensionless.
+(Note: $\pi$ is the name of a parameter.
+We are not using $\pi = 3.1415\ldots$.)
+The dimensions of $\pi$ are
+\begin{equation}
+  \mathcal{T}^a \mathcal{L}^b \mathcal{M}^c
+     \left(\mathcal{LT}^{-2}\right)^d
+     = \mathcal{T}^{a-2d}\mathcal{L}^{b+d}\mathcal{M}^c.
+\end{equation}
+We want $\pi$ to be dimensionless, so we want
+\begin{equation}
+\begin{split}
+  a-2d & = 0 \\
+  {b+d} & = 0 \\
+  c  & = 0
+\end{split}
+\end{equation}
+This is a linear equation for the unknown $a$, $b$, $c$, and
+$d$. Actually, $e$ is also an unknown, but it only shows
+up in the exponent of $\theta_0$, and $\theta_0$ is 
+already dimensionless, so we know $e$ is arbitrary.
+It is not difficult to solve the above system of
+equations, but I will still rewrite it in matrix form, and
+I'll include $e$ in the system:
+\begin{equation}
+   \begin{bmatrix}
+       1 & 0 & 0 & -2 & 0 \\
+       0 & 1 & 0 & 1  & 0 \\
+       0 & 0 & 1 & 0  & 0 \\
+       0 & 0 & 0 & 0 & 0  \\
+   \end{bmatrix}
+   \begin{bmatrix}
+       a \\ b \\ c \\ d \\ e
+   \end{bmatrix}
+   =
+   \begin{bmatrix}
+       0 \\ 0 \\ 0 \\ 0
+   \end{bmatrix}
+   \label{eqn:linear_sys_for_nondim_params}
+\end{equation}
+which we can write more concisely as
+\begin{equation}
+   A \BP = \mathbf{0}
+\end{equation}
+where $A$ is the \emph{dimension matrix}
+and  $\BP$ is the vector of the powers
+$a$, $b$, $c$, $d$, $e$.
+Each nontrivial solution to the
+linear algebra problem provides a way
+to combine the dimensional parameters
+into a nondimensional product.
+Note, however, that if
+$\BP = \left[a,b,c,d,e\right]^{\textsf{T}}$ is a solution,
+then so is $r\left[a,b,c,d,e\right]^{\textsf{T}} = \left[ra,rb,rc,rd,re\right]^{\textsf{T}}$
+for any constant $r$.
+Since
+\begin{equation}
+  T^{ra}l^{rb} m^{rc} g^{rd} \theta_0^{re}
+   = \left(T^a l^b m^c g^d \theta_0^e\right)^r ,
+\end{equation}
+multiples of a solution to \eqref{eqn:linear_sys_for_nondim_params}
+do not really identify new combinations of
+parameters.
+Thus, all we need is a set of
+\emph{linearly independent} solutions
+to \eqref{eqn:linear_sys_for_nondim_params}.
+(To use the lingo from linear algebra, we need
+a \emph{basis for the null-space of $A$}.)
+In this case, we see that the system~\eqref{eqn:linear_sys_for_nondim_params}
+is already in reduced row echelon form, and
+the solution can be written
+\begin{equation}
+  \BP = c_1\begin{bmatrix} 2 \\ -1 \\ 0 \\ 1 \\ 0 \end{bmatrix} +
+      c_2 \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 1 \end{bmatrix} 
+\end{equation}
+where $c_1$ and $c_2$ are arbitrary.  Thus a basis for the
+null-space of $A$ is
+given by the two vectors in the above solution.
+So one nondimensional parameter is
+\begin{equation}
+   \pi_1 = T^2 l^{-1} m^0 g^1 \theta_0^0
+         = \frac{gT^2}{l}
+\end{equation}
+and another (which we already knew) is
+\begin{equation}
+   \pi_2 = T^0 l^0 m^0 g^0 \theta_0^1
+         = \theta_0 .
+\end{equation}
+
+
+Presumably there \emph{is} some relationship
+among $l$, $m$, $g$, $\theta_0$, and the
+period $T$. We don't know what it is, so we'll
+just assume it can be written in the form
+\begin{equation}
+   f(T,l,m,g,\theta_0) = 0,
+   \label{eqn:assume}
+\end{equation}
+where $f$ is dimensionally homogeneous.
+The fundamental result that we will now use
+is known as the \emph{Buckingham Pi Theorem}.\index{Buckingham Pi Theorem}
+It says that a dimensionally homogeneous
+relation is equivalent to another relation
+expressed  in terms of only the independent
+nondimensional parameters $\pi_i$.
+For our example, the Buckingham Pi Theorem
+implies that there is a function $F$
+for which
+\begin{equation}
+   F(\pi_1,\pi_2) = 0.
+   \label{eqn:bpthmresult}
+\end{equation}
+Thus it must be possible to
+express the relation assumed in
+\eqref{eqn:assume} in the simpler form
+\begin{equation}
+    F\left(\frac{gT^2}{l},\theta_0\right) = 0.
+\end{equation}
+Equation \eqref{eqn:bpthmresult}
+is an implicit relation between $\pi_1$ and $\pi_2$.
+We expect that for most values of $\pi_1$ and
+$\pi_2$, we can solve for $\pi_1$ in terms
+of $\pi_2$.  That is, we can write
+\eqref{eqn:bpthmresult} as
+\begin{equation}
+    \pi_1 = h(\pi_2)
+    \label{eqn:bpthmsolved}
+\end{equation}
+where $h$ is some function.
+(In principle, the function $h$ exists,
+but the dimensional analysis performed here
+tells us nothing about the nature of $h$.)
+Substituting the formulas for $\pi_1$ and $\pi_2$
+into \eqref{eqn:bpthmsolved} gives
+\begin{equation}
+    \frac{gT^2}{l} = h(\theta_0),
+\end{equation}
+or
+\begin{equation}
+    T = \sqrt{\frac{l}{g} h(\theta_0)}
+      = \sqrt{\frac{l}{g}}\, \hat{h}(\theta_0)
+\end{equation}
+where $\hat{h}(\theta_0) = \sqrt{h(\theta_0)}$.
+With this result, we can predict how the period
+of the oscillation of the pendulum depends on
+the parameters $g$ and $l$, without actually
+solving (or even writing down) the differential
+equations that describe the motion.
+
+For example, suppose a pendulum of length $l_1$ has
+period $T_1$ when released from angle $\theta_0$.
+If the length is doubled and the pendulum
+is released from the same angle, the new period
+must be
+\begin{equation}
+   T_2 = \sqrt{\frac{l_2}{g}} \, \hat{h}(\theta_0)
+       = \sqrt{\frac{2l_1}{g}} \, \hat{h}(\theta_0)
+       = \sqrt{2}\sqrt{\frac{l_1}{g}} \, \hat{h}(\theta_0)
+       = \sqrt{2} \, T_1.
+\end{equation}
+Thus, doubling the length should cause the period
+to increase by a factor of $\sqrt{2}$.
+
+We can also compare the behavior of a pendulum
+on Earth to its behavior on Mars.
+The gravitational constant
+$g_M$ on Mars is roughly one-third that of Earth's
+gravitational consant $g_E$.
+If, for a given initial angle $\theta_0$ and length $l$,
+the period of the oscillation on Earth is $4$ seconds,
+then on Mars the period will be
+\begin{equation}
+\begin{split}
+    T_M = \sqrt{\frac{l}{g_M}} \, \hat{h}(\theta_0)
+        = \sqrt{\frac{l}{g_E/3}} \, \hat{h}(\theta_0)
+	= \sqrt{3}\, \sqrt{\frac{l}{g_E}} \, \hat{h}(\theta_0)
+	= \sqrt{3}\, T_E
+	& = \sqrt{3}\, 4 \\
+	& \approx 6.9 \; \textrm{seconds.}
+\end{split}
+\end{equation}
+
+\subsection{Another Example: Periodic Drug Doses}
+We consider the concentration of a drug
+in the bloodstream of an individual when the drug is administered
+periodically.  We'll look at a simple model that involves
+both a differential equation and a discrete map.  We'll also
+see another example of using dimensional analysis.
+
+\subsection*{Clearing of a Drug from the Bloodstream}
+There is a variety of mechanisms for a drug to be cleared from the
+bloodstream. Organs in the body may actively absorb the drug, the drug
+may react with other chemicals in the bloodstream,
+or the drug may naturally breakdown
+into simpler components.
+The simplest model of how a drug is cleared from the bloodstream
+results from assuming that the rate of loss of the drug is
+proportional to the concentration of the drug. If $c(t)$ is the
+concentration of the drug at time $t$, the differential equation
+for this simple model is
+\begin{equation}
+  \frac{dc}{dt} = -r c,
+\label{eqn:decay}
+\end{equation}
+where $r>0$ is the proportionality constant that determines
+the rate of clearance.
+We know that the solution to this equation
+is $c(t) = c_0 e^{-rt}$, where $c_0$ is the concentration
+at time $t=0$.
+
+Equation~\eqref{eqn:decay}
+is the same as the equation for the decay of
+radioactive materials, so we can define the
+\emph{half-life} of the drug. This is the time
+required for the amount of the drug to be reduced
+to half the original amount.
+For example, according to an article on
+\textbf{Slate} by Sam Schechner\footnote{\texttt{http://slate.msn.com/id/2110979/}, Dec. 13, 2004}
+about the poisoning of Ukrainian president
+Viktor Yushchenko, some isomers of 
+dioxin have a half-life of more than seven years.
+If a drug has a half-life of seven years, then
+\begin{equation}
+   c(7) = c_0e^{-7r} = \frac{c_0}{2},
+\end{equation}
+which implies
+\begin{equation}
+   r = \frac{\ln 2}{7} \approx 0.0990,
+\end{equation}
+where we assumed $t$ was measured in years, and therefore
+$r$ has the units of years$^{-1}$.
+\begin{question}
+Suppose a drug has a half-life of seven years.
+(a) How long will it take for the amount of the drug to
+be reduced to one-quarter of the original amount?
+(b) How long will it take to be reduced to one percent of the 
+original amount?
+
+\hfill \textbf{Answers:} (a) 14 years, (b) 46.5 years.
+\end{question}
+
+\subsection*{Administering a Drug with Periodic Doses}
+We now suppose that a drug is administered periodically.
+That is, every $h$ time units, a dose is administered that
+increases the concentration by $b$.
+(If the \emph{amount} administered is $a$, and the volume
+of the blood in bloodstream is $V$, then $b=a/V$.
+We will work with $b$ from here on.)
+We assume that the dose causes an instantaneous increase
+in the concentration.  This is probably a
+good assumption for a drug administered by an injection.
+Whether this is a good assumption for a drug taken
+orally depends on the properties of the drug.
+Alcohol, for example, enters the bloodstream fairly
+rapidly, so the instantaneous increase in concentration
+is probably a reasonable approximation for alcohol.
+
+We assume that the first dose is administered at time $t=0$, and
+the concentration of the drug in the bloodstream before then
+is zero.  At $t=0$ the concentration jumps to $b$, and then
+for $0 < t < h$, the concentration decays according
+to~\eqref{eqn:decay}.  At $t=h$, another dose is administered,
+and the concentration increases by $b$. The concentration then decays
+for $h < t < 2h$, and the process continues.
+We expect the plot of the concentration to look like
+the graph shown in Figure~\ref{fig:PeriodicDrugDosePlot}.
+\begin{figure}
+\centerline{%
+\includegraphics[angle=270,width=4in]{python_PeriodicDrugDose/PeriodicDrugDosePlot.eps}
+}
+\caption{A plot of the concentration $c(t)$ for a drug administered
+periodically.  In this example, $r=0.3$, $h=2$ and $b=1$.
+At $t=0, h, 2h, \ldots$, $c(t)$ increases by $b$; otherwise
+the concentration decays according to~\eqref{eqn:decay}.}
+\label{fig:PeriodicDrugDosePlot}
+\end{figure}
+
+
+Let $x_n$ be the concentration at the moment before
+a new dose is administered.
+It is clear the graph of $c(t)$ will consists of
+periods of decay, separated by jumps.  What we would like to
+know is what happens to $x_n$ as $n$ increases?
+Does $x_n$ increase without bound? Or does $x_n$ approach
+some value asymptotically?  If so, what value does is approach?
+
+\subsection*{Dimensional Analysis of $\pmb{x_{\infty}}$}
+We'll find the exact formula for $x_n$ in the next section.
+In this section, we
+assume that $x_n$ approaches a finite value $x_{\infty}$
+asymptotically as $n\rightarrow\infty$.
+We use dimensional analysis to determine
+(as far as possible) how $x_{\infty}$
+depends on the other parameters.
+
+We use the procedure that we saw for the period of the pendulum
+in an earlier lecture.  Our first task is to find all
+the \emph{independent} nondimensional parameters.
+We list all the relevant parameters along with their
+dimensions in Table~\ref{tbl:params}.
+\begin{table}
+\centerline{%
+\begin{tabular}{|c|l|l|}
+  \hline
+  Parameter & Meaning & Dimension \T \B \\
+  \hline
+    $r$  & proportionality constant for the clearance of the drug  & $\mathcal{T}^{-1}$ \T \B \\
+    $h$  & time period  & $\mathcal{T}$ \\
+    $b$  & instantaneous change in concentration due to each dose & $\mathcal{C}$ \T \B \\
+    $x_{\infty}$ &  asymptotic concentration just before the next dose  & $\mathcal{C}$ \\
+  \hline
+\end{tabular}
+\newline
+\vspace{0.2cm}
+}
+\caption{The list of variables and parameters along with their dimensions.
+$\mathcal{T}$ means \emph{time} and $\mathcal{C}$ means a
+\emph{concentration}.
+(In a problem with a wider variety of parameters, we might want to
+express concentration as an \emph{amount} $\mathcal{A}$ divided by
+a \emph{volume} $\mathcal{V}$ or even divided by the cube of a
+\emph{length} $\mathcal{L}$, but this is not necessary in this
+case.)}
+\label{tbl:params}
+\end{table}
+We see that $\pi_1=rh$
+and $\pi_2=x_{\infty}/b$
+are nondimensional combinations of the parameters.
+With a little thought, we could probably
+convince ourselves that these are the \emph{only} nontrivial
+(or independent) combinations.
+(For example, $rhb^2/x_{\infty}^2$ is nondimensional,
+but it is equivalent to
+$\pi_1/\pi_2^2$, so it is not really a ``new'' parameter.)
+However, for the sake of
+pedagogy, we will follow the formal procedure, and pretend
+we didn't see the ``obvious'' choices.
+
+We must choose exponents $\alpha$, $\beta$, $\gamma$ and $\delta$
+such that
+\begin{equation}
+   \pi = r^{\alpha} b^{\beta} h^{\gamma} x_{\infty}^{\delta}
+\label{eqn:nondimparam}
+\end{equation}
+is dimensionless.  Substituting in the dimensions from 
+Table~\ref{tbl:params}, we require
+\begin{equation}
+   \left(\mathcal{T}^{-1}\right)^{\alpha} \mathcal{C}^{\beta}
+       \mathcal{T}^{\gamma} \mathcal{C}^{\delta} = \mathcal{T}^0\mathcal{C}^0 = 1
+       \quad\implies\quad
+       \mathcal{T}^{-\alpha+\gamma}\mathcal{C}^{\beta+\delta}
+        = \mathcal{T}^{0}\mathcal{C}^{0}.
+\end{equation}
+This results in the linear system of equations
+\begin{equation}
+\begin{split}
+   -\alpha + \gamma & = 0, \\
+    \beta + \delta & = 0. \\
+\label{eqn:pdd:linearsys}
+\end{split}
+\end{equation}
+This is easy enough to solve: $\alpha = \gamma$ and $\beta = -\delta$,
+where $\gamma$ and $\delta$ are arbitrary. Equivalently, we can express
+this as
+\begin{equation}
+  \alpha = p, \quad \beta = -q, \quad \gamma = p, \quad \delta = q,
+\end{equation}
+where $p$ and $q$ are arbitrary parameters.
+In vector form,
+\begin{equation}
+\begin{bmatrix} \alpha \\ \beta \\ \gamma \\ \delta \end{bmatrix}
+  =
+\begin{bmatrix} p \\ -q \\ p \\ q \end{bmatrix}
+  =
+p\begin{bmatrix} 1 \\ 0 \\ 1 \\ 0 \end{bmatrix} +
+q\begin{bmatrix} 0 \\ -1 \\ 0 \\ 1 \end{bmatrix} .
+\end{equation}
+A \emph{basis} for the solution set of~\eqref{eqn:pdd:linearsys}
+is given by the vectors $\left\{[1,0,1,0],[0,-1,0,1]\right\}$ (written as
+row vectors for convenience).
+Each basis vector gives us exponents that we can plug into~\eqref{eqn:nondimparam} to form a nondimensional parameter.
+Thus we have found (as expected) that there are only two
+independent nondimensional parameters:
+\begin{equation}
+  \pi_1 = r^1 b^0 h^1 x_{\infty}^0 = rh, \quad \textrm{and}\quad
+  \pi_2 = r^0 b^{-1} h^0 x_{\infty}^1 = \frac{x_{\infty}}{b}. 
+\end{equation}
+
+Now we assume that there is some functional relationship
+among $r$, $h$, $b$ and $x_{\infty}$.  Since we don't know
+what it is, we'll assume the general form
+\begin{equation}
+  f(r,h,b,x_{\infty}) = 0.
+\end{equation}
+We expect $f$ to be dimensionally homogeneous; then the
+Buckingham Pi Theorem\index{Buckingham Pi Theorem} implies that there is an equivalent
+relationship of the form
+\begin{equation}
+   F(\pi_1, \pi_2) = 0.
+\label{eqn:F}
+\end{equation}
+Moreover, we expect that for most values of $\pi_1$
+and $\pi_2$, this equation can be solved for $\pi_2$
+in terms of $\pi_1$. That is, there is some function
+$G$ such that~\eqref{eqn:F} is equivalent to
+\begin{equation}
+   \pi_2 = G(\pi_1).
+\end{equation}
+Substituting in the definitions of $\pi_1$ and $\pi_2$ gives
+\begin{equation}
+   \frac{x_{\infty}}{b} = G(rh),
+\end{equation}
+or
+\begin{equation}
+   x_{\infty} = bG(rh).
+\end{equation}
+This gives us the form of the equation that will result if
+we can solve for $x_{\infty}$ in terms of $r$, $h$ and $b$.
+That is, $x_{\infty}$ \emph{must} be
+a product of $b$ and some function of $rh$ only.
+
+This problem is actually simple enough that we can
+solve for $x_{\infty}$ exactly.
+In the steady-state behavior of $c(t)$, the decrease
+in the concentration during the time interval
+between doses must be exactly $b$.
+For convenience, let us shift our time axis
+so that the concentration has just jumped to 
+$c_{\textrm{max}}$ at $t=0$.
+Then $c(h) = c_{\textrm{max}}e^{-rh}$, and the change in the
+concentration is
+\begin{equation}
+   c(0)-c(h) = c_{\textrm{max}}-c_{\textrm{max}}e^{-rh} = c_{\textrm{max}}(1-e^{-rh}).
+\end{equation}
+This must equal $b$:
+\begin{equation}
+   c_{\textrm{max}}(1-e^{-rh})=b \implies
+        c_{\textrm{max}} = \frac{b}{1-e^{-rh}} 
+\end{equation}
+Finally, since $x_{\infty}$ is the concentration at the
+end of the $h$ time interval (just before the next dose),
+we have
+\begin{equation}
+   x_{\infty} = c_{\textrm{max}}-b = \frac{b e^{-rh}}{1-e^{-rh}}.
+\end{equation}
+As expected, the formula has the form $bG(rh)$.
+In this case, $G(u) = \frac{e^{-u}}{1-e^{-u}}$.
+%
+\subsection*{Derivation of the Formula for $\pmb{x_{n}}$}%
+In this section,%
+\footnote{This section is not an integral part of the
+discussion of dimensional analysis.}
+we derive the actual formula for
+$x_n$. 
+You may find it helpful to label the plot in
+Figure~\ref{fig:PeriodicDrugDosePlot} using the notation
+from the following discussion.
+
+We need some additional notation to describe the
+graph shown in the figure.
+Let
+\begin{equation}
+\begin{split}
+    c(h^{-})  & = \lim_{t\rightarrow h^{-}} c(t)
+                     \quad\quad \textrm{(the limit from below),} \\
+    c(h^{+})  & = \lim_{t\rightarrow h^{+}} c(t)
+                     \quad\quad \textrm{(the limit from above).}
+\end{split}
+\end{equation}
+and define
+\begin{equation}
+   x_n = c((nh)^{-}).
+\end{equation}
+
+The instant after the first dose, we have
+\begin{equation}
+  c(0^{+}) = b.
+\end{equation}
+Then, for $0 < t < h$, we have $c(t) = be^{-rt}$, so
+\begin{equation}
+  c(h^{-}) = be^{-rh}.
+\label{eqn:x_one}
+\end{equation}
+At $t=h$, the concentration increases by $b$, so
+\begin{equation}
+  c(h^{+}) = c(h^{-})+b = be^{-rh} + b = b\left(e^{-rh}+1\right)
+\end{equation}
+Then in the next interval, the solution again decays, and we have
+\begin{equation}
+  c((2h)^{-}) = c(h^{+})e^{-rh} = b\left(e^{-rh}+1\right) e^{-rh}
+     = b\left(e^{-2rh} + e^{-rh}\right)
+\label{eqn:x_two}
+\end{equation}
+and after the jump at $t=2h$ we have
+\begin{equation}
+  c((2h)^{+}) = c((2h)^{-})+b = b\left(e^{-2rh}+e^{-rh}\right) + b
+     = b\left( e^{-2rh} + e^{-rh}+1\right)
+\end{equation}
+Once again, in the next time interval, the solution decays and we have
+\begin{equation}
+  c((3h)^{-}) = c((2h)^{+})e^{-rh} = b\left( e^{-2rh} + e^{-rh}+1\right)e^{-rh}
+    = b\left( e^{-3rh} + e^{-2rh}+e^{-rh}\right)
+\label{eqn:x_three}
+\end{equation}
+Recall that we defined $x_n = c((nh)^{-})$.
+The process that we are describing defines a one dimensional mapping
+\begin{equation}
+   x_{n+1} = (x_n+b)e^{-rh}, \quad \textrm{with $x_0=0$.}
+\end{equation}
+Equations~\eqref{eqn:x_one}, \eqref{eqn:x_two} and
+\eqref{eqn:x_three} give the formulas for the first three
+iterations of this map.
+In general, we have
+\begin{equation}
+  x_n = c((nh)^{-}) = b\left( e^{-nrh} + e^{-(n-1)rh} + \cdots + e^{-rh}\right)
+        = b \sum_{k=1}^{n} e^{-krh}
+	= b \sum_{k=1}^{n} \rho^k,
+\label{eqn:xnsum}
+\end{equation}
+where $\rho = e^{-rh}$.
+(Note that, since $r>0$ and $h>0$, we have $0 < \rho < 1$.)
+The formula in Equation~\eqref{eqn:xnsum} is a geometric sum.
+By using Equation~\eqref{eqn:geomsumfromone} from the
+appendix, we obtain
+\begin{equation}
+  x_n = b \rho\left(\frac{1-\rho^n}{1-\rho}\right)
+      = be^{-rh}\left(\frac{1-e^{-nrh}}{1-e^{-rh}}\right)
+\end{equation}
+Finally, since $\ds \lim_{n\rightarrow\infty} \rho^n = 0$, we have
+\begin{equation}
+  x_{\infty} = \frac{b\rho}{1-\rho}
+     = \frac{be^{-rh}}{1-e^{-rh}}. 
+\end{equation}
+
+The example shown earlier was for $r=0.3$, $h=2$ and $b=1$.
+With these values we find $x_{\infty} \approx 1.2164$.
+Figure~\ref{fig:PeriodicDrugDosePlotWithXinf}
+shows the result of ten periods for these parameters.
+The dashed line in this plot indicates $x_{\infty}$.
+\begin{figure}
+\centerline{%
+\includegraphics[angle=270,width=4.5in]{python_PeriodicDrugDose/PeriodicDrugDosePlotWithXinf.eps}
+}
+\caption{The graph of $c(t)$ for $r=0.3$, $h=2$, and $b=1$.
+The dashed line shows $x_{\infty} \approx 1.2164$.}
+\label{fig:PeriodicDrugDosePlotWithXinf}
+\end{figure}
+%
+
+\newpage
+
+\begin{exercises}
+\begin{exercise}
+\label{ex:Nondim_lrgmP}
+Find a set of independent nondimensional parameters for the following
+dimensional parameters.  The dimension of each parameter
+is given in parentheses.
+
+\centerline{$\ell$ ($\mathcal{L}$), $r$ ($\mathcal{T}^{-1}$),
+$g$ ($\mathcal{LT}^{-2}$), $m$ ($\mathcal{M}$),
+$P$ ($\mathcal{M}\mathcal{L}^{-1}\mathcal{T}^{-2}$)}
+\end{exercise}
+\end{exercises}
+
+\newpage
+
+\section{Systems of Differential Equations}
+
+A general form for a \emph{system} of $n$ first order differential
+equations is
+\begin{equation}
+\begin{split}
+  \frac{dx_1}{dt} & = f_1(t,x_1,x_2,\ldots,x_n) \\
+  \frac{dx_2}{dt} & = f_2(t,x_1,x_2,\ldots,x_n) \\
+  \vdots \\
+  \frac{dx_n}{dt} & = f_n(t,x_1,x_2,\ldots,x_n)
+\end{split}
+\end{equation}
+If all the functions $f_i$ on the right do not explicitly depend on
+$t$, we say the system is \emph{autonomous};\index{autonomous} otherwise it is
+\emph{nonautonomous}.\index{nonautonomous}
+We may write the system in vector notation as
+\begin{equation}
+   \frac{d\BX}{dt} = \BF(t,\BX),
+      \quad
+      \textrm{where}
+      \quad
+      \BX(t) = \begin{bmatrix} x_1(t) \\ x_2(t) \\ \vdots \\ x_n(t)\end{bmatrix}
+      \quad
+      \textrm{and}
+      \quad
+      \BF(t,\BX) = \begin{bmatrix} f_1(t,\BX) \\ f_2(t,\BX) \\ \vdots \\ f_n(t,\BX) \end{bmatrix}
+\end{equation}
+We will focus on the autonomous system
+\begin{equation}
+   \frac{d\BX}{dt} = \BF(\BX).
+\end{equation}
+The function $\BF$ is called a \emph{vector field}.
+It assigns a vector to each point in $\mathbb{R}^n$.
+The vector function $\BX(t)$ is a curve in $\mathbb{R}^n$,
+parameterized by $t$.
+(In this context, $\mathbb{R}^n$ is often called
+the $\emph{phase space}$.)
+The derivative $\frac{d\BX}{dt}$ is a vector tangent to
+the curve.
+If we interpret $\BX(t)$ as the motion of a particle
+in $\mathbb{R}^n$, then $\frac{d\BX}{dt}$ is the \emph{velocity}
+of the particle.
+\emph{Solving} the differential equation means finding
+the vector function
+$\BX(t)$ such that its velocity matches the given vector field
+at all points along the curve.
+
+We state without proof the following theorems.
+\begin{theorem}
+Uniqueness...
+\end{theorem}
+This theorem means that trajectories in phase
+space do not cross each other.
+
+\begin{exercises}
+\begin{exercise}
+An exercise...
+\end{exercise}
+\end{exercises}
+%
+\newpage
+%
+\section{Phase Plane Analysis\index{phase plane}}
+
+In the two dimensional autonomous case, the phase space
+is called the \emph{phase plane}.
+The system of equations can be rewritten as
+\begin{equation}
+\begin{split}
+    \frac{dx}{dt} & = f(x,y) \\
+    \frac{dy}{dt} & = g(x,y)
+\end{split}
+\end{equation}
+or
+\begin{equation}
+  \frac{d\BX}{dt} = \BF(\BX), \quad \BX \in \mathbb{R}^2, \quad
+      \BF : \mathbb{R}^2 \rightarrow \mathbb{R}^2.
+\end{equation}
+\begin{xexample}
+\textbf{The SI Components of the SIR Model.}
+We have previously seen the SIR model of the spread of
+a disease in a population:
+\begin{equation}
+\begin{split}
+   \frac{dS}{dt} & = -rSI \\
+   \frac{dI}{dt} & = rSI -\gamma I \\
+   \frac{dR}{dt} & = \gamma I
+\end{split}
+\end{equation}
+Note that the first two equations do not depend on $R$.
+We can analyze the first two equations as a two dimensional
+system, and then infer the values of $R$ from the
+relation $S+I+R=N$, where $N$ is the (constant) size
+of the total population.
+\end{xexample}
+
+
+%
+
+The basic steps are
+\begin{enumerate}
+\item Find the equilibrium solutions.
+This means we must solve simultaneously
+\begin{equation}
+    f(x,y) = 0 \quad \textrm{and} \quad g(x,y) =0.
+\end{equation}
+(This may turn out to be very hard or impossible!)
+\item Find and sketch the $x$ and $y$ \emph{nullclines}.
+
+The $x$ nullclines are the curves where $\frac{dx}{dt}=0$, which
+is the set of points where $f(x,y)=0$.
+Since the $x$ component of the vector field is zero on the
+$x$ nullcline, trajectories cross the $x$ nullcline with
+vertical tangents.
+
+Similarly, the $y$ nullclines are the curves where
+$\frac{dy}{dt} = 0$, which is the set of points where $g(x,y) = 0$.
+Trajectories cross the $y$ nullclines with horizontal tangents.
+
+Note that each intersection of an $x$ nullcline and a $y$ nullcline
+is an equilibrium.
+
+Once the nullclines are sketched, figure out the direction of the
+vector field on each nullcline. To do this, simply pick a few points
+on the nullclines and plug them into $\BF(\BX)$.
+
+\item
+The nullclines divide the phase plane in regions.  In each
+region, $\frac{dx}{dt}$ and $\frac{dy}{dt}$ have constant sign.
+This lets us determine (very roughly!) the direction of the
+vector field for all points in each region.  For example,
+if $\frac{dx}{dt} > 0$ and $\frac{dy}{dt} < 0$ in some region,
+then all vectors in the vector field are pointing
+``down and to the right'' (i.e. negative $y$ direction,
+positive $x$ direction).
+\end{enumerate}
+The above steps are often enough to obtain a
+pretty good idea of the behavior of the trajectories
+in the phase plane.
+
+\begin{exercises}
+\begin{exercise}
+An exercise...
+\end{exercise}
+\end{exercises}
+%
+%
+\newpage
+
+\section{Planar Linear Systems}
+
+
+We consider the linear system of two first order
+differential equations
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = ax + by \\
+  \frac{dy}{dt} & = cx + dy
+\end{split}
+\label{eqn:linearsys_scalar_eqns}
+\end{equation}
+or equivalently,
+\begin{equation}
+  \frac{d\BX}{dt} = A\BX, \quad \textrm{where} \quad
+     \BX = \begin{bmatrix} x \\ y \end{bmatrix},
+     \quad \textrm{and} \quad
+     A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}.
+\label{eqn:linearsys}
+\end{equation}
+
+
+\begin{xexample}
+Before discussing a general technique for
+solving such systems, we consider this example:
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = -3x + y \\
+  \frac{dy}{dt} & = -y
+\end{split}
+\label{eqn:linearsys_ex}
+\end{equation}
+The $x$ variable does not appear in the second equation,
+so we can it solve for $y(t)$ without knowing $x(t)$. We find
+\begin{equation}
+y(t) = c_1 e^{-t},
+\label{eqn:linearsys_ex_sol1}
+\end{equation}
+where $c_1$ is an arbitrary constant.
+Then the first equation is
+\begin{equation}
+  \frac{dx}{dt} = -3x + c_1 e^{-t}.
+\end{equation}
+This is a linear first order differential equation; it may be
+solved by using the method discussed in Section~\ref{sec:LinearFirstOrder}.
+We find the solution to be
+\begin{equation}
+   x(t) = c_2 e^{-3t} + \frac{c_1}{2}e^{-t}
+\label{eqn:linearsys_ex_sol2}
+\end{equation}
+where $c_2$ is an arbitrary constant.
+Let's write our solutions \eqref{eqn:linearsys_ex_sol1}
+and \eqref{eqn:linearsys_ex_sol2} as a vector:
+\begin{equation}
+  \BX(t) = \begin{bmatrix}
+                x(t) \\ y(t)
+           \end{bmatrix}
+         =
+           \begin{bmatrix}
+               c_2 e^{-3t} + \frac{c_1}{2} e^{-t} \\
+               c_1 e^{-t}
+           \end{bmatrix}
+         =
+           c_2 \begin{bmatrix}
+               1 \\ 0
+           \end{bmatrix} e^{-3t}
+           + c_1 \begin{bmatrix}
+               \frac{1}{2} \\
+               1
+           \end{bmatrix} e^{-t}
+\label{eqn:linearsys_ex_vecsol}
+\end{equation}
+Because the second equation of this example was
+\emph{decoupled} from the first, we were able to
+find the solution by solving two first order differential equations.
+Unfortunately, this method won't work for the general problem.
+\end{xexample}
+
+\subsection*{Solving the System}
+To motivate our method for
+solving \eqref{eqn:linearsys},
+we first recall that the solution to the
+single equation
+\begin{equation}
+  \frac{dx}{dt} = a x
+\end{equation}
+is $x(t) = c e^{at}$: a constant multiplied by
+an exponential.  We also 
+note that the solution to
+the example problem \eqref{eqn:linearsys_ex} that is given
+by \eqref{eqn:linearsys_ex_vecsol} is a linear combination of functions
+of the form $\BV e^{\lambda t}$, where $\BV$ is constant vector.
+This suggests that to solve~\eqref{eqn:linearsys},
+we look for a solution of the form
+\begin{equation}
+  \BX(t) = \BV e^{\lambda t}
+\end{equation}
+where $\BV$ is a constant vector, and $\lambda$ is a number.
+We note that $\BX(t) = \BZero$ is a solution to \eqref{eqn:linearsys},
+which we call the \emph{trivial solution}\index{trivial solution}.
+We would like to
+find nontrivial solutions, so we assume $\BV\ne \BZero$.
+
+By substituting our ``guess'' into the differential equation, we
+find
+\begin{equation}
+  \lambda \BV e^{\lambda t} = A\left(\BV e^{\lambda t}\right)
+       = A\BV e^{\lambda t}
+\end{equation}
+or, after canceling $e^{\lambda t}$ and rearranging,
+\begin{equation}
+   A\BV = \lambda \BV.
+\label{eqn:eigenvalueprob}
+\end{equation}
+This is the \emph{eigenvalue problem}\index{eigenvalue problem}
+for the matrix $A$.
+To solve \eqref{eqn:linearsys}, we must find
+the eigenvalues ($\lambda$) and
+the corresponding eigenvectors ($\BV$) of $A$.
+
+Recall from linear algebra that an $n\times n$ matrix
+has at most $n$ eigenvalues, and always has at least
+one eigenvalue.  Thus for our $2\times 2$
+system, we expect to find one or two eigenvalues.
+A ``typical'' or ``generic'' $2\times 2$ matrix
+will have two eigenvalues, and that is the case
+we will study.  The case where there is just one
+eigenvalue is also important, but we will not pursue
+it in this course.
+
+An eigenvalue may be real or complex. We note that
+if $\lambda$ is a complex eigenvalue of $A$, then
+the corresponding eigenvector $\BV$ must also be
+complex. Moreover, by taking the complex conjugate
+of both sides of~\eqref{eqn:eigenvalueprob},
+we find
+\begin{equation}
+\begin{split}
+   (A\BV)^* & = (\lambda \BV)^* \\
+   A\BV^* & = \lambda^* \BV^*
+\end{split}
+\end{equation}
+(where $z^*$ is the complex conjugate of $z$).
+The second equation follows from the first
+by using the multiplicative property of the conjugate
+$(wz)^* = w^* z^*$, and
+by noting that
+$A$ is a real matrix, so $A^*=A$.
+The second equation says that $\lambda^*$ is also an eigenvalue,
+with a corresponding eigenvector $\BV^*$.
+The short summary is, for a real matrix $A$,
+\emph{complex eigenvalues always occur in complex conjugate
+pairs}.
+
+Finally, it is not hard to verify that if $\BX_1(t)$ and
+$\BX_2(t)$ are solutions to \eqref{eqn:linearsys}, then
+so is $c_1 \BX_1(t) + c_2\BX_2(t)$ for any constants
+$c_1$ and $c_2$.
+(This is the \emph{principle of superposition} for linear
+systems.)
+  Equation \eqref{eqn:linearsys} is
+a pair of coupled first order equations, so we expect the
+general solution to have two arbitrary constants.
+In fact, the general solution must have the form
+\begin{equation}
+  \BX(t) = c_1 \BX_1(t) + c_2 \BX_2(t).
+\end{equation}
+We'll find the general solution in two cases: real and distinct eigenvalues,
+and complex eigenvalues.
+
+\subsection*{Real, distinct eigenvalues.}
+Suppose that $A$ has real eigenvalues $\lambda_1$
+and $\lambda_2$, and $\lambda_1 \ne \lambda_2$.
+Let $\BV_1$ and $\BV_2$ be corresponding eigenvectors.
+The general solution is
+\begin{equation}
+  \BX(t) = c_1 \BV_1 e^{\lambda_1 t} + c_2 \BV_2 e^{\lambda_2 t}
+\label{eqn:gensolreal}
+\end{equation}
+where $c_1$ and $c_2$ are arbitrary constants.
+
+\subsection*{Complex eigenvalues.}
+Because the matrix $A$ is real, we know that complex eigenvalues must
+occur in complex conjugate pairs.
+Suppose $\lambda_1 = \mu + i\omega$, with eigenvector
+$\BV_1=\BA+i\BB$ (where $\BA$ and $\BB$ are real vectors).
+If we use the formula for real eigenvalues,
+we obtain
+\begin{equation}
+ \BX = c_1 \BV_1 e^{\lambda_1 t} + c_2 \BV_1^* e^{\lambda_1^* t}. 
+\end{equation}
+This expression is a solution to the differential equations.
+However, for arbitrary $c_1$ and $c_2$, this expression will
+generally be complex-valued, and we want a \emph{real-valued}
+solution.
+We derive such a solution based on the following observation:
+\emph{If the matrix $A$ has only real elements, and} $\BX(t)$
+\emph{is a complex solution to the linear system of differential equations,
+then the real and imaginary parts of} $\BX(t)$
+\emph{are also solutions
+to the differential equation.}  (We take the ``imaginary part''
+to be the coefficient of $i$, so the imaginary part is also
+a real-valued solution.)  This claim is easily verified:
+Assume $\BX(t) = \BP(t) + i \BQ(t)$ is a solution to
+$d\BX/dt = A\BX$.  Then
+\begin{equation}
+  \frac{d\BP}{dt} + i\frac{d\BQ}{dt} = A(\BP+i\BQ) = A\BP + iA\BQ
+\end{equation}
+Two complex expressions are equal if and only if their real
+and imaginary parts are equal, so this equation implies
+\begin{equation}
+  \frac{d\BP}{dt} = A\BP \quad \textrm{and} \quad
+  \frac{d\BQ}{dt} = A\BQ.
+\end{equation}
+In other words, $\BP(t)$ and $\BQ(t)$ are solutions
+to the system of differential equations.
+
+Now consider the complex solution
+\begin{equation}
+  \BX_1(t) = \BV_1 e^{\lambda_1 t}
+    = (\BA+i\BB) e^{(\mu + i\omega)t}
+\end{equation}
+To separate this into its real and imaginary parts, we use
+\emph{Euler's formula}\index{Euler's formula}:
+\begin{equation}
+e^{i\theta} = \cos\theta + i \sin\theta.
+\end{equation}
+Then
+\begin{equation}
+\begin{split}
+  \BX_1(t) & = \BV_1 e^{\lambda_1 t} \\
+     & = (\BA+i\BB) e^{(\mu + i\omega)t} \\
+     & = (\BA+i\BB)e^{\mu t} e^{i\omega t} \\
+     & = e^{\mu t} (\BA+i\BB)(\cos \omega t + i\sin \omega t) \\
+     & = e^{\mu t} \left(\BA\cos\omega t - \BB\sin\omega t + i(\BA\sin\omega t + \BB\cos\omega t)\right) \\
+     & = \left[e^{\mu t}\left(\BA\cos\omega t - \BB\sin\omega t \right) \right]
+         + i \left[e^{\mu t}\left(\BA\sin\omega t + \BB\cos\omega t\right) \right]
+\end{split} 
+\end{equation}
+The real part of this solution is
+\begin{equation} 
+\BU(t) = e^{\mu t}\left(\BA\cos\omega t - \BB\sin\omega t \right)
+\end{equation}
+and the imaginary part (i.e. the coefficient of $i$) is
+\begin{equation}
+\BW(t) = e^{\mu t}\left(\BA\sin\omega t + \BB\cos\omega t\right).
+\end{equation}
+Each of these is real-valued, and by the observation given
+above, each is a solution to the differential equations.
+We may then write the general solution as
+\begin{equation}
+\begin{split}
+   \BX(t) & = c_1 \BU(t) + c_2 \BW(t) \\
+    &  =  c_1 e^{\mu t}\left(\BA\cos\omega t - \BB\sin\omega t \right)
+                 + c_2 e^{\mu t}\left(\BA\sin\omega t + \BB\cos\omega t\right).
+\end{split}
+\label{eqn:gensolcomplex}
+\end{equation}
+Note that we never had to write down the second (complex conjugate)
+eigenvalue or eigenvector. 
+
+\subsection*{Classifying the Equilibrium and Its Stability}
+We now consider several subcases of the real and complex cases.
+Our goal is to understand the possible behaviors of solutions
+in the various cases.
+An important property of an equilibrium point is its
+\emph{stability}\index{stability}.
+The following describes three basic cases.
+
+\begin{itemize}
+\item If all solutions that start close to an equilibrium converge
+to the equilibrium asymptotically as $t\rightarrow\infty$, we
+say the equilibrium is
+\emph{asymptotically stable}\index{asymptotically stable}.
+\item If all solutions in sufficiently small neighborhoods
+of the equilibrium remain close to the equilibrium, we say
+the equilibrium is \emph{stable}\index{stable}.
+Note that asymptotic stability implies stability.
+\item If every neighborhood of the equilibrium contains solutions
+arbitrarily close to the equilibrium that leave the neighborhood, we say the equilibrium is \emph{unstable}\index{unstable}. 
+\end{itemize}
+To determine how to classify the equilibrium, we consider
+the real and complex cases separately.
+
+\subsection*{Real, distinct eigenvalues.}
+Let $\lambda_1$ and $\lambda_2$ be real eigenvalues,
+$\lambda_1\ne\lambda_2$, and let $\BV_1$ and $\BV_2$
+be respective eigenvectors.  We have the following
+cases.
+\begin{enumerate}
+\item $\pmb{\lambda_1 < \lambda_2 < 0}$.
+
+\noindent
+When both eigenvalues are negative, it is clear from
+\eqref{eqn:gensolreal}
+that
+\[
+  \lim_{t\rightarrow\infty}\BX(t) = \BZero.
+\]
+All trajectories approach $\BZero$ asymptotically.
+
+\noindent
+The equilibrium $\BZero$ is called a \emph{sink.}
+It is \emph{asymptotically stable}.
+
+\smallskip
+
+\item $\pmb{0 < \lambda_1 < \lambda _2}$.
+
+\noindent
+In this case, all solutions diverge from the origin.
+However, for any solution $\BX(t)$, we have
+\[
+  \lim_{t\rightarrow -\infty}\BX(t) = \BZero,
+\]
+so all solutions 
+converge to $\BZero$ backwards in time.
+
+\noindent
+The equilibrium $\BZero$ is called a \emph{source.}
+It is \emph{unstable}.
+
+\smallskip
+
+\item $\pmb{\lambda_1 < 0 < \lambda_2}$.
+
+\noindent
+Looking at \eqref{eqn:gensolreal}, we see that if $c_2=0$, the solution
+will converge to $\BZero$ as $t\rightarrow\infty$.
+If $c_2\ne 0$, then eventually the term $c_2\BV_2e^{\lambda_2 t}$ will
+dominate, and the solution will grow exponentially.
+Thus, there are solutions that converge to $\BZero$, but ``most''
+(i.e. those with $c_2\ne 0$) will not.
+
+\noindent
+The equilibrium $\BZero$ is called a \emph{saddle point}, 
+and it is \emph{unstable}.
+
+\smallskip
+
+\item \textbf{Zero eigenvalue}.  It is also possible that
+one of the eigenvalues is zero.  The analysis
+of this case is left as an exercise.
+\end{enumerate}
+
+We can say a little more about cases (1) and (2).
+Consider the sink, where $\lambda_1 < \lambda_2 < 0$.
+We can write the general solution as
+\begin{equation}
+\BX(t) = e^{\lambda_2 t}\left[c_1\BV_1 e^{(\lambda_1-\lambda_2)t} + c_2\BV_2\right] . 
+\end{equation} 
+Suppose $c_2\ne 0$.
+Since $\lambda_1-\lambda_2 < 0$, the first term in the
+square brackets goes to zero as $t$ increases,
+and for large positive $t$ we have
+\begin{equation}
+  \BX(t) \approx c_2\BV_2 e^{\lambda_2 t}.
+\end{equation}
+This says that as the solution converges to zero, it does
+so along the direction of $\BV_2$.
+That is, $\BX(t)$ will approach $\BZero$ along a curve that
+is tangent to the eigenvector $\BV_2$.
+
+In the case of a source, where $0 < \lambda_1 < \lambda_2$,
+we can write the general solution as
+\begin{equation}
+\BX(t) = e^{\lambda_1 t}\left[c_1\BV_1 + c_2\BV_2 e^{(\lambda_2-\lambda_1)t}\right] 
+\end{equation}
+Suppose $c_1\ne 0$.
+For large \emph{negative} $t$, the second term in the
+square brackets goes to zero while the first is constant, so we have
+\begin{equation}
+ \BX(t) \approx c_1 \BV_1 e^{\lambda_1 t}.
+\end{equation}
+This says that
+as $t\rightarrow-\infty$, the solution converges to
+$\BZero$ along the direction of $\BV_1$.  That is,
+$\BX(t)$ will approach $\BZero$ (as $t\rightarrow-\infty$)
+along a curve that is tangent to the eigenvector
+$\BV_1$.
+
+We can summarize these observations by saying
+that in the case of a source or sink,
+\emph{curved trajectories in the phase plane approach
+$\BZero$ along curves that are tangent to the eigenvector
+of the eigenvalue closest to zero.}
+By stating it this way, we don't have to worry
+about which eigenvalue we called $\lambda_1$ or
+$\lambda_2$.  This observation will be very useful
+when we sketch phase portraits.
+
+\subsection*{Complex eigenvalues.}
+We assume one eigenvalue is $\lambda_1 = \mu + i\omega$,
+and a corresponding eigenvector is
+$\BV_1 = \BA+i\BB$.
+We can rewrite the general solution~\eqref{eqn:gensolcomplex}
+as
+\begin{equation}
+\BX(t) = 
+     e^{\mu t} \left[ c_1 \left(\BA\cos\omega t - \BB\sin\omega t \right)
+         + c_2 \left(\BA\sin\omega t + \BB\cos\omega t\right)\right]
+\end{equation}
+Note that the only $t$ dependence in the expression in the square
+brackets is through $\sin\omega t$ and $\cos\omega t$.
+Thus the expression in the square brackets is periodic, with
+period $T = 2\pi/\omega$.
+All solutions therefore have an oscillatory behavior, 
+but whether the oscillation grows or decays depends on the
+sign of $\mu$.
+We have the following subcases.
+\begin{enumerate}
+
+\item[$\pmb{\mu < 0}$]
+
+In this case, the amplitude of the oscillation decays
+exponentially.
+The trajectories spiral into the origin as $t$ increases,
+and $\ds\lim_{t\rightarrow\infty} \BX(t) = \BZero$.
+
+\noindent
+The equilibrium $\BZero$ is called a \emph{spiral sink.}
+It is \emph{asymptotically stable}.
+
+\smallskip
+
+\item[$\pmb{\mu = 0}$]
+
+Since $e^{0}=1$, the solution is periodic.
+In the phase plane, the trajectories are ellipses.
+
+\noindent
+The equilibrium $\BZero$ is called a \emph{center}, and it is
+\emph{stable}.
+
+\smallskip
+
+\item[$\pmb{\mu > 0}$]
+
+In this case, the amplitude of the oscillation grows
+exponentially.
+The trajectories spiral out of the origin as $t$ increases.
+Considering backwards time, we have
+$\ds \lim_{t\rightarrow-\infty} \BX(t) = \BZero$.
+
+\noindent
+The equilibrium $\BZero$ is called a \emph{spiral source.}
+It is \emph{unstable}.
+\end{enumerate}
+
+\begin{xexample}
+\label{exm:linearsys_ex_parameter}
+We consider the linear system
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = x + b y \\
+  \frac{dy}{dt} & = -x- 2y
+\end{split}
+\label{eqn:linearsys_ex_parameter}
+\end{equation}
+In this example, the linear system depends on a parameter
+$b$.  We will determine how the classification and
+stability of the equilibrium $\BZero$ depends on $b$.
+
+The coefficient matrix is
+\begin{equation}
+    A = \begin{bmatrix}
+            1 & b \\
+           -1 & -2
+        \end{bmatrix}
+\end{equation}
+The eigenvalues of this matrix are
+\begin{equation}
+\lambda_1 = \frac{-1+\sqrt{9-4b}}{2}, \quad \lambda_2= \frac{-1-\sqrt{9-4b}}{2}.
+\end{equation}
+We first note that these eigenvalues are complex
+if
+\begin{equation}
+  9-4b < 0 \implies b > \frac{9}{4}
+\end{equation}
+In this case, we have $\mu = -1/2$, so the equilibrium is
+a \emph{spiral sink}.
+
+Next we note that $\lambda_2 < 0$ for any $b < 9/4$.
+The classification of $\BZero$ depends on the sign of
+$\lambda_1$.  We'll find where $\lambda_1 = 0$:
+\begin{equation}
+  \lambda_1 = 0 \implies  \frac{-1+\sqrt{9-4b}}{2}=0
+    \implies b = 2.
+\end{equation}
+We have $\lambda_1 < 0$ if $2 < b < 9/4$, and
+$\lambda_1 > 0$ if $b < 2$.
+Table~\ref{tbl:linearsys_ex_paramresults}
+summarizes the results.
+\begin{table}
+\centerline{%
+\begin{tabular}{|c|c|c|c|}
+\hline
+ Range of $b$ \T & Eigenvalues & Classification & Stability \\
+\hline
+ $b < 2$\T & Real: $\lambda_1 > 0$, $\lambda_2 < 0$ & saddle & unstable \\
+\hline
+ $2 < b < 9/4$ \T & Real: $\lambda_1 < 0$, $\lambda_2 < 0$ & sink & asymptotically stable \\
+\hline
+ $b > 9/4$ \T & Complex: $\mu < 0$ & spiral sink & asymptotically stable \\
+\hline
+\end{tabular}
+\vspace{0.25cm}
+}
+\caption{Results for Example \ref{exm:linearsys_ex_parameter}.}
+\label{tbl:linearsys_ex_paramresults}
+\end{table}
+\end{xexample}
+
+\subsection*{Sketching Phase Portraits for Planar Linear Systems}
+
+\noindent
+The \emph{phase portrait} is obtained by plotting several
+representative solutions in the $(x,y)$ plane.
+Generally, enough solutions are plotted to illustrate
+the behavior of all the possible solutions to the system.
+
+We summarize the procedure for sketching the phase portraits for
+the linear system
+\[
+    \frac{d\BX}{dt} = A\BX, \quad \textrm{where} \quad
+    \BX=\begin{bmatrix} x \\ y \end{bmatrix},
+    \quad \textrm{and} \quad
+    A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}.
+\]
+\noindent
+\textbf{Procedure}
+\begin{enumerate}
+\item
+Find the eigenvalues of the matrix, and classify the equilibrium as a
+saddle, sink, source, spiral source, spiral sink, or center.
+(There are a few other special cases that we did not cover.)
+\item
+If the eigenvalues are real, find the associated eigenvectors, and
+draw the straight-line solutions.
+\item  Sketch the \emph{nullclines}, and indicate the
+directions of the vector field on the nullclines.
+
+The $x$ \emph{nullcline} is the line where $\frac{dx}{dt}=0$,
+so $ax+by=0$. Along this line, the vector field is vertical, so trajectories
+must have a vertical tangent when they cross this line.
+
+The $y$ \emph{nullcline} is the line where $\frac{dy}{dt}=0$, so
+$cx+dy=0$.  Along this line, the vector field is horizontal, so
+trajectories must have a horizontal tangent when they cross this line.
+ 
+\item Indicate the direction of the vector field on the $x$ and $y$ axes.
+Note that at the points $(1,0)$ and $(0,1)$, the
+vector field is given by the first and second columns of $A$, respectively.
+\item
+If the eigenvalues are real, distinct, and of the same sign,
+all trajectories except the straight-line solutions
+will approach the origin \emph{tangent to the eigenvector
+of the eigenvalue closest to zero}.
+\item Use the above information to sketch several representative trajectories.
+\end{enumerate}
+The following examples demonstrate this procedure.
+(In the examples, the general solution will be found in step (2),
+even though this isn't strictly necessary if you only want to
+sketch the phase portrait.)
+\newpage
+
+\begin{xexample}
+\[
+  \frac{d\BX}{dt} = A \BX, \quad \textrm{where} \quad
+    A = \begin{bmatrix}
+                   \frac{1}{2} & -1 \\
+		   1 & -1 \\
+        \end{bmatrix}
+\]
+or equivalently,
+\[
+\begin{split}
+   \frac{dx}{dt} & = \frac{1}{2} x - y \\
+   \frac{dy}{dt} & = x - y
+\end{split}
+\]
+\begin{enumerate}
+\item
+The characteristic polynomial is $\lambda^2 +\frac{1}{2}\lambda+\frac{1}{2}$,
+and the eigenvalues are
+$\lambda = -\frac{1}{4}\pm i \frac{\sqrt{7}}{4}$.
+The eigenvalues are complex,
+and the real part is negative,
+so the origin is a \emph{spiral sink}.
+
+\item In the complex case, we don't need the eigenvectors
+to sketch the phase portrait, but we do need an eigenvector
+$\BV_1$ associated with $\lambda_1 = \mu + i \omega$
+to find the general solution.
+In this case, $\lambda_1 = -\frac{1}{4}+i\frac{\sqrt{7}}{4}$,
+so $\mu = -\frac{1}{4}$ and $\omega = \frac{\sqrt{7}}{4}$,
+and
+\begin{equation}
+A-\lambda_1 I =
+  \begin{bmatrix}
+     \frac{1}{2} - \left( -\frac{1}{4}+i\frac{\sqrt{7}}{4} \right) & -1 \\
+     1 & -1 -\left( -\frac{1}{4}+i\frac{\sqrt{7}}{4} \right)
+  \end{bmatrix}
+     = 
+  \begin{bmatrix}
+          \frac{3}{4}-i\frac{\sqrt{7}}{4} & -1 \\
+	  1 & -\frac{3}{4}-i\frac{\sqrt{7}}{4}
+  \end{bmatrix}
+\end{equation}
+From the first row of $A-\lambda_1 I$ we see that we can choose
+\begin{equation}
+  \BV_1 = \begin{bmatrix} 1 \\ \frac{3}{4}-i\frac{\sqrt{7}}{4} \end{bmatrix}
+   = \begin{bmatrix} 1 \\ \frac{3}{4} \end{bmatrix}
+      + i \begin{bmatrix} 0 \\ -\frac{\sqrt{7}}{4} \end{bmatrix}
+\end{equation}
+So
+\begin{equation}
+  \BA = \begin{bmatrix} 1 \\ \frac{3}{4} \end{bmatrix}
+  \quad \textrm{and} \quad
+  \BB = \begin{bmatrix} 0 \\ -\frac{\sqrt{7}}{4} \end{bmatrix}
+\end{equation}
+The general solution is then
+\begin{multline}
+  \BX(t) = c_1 e^{-(1/4)t}
+      \left\{\begin{bmatrix} 1 \\ \frac{3}{4} \end{bmatrix} \cos\left( \sqrt{7}t/4\right)
+      - \begin{bmatrix} 0 \\ -\frac{\sqrt{7}}{4} \end{bmatrix}
+         \sin\left(\sqrt{7}t/4\right) \right\} \\
+	 +
+	  c_2 e^{-(1/4)t}
+	 \left\{
+	 \begin{bmatrix} 1 \\ \frac{3}{4} \end{bmatrix}
+	   \sin\left( \sqrt{7}t/4 \right)
+	  +
+	 \begin{bmatrix} 0 \\ -\frac{\sqrt{7}}{4} \end{bmatrix}
+	   \cos \left( \sqrt{7}t/4 \right)
+	   \right\}
+\end{multline}
+
+\item
+The $x$ nullcline is
+\[
+    \frac{1}{2} x - y = 0, \quad \textrm{or} \quad y = \frac{1}{2}x.
+\]
+At the point $(1,1/2)$, we have $\frac{dy}{dt} = 1/2 > 0$, so the
+vectors on the $x$ nullcline in the first quadrant point in the
+positive $y$ direction. (Since this problem is linear, they
+must point in the opposite direction in the opposite quadrant.)
+
+The $y$ nullcline is
+\[
+  x - y = 0, \quad \textrm{or} \quad y = x.
+\]
+At the point $(1,1)$, we have $\frac{dx}{dt} = -1/2$, so the
+vectors on the $y$ nullcline in the first quadrant point
+in the negative $x$ direction.
+\item The vector field at $(1,0)$ is
+$\begin{bmatrix} 1/2 \\ 1\end{bmatrix}$, and at $(0,1)$ it
+is
+$\begin{bmatrix} -1 \\ -1 \end{bmatrix}$.
+Vectors in these directions are drawn on the positive
+$x$ and $y$ axes, respectively (and vector in the opposite
+directions are drawn on the negative $x$ and $y$ axes).
+\item
+(The eigenvalues are complex, so this guideline is not
+applicable.)
+\item
+Here is the phase portrait.  The dashed lines are the nullclines.
+We know the equilibrium is a spiral sink, so the trajectories
+will spiral into the origin.  We use the vector field on the
+nullclines and the axes to make a ``pretty good'' sketch
+of two of the spiral trajectories.
+
+\medskip
+\noindent
+\centerline{\includegraphics[width=3in]{matlab/LinPhPortExample1.eps}}
+\end{enumerate}
+\end{xexample}
+
+\newpage
+
+\begin{xexample}
+We consider the linear system of differential equations
+with
+\[
+   A = \begin{bmatrix}
+            4 & -2 \\ 3 & -3
+       \end{bmatrix}
+\]
+\begin{enumerate}
+\item
+The characteristic polynomial is
+$\lambda^2 -\lambda -6$, and the eigenvalues are
+$\lambda_1 = -2$ and $\lambda_2 = 3$.
+We have real eigenvalues with opposite signs, so
+$\BZero$ is a \emph{saddle point}.
+\item
+The corresponding eigenvectors are
+$\BV_1 = \begin{bmatrix} 1 \\ 3 \end{bmatrix}$
+and
+$\BV_2 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$.
+These will correspond to straight-line solutions with
+slope $3$ and $1/2$, respectively, in the phase plane.
+
+The general solution is
+\begin{equation}
+\BX(t) = c_1 \begin{bmatrix} 1 \\ 3 \end{bmatrix} e^{-2t}
+   + c_2 \begin{bmatrix} 2 \\ 1 \end{bmatrix} e^{3t}.
+\end{equation}
+\item
+The $x$ nullcline is $4x-2y=0$, or $y = 2x$, and the
+$y$ nullcline is $3x-3y=0$, or $y=x$.  These are shown
+as dashed lines in the phase plane.
+\item
+The vector field at $(1,0)$ is $\begin{bmatrix} 4 \\ 3 \end{bmatrix}$,
+and the vector field at $(0,1)$
+is $\begin{bmatrix} -2 \\ -3 \end{bmatrix}$.  Vectors in the
+same direction as these are shown on the positive $x$ and $y$ axes,
+respectively.
+(They are in the opposite directions on the negative axes.
+\item
+(This guideline is not applicable, since the eigenvalues
+have opposite signs.)
+\item
+Here is the phase portrait:
+
+\noindent
+\centerline{\includegraphics[width=3in]{matlab/LinPhPortExample2.eps}}
+\end{enumerate}
+\end{xexample}
+
+\newpage
+
+\begin{xexample}
+We'll look at one more example, this time with
+\[
+   A = \begin{bmatrix}
+            4 & 2 \\ 1 & 3
+       \end{bmatrix}
+\]
+\begin{enumerate}
+\item
+The characteristic polynomial is
+$\lambda^2 -7\lambda +10$, and the eigenvalues are
+$\lambda_1 = 2$ and $\lambda_2 = 5$.
+We have positive real eigenvalues, so
+$\BZero$ is a \emph{source}.
+\item
+The corresponding eigenvectors are
+$\BV_1 = \begin{bmatrix} 1 \\ -1 \end{bmatrix}$
+and
+$\BV_2 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$.
+These will correspond to straight-line solutions with
+slope $-1$ and $1/2$, respectively, in the phase plane.
+
+The general solution is
+\begin{equation}
+\BX(t) = c_1 \begin{bmatrix} 1 \\ -1 \end{bmatrix} e^{2t}
+   + c_2 \begin{bmatrix} 2 \\ 1 \end{bmatrix} e^{5t}.
+\end{equation}
+\item
+The $x$ nullcline is $4x+2y=0$, or $y = -2x$, and the
+$y$ nullcline is $x+3y=0$, or $y=-x/3$.  These are the
+dashed lines in the phase plane.
+\item
+The vector field at $(1,0)$ is $\begin{bmatrix} 4 \\ 1 \end{bmatrix}$,
+and the vector field at $(0,1)$
+is $\begin{bmatrix} 1 \\ 3 \end{bmatrix}$.  Vectors in the
+same direction as these are shown on the positive $x$ and $y$ axes,
+respectively.
+\item We have two distinct eigenvalues with the same sign, so
+we know that the equilibrium is a source, and all trajectories
+(except the straight-line solution associated with the
+bigger eigenvalue) will come out of the origin
+tangent to the eigenvector associated with the eigenvalue
+closest to zero.  In this case, the trajectories will
+be tangent to the direction of
+$\BV_1 = \begin{bmatrix}1 \\ -1 \end{bmatrix}$.
+\item
+Here is the phase portrait:
+
+\noindent
+\centerline{\includegraphics[width=3in]{matlab/LinPhPortExample3.eps}}
+\end{enumerate}
+\end{xexample}
+%
+\newpage
+
+\begin{exercises}
+\begin{exercise}
+Follow the procedure outlined in this section (and demonstrated
+in the examples) to sketch the phase portraits for the linear
+systems with the following coefficient matrices.
+
+\smallskip
+(a) $\ds \; A = \begin{bmatrix} 1 & 2 \\ -1 & 1 \end{bmatrix}$
+\hspace{1cm}
+(b) $\ds \; A = \begin{bmatrix} -2 & 3 \\ -2 & -4 \end{bmatrix}$
+\hspace{1cm}
+(c) $\ds \; A = \begin{bmatrix} -4 & -1/2 \\ -1 & -2 \end{bmatrix}$ 
+
+\smallskip
+(d) $\ds \; A = \begin{bmatrix} 3 & 1 \\ -1 & -3 \end{bmatrix}$ 
+\hspace{0.75cm}
+(e) $\ds \; A = \begin{bmatrix} 0 & 6 \\ 3/2 & 0 \end{bmatrix}$
+\hspace{1.2cm}
+(f) $\ds \; A = \begin{bmatrix} 1 & -1 \\ 0 & 1/2 \end{bmatrix}$ 
+\end{exercise}
+\begin{exercise}
+Suppose $A$ has one zero eigenvalue and one nonzero eigenvalue.
+\begin{enumerate}
+\item[(a)] What is the general solution?
+\item[(b)] Describe the set of equilibrium solutions.
+\item[(c)] Describe the phase portrait.
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
+Each of the following matrices has one zero eigenvalue.
+Find the general solution of the corresponding linear system of
+differential equations, and sketch the phase portrait.
+
+\smallskip
+(a) $\ds \; A = \begin{bmatrix} 1 & 2 \\ 1 & 2 \end{bmatrix}$
+\hspace{1cm}
+(b) $\ds \; A = \begin{bmatrix} 0 & 2 \\ 0 & -1 \end{bmatrix}$
+\hspace{1cm}
+(c) $\ds \; A = \begin{bmatrix} 1 & 1 \\ -2 & -2 \end{bmatrix}$
+\end{exercise}
+\end{exercises}
+%
+\newpage
+%
+\section{Nonlinear Systems}
+We consider the general form of an autonomous
+system of differential equations
+\begin{equation}
+   \dot{\BX} = \BF\left(\BX\right),
+   \label{eqn:NONLIN}
+\end{equation}
+where $\BX \in \Real^{n}$.
+
+\begin{exercises}
+\begin{exercise}
+An exercise...
+\end{exercise}
+\end{exercises}
+
+\newpage
+
+\section{Linearization and Stability of Equilibrium Points}
+\label{sec:DELinearization}
+
+In this section we discuss \emph{linearization},\index{linearization}
+in which a linear system
+is used to approximate the behavior of a nonlinear system
+near an equilibrium point.
+We will focus on two-dimensional systems, but the
+techniques used here also work in $n$ dimensions.
+
+Recall that a system of two (autonomous) differential equations has the form
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = f(x,y) \\
+  \frac{dy}{dt} & = g(x,y)
+\end{split}
+\label{eqn:de}
+\end{equation}
+The constant solutions to this system are called the equilibria.
+They satisfy the equation
+\begin{equation}
+    f(x^*,y^*) = 0, \quad g(x^*,y^*) = 0.
+\end{equation}
+If the system is \emph{linear with constant
+coefficients}, we have learned
+how to solve it.  Unfortunately, most problems that arise in the
+real world are not linear,
+and in most cases, nonlinear systems can not be ``solved''--there is
+typically no method for deriving a solution to the equations.
+
+When confronted with a nonlinear problem, we usually must
+be satisfied with an approximate solution.
+One method to find approximate solutions is \emph{linearization}.
+This method is quite general; in these notes, we will look at the
+linearization of the equations near a constant solution.
+
+Recall from calculus
+that the linearization (or tangent plane approximation)
+of $f(x,y)$ at a point $(x^*,y^*)$ is
+\begin{equation}
+  f(x,y) \approx f(x^*,y^*)+f_x(x^*,y^*)(x-x^*) + f_y(x^*,y^*)(y-y^*),
+\end{equation}
+where $f_x(x,y)$ is the partial derivative\footnote{%
+See Appendix~\ref{sec:PartialDerivs} for a review
+of partial derivatives.}
+of $f$ with respect to $x$.
+This is also written $\frac{\partial f}{\partial x}$.
+
+%\paragraph{Linearization at an equilibrium point of a system
+%of differential equations.}
+By replacing $f(x,y)$ in \eqref{eqn:de}
+with its linear approximation near $(x^*,y^*)$,
+we obtain
+\begin{equation}
+   \frac{dx}{dt} = f(x^*,y^*)+f_x(x^*,y^*)(x-x^*) + f_y(x^*,y^*)(y-y^*).
+   \label{eqn:ftangentplane}
+\end{equation}
+If $(x^*,y^*)$ is an equilibrium of \eqref{eqn:de}, we have
+$f(x^*,y^*)=0$, so we can drop that term on the right
+of~\eqref{eqn:ftangentplane}.
+The linear approximation of $g(x,y)$ near $(x^*,y^*)$ gives
+a corresponding equation for $\frac{dy}{dt}$.
+
+Define new coordinates $u = x-x^*$, $v = y-y^*$.
+The $(u,v)$ coordinates are coordinates measured relative to $(x^*,y^*)$.
+In the $(u,v)$ coordinates, the equilibrium is at the origin.
+Since $x^*$ and $y^*$ are constants, we have $\frac{du}{dt} = \frac{dx}{dt}$,
+and $\frac{dv}{dt} = \frac{dy}{dt}$.  Writing the linear approximations
+in terms of $u$ and $v$ gives us
+\begin{equation}
+\begin{split}
+  \frac{du}{dt} & = f_x(x^*,y^*)u + f_y(x^*,y^*)v \\
+  \frac{dv}{dt} & = g_x(x^*,y^*)u + g_y(x^*,y^*)v \\
+\end{split}
+\end{equation}
+This is the \emph{linearization of \eqref{eqn:de} at $(x^*,y^*)$}.
+By defining $\BU = \begin{bmatrix} u \\ v \end{bmatrix}$, we can write
+this in matrix form as
+\begin{equation}
+  \frac{d\BU}{dt} = J\BU,
+\label{eqn:linearizedde}
+\end{equation}
+where
+\begin{equation}
+   J = \begin{bmatrix}
+             f_x(x^*,y^*) & f_y(x^*,y^*) \\
+	     g_x(x^*,y^*) & g_y(x^*,y^*)
+       \end{bmatrix}
+\label{eqn:jac}
+\end{equation}
+is called the \emph{Jacobian matrix}.\index{Jacobian matrix}
+
+\subsection*{What does the linearization tell us about the original system?}
+Equation \eqref{eqn:linearizedde}
+is the linear approximation to \eqref{eqn:de} at the
+equilibrium point $(x^*,y^*)$.
+How ``good'' is this approximation?
+We have the following result:
+\emph{If the real parts of both eigenvalues
+are nonzero, then the behavior of the system \eqref{eqn:de}
+near $(x^*,y^*)$ is qualitatively the same as the behavior of the
+linear approximation \eqref{eqn:linearizedde}.}
+The classification of the equilibrium in the nonlinear system
+is the same as the classification of the origin in
+the linearization.
+This is the case where the linear approximation contains
+enough information to determine the actual behavior of the
+nonlinear system.
+
+\begin{theorem}\index{stability}
+Let $\BX_0$ be an equilibrium point of
+\eqref{eqn:NONLIN}, and let $J$ be the Jacobian
+matrix of \eqref{eqn:NONLIN} at $\BX_0$.
+If the real parts of the eigenvalues of $J$
+are all negative, then $\BX_0$ is an
+asymptotically stable equilibrium point
+of \eqref{eqn:NONLIN}.
+If any eigenvalue has a positive real part,
+then $\BX_0$ is unstable.
+\end{theorem}
+
+\begin{xexample}
+The system of differential equations
+\begin{equation}
+\begin{split}
+   \frac{dx}{dt} & = 3x-y^2 \\
+   \frac{dy}{dt} & = \sin(y)-x
+\end{split}
+\label{eqn:nonlinexample1}
+\end{equation}
+has two equilibria, one of which is  $(0,0)$.
+A phase portrait (generated with PPLANE) is shown in
+Figure~\ref{fig:nonlinexample1}.
+\begin{figure}
+\centerline{%
+\includegraphics[width=5in]{pplane_plots/NonlinExample1.ps}
+}
+\caption{Phase portrait for system \eqref{eqn:nonlinexample1}.}
+\label{fig:nonlinexample1}
+\end{figure}
+  The Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+           3 &  -2y \\
+	   -1 & \cos(y)
+      \end{bmatrix}
+\end{equation}
+and at $(0,0)$, this is
+\begin{equation}
+  J = \begin{bmatrix}
+           3 &  0 \\
+	   -1 & 1
+      \end{bmatrix}.
+\end{equation}
+The eigenvalues are $\lambda_1=1$ and $\lambda_2=3$.
+Both $\lambda_1>0$ and $\lambda_2>0$, so the origin
+in the linearization is a \emph{source}.
+Since the real part of both eigenvalues is nonzero,
+we conclude that the equilibrium $(0,0)$ of the original
+nonlinear equations is also a source.
+\emph{Near $(0,0)$}, the linearization provides a
+good approximation to the nonlinear system.
+The image on the left in Figure~\ref{fig:nonlinexample1compare}
+shows the phase portrait of \eqref{eqn:nonlinexample1}
+near $(0,0)$, and the image on the right
+is the phase portrait of the linearization at $(0,0)$.
+\begin{figure}
+\centerline{%
+\includegraphics[width=2.5in]{pplane_plots/NonlinExample1detail.ps}
+\includegraphics[width=2.5in]{pplane_plots/NonlinExample1lin.ps}
+}
+\caption{On the left is the phase portrait of
+\eqref{eqn:nonlinexample1} near $(0,0)$, and on the
+right is the phase portrait of the linearization
+at $(0,0)$.  They are almost the same.  If we zoomed
+in closer, they would appear even more similar.}
+\label{fig:nonlinexample1compare}
+\end{figure}
+\end{xexample}
+%
+%
+\begin{xexample}
+The system of differential equations
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = 2x - y -x^2 \\
+  \frac{dy}{dt} & = x - 2y + y^2
+\end{split}
+\end{equation}
+has equilibria at $(0,0)$ and $(1,1)$.
+The Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+           2-2x & -1 \\
+	   1 & -2 + 2y
+      \end{bmatrix}
+\end{equation}
+
+At $(0,0)$, this is
+\begin{equation}
+  J = \begin{bmatrix}
+           2 & -1 \\
+	   1 & -2
+      \end{bmatrix}
+\end{equation}
+This matrix has eigenvalues $\lambda_1 = -\sqrt{3}$ 
+and $\lambda_2 = \sqrt{3}$, so the
+origin of the  linearized system is a saddle point.
+Both eigenvalues are real and nonzero,
+so we conclude that the equilibrium
+$(0,0)$ of the nonlinear system is also a saddle point.
+
+At $(1,1)$, the Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+           0 & -1 \\
+	   1 & 0
+      \end{bmatrix}
+\end{equation}
+This matrix has eigenvalues $\lambda=\pm i$,
+so the linearization results in a \emph{center}.
+Because the real parts of the eigenvalues are
+zero, we can \emph{not} conclude that $(1,1)$
+is actually a center in the nonlinear system.
+Trajectories near $(1,1)$ will rotate around $(1,1)$, but
+the linearization can not tell us if these trajectories
+actually form closed curves.
+The trajectories might, in fact, slowly spiral
+towards or away from $(1,1)$.
+\end{xexample}
+%
+\newpage
+%
+% \begin{exercises}
+% \begin{exercise}
+% An exercise...
+% \end{exercise}
+% \end{exercises}
+%
+\section{Periodic Solutions}
+It is possible that solutions can oscillate...
+% \begin{exercises}
+% \begin{exercise}
+% An exercise...
+% \end{exercise}
+% \begin{exercise}
+% Another exercise...
+% \end{exercise}
+% \end{exercises}
+% 
+% \newpage
+
+\section{Higher Dimensional Systems}
+\[
+  \dot{\BX} = \BF(\BX)
+\]
+\begin{xexample}
+\emph{Do a 3D example: solve for equilibria, find the
+Jacobian, determine stability.  At least one point
+should require numerical evaluation of the equilibrium
+and of the eigenvalues of the Jacobian.}
+\end{xexample}
+%
+
+\section{The Saddle-Node Bifurcation}
+\index{saddle-node bifurcation}
+
+\section{The Hopf Bifurcation}
+\index{Hopf bifurcation}
+
+\section{Chaos}
+Just an example...
+
+\begin{exercises}
+\begin{exercise}
+An exercise... use a computer to observe chaotic solutions
+to the Lorenz equations.
+\end{exercise}
+\begin{exercise}
+Another exercise...
+\end{exercise}
+\end{exercises}
+%
+%

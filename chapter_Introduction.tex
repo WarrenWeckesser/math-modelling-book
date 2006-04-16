@@ -1,0 +1,348 @@
+\chapter{Introduction}
+%
+Love and marriage.  Battles and wars.
+Drugs and disease. Fun and games.
+These are \emph{not} the typical subjects that most
+people think of when asked ``How is mathematics used
+in the real world?''
+
+...
+
+This is a text on \emph{mathematical modeling}.
+Actually, it is a bit narrower than that.
+It is a text on modeling a selected class of
+problems.  These are \emph{dynamic} problems;
+problems in which \emph{time} (either continuous
+or discrete) is the independent variable.
+
+\bigskip
+\noindent
+\emph{``The merit of painting lies in the exactness of reproduction.
+      Painting is a science and all sciences are based on mathematics. 
+      No human inquiry can be a science unless it pursues its path
+      through mathematical exposition and demonstration.''}
+
+\hfill -- Leonardo Da Vinci
+
+\bigskip
+\noindent
+\emph{``As far as the laws of mathematics refer to reality, they are not
+certain, and as far as they are certain, they do not refer to reality.''}
+
+\hfill  --Albert Einstein
+\index{Einstein, Albert}
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\newpage
+
+\section{Modeling: An Introductory Example}
+
+\subsection*{Classifying Mathematical Models -- An Example}
+We consider the following scenario.
+During a storm, a large tree with several
+mice is blown into the ocean.  The storm carries the
+tree many miles until it washes ashore on an
+island that, until now, has had no mice.
+This island has many seed-bearing plants that
+mice love, and a nice climate, so the mice
+have a good chance to survive and prosper.
+
+How will the population of mice on this island
+change over time?
+
+For simplicity, we will consider just the population of female
+mice.
+We will also assume that a new generation is produced
+each year.
+We begin by making the following assumptions
+\begin{enumerate}
+\item In each generation, each female produces three offspring
+(along with some number of males).
+\item The offspring can reproduce after one year.
+\item Mice live forever.
+\end{enumerate}
+Clearly these are not realistic assumptions.
+We will accept them for now, in order to develop
+a simple model.  Later we will look at some more
+realistic variations.
+
+To start, we will work with
+\emph{discrete time}.
+Let $p(n)$ be the population at the end of the
+$n$th year, where $n$ is an integer.
+With this notation, $p(0)$ is the initial population.
+Let's suppose that $p(0)=1$; that is, the initial
+population contained just one female mouse.
+
+At the end of the first year, this mouse has produced
+three female offspring,
+so $p(1) = 4$.  At the end of the second year,
+each of the four mice has produced three more offspring,
+so $p(2) = 16$.
+In general, we have
+\begin{equation}
+   p(n+1) = 4p(n)
+\label{eqn:mousepop}
+\end{equation}
+Equation \eqref{eqn:mousepop} is the rule that describes
+how the population changes over time.  Such a rule
+involving discrete time is sometimes called 
+a \emph{difference equation}.
+\index{difference equation}
+This terminology is a bit clearer if we rewrite the
+equation as
+\begin{equation}
+    p(n+1)-p(n) = 3p(n)
+\label{eqn:mousepopdiff}
+\end{equation}
+This gives the rule for computing the difference
+between successive generations.
+
+We can easily verify that \eqref{eqn:mousepop}
+has the solution
+\begin{equation}
+   p(n) = p(0)4^n
+\label{eqn:mousepopsol}
+\end{equation}
+This is a solution in the sense that the 
+population at time $n$ is given directly
+as a function of $n$ and the initial
+population.
+
+If we plot this solution, we will see
+a ``stair-step'' plot, with the size of
+the steps getting larger as $n$ increases.
+If all the mice produce their offspring
+at exactly the same time, then this stair-step
+shape is reasonable. But we don't really expect
+that to be the case.  Presumably mice will
+be born throughout the year, and we expect the
+actual graph of the population to have many smaller steps.
+In fact, when the
+population is large (and if we blur our vision
+a bit), we might expect the graph to look like
+a smooth curve.
+Let $p(t)$ be the population at time $t$, where
+now $t$ is a real number.
+What mathematical
+rule is obeyed by $p(t)$?
+
+
+If we still believe our assumptions,
+we still expect that in one year, the population
+increases four-fold.
+That is, we still have
+\begin{equation}
+    p(t+1) = 4p(t)
+\label{eqn:mousepopcont}
+\end{equation}
+What is the corresponding rule for increments of
+time less than one year? That is, what can we
+say about $p(t+\frac{1}{2})$, $p(t+\frac{1}{3})$,
+or in general, $p(t+h)$?
+I claim that the correct rule is
+\begin{equation}
+   p(t+h) = 4^{h}p(t)
+\label{eqn:mousepoph}
+\end{equation}
+If $h=0$, we obtain $p(t)=p(t)$, as we should, and if
+$h=1$, we obtain \eqref{eqn:mousepopcont}.
+If $h=1/k$, where $k$ is an integer, we have
+\begin{equation}
+\begin{split}
+   p(t+1) & = p(t+\frac{k-1}{k} + \frac{1}{k}) \\
+          & = 4^{1/k}p(t+\frac{k-1}{k}) \\
+	  & = 4^{2/k}p(t+\frac{k-2}{k}) \\
+	  & \quad \vdots \\
+	  & = 4^{\frac{k-1}{k}}p(t+\frac{1}{k}) \\
+	  & = 4p(t)
+\end{split}
+\end{equation}
+so the repeated application of \eqref{eqn:mousepoph}
+with $h=1/k$ also agrees with \eqref{eqn:mousepopcont}.
+
+We now subtract $p(t)$ from both sides of
+\eqref{eqn:mousepoph}, and divide by $h$:
+\begin{equation}
+   \frac{p(t+h) - p(t)}{h} =
+     \frac{4^{h} p(t) - p(t)}{h} = \left(\frac{4^h-1}{h}\right)p(t).
+\end{equation}
+Take the limit $h\rightarrow 0$.
+On the left we obtain $p'(t)$.
+On the right, we apply L'Hopital's Rule
+(and recall that $\frac{d}{dx}\left[a^x\right] = \ln(a)a^x$)
+to obtain $\ln(4)p(t)$.
+Thus we have
+\begin{equation}
+   p'(t) = \ln(4)p(t)
+\label{eqn:mousepopdiffeq}
+\end{equation}
+This is a \emph{differential equation}.
+\index{differential equation}
+This equation says that the
+instantaneous rate of change of the population
+at time $t$ is proportional to the population at time $t$;
+the proportionality constant is $\ln(4)$.
+
+Equations \eqref{eqn:mousepop} and
+\eqref{eqn:mousepopdiffeq} both give rules
+for determining the population.
+The first is a \emph{discrete time} model,
+and the second is a \emph{continuous time}
+model.
+This distinction is one of the fundamental
+categorizations of models.
+
+We now consider a more complicated discrete model, 
+in which we no longer assume that the mice live forever.
+Suppose the mice only live three years.
+Moreover, each female mouse produces two female
+offspring during its second year and its third year.
+At time $n$, we need \emph{three}
+quantities to describe the state of the population.
+We define
+\begin{itemize}
+\item $p_0(n)$ is the number of new female offspring
+in year $n$;
+\item $p_1(n)$ is the number of one-year-old females in year $n$; and
+\item $p_2(n)$ is the number of two-year-old females in year $n$. 
+\end{itemize}
+Then we have
+\begin{equation}
+\begin{split}
+   p_0(n+1) & = 2p_1(n) + 2p_2(n) \\
+   p_1(n+1) & = p_0(n) \\
+   p_2(n+1) & = p_1(n)
+\end{split}
+\label{eqn:mouseagemodel}
+\end{equation}
+Suppose that in the initial population,
+$p_0(0)=0$, $p_1(0)=2$ and $p_2(0)=0$.
+Let's compute the population for a few generations:
+
+\centerline{%
+\begin{tabular}{ccccc}
+%   MM \= MMM \= MMM \= MMM \= MMMM \kill
+   $n$ & $p_0(n)$ & $p_1(n)$ & $p_2(n)$ & Total \\
+    0  &   0      &   2      &    0     &   2 \\
+    1  &   4      &   0      &    2     &   6 \\
+    2  &   4      &   4      &    0     &   8 \\
+    3  &   8      &   4      &    4     &   16 \\
+    4  &   16     &   8      &    4     &   28
+\end{tabular}
+}
+
+We appear to have a growing population, but unlike
+the simpler model, a formula for the solution
+is not obvious.  (We will see how to solve a problem
+like this later in the course.)
+
+A key observation to make about the model
+is that the ``state'' of the population
+is three dimensional. In order to write down the rules
+that determine how
+the population changes, we needed to keep track
+of three quantities.  We can put these in a vector:
+\begin{equation}
+   \BX(n) = \begin{bmatrix} p_0(n) \\ p_1(n) \\ p_2(n)
+            \end{bmatrix}
+\end{equation}
+Then the rules given in
+\eqref{eqn:mouseagemodel} can be written
+more concisely as
+\begin{equation}
+   \BX(n+1) = \BF(\BX(n))
+\label{eqn:general_map}
+\end{equation}
+where $\BF$ is the vector-valued function
+(or \emph{map}, or \emph{mapping})
+\index{map, mapping}
+given by the right side of \eqref{eqn:mouseagemodel}.
+
+Equation \eqref{eqn:general_map}
+is a general form for multi-dimensional
+discrete time models.
+We will often call such an equation an
+\emph{iterated map}.
+\index{iterated map}
+ (Just like the one-dimensional
+case, these are also often called \emph{difference equations}.)
+\index{difference equation}
+
+We will also study multi-dimensional
+\emph{systems of differential equations}:
+\index{differential equation, system}
+\begin{equation}
+   \BX'(t) = \BF(\BX(t))
+\label{eqn:general_diffeq}
+\end{equation}
+where
+\begin{equation}
+   \BX(t) = \begin{bmatrix}x_1(t) \\ x_2(t) \\ \vdots \\ x_m(t)\end{bmatrix}
+   \quad
+   \textrm{and}
+   \quad
+   \BX'(t) = \begin{bmatrix}x_1'(t) \\ x_2'(t) \\ \vdots \\ x_m'(t)\end{bmatrix}
+\end{equation}
+
+\subsection*{Deterministic vs. Stochastic Models.}
+We have one more important categorization to discuss.
+Both \eqref{eqn:general_map} and \eqref{eqn:general_diffeq}
+are \emph{deterministic}.\index{deterministic}
+That is, for a given starting state (e.g. $\BX(0)$),
+the fate of the population is determined;
+the equations produce only one possible solution.
+There are no random events incorporated in the model.
+
+Models that explicitly include random events are 
+called \emph{stochastic}.\index{stochastic}
+For example, suppose we model a population of mice
+with the rule that in each year, there is a one in ten
+chance that a mouse will die, and a one in two chance that
+the mouse will produce one offspring.
+(This means there is a four in ten chance that the mouse
+will not die and will not produce an offspring.)
+In such a model, if the initial population is 1, then
+in the next year the population could be 0, 1, or 2.
+The following year it could be 0, 1, 2, 3 or 4.
+Figure \ref{fig:StochModel} shows five instances of
+the population for this model. In all five cases,
+the initial population is 2.
+
+\begin{figure}
+\centerline{\includegraphics[width=3.5in]{matlab/StochModel.eps}}
+\caption{Five instances of the population in 
+a stochastic model.}
+\label{fig:StochModel}
+\end{figure}
+
+In such models, the question that we ask is not
+``What is the population in year $n$?''
+Rather, we usually ask ``What is the probability
+distribution of the population in year $n$?''
+If we have the probability distribution at year
+$n$, we can then answer questions such as
+``What is the probability that the population is zero?''
+or ``What is the probability that the population is
+greater than 500 in year 10?''
+
+Figure \ref{fig:StochDist} shows a numerically
+computed distribution of the population after
+five years. This was computed by running 50000
+simulations, and adding up the number of times
+each possible final population occurred.
+For example, in the figure we see that
+approximately 3.6\% of the time, the population
+is zero after five years.
+
+\begin{figure}
+\centerline{\includegraphics[width=3.5in]{matlab/StochDist.eps}}
+\caption{Numerically computed population
+probability distribution for the population
+after five years.  This was computed by
+tallying the results of 50000 individual
+simulations.}
+\label{fig:StochDist}
+\end{figure}

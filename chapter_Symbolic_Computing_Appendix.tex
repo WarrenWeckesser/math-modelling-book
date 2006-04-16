@@ -1,0 +1,48 @@
+\chapter{Symbolic Computing}
+The computer can be a powerful tool for performing
+algebraic computations.  In this appendix I give a brief introduction
+to a few software packages that can do symbolic computations.
+Maple (tm) is a widely used commercial
+package, and Maxima is a free open-source
+program.
+(Other widely used programs that might also be useful
+are Mathematica (tm), Axiom or Yacas.)
+\section{Maple (tm)}
+\textbf{Solving first order differential equations.}
+\begin{xexample}
+We'll solve
+\[
+   y' = -y + 3
+\]
+\end{xexample}
+\section{Maxima (tm)}
+\textbf{Solving first order differential equations.}
+\begin{xexample}
+We'll solve
+\[
+   y' = -y + 3
+\]
+and then we'll require that the solution satisfy the
+initial condition $y(0)=1$.
+The Maxima code in Figure~\ref{fig:maxima_example_firstorderde} shows how this is done.
+In Maxima output, the number $e$ is written \texttt{\%E},
+and the arbitrary constant in the general solution of
+the first order differential equation is written \texttt{\%C}.
+Lines 6 and 7 of Figure~\ref{fig:maxima_example_firstorderde} show that the
+solution to the equation is
+\[
+    y(t) = e^{-t}\left(2 e^{t} + C\right),
+\]
+which we can rewrite as
+\[
+    y(t) = 2 + C e^{-t}.
+\]
+\begin{figure}[hbp]
+\fbox{%
+\input{maxima/maxima_example.firstorderde}
+}
+\caption{Solving a first order differential
+equation in Maxima.}
+\label{fig:maxima_example_firstorderde}
+\end{figure}
+\end{xexample}

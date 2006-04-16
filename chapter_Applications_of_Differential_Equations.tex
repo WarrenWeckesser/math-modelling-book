@@ -1,0 +1,999 @@
+
+\chapter{Applications of Differential Equations}
+%
+In this chapter, we developed models using differential
+equations for a wide variety of systems.
+We include problems from a wide variety of fields:
+\begin{itemize}
+\item \emph{Economics}: Solow growth model
+\item \emph{Population Dynamics}: predator-prey, competing species
+\item \emph{War and Peace}: Lanchester battle model, Richardson's arms
+race model
+\item \emph{Love Affairs}: a variation of Romeo and Juliet, Rinaldi's
+model of Petrarch's love for Laura
+\item \emph{Epidemiology}: the SI, SIR, and SIQR models
+\end{itemize}
+%
+\newpage
+%
+\section{Solow's Economic Growth Model}
+\index{Solow growth model}
+% \emph{(Draft version\footnote{\copyright ~2006 Warren Weckesser}.)}
+
+%\medskip
+We consider a model from macroeconomics.\index{economics}
+Let $K$ be the capital,%
+\footnote{\emph{Capital} includes things that are owned to be used
+in production, such as buildings and manufacturing equipment.}%
+~$L$ the labor, and $Q$ the production output of an economy.
+We are interested in a \emph{dynamic} problem, so $K(t)$, $L(t)$ and
+$Q(t)$ are all functions of time, but we will suppress the $t$ argument.
+In elementary economics, one learns that a common assumption is that
+$Q$ can be expressed as function of $K$ and $L$:
+\begin{equation}
+   Q = f(K,L).
+   \label{EQN:PROD}
+\end{equation}
+%We make the reasonable assumptions that $f_K > 0$ and $f_L > 0$.
+%(The subscript denotes a partial derivative: $f_K = \partial f/\partial K$.)
+%These assumptions mean that $Q$ increases if either $K$ or $L$ increases.
+%That is, with more capital or more labor, we can produce more.
+%We also assume that $f_{KK} < 0$ and $f_{LL} < 0$.
+%These assumptions say that $f$ has \emph{diminishing returns} to the
+%inputs $K$ and $L$.  In other words, the larger $K$ is, the less is the
+%effect of increasing $K$, and the same holds for $L$.
+We assume that $f$ has, using economics terminology,
+\emph{constant returns to scale}.\index{constant returns to scale}  Mathematically, this means
+that multiplying $K$ and $L$ by the same amount results in $Q$ being
+multiplied by the same amount.  That is, for any constant $b$,
+\begin{equation}
+   f(bK,bL) = bf(K,L).
+\end{equation}
+For example, the Cobb-Douglas function\index{Cobb-Douglas function}
+$f(K,L) = K^{1/3}L^{2/3}$
+satisfies this assumption.
+
+We make two more assumptions.
+We assume that a constant proportion of $Q$ is invested in capital.
+This means that the \emph{rate of change} of $K$ is proportional to
+$Q$:
+\begin{equation}
+    \frac{dK}{dt} = s Q,
+\label{EQN:DKDT}
+\end{equation}
+where $s > 0$ is the proportionality constant.
+We also assume that the labor force is growing according
+to the equation
+\begin{equation}
+   \frac{dL}{dt} = \lambda L,
+   \label{EQN:DLDT}
+\end{equation}
+where $\lambda > 0$ is the per capita growth rate.  This is a
+familiar first order equation for $L$ which we can solve to find 
+\begin{equation}
+    L = L_0 e^{\lambda t}.
+\label{eqn:solowLsol}
+\end{equation}
+
+If possible, we would like to combine \eqref{EQN:PROD},
+\eqref{EQN:DKDT}, and \eqref{EQN:DLDT} (or \eqref{eqn:solowLsol})
+into a single
+equation that we may easily analyze. A natural first
+attempt is to substitute \eqref{EQN:PROD} into
+\eqref{EQN:DKDT} and use \eqref{eqn:solowLsol} to obtain
+\begin{equation}
+  \frac{dK}{dt} = sf(K,L_0e^{\lambda t})
+\label{eqn:solowfirstattempt}
+\end{equation}
+This is a first order differential equation for $K(t)$.
+It is, however, nonautonomous; the right side depends on $t$ explicitly.
+We could try to analyze this equation, but it would
+be nice if we could find an \emph{autonomous} first order
+differential equation.  It turns out we can derive an
+autonomous equation for 
+the \emph{ratio} $\frac{K}{L}$ instead of $K$.
+
+First, because $f$ has constant returns to scale,
+we may write
+\begin{equation}
+  f(K,L) = f\left(L\frac{K}{L},L\right) = Lf\left(\frac{K}{L},1\right).
+\end{equation}
+Then, after dividing by $L$, \eqref{eqn:solowfirstattempt} becomes
+\begin{equation}
+  \frac{1}{L}\frac{dK}{dt} = sf\left(\frac{K}{L},1\right)
+\label{eqn:solowintermediate}
+\end{equation}
+Next, we consider the
+derivative of $\frac{K}{L}$ given by the quotient rule,
+and we use \eqref{EQN:DLDT}:
+\begin{equation}
+  \frac{d}{dt}\left(\frac{K}{L}\right)
+    = \frac{1}{L}\frac{dK}{dt} - \frac{K}{L^2}\frac{dL}{dt}
+    = \frac{1}{L}\frac{dK}{dt} - \lambda\frac{K}{L}.
+\end{equation}
+If we subtract $\lambda\frac{K}{L}$ from both sides of
+\eqref{eqn:solowintermediate}, the left side becomes
+$\frac{d}{dt}\left(\frac{K}{L}\right)$, and we obtain
+\begin{equation}
+  \frac{d}{dt}\left(\frac{K}{L}\right) =
+    sf\left(\frac{K}{L},1\right) - \lambda\frac{K}{L}
+\label{eqn:solowKoverL}
+\end{equation}
+We now have an equation in which the unknown function
+is $\frac{K}{L}$.  Let us define
+\begin{equation}
+   k = \frac{K}{L}
+\label{eqn:solowdefk}
+\end{equation}
+and
+\begin{equation}
+    g(k) = f(k,1).
+\label{eqn:solowdefg}
+\end{equation}
+Then \eqref{eqn:solowKoverL} becomes
+\begin{equation}
+  \frac{dk}{dt} = s g(k) - \lambda k
+\end{equation}
+This is the \emph{Solow Growth Model} \cite{Solow}\index{Solow growth model}
+which models the growth of the ratio of capital to labor
+under the assumptions given earlier.
+
+\medskip
+\fbox{%
+\begin{minipage}{4.7in}
+\medskip
+\centerline{\textbf{Summary}}
+\medskip
+\emph{Assumptions}
+\\[3pt]
+\hspace*{0.15cm}(1) $Q=f(K,L)$ where $f(K,L)$ is a function
+with constant returns to scale.
+\\[4pt]
+\hspace*{0.15cm}(2) $\ds \frac{dK}{dt} = sQ$; a fraction of the production output
+is invested in capital.
+\\[4pt]
+\hspace*{0.15cm}(3) $\ds \frac{dL}{dt} = \lambda L$; labor grows according to this
+equation.
+\\[6pt]
+\emph{Definitions}
+\\[3pt]
+\hspace*{0.25cm}$\bullet$ $\ds k = \frac{K}{L}$; we analyze the \emph{ratio} of capital to labor.
+\\[3pt]
+\hspace*{0.25cm}$\bullet$ $g(k) = f(k,1)$.
+\\[6pt]
+\emph{Result}\\
+\centerline{$\ds \frac{dk}{dt} = s g(k) - \lambda k$}
+\medskip
+\end{minipage}
+}
+
+\medskip
+\begin{xexample}
+\label{exm:solow}
+As an example, let's take the production function to be
+\begin{equation}
+   f(K,L) = K^{1/3}L^{2/3}.
+\label{eqn:cobbexample}
+\end{equation}
+Then
+\begin{equation}
+g(k) = f(k,1) = k^{1/3},
+\end{equation}
+ and the differential equation for
+$k$ is
+\begin{equation}
+   \frac{dk}{dt} = sk^{1/3} - \lambda k .
+\label{eqn:solowcobb}
+\end{equation}
+Figure~\ref{fig:solow_rhsplot} shows the graph of
+$\frac{dk}{dt}$ versus $k$.
+\begin{figure}
+\centerline{\includegraphics[width=2.75in]{matlab/solow_rhsplot.eps}}
+\caption{The graph of the right side of equation \eqref{eqn:solowcobb}.}
+\label{fig:solow_rhsplot}
+\end{figure}
+
+By solving
+\[
+   sk^{1/3} - \lambda k = 0,
+\]
+we find the equilibrium solutions to be $k=0$ or $k=(s/\lambda)^{3/2}$.
+
+
+Changing $\lambda$ or $s$ will change the scale
+(and the numerical value of the non-zero equilibrium),
+but the graph of $dk/dt$ versus $k$ will always have the
+same qualitative shape as the graph shown above.
+
+We see that if $k>0$ is small,
+$\frac{dk}{dt} > 0$, so $k$
+will increase; the equilibrium $k=0$ is \emph{unstable}.
+The graph of $k(t)$ will have an inflection point when $k$ reaches
+$\left(\frac{s}{3\lambda}\right)^{3/2}$
+(where right side of \eqref{eqn:solowcobb} has its maximum).
+$k$ will then converge asymptotically to the non-zero equilibrium.
+
+The equilibrium $k=(s/\lambda)^{3/2}$ is \emph{asymptotically stable}:
+any solution that starts near the equilibrium will converge to the equilibrium
+as $t\rightarrow \infty$.
+In fact, \emph{all} solutions with $k(0)>0$ will converge asymptotically to this
+equilibrium.
+
+What does this mean in terms of the capital $K$ and the labor $L$?
+Since $k(t) = K(t)/L(t)$, and $L(t) = L_0e^{\lambda t}$, if $k(t)$ converges to an
+asymptotically stable equilibrium $k_1$, then $K(t)$ must behave asymptotically like
+$k_1  L(t)$.  This means that, in the long term, $K(t)$ must 
+grow exponentially, with the
+same exponent as $L(t)$.
+This model predicts that in the long term, capital will grow
+exponentially along with the labor.
+If, for example, the capital is too low, it will rapidly increase until it becomes
+approximately proportional to the labor, and then it will settle into a long term behavior in
+which capital remains proportional to the labor.
+\end{xexample}
+%
+\begin{exercises}
+\begin{exercise}
+Verify that the maximum value of the right side
+of \eqref{eqn:solowcobb} occurs
+at $k=\left(\frac{s}{3\lambda}\right)^{3/2}$.
+\end{exercise}
+\begin{exercise}
+Find an explicit solution for \eqref{eqn:solowcobb},
+assuming that the initial condition is $k(0)=k_0 > 0$.
+Use your solution to verify analytically that
+$\lim_{t\rightarrow\infty} k(t) = \left(s/\lambda\right)^{3/2}$.
+\end{exercise}
+\begin{exercise}
+Suppose that labor grows according to a logistic equation
+\begin{equation}
+  \frac{dL}{dt} = \lambda L \left(1-\frac{L}{M}\right)
+\end{equation}
+where $M$ is the carrying capacity for the labor population.
+Derive a new differential equation for $k(t)$.
+Is your new equation autonomous?
+If not, can you still determine the asymptotic
+behavior of the solutions as $t\rightarrow\infty$?
+\end{exercise}
+\begin{exercise}
+Suppose we include the fact that capital deteriorates
+over time.  We replace the assumption given
+in equation \eqref{EQN:DKDT} with
+\begin{equation}
+   \frac{dK}{dt} = -rK + sQ
+\end{equation}
+where $r > 0$.
+(This says that, if $Q=0$, then $K$ will decay and
+approach zero asymptotically.)
+\begin{enumerate}
+\item[(a)]
+Show that this leads to the differential equation
+\begin{equation}
+   \frac{dk}{dt} = s g(k) - (r+\lambda) k,
+\end{equation}
+where $k$ and $g(k)$ are defined
+in \eqref{eqn:solowdefk} and \eqref{eqn:solowdefg}, 
+respectively.
+\item[(b)]
+Suppose the production function is the Cobb-Douglas function
+given in equation \eqref{eqn:cobbexample}.
+Find the equilibrium solutions of this model, 
+and describe the behavior of all possible solutions
+(assuming $k(0)>0$).
+Compare to the results given in Example \ref{exm:solow}.
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
+Find an explicit solution to equation
+\eqref{eqn:solowfirstattempt} when $f$ is given by
+\eqref{eqn:cobbexample}.  (The equation will be separable.)
+Then divide your solution by $L$ to obtain $k(t)$,
+and verify that $\lim_{t\rightarrow\infty} k(t) =
+\left(s/\lambda\right)^{3/2}$.
+\end{exercise}
+\begin{exercise}
+Consider a general Cobb-Douglas function with
+constant returns to scale
+\begin{equation}
+   f(K,L) = K^{\alpha}L^{1-\alpha}
+\end{equation}
+where $0 < \alpha < 1$.
+Repeat the analysis of Example \ref{exm:solow},
+but use this function in place of the
+specific function given in \eqref{eqn:cobbexample}.
+\end{exercise}
+\end{exercises}
+\newpage
+%
+\section{Predator-Prey\index{predator-prey}}
+%
+\newpage
+%
+\section{Competing Species\index{competing species}}
+%
+We consider an example that models the populations
+of two species that are competing for a common resource.
+In the absence of the other species, each species
+grows according to a logistic equation.
+However, the presence of one species lowers
+the \emph{per capita} growth rate of the other species.
+One way to write the equations for this system
+is
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = r_1\left(1-\frac{x}{K_1}-\beta_1 y\right)x \\
+  \frac{dy}{dt} & = r_2\left(1-\frac{y}{K_2}-\beta_2 x\right)y
+\end{split}
+\end{equation}
+Note that if $y(0)=0$, then $y(t)$ remains $0$, and
+the equation for $x(t)$ is
+\begin{equation}
+    \frac{dx}{dt} = r_1 \left(1-\frac{x}{K_1}\right),
+\end{equation}
+which is the familiar logistic equation.
+Similarly, if $x(0)=0$, then $x(t)$ remains $0$ and
+$y(t)$ is governed by a logistic equation.
+
+Let's do a careful analysis of a specific example,
+in which $r_1 = 1$, $K_1 = 1$, $\beta_1 = 1$, 
+$r_2 = 3/4$, $K_2 = 3/4$, and $\beta_2 = 2/3$.
+The differential equations are
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = (1-x-y)x \\
+  \frac{dy}{dt} & = \frac{3}{4}\left(1 -\frac{4}{3}y - \frac{2}{3}x\right)y .
+\end{split}
+\label{eqn:compspecexample}
+\end{equation}
+We'll find the equilibria, find the linearization at each
+equilibrium to determine the behavior near each one, and then
+use the nullclines of~\eqref{eqn:compspecexample} to understand
+what happens in the phase plane ``far away'' from the equilibria.
+
+\noindent
+\textbf{Equilibria.}
+To find the equilibria, we must solve
+\begin{equation}
+\begin{split}
+(1-x-y)x & = 0 \\
+\frac{3}{4}\left(1 -\frac{4}{3}y - \frac{2}{3}x\right)y & = 0.
+\end{split}
+\label{eqn:exampleequil}
+\end{equation}
+The first equation holds if $x=0$ or $y = 1-x$.
+We consider each case separately in the second equation.
+\begin{itemize}
+\item
+If $x=0$, then the second equation of~\eqref{eqn:exampleequil} implies
+$y=0$ or $y=\frac{3}{4}$.
+
+So two equilibria are $(0,0)$ and $(0,3/4)$.
+\item
+If $y=1-x$, then the second equation
+of~\eqref{eqn:exampleequil} implies
+\begin{equation}
+  \left(1-\frac{4}{3}(1-x) - \frac{2}{3}x\right)(1-x) = 0
+  \implies x=1 \quad \textrm{or} \quad x=\frac{1}{2}.
+\end{equation}
+So two equilibria are $(1,0)$ and $(1/2,1/2)$.
+\end{itemize}
+
+\noindent
+\textbf{Linearization at each equilibrium.}
+We have found the following equilibria: $(0,0)$, $(0,3/4)$, $(1,0)$, $(1/2,1/2)$.
+We now determine the behavior of~\eqref{eqn:compspecexample}
+near each equilibrium by finding the linearization at each
+equilibrium.
+We will need the Jacobian matrix:
+\begin{equation}
+  J = \begin{bmatrix}
+          1-2x-y & -x \\
+	  -\frac{1}{2}y & \frac{3}{4}-2y-\frac{1}{2}x
+      \end{bmatrix}
+\end{equation}
+For each equilibrium, we will find the Jacobian matrix
+and plot the phase portrait of the linearization.
+We make two remarks about the phase portraits of the linearized
+systems:
+\begin{enumerate}
+\item
+Recall from the notes on ``Linearization'' that we
+used the local coordinates $(u,v)$ for the linearization.
+In a linear system, the scale of the coordinates is not
+important: if you zoom in on the origin of a linear system,
+the phase portrait will look exactly the same.
+So, in the following phase portraits of the linearizations,
+the ranges on the axis are  from $-1$ to $1$.  These
+are \emph{not} the actual $x$ and $y$ ranges.
+\item
+In a population model such as this, $x<0$ and $y<0$
+are not relevant.  However, we will still plot negative
+values in the linearization.  It seems easier to simply
+plot the linear phase portrait, ignoring the actual
+meaning until later.  Also, recall that the linearized
+system is expressed in coordinates measured relative
+to the equilibrium.  If a coordinate of the equilibrium
+is positive, then a negative value of the corresponding
+local coordinates means that the population is less than
+the equilibrium value. It does not necessarily mean that
+the actual population is negative.
+\end{enumerate}
+
+\medskip
+
+At $(0,0)$, the Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+          1 & 0 \\
+	  0 & \frac{3}{4} \\
+      \end{bmatrix} .
+\end{equation}
+The eigenvalues are $\lambda_1 = 3/4$ and $\lambda_2 = 1$, with
+corresponding eigenvectors
+\[
+  \BV_1 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}
+  \quad \textrm{and}\quad 
+  \BV_2 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}.
+\]
+Since $\lambda_1 > 0$ and $\lambda_2 > 0$,
+the equilibrium $(0,0)$ is a
+\emph{source}.  The trajectories come out of $(0,0)$
+tangent to the eigenvector $\BV_1$.
+The phase portrait of the linearization at $(0,0)$ is
+shown in Figure~\ref{fig:CompSpecLinPlots}(a).
+%\centerline{%
+%\includegraphics{matlab/LinCS1.eps}
+%}
+%\noindent
+If we were to ``zoom in'' on the point $(0,0)$
+in~\eqref{eqn:compspecexample}, this is what the 
+phase portrait would look like.
+
+%\medskip
+
+At $(1,0)$, the Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+          -1 & -1 \\
+	  0 & \frac{1}{2} \\
+      \end{bmatrix}.
+\end{equation}
+The eigenvalues are $\lambda_1 = -1$ and $\lambda_2 = 1/2$,
+with corresponding eigenvectors
+\[
+  \BV_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}
+  \quad \textrm{and} \quad
+  \BV_2 = \begin{bmatrix} 1 \\ -3/2 \end{bmatrix}.
+\]
+Since $\lambda_1 < 0$ and $\lambda_2 > 0$, the equilibrium
+$(1,0)$ is a \emph{saddle point}.
+The phase portrait of the linearization at $(1,0)$ is
+shown in Figure~\ref{fig:CompSpecLinPlots}(b).
+
+%\centerline{%
+%\includegraphics{matlab/LinCS2.eps}
+%}
+
+%\medskip
+
+At $(0,3/4)$, the Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+          \frac{1}{4} & 0 \\
+	  -\frac{3}{8} & -\frac{3}{4} \\
+      \end{bmatrix}.
+\end{equation}
+The eigenvalues are $\lambda_1 = -\frac{3}{4}$ and
+$\lambda_2 = \frac{1}{4}$,
+with corresponding eigenvectors
+\[
+  \BV_1 = \begin{bmatrix} 1 \\ -3/8 \end{bmatrix}
+  \quad \textrm{and}\quad 
+  \BV_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}.
+\]
+Since $\lambda_1 < 0$ and $\lambda_2 > 0$,
+the equilibrium $(0,3/4)$
+is a \emph{saddle point}.
+The phase portrait of the linearization at $(0,3/4)$ is
+shown in Figure~\ref{fig:CompSpecLinPlots}(c).
+
+%\centerline{%
+%\includegraphics{matlab/LinCS3.eps}
+%}
+
+%\medskip
+
+At $(1/2,1/2)$, the Jacobian matrix is
+\begin{equation}
+  J = \begin{bmatrix}
+          -\frac{1}{2} & -\frac{1}{2} \\
+	  -\frac{1}{4} & -\frac{1}{2} \\
+      \end{bmatrix}.
+\end{equation}
+The eigenvalues are
+$\lambda_1 = \frac{-2-\sqrt{2}}{4} \approx -0.853 < 0$
+and $\lambda_2 = \frac{-2+\sqrt{2}}{4} \approx -0.147 < 0$,
+with corresponding eigenvectors
+\[
+  \BV_1 = \begin{bmatrix} \sqrt{2} \\ 1 \end{bmatrix}
+  \quad \textrm{and}\quad
+  \BV_2 = \begin{bmatrix} \sqrt{2} \\ -1 \end{bmatrix}.
+\]
+Since both eigenvalues are negative,
+the equilibrium at $(1/2,1/2)$ is a \emph{sink}.
+The phase portrait of the linearization at $(1/2,1/2)$ is
+shown in Figure~\ref{fig:CompSpecLinPlots}(d)
+
+%\centerline{%
+%\includegraphics{matlab/LinCS4.eps}
+%}
+
+%\medskip
+
+\begin{figure}
+\centerline{\includegraphics[width=2.5in]{matlab/LinCS1.eps}\includegraphics[width=2.5in]{matlab/LinCS2.eps}}
+\vspace{-0.2in}
+\centerline{\hspace{0.2in}\textbf{(a)}\hspace{2.1in}\textbf{(b)}}
+\centerline{\includegraphics[width=2.5in]{matlab/LinCS3.eps}\includegraphics[width=2.5in]{matlab/LinCS4.eps}}
+\vspace{-0.2in}
+\centerline{\hspace{0.2in}\textbf{(c)}\hspace{2.1in}\textbf{(d)}}
+\caption{Phase portraits of the linearizations at each equilibrium point
+of the competing species example:
+(a) at $(0,0)$; (b) at $(1,0)$; (c) at $(0,3/4)$; (d) at $(1/2,1/2)$.}
+\label{fig:CompSpecLinPlots}
+\end{figure}
+
+
+\noindent
+\textbf{Nullclines.}
+Since the eigenvalues at each linearization
+all had nonzero real parts, each linearization
+provides a good approximation to the behavior
+of~\eqref{eqn:compspecexample} near the corresponding
+equilibrium point.
+However, the local linearizations do not tell us what is
+happening in the phase plane far from the equilibria.
+In a planar system such as this, the nullclines
+can provide useful information about the phase portrait.
+
+The $x$ nullcline is given by
+\begin{equation}
+   (1-x-y)x = 0 \implies x=0 \quad\textrm{or}\quad y = 1-x.
+\end{equation}
+So $\frac{dx}{dt}=0$ on the lines\footnote{In this example, and in all
+the planar linear systems that we have studied,
+the nullclines are straight lines. This is not true in general;
+nullclines can be curves.}
+$x=0$ and $y=1-x$.
+
+The $y$ nullcline is given by
+\begin{equation}
+  \frac{3}{4}\left(1-\frac{4}{3}y - \frac{2}{3} x\right)y = 0
+\end{equation}
+which gives the lines
+\begin{equation}
+  y = 0 \quad \textrm{or} \quad y = \frac{3}{4} - \frac{1}{2}x.
+\end{equation}
+On these lines, $\frac{dy}{dt}=0$.
+
+The nullclines give the points in the plane where 
+$\frac{dx}{dt}=0$ or $\frac{dy}{dt}=0$.
+They form the boundaries of regions in the plane
+where $\frac{dx}{dt}$ and $\frac{dy}{dt}$ do not change sign.
+This can be very useful information.
+For example, if we know that in a certain region,
+$\frac{dx}{dt} > 0$ and $\frac{dy}{dt}>0$, we know that all
+vectors of the vector field point ``up and to the right'';
+this means all trajectories move up and to the right.
+If this region is in the first quadrant, it implies that
+all trajectories move away from the origin.
+
+In the following plot, the nullclines (that are not coordinate
+axes) are plotted with dashed lines, and trajectories
+are plotted as solid lines.  Since our equations give 
+a model for two species, we only include the first quadrant.
+Negatives values would not be meaningful, so we do not include them.
+
+\smallskip
+\centerline{%
+\fbox{\includegraphics[width=4.5in]{matlab/CompSpec.eps}}
+}
+
+\medskip
+\noindent
+In the region labeled \textsf{\textbf{A}},
+$\frac{dx}{dt}<0$ and $\frac{dy}{dt}<0$.
+All trajectories in this region (which extends out to infinity)
+must move down and to the left.  This implies that
+all these trajectories must either cross the $x$ or $y$ axes,
+or cross the nullclines that form the boundaries between
+\textsf{\textbf{A}} and \textsf{\textbf{B}}
+and between \textsf{\textbf{A}} and \textsf{\textbf{D}}.
+But the coordinate axes are themselves solutions,
+so solutions that do not start on the coordinate axes
+can not cross the axes.  Thus any trajectory that begins in
+\textsf{\textbf{A}} must eventually cross into
+\textsf{\textbf{B}} or \textsf{\textbf{D}}
+(or, in one special case, converge to the equilibrium
+at $(1/2,1/2)$).
+
+Now consider trajectories in \textsf{\textbf{B}}.
+In \textsf{\textbf{B}}, we have
+$\frac{dx}{dt} > 0$ and $\frac{dy}{dt} < 0$.
+All trajectories in this region move down and to the right.
+They can not cross either of the nullclines that
+form the upper and lower boundaries of the region,
+because the vector field on these nullclines points
+\emph{into} \textsf{\textbf{B}}.  Therefore,
+\emph{all trajectories in \textsf{\textbf{B}} must
+converge to $(1/2,1/2)$}.
+
+A similar argument applies to \textsf{\textbf{D}},
+where $\frac{dx}{dt} < 0$ and $\frac{dy}{dt} >0$.
+In this region, all trajectories move up and to the left,
+but they can't cross the nullclines, so
+\emph{all trajectories in \textsf{\textbf{D}} must
+converge to $(1/2,1/2)$}.
+
+Finally, in \textsf{\textbf{C}} we have
+$\frac{dx}{dt} >0$ and $\frac{dy}{dt} > 0$.
+All trajectories in this region move up and to the right.
+Therefore, they must all eventually cross into
+\textsf{\textbf{B}} or \textsf{\textbf{D}}, except
+for the special trajectory in \textsf{\textbf{C}}
+that converges to $(1/2,1/2)$.
+
+Our conclusion is that any trajectory that begins in the
+first quadrant, with $x(0)>0$ and $y(0)>0$, must
+converge to $(1/2,1/2)$. Note that we have concluded this
+without actually solving the differential equations
+given in~\eqref{eqn:compspecexample}.
+Thus, this population model
+predicts that the two species will co-exist in 
+a stable equilibrium.
+(Different parameters values may lead to different
+conclusions.)
+
+% \begin{exercises}
+% \begin{exercise}
+% An exercise...
+% \end{exercise}
+% \end{exercises}
+%
+\newpage
+%
+\section{Battle of Attrition--The Lanchester Model}
+\index{Lanchester model}
+%
+We consider a model of a battle in which the opponents
+simply blast away at each other until one side is wiped
+out.
+This model was proposed by F. W. Lanchester\cite{Lanchester}.
+The simple version presented here
+is \emph{not} a realistic model of modern warfare!
+%(It has been suggested as a model for the battles that
+%occur between colonies of ants...\emph{find this reference!})
+In this model $x(t)$ and $y(t)$ are the sizes of the
+opposing armies at time $t$.
+As the battle rages, the losses incurred by army $x$
+are simply proportional to the size of army $y$,
+and the losses incurred by army $y$ are proportional
+to the size of army $x$ (but not necessarily with
+the same proportionality constant).
+That is,
+\begin{equation}
+\begin{split}
+   \frac{dx}{dt} & = - \alpha y \\
+   \frac{dy}{dt} & = - \beta x
+\end{split}
+\end{equation}
+where $\alpha$ and $\beta$ are positive constants.
+This is a planar linear system.
+The coefficient matrix is
+\begin{equation}
+  A = \begin{bmatrix} 0 & -\alpha \\ -\beta & 0 \end{bmatrix}.
+\end{equation}
+The eigenvalues are $\lambda_1 = -\sqrt{\alpha\beta}$
+and $\lambda_2 = \sqrt{\alpha\beta}$,
+so we know that the origin $(0,0)$ is a saddle point.
+A corresponding set of eigenvectors are
+\[
+  \BV_1 = \begin{bmatrix} 1 \\ -\sqrt{\frac{\beta}{\alpha}}\end{bmatrix}
+  \quad \textrm{and}\quad
+  \BV_2 = \begin{bmatrix} 1 \\ \sqrt{\frac{\beta}{\alpha}}\end{bmatrix}.
+\]
+The $x$ nullcline is $y=0$, which means that trajectories
+cross the $x$ axis vertically. Similarly, the $y$ nullcline is
+$x=0$, so trajectories cross the $y$ axis horizontally.
+Since the nullclines are the axes, we know that in the first
+quadrant, $dx/dt < 0$ and $dy/dt < 0$, so for any initial
+condition in the first quadrant, the trajectory will eventually
+cross either the $x$ or $y$ axis. If the initial condition
+happens to be in the eigenspace associated with the negative
+eigenvalue $\lambda_1$, the trajectory will converge to
+$(0,0)$. (In this exceptional case, the armies wipe each
+other out!)
+This eigenspace is given by the line
+\begin{equation}
+  y = \sqrt{\frac{\beta}{\alpha}}\, x.
+\label{eqn:lanchester_eigenspace}
+\end{equation}
+If the initial condition is above the $\lambda_1$ eigenspace
+(so $y_0 > \sqrt{\frac{\beta}{\alpha}}\, x_0$), then
+$y$ wins, and if the initial condition is below this line,
+then $x$ wins.
+
+There is a different approach we can take to analyze
+this system.
+By multiplying the first equation by $2\beta x$ and the
+second by $-2\alpha y$, we obtain
+\begin{equation}
+\begin{split}
+ 2\beta x\frac{dx}{dt} & = -2 \alpha \beta x y \\
+ -2\alpha y\frac{dy}{dt} & = 2 \alpha \beta x y.
+\end{split}
+\end{equation}
+Then adding these equations results in
+\begin{equation}
+   2\beta x\frac{dx}{dt} -2\alpha y\frac{dy}{dt} = 0.
+\end{equation}
+We note that the left side of this equation is
+the $t$ derivative of $\beta x^2 - \alpha y^2$.
+So we'll integrate from $0$ to $t$:
+\begin{equation}
+   \int_0^t \left(2\beta x\frac{dx}{dt} -2\alpha y\frac{dy}{dt}\right)\, ds = \int_0^t 0 \, ds = 0.
+\end{equation}
+which gives
+\begin{equation}
+\begin{split}
+  \left.\beta x^2(s) - \alpha y^2(s)\right|_{s=0}^{s=t} & = 0 \\
+   \beta x^2(t) - \alpha y^2(t) - (\beta x^2(0) - \alpha y^2(0)) & = 0 \\
+      \beta x^2(t) - \alpha y^2(t) & = \beta x^2(0) - \alpha y^2(0) =
+         \beta x_0^2 - \alpha y_0^2 \\
+\end{split}
+\end{equation}
+By dropping the explicit $t$ dependence of $x(t)$
+and $y(t)$, we obtain
+\begin{equation}
+   \beta x^2 - \alpha y^2 = \beta x_0^2 - \alpha y_0^2.
+   \label{eqn:lanchester_hyperbola}
+\end{equation}
+This is the equation of a hyperbola in the $(x,y)$ plane.
+Whether the hyperbola crosses the $x$ or $y$ axis is
+determined by the sign of
+$\beta x_0^2 - \alpha y_0^2$.
+If this value is positive, then the hyperbola
+crosses the positive $x$ axis
+at $x=\sqrt{x_0^2 - \frac{\alpha}{\beta} y_0^2}$.
+If $\beta x_0^2 - \alpha y_0^2$
+is negative, then the hyperbola
+crosses the $y$ axis at
+$y = \sqrt{y_0^2 - \frac{\beta}{\alpha} x_0^2}$.
+Thus, if we know the initial sizes of the armies
+and the constants $\alpha$ and $\beta$, we can
+easily determine which army will win, and what the
+size of the winning army will be at the end of the
+battle.
+
+\begin{xexample}
+\label{exm:Lanchester}
+Suppose we have two armies, with $\alpha=1.0$,
+$\beta = 1.5$, and $x_0=10,000$.
+What is the outcome of the battle if
+$y_0=10,000$?  What if $y_0=14,000$?
+How large must $y_0$ be if both armies
+wipe each other out?
+
+We can answer these questions with
+equation \eqref{eqn:lanchester_hyperbola}.
+We have
+\begin{equation}
+  1.5x^2-y^2 = 1.5(10000)^2-y_0^2
+\end{equation}
+If $y_0=10,000$, we have
+\begin{equation}
+  1.5x^2-y^2 = 1.5(10000)^2-(10000)^2 = 5\times 10^7.
+\end{equation}
+The right side is positive, so the hyperbola must cross
+the $x$ axis.  That is, the $x$ army wins, and the
+size of the surviving army is
+\begin{equation}
+   x = \sqrt{\frac{5\times 10^7}{1.5}} \approx 5800.
+\end{equation}
+If $y_0=14,000$, we have
+\begin{equation}
+  1.5x^2-y^2 = 1.5(10000)^2-(14000)^2 = -4.6\times 10^7.
+\end{equation}
+The right side is negative, so the hyperbola must
+cross the $y$ axis.  The $y$ army wins, and its remaining size
+is
+\begin{equation}
+   y = \sqrt{4.6\times 10^7} \approx 6780.
+\end{equation}
+The armies will wipe each other out when
+\begin{equation}
+  y_0 = \sqrt{\frac{\beta}{\alpha}}x_0 
+      = \sqrt{\frac{1.5}{1.0}}10000
+      \approx 12247.
+\end{equation}
+Plots of the three curves in the $xy$ plane for each of these
+cases are shown in Figure~\ref{fig:LanchesterExamplePlots}.
+\begin{figure}
+\centerline{\includegraphics[width=2in]{matlab/LanchesterExamplePlots.eps}}
+\caption{Plots of the three curves discussed in
+Example~\ref{exm:Lanchester}.}
+\label{fig:LanchesterExamplePlots}
+\end{figure}
+\end{xexample}
+
+Equation \eqref{eqn:lanchester_eigenspace} gives an asymptote
+of the family of hyperbolas.
+If the initial sizes of the armies result in a point
+on this line, the two armies will eliminate each other.
+The equation lets us make an interesting observation.
+Suppose $x_0$ is, say, three times larger than $y_0$.
+How much more efficient must the $y$ army be in order to
+defeat the larger opponent?
+In other words, by what factor must $\alpha$
+exceed $\beta$
+to ensure that $y_0 > \sqrt{\frac{\beta}{\alpha}}\,x_0$?
+According to
+this equation, the $y$ army must
+be more than \emph{nine times} more effective than the $x$ army
+if it hopes to win the battle.
+In this simple model, raw numbers are very important.
+
+\newpage
+\begin{exercises}
+\begin{exercise}
+\label{ex:lanchester_ants}
+A colony of $50,000$ red ants is in a battle
+with a colony of $35,000$ larger and stronger black ants.
+The sizes and strengths of the two types of ants
+are such that $\alpha=3\beta$.
+\begin{enumerate}
+\item[(a)] Based on this description, which type of ant
+(black or red) is represented by $x$
+and which is represented by $y$ in the
+Lanchester model?
+\item[(b)] If the battle proceeds according to the Lanchester
+model, which colony will win, and how many ants will
+remain in the winning colony?
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
+\label{ex:lanchester_general}
+In the year 17**, a general is facing an impending battle.
+Across the valley from his encampment, the opposing
+army has $10,000$ soldiers, but the general has only $6,500$.
+His army and the opposing army have similar abilities
+and armaments, so, in a Lanchester model of the battle,
+the proportionality constant $\alpha$ and $\beta$
+are equal.
+If, as might be the case in these times, the battle
+is accurately modeled by the Lanchester equations,
+the general's army will lose the battle.
+Fortunately, the general has $5,000$ reinforcement
+on the way.  Unfortunately, the opposing army
+also expects reinforcements, but only $2,000$.
+This is enough to give the advantage to the opposing
+army.
+
+After consulting his maps, the general realizes that
+he can divert his reinforcements to engage the
+opposing army's reinforcements before they
+reach the valley. According to the Lanchester model,
+the general's reinforcements would defeat
+the opposing army's reinforcements.  The surviving
+reinforcements could then join the general's army
+before the general engages in the battle with the
+opposing army across the valley.
+
+\begin{enumerate}
+\item[(a)] Show that, if the surviving reinforcements reach the valley
+before the main battle begins, the general will win
+the main battle.
+What will be the size of the surviving army?
+\item[(b)] The general realizes that the opposing army
+might attack before his surviving reinforcements
+reach him. If the reinforcements arrive too late,
+his losses might have been too great, and the
+reinforcements will not be enough to win the battle.
+How large can the pre-reinforcement losses be before
+the reinforcement will not be enough to win the main battle?
+\end{enumerate}
+\end{exercise}
+\end{exercises}
+%
+\newpage
+%
+\section{Arms Race}
+%
+\section{Romeo and Juliet\index{Romeo}\index{Juliet}}
+\section{Laura and Petrarch\index{Laura}\index{Petrarch}}
+
+\begin{exercises}
+\begin{exercise}
+Adjust parameters, see how the behavior changes...
+\end{exercise}
+\begin{exercise}
+Change the shape of a function... see if the results change
+significantly...
+\end{exercise}
+\end{exercises}
+
+\newpage
+
+\section{Epidemiology and the SI Model\index{SI model}}
+
+
+\section{The SIS Model\index{SIS model}}
+%
+% Perhaps the SIS model could be given as an exercise:
+% state the assumption, and then have the student give
+% the equations.
+%
+For some diseases, surviving an infection
+does not guarantee immunity from subsequent infections.
+Infectives can recover,
+but once they have recovered, they return to the
+susceptible pool... 
+
+
+\section{The SIR Model\index{SIR model}}
+For many diseases, people recover after being infected,
+and from then on they are immune to the disease.
+To incorporate this into our model of the spread of
+a disease, we consider a third class of \emph{recovered}
+people. (Calling them the recovered people is the
+optimistic point of view.  It turns out that the
+model is the same if we interpret this group as
+\emph{removed}, meaning deceased.)
+
+We assume that the rate at which the infected
+group changes to recovered is proportional to
+the number of infected people.
+
+\emph{Why? ...}
+
+So, if we have a group of infectives, and no
+one else is becoming infected, the equation
+for $I(t)$ is
+\begin{equation}
+  \frac{dI}{dt} = -\gamma I,
+\end{equation}
+where $\gamma > 0$ is the constant of proportionality.
+The parameter $\gamma$ depends on how fast people
+typically recover from the disease.
+The decrease in $I$ because of recovery results
+in a corresponding increase in $R(t)$.
+Putting this all together, we obtain the
+$SIR$ model:\index{SIR model}
+\begin{equation}
+\begin{split}
+   \frac{dS}{dt} & = -r S I \\
+   \frac{dI}{dt} & = r S I - \gamma I \\
+   \frac{dR}{dt} & = \gamma I
+\end{split}
+\label{eqn:SIR}
+\end{equation}
+As in the $SI$ model, we have assumed that the total
+population remains constant.  This is apparent in the equations:
+add them all together to find
+\begin{equation}
+   \frac{dS}{dt} + \frac{dI}{dt} + \frac{dR}{dt} = 0
+   \quad \textrm{which implies} \quad
+   S(t) + I(t) + R(t) = N.
+\end{equation}
+Also note that $R$ does not appear in the first two equations
+of \eqref{eqn:SIR}.  This means we can analyze the equations
+for $S$ and $I$, and then infer the behavior of $R$ afterwards.
+
+\medskip
+\noindent
+\emph{To be continued...}
+
+
+\section{The SIQR Model\index{SIQR model}}
+\section{The SEIR Model\index{SEIR model}}
+%
