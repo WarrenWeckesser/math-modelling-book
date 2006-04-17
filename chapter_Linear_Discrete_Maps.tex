@@ -1161,69 +1161,132 @@ eigenvector.
 
 There is a variation of this theorem for a different
 class of matrices.
-The following definition is a bit obtuse, but we will
-carify it shortly.
+%The following definition is a bit obtuse, but we will
+%carify it shortly.
+We first need a little more background.
 \begin{definition}
-An $m\times m$ matrix $A$ is \emph{reducible}\index{reducible matrix}
-if the indices $1$, $2$, $\ldots$, $m$
-can be divided into two disjoint nonempty sets
-$i_1$, $i_2$, $\ldots$, $i_{\mu}$ and
-$j_1$, $j_2$, $\ldots$, $j_{\nu}$ (with $\mu+\nu = m$) such that
-$a_{(i_{\alpha},j_{\beta})} =0$
-for $\alpha=1, 2, \ldots, \mu$ and
-$\beta = 1, 2, \ldots, \nu$.
-A square matrix which is not reducible is said
-to be \emph{irreducible}.\index{irreducible matrix} 
+A square matrix $P$ is called a \emph{permutation matrix}\index{permutation matrix}
+if each row and each column of $P$ contains exactly one one,
+and all other entries are zero.
 \end{definition}
-If a matrix $A$ is reducible, then by simply reordering the
-variables, we can convert the system
+For example, the following are permutation matrices:
+\begin{equation}
+  \begin{bmatrix}
+      0 & 1 \\ 1 & 0
+  \end{bmatrix},
+  \quad
+  \begin{bmatrix}
+     0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0
+  \end{bmatrix},
+  \quad
+  \begin{bmatrix}
+     1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0
+  \end{bmatrix},
+  \quad
+  \begin{bmatrix}
+     0 & 1 & 0  & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1
+  \end{bmatrix}.
+\end{equation}
+Given a vector $\BX$, the product $P\BX$ simply rearranges
+(i.e. permutes) the entries of $\BX$.
+It is easily verified that if $P$ is a permutation matrix,
+then
+\begin{equation}
+    P^{-1} = P^{\textsf{T}}.
+\end{equation}
+
+\begin{definition}
+An $m\times m$ matrix A is a \emph{reducible}\index{reducible matrix}
+if there is a permutation matrix $P$ such that
+\begin{equation}
+   P^{\textsf{T}} A P =
+      \begin{bmatrix}
+         B & C \\
+        \textbf{0} & D 
+      \end{bmatrix}
+\label{eqn:reducibleblockstructure}
+\end{equation}
+where $B$ and $D$ are square matrices, and $\textbf{0}$
+is a matrix of zeros.
+A matrix that is not reducible is called \emph{irreducible}.\index{irreducible matrix}
+\end{definition}
+% \begin{definition}
+% An $m\times m$ matrix $A$ is \emph{reducible}\index{reducible matrix}
+% if the indices $1$, $2$, $\ldots$, $m$
+% can be divided into two disjoint nonempty sets
+% $i_1$, $i_2$, $\ldots$, $i_{\mu}$ and
+% $j_1$, $j_2$, $\ldots$, $j_{\nu}$ (with $\mu+\nu = m$) such that
+% $a_{(i_{\alpha},j_{\beta})} =0$
+% for $\alpha=1, 2, \ldots, \mu$ and
+% $\beta = 1, 2, \ldots, \nu$.
+% A square matrix which is not reducible is said
+% to be \emph{irreducible}.\index{irreducible matrix} 
+% \end{definition}
+
+Consider the equation
 \begin{equation}
    \BX(n+1)  = A\BX(n)
 \label{eqn:pf:linmap}
 \end{equation}
-into
+and suppose $A$ is reducible.
+We define a new vector
 \begin{equation}
-   \BY(n+1) = B\BY(n),
+  \BY(n) = P^{\textsf{T}}\BX(n), \quad \textrm{or equivalently}\quad
+  \BX(n) = P\BY(n).
+\end{equation}
+(Since $P$ is a permutation matrix, all we are really doing here
+is reordering the entries of $\BX$ and calling the result $\BY$.)
+We replace $\BX$ with $P\BY$ in \eqref{eqn:pf:linmap}
+\begin{equation}
+   P\BY(n+1)  = AP\BY(n)
+\end{equation}
+or
+\begin{equation}
+\begin{split}
+    \BY(n+1) & = P^{\textsf{T}}AP\BY \\
+             & = M\BY(n),
+\end{split}
 \label{eqn:pf:reduced}
 \end{equation}
-where $B$ can be partitioned as
+where $M$ can be partitioned as
 \begin{equation}
-   B = \begin{bmatrix}
-            B_{11} & B_{12} \\
-            \textbf{0} & B_{22}
-       \end{bmatrix}
+   M = \begin{bmatrix}
+            B & C \\
+            \textbf{0} & D
+       \end{bmatrix}.
 \end{equation}
-$B_{11}$ is  $\mu\times\mu$ and $B_{22}$ is $\nu\times\nu$. 
+% $B_{11}$ is  $\mu\times\mu$ and $B_{22}$ is $\nu\times\nu$. 
 In other words, by defining
 \begin{equation}
    \BY = \begin{bmatrix} \BU \\ \BW,
          \end{bmatrix}
 \end{equation}
-where $\BU \in \Real^{\mu}$ and $\BW \in \Real^{\nu}$,
+where $\BU \in \Real^{\mu}$ and $\BW \in \Real^{\nu}$ ($\mu+\nu=m$),
 we may rewrite
 \eqref{eqn:pf:reduced} as
 \begin{equation}
 \begin{split}
-   \BU(n+1) & = B_{11}\BU(n) + B_{12} \BW(n) \\
-   \BW(n+1) & = \quad\quad\quad\quad\quad B_{22} \BW(n).
+   \BU(n+1) & = B \BU(n) + C \BW(n) \\
+   \BW(n+1) & = \quad\quad\quad\;\; D \BW(n).
 \end{split}
 \end{equation}
 Note that the equation for $\BW$ does not depend
 on $\BU$; we say that the dynamics for $\BW$
 are \emph{decoupled}\index{decoupled} from $\BU$.
 
-To reorder the variables, we can use a permutation matrix
-$P$, in which each row and each column contains exactly
-one one, and all other entries are zero.
+% To reorder the variables, we can use a permutation matrix
+% $P$, in which each row and each column contains exactly
+% one one, and all other entries are zero.
 \begin{xexample}
 The matrix 
 \begin{equation}
   A = \begin{bmatrix}
             1 & 3 & 1 & 0 \\
-            0 & 1 & 2 & 0 \\
+            0 & 0 & 2 & 0 \\
             0 & 1 & 1 & 0 \\
             1 & 0 & 3 & 2
       \end{bmatrix}
+\label{eqn:examplereducible}
 \end{equation}
 is reducible.  By defining
 \begin{equation}
@@ -1237,11 +1300,11 @@ is reducible.  By defining
 \end{equation}
 we convert \eqref{eqn:pf:linmap} into
 \begin{equation}
-   \BY(n+1) = B\BY(n), \quad \textrm{where} \quad
-   B = \begin{bmatrix}
+   \BY(n+1) = M\BY(n), \quad \textrm{where} \quad
+   M = \begin{bmatrix}
          1 & 0 & 3 & 1 \\
          1 & 2 & 0 & 3 \\
-         0 & 0 & 1 & 2 \\
+         0 & 0 & 0 & 2 \\
          0 & 0 & 1 & 1
        \end{bmatrix}.
 \end{equation}
@@ -1258,6 +1321,79 @@ irreducible if and only if
 \end{theorem}
 % (A web page refers to page 6 of:
 % Varga, Richard S. 1962. Matrix Iterative Analysis. Englewood Cliffs N.J.: Prentice-Hall.)
+Since the test is whether or not $(I+A)^{m-1}$ is positive, and we have assumed that
+$A$ is nonnegative, all we really have to keep track of in this calculation is
+whether or not an entry is zero.
+\begin{xexample}
+We consider the matrix $A$ defined in equation~\eqref{eqn:examplereducible}
+above.  The pattern of nonzero entries in $I+A$ is
+\begin{equation}
+  I+A = \begin{bmatrix}
+            \# & \# & \# & 0 \\
+            0  & \# & \# & 0 \\
+            0 & \# & \# & 0 \\
+            \# & 0 & \# & \#
+      \end{bmatrix}
+\end{equation}
+Then
+\begin{equation}
+  (I+A)^2 = 
+      \begin{bmatrix}
+            \# & \# & \# & 0 \\
+            0  & \# & \# & 0 \\
+            0 & \# & \# & 0 \\
+            \# & \# & \# & \#
+      \end{bmatrix}
+    \quad \textrm{and} \quad
+  (I+A)^3 = 
+      \begin{bmatrix}
+            \# & \# & \# & 0 \\
+            0  & \# & \# & 0 \\
+            0 & \# & \# & 0 \\
+            \# & \# & \# & \#
+      \end{bmatrix}.
+\end{equation}
+Since $(I+A)^3$ is not positive, $A$ is reducible.
+
+Let's try another example:
+\begin{equation}
+  B = \begin{bmatrix}
+            2 & 1 & 0 & 1 \\
+            0 & 0 & 0 & 1/2 \\
+            2 & 1/2 & 1 & 0 \\
+            0 & 1  & 1 & 5
+      \end{bmatrix}
+\end{equation}
+We find
+\begin{equation}
+  I+B =
+      \begin{bmatrix}
+            \# & \#  & 0 & \# \\
+            0  & \#  & 0 & \# \\
+            \# & \#  & \# & 0 \\
+            0 & \#  & \# & \#
+      \end{bmatrix},
+  \quad
+  (I+B)^2 =
+      \begin{bmatrix}
+            \# & \#  & \# & \# \\
+            0  & \#  & \# & \# \\
+            \# & \#  & \# & \# \\
+            \# & \#  & \# & \#
+      \end{bmatrix}
+\end{equation}
+and
+\begin{equation}
+  (I+B)^3 =
+      \begin{bmatrix}
+            \# & \#  & \# & \# \\
+            \# & \#  & \# & \# \\
+            \# & \#  & \# & \# \\
+            \# & \#  & \# & \#
+      \end{bmatrix} > 0
+\end{equation}
+So $B$ is irreducible.
+\end{xexample}
 
 Finally, we state a variation of the Perron-Frobenius Theorem
 for irreducible matrices.
@@ -1295,6 +1431,10 @@ is that in version for primitive matrices, the inequality in the third
 conclusion is a strict inequality.
 For an irreducible matrix, there may be other eigenvalues $\lambda_j$
 for which $|\lambda_j| = \lambda_1$.
+In other words, while an irreducible matrix has a real, positive, and simple
+eigenvalue that is not smaller than any other eigenvalues, there might be
+other eigenvalues with the same magnitude as $\lambda_1$.  Note if such
+an eigenvalue exists, it must be $-\lambda_1$ or else complex.
 
 \begin{xexample}
 Earlier we discussed the matrix
@@ -1324,117 +1464,194 @@ the eigenvalues of $B$ are
 We see that $|\lambda_j| = 1 = \lambda_1$.
 \end{xexample}
 
-%
-\newpage
-%
-\section{Age-Structured Populations and Leslie Matrix Models}
-\index{Leslie matrix}
-\emph{introduction, basic idea, etc...}
+\medskip
+\noindent
+\textbf{The Graph $\Gamma(A)$ Associated with $A$.}
 
-We consider a population in which the maximum
-age is $m$.
-Let $x_{k}(n)$ be the number of individuals
-of age $k$ at time $n$.
-(We use this notation because
-I find $x_{k}(n+1)$
-easier to read than $x_{k,n+1}$--or would it be $x_{n+1,k}$?)
-Let
-$p_k$ be the probability of surviving from age $k$
-to age $k+1$,
-and let $f_k$ be the number of offspring per individual
-of age $k$.
-We define $x_0(n)$ to be the number of newborn individuals
-in time $n$.
-Then
+\begin{definition}
+Let $A$ be an $m \times m$ matrix, with entries
+$a_{ij}$.
+$\Gamma(A)$ is the directed graph associated with $A$, defined as follows:
+\index{graph $\Gamma(A)$ associated with a matrix}
+\begin{itemize}
+\item The graph has $m$ vertices.
+\item If $a_{ij} \ne 0$, the graph as an edge
+(i.e. an arrow) from vertex $j$ to vertex $i$.
+\end{itemize}
+\end{definition}
+Often it is useful to label the edges with the corresponding entries from
+the matrix.
+\begin{xexample}
+Consider the matrix
 \begin{equation}
-  x_{0}(n+1) = f_1 x_{1}(n) + f_2 x_{2}(n) + \cdots + f_m x_{m}(n)
-\label{eqn:leslie:newborn}
+    A = \begin{bmatrix}
+             1/2 & 0 & 3/4 \\
+             1/2 & 2/3 & 1/4 \\
+              0  & 1/3 & 0 
+        \end{bmatrix}
+\label{eqn:Aforgraphexample}
 \end{equation}
-Then, for $1 \le k \le m$, we have
-\begin{equation}
-   x_{k}(n+1) = p_k x_{k}(n),
-\label{eqn:leslie:nextgen}
-\end{equation}
+The graph associated with $A$ has three vertices, which we will
+label simply $\textbf{1}$, $\textbf{2}$ and $\textbf{3}$.
+Since $a_{11} \ne 0$, there is an edge from $\textbf{1}$ back to
+itself, and since $a_{13}\ne 0$, there is an edge from $\textbf{3}$
+to $\textbf{1}$.  Proceeding through the rest of the matrix, we
+obtain the graph shown in Figure~\ref{fig:graphexample}
+\end{xexample}
+\begin{figure}
+\centerline{\includegraphics[width=3in]{fig/ExampleGraph.eps}}
+\caption{The graph $\Gamma(A)$ associated with the matrix $A$ defined
+in \eqref{eqn:Aforgraphexample}.}
+\label{fig:graphexample}
+\end{figure}
 
-The ``state'' of this system is the $m+1$ dimensional
-vector
-\begin{equation}
-  \BX(n) = \begin{bmatrix} x_0(n) \\ x_1(n) \\ \vdots \\x_m(n)
-           \end{bmatrix}
-\end{equation}
-and we can combine equations \eqref{eqn:leslie:newborn}
-and \eqref{eqn:leslie:nextgen} into the matrix equation
-\begin{equation}
-   \begin{bmatrix}
-      x_0(n+1) \\ x_1(n+1) \\ x_2(n+1) \\ x_3(n+1) \\ \vdots \\x_m(n+1)
-   \end{bmatrix}
-    =
-   \begin{bmatrix}
-      f_0 & f_1 &  f_2 & \cdots & f_{m-1} & f_m \\
-      p_0 &  0  &   0  &        &  0      &  0  \\
-       0  & p_1 &   0  &        &  0      &  0  \\
-       0  &  0  &  p_2  &       &  0      &  0  \\
-       \vdots & & & \ddots \\
-       0 &  0  &   0  & & p_{m-1} & 0 \\
-   \end{bmatrix}
-   \begin{bmatrix}
-       x_0(n) \\ x_1(n) \\ x_2(n) \\ x_3(n) \\ \vdots \\x_m(n)
-   \end{bmatrix}
-\label{eqn:leslie1}
-\end{equation}
-or more compactly
-\begin{equation}
-   \BX(n+1) = A\BX(n)
-\end{equation}
-where $A$ is the matrix in \eqref{eqn:leslie1}.
-
-Recall that for the simplest population model, $p(n+1) = rp(n)$,
-the long-term survival of the population was determined 
-by $r$. If $r > 1$, the population would grow exponentially,
-and if $0 < r < 1$, the population would decay exponentially.
-We can ask the same question for an age-structured population:
-Will this population grow or decay?
-
-The answer can be found by determining the eigenvalues
-of $\lambda_k$ of $A$.
-If for some $k$,  $|\lambda_k| > 1$, then it is possible
-that the population will grow.  If, for all eigenvalues,
-$|\lambda_k| < 1$, the population will decay to zero
-asymptotically.
+The two versions of the Perron-Frobenius Theorem
+are for primitive and irreducible matrices, respectively.
+Let's consider the significance of these two properties
+in terms of the graph $\Gamma(A)$.
 
 \medskip
 \noindent
-\emph{Discuss how, in the long term, the population
-distribution is determined by the dominant eigenvalue.}
-%
-%
-\newpage
-%
-\section{Stage-Structured Lefkovitch Models}
-\index{Lefkovitch models}
-Leslie models assume that development and maturity
-depend only on chronological age.  This is not always
-the case.
+\textbf{Primitive Matrices and $\Gamma(A)$.}
+If $A$ is positive, then $\Gamma(A)$ has an edge from every
+vertex to all other vertices.
+Such a graph is called \emph{complete}.\index{complete graph}
+Recall that a matrix is primitive if $A^k > 0$ for some
+integer $k>0$.  We can now interpret this as saying that
+$A$ is primitive if $\Gamma(A^k)$ is complete for some $k$.
+This means there is a directed path of length exactly
+$k$ from each vertex to all other vertices.
+Numerically, this means that if we compute
+\begin{equation}
+   \BY = A^k \BX,
+\end{equation}
+then each entry of $\BX$ contributes to each entry of $\BY$.
+Another way of saying that is if $\BX$ is nonnegative and at least
+one entry of $\BX$ is nonzero, 
+then \emph{all} entries of $\BY$ will be nonzero.
 
-An alternate model is to consider the specific stages
-of development (e.g. egg, larva, pupa, adult, etc).
-A graph is developed that represents the possible transitions
-among the stages in a single time unit, and the edges
-of the graphs are labeled with the multiplicative
-factor for that transition.  For example, if in a given
-population, 75\% of the eggs survive to form larva,
-a transition edge would connect eggs to larva, with
-a numerical label of 0.75.
+\begin{xexample}
+Let
+\begin{equation}
+  A = \begin{bmatrix}
+           1 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0
+      \end{bmatrix}
+\label{eqn:AforGammaIteration}
+\end{equation}
+We find
+\begin{equation}
+   A^2 = \begin{bmatrix}
+            1 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 0 & 0
+         \end{bmatrix},
+   \quad
+   A^3 = \begin{bmatrix}
+            2 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 0 & 1
+         \end{bmatrix},
+   \quad
+   A^4 = \begin{bmatrix}
+            3 & 1 & 2 \\ 2 & 1 & 1 \\ 1 & 1 & 1
+         \end{bmatrix},
+\end{equation}
+Figure \ref{fig:GammaIteration} shows the graphs associated
+with the powers of $A$.  $A^4 > 0$, and we see that
+$\Gamma(A^4)$ is a complete graph.
+\end{xexample}
 
-From the transition graph, we obtain a matrix equation
-for the populations of each stage.
+\begin{figure}
+\centerline{\includegraphics[width=4.5in]{images/GammaIteration.ps}}
+\caption{Graphs associated with powers of $A$ defined in \eqref{eqn:AforGammaIteration}}.
+\label{fig:GammaIteration}
+\end{figure}
 
-\emph{etc...}
-
+\medskip
 \noindent
-\emph{These models are analyzed using the same techniques
-as for the Leslie models.}
-%
+\textbf{Irreducible Matrices and $\Gamma(A)$.}
+We give the interpretation of the reducibility of $A$ in terms of the graph $\Gamma(A)$
+in the following theorem.
+
+\begin{theorem}
+The matrix $A$ is reducible if and only if $\,\Gamma(A)$ contains a subset
+$V$ of vertices such that the
+edges between $V$ and vertices not in $V$
+are all directed out of $V$.
+\end{theorem}
+
+\begin{xexample}
+We consider the matrix
+\begin{equation}
+    A = \begin{bmatrix}
+             2 & 1 & 1 & 1\\
+             0 & 0 & 0 & 1/2 \\
+             2 & 1/2 & 1 & 0 \\
+             0 & 1 & 0 & 5
+        \end{bmatrix}
+\label{eqn:AforgraphexampleII}
+\end{equation}
+The graph $\Gamma(A)$ is shown in Figure~\ref{fig:graphexampleII}.
+All the edges from the set $V = \{\textbf{2},\textbf{4}\}$
+to $\{\textbf{1},\textbf{3}\}$ are directed out of $V$.
+This implies that $A$ is reducible.
+This also suggests that the permutation
+matrix $P$ that converts $A$ into the reduced block structure
+should simply interchange the labels of vertices
+$\textbf{2}$ and $\textbf{3}$.  Indeed, if we define
+\begin{equation}
+   P = \begin{bmatrix}
+            1 & 0 & 0 & 0 \\
+            0 & 0 & 1 & 0 \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 1
+       \end{bmatrix}
+\end{equation}
+we find
+\begin{equation}
+  P^{\textsf{T}}AP = 
+      \begin{bmatrix}
+              2 & 1 & 1 & 1 \\
+              2 & 1 & 1/2 & 0 \\
+              0 & 0 & 0 & 1/2 \\
+              0 & 0 & 1 & 5
+      \end{bmatrix}.
+\end{equation}
+\end{xexample}
+
+\begin{figure}
+\centerline{\includegraphics[width=3.25in]{fig/ExampleGraph2.eps}}
+\caption{The graph $\Gamma(A)$ associated with the matrix $A$ defined
+in \eqref{eqn:AforgraphexampleII}.}
+\label{fig:graphexampleII}
+\end{figure}
+
+
+Irreducibility of $A$ is associated with the degree of ``connectedness''
+of the graph of $A$. We shall not need the following definition and
+theorem, but they are included for completeness.
+
+\begin{definition}
+A directed graph $\Gamma$ is \emph{strongly connected}\index{strongly connected graph}
+if there is a directed path from each vertex to all other vertices.
+\end{definition}
+\begin{theorem}
+The $m\times m$ matrix $A$ is irreducible if and only if $\Gamma(A)$
+is strongly connected.
+\end{theorem}
+
+\newpage
+\begin{exercises}
+\begin{exercise}
+Show that
+\begin{equation}
+   A = \begin{bmatrix}
+                0 & 1 & 0 & 1 \\
+                0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 1 \\ 1 & 0 & 1 & 0
+       \end{bmatrix}
+\end{equation}
+is reducible.  Find the permutation matrix $P$ such that $P^{\textsf{T}}AP$
+has the block structure shown in \eqref{eqn:reducibleblockstructure}.
+Sketch $\Gamma(A)$, and indicate the subset of the vertices
+that correspond to the decoupled variables.
+\end{exercise}
+\end{exercises}
 %
 \newpage
 %
@@ -1582,4 +1799,114 @@ is stochastic. We find that the eigenvalues
 are $\lambda_1 = 1$ and $\lambda_2 = -1$.
 Note that the magnitude of both eigenvalues is 1.
 \end{xexample}
+%
+\newpage
+%
+\section{Age-Structured Populations and Leslie Matrix Models}
+\index{Leslie matrix}
+\emph{introduction, basic idea, etc...}
 
+We consider a population in which the maximum
+age is $m$.
+Let $x_{k}(n)$ be the number of individuals
+of age $k$ at time $n$.
+(We use this notation because
+I find $x_{k}(n+1)$
+easier to read than $x_{k,n+1}$--or would it be $x_{n+1,k}$?)
+Let
+$p_k$ be the probability of surviving from age $k$
+to age $k+1$,
+and let $f_k$ be the number of offspring per individual
+of age $k$.
+We define $x_0(n)$ to be the number of newborn individuals
+in time $n$.
+Then
+\begin{equation}
+  x_{0}(n+1) = f_1 x_{1}(n) + f_2 x_{2}(n) + \cdots + f_m x_{m}(n)
+\label{eqn:leslie:newborn}
+\end{equation}
+Then, for $1 \le k \le m$, we have
+\begin{equation}
+   x_{k}(n+1) = p_k x_{k}(n),
+\label{eqn:leslie:nextgen}
+\end{equation}
+
+The ``state'' of this system is the $m+1$ dimensional
+vector
+\begin{equation}
+  \BX(n) = \begin{bmatrix} x_0(n) \\ x_1(n) \\ \vdots \\x_m(n)
+           \end{bmatrix}
+\end{equation}
+and we can combine equations \eqref{eqn:leslie:newborn}
+and \eqref{eqn:leslie:nextgen} into the matrix equation
+\begin{equation}
+   \begin{bmatrix}
+      x_0(n+1) \\ x_1(n+1) \\ x_2(n+1) \\ x_3(n+1) \\ \vdots \\x_m(n+1)
+   \end{bmatrix}
+    =
+   \begin{bmatrix}
+      f_0 & f_1 &  f_2 & \cdots & f_{m-1} & f_m \\
+      p_0 &  0  &   0  &        &  0      &  0  \\
+       0  & p_1 &   0  &        &  0      &  0  \\
+       0  &  0  &  p_2  &       &  0      &  0  \\
+       \vdots & & & \ddots \\
+       0 &  0  &   0  & & p_{m-1} & 0 \\
+   \end{bmatrix}
+   \begin{bmatrix}
+       x_0(n) \\ x_1(n) \\ x_2(n) \\ x_3(n) \\ \vdots \\x_m(n)
+   \end{bmatrix}
+\label{eqn:leslie1}
+\end{equation}
+or more compactly
+\begin{equation}
+   \BX(n+1) = A\BX(n)
+\end{equation}
+where $A$ is the matrix in \eqref{eqn:leslie1}.
+
+Recall that for the simplest population model, $p(n+1) = rp(n)$,
+the long-term survival of the population was determined 
+by $r$. If $r > 1$, the population would grow exponentially,
+and if $0 < r < 1$, the population would decay exponentially.
+We can ask the same question for an age-structured population:
+Will this population grow or decay?
+
+The answer can be found by determining the eigenvalues
+of $\lambda_k$ of $A$.
+If for some $k$,  $|\lambda_k| > 1$, then it is possible
+that the population will grow.  If, for all eigenvalues,
+$|\lambda_k| < 1$, the population will decay to zero
+asymptotically.
+
+\medskip
+\noindent
+\emph{Discuss how, in the long term, the population
+distribution is determined by the dominant eigenvalue.}
+%
+%
+\newpage
+%
+\section{Stage-Structured Lefkovitch Models}
+\index{Lefkovitch models}
+Leslie models assume that development and maturity
+depend only on chronological age.  This is not always
+the case.
+
+An alternate model is to consider the specific stages
+of development (e.g. egg, larva, pupa, adult, etc).
+A graph is developed that represents the possible transitions
+among the stages in a single time unit, and the edges
+of the graphs are labeled with the multiplicative
+factor for that transition.  For example, if in a given
+population, 75\% of the eggs survive to form larva,
+a transition edge would connect eggs to larva, with
+a numerical label of 0.75.
+
+From the transition graph, we obtain a matrix equation
+for the populations of each stage.
+
+\emph{etc...}
+
+\noindent
+\emph{These models are analyzed using the same techniques
+as for the Leslie models.}
+%
