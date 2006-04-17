@@ -1656,11 +1656,90 @@ that correspond to the decoupled variables.
 \newpage
 %
 \section{Stochastic Matrices}
+Consider the following situation.
+There are three cities \textbf{A}, \textbf{B}, and \textbf{C}, initially with
+populations of 25,000, 25,000 and 50,000, respectively.
+Each year, 5\% of the population of \textbf{A} moves to \textbf{B}
+and 10\% of the population of \textbf{A} moves to \textbf{C}.
+At the same time, 1\% of the population of \textbf{B} moves to \textbf{C},
+and 5\% of the population of \textbf{C} moves to \textbf{A}.
+We'll assume that the total population remains constant.
+
+Let $\BX(n) \in \Real^{3}$ represent the population of the three cites
+in year $n$, measured in thousands.  Then
+\begin{equation}
+   \BX(0)=\begin{bmatrix} 25 \\ 25 \\ 50 \end{bmatrix},
+\end{equation}
+and each year the populations change according to
+\begin{equation}
+\begin{split}
+    x_1(n+1) & = 0.85 x_1(n) + 0.05x_3(n) \\
+    x_2(n+1) & = 0.05x_1(n) + 0.99x_2(n)  \\
+    x_3(n+1) & = 0.1x_1(n) + 0.01x_2(n) + 0.95x_3(n)
+\end{split}
+\end{equation}
+or
+\begin{equation}
+    \BX(n+1) = A\BX(n),
+\label{eqn:stoch:linmap}
+\end{equation}
+where
+\begin{equation}
+    A = \begin{bmatrix}
+             0.85 & 0 & 0.05 \\
+             0.05  & 0.99 & 0 \\
+             0.1 & 0.01 & 0.95
+        \end{bmatrix}
+\end{equation}
+What will be the long-term distribution of the populations?
+Will the population of any city approach 0?
+We can answer these questions using the tools we have already
+derived.
+
+We first observe that $A^2 > 0$.  By the Perron-Frobenius
+Theorem for Primitive Matrices, we know that $A$ has
+a real, positive, dominant eigenvalue, with a positive eigenvector.
+From the discussion in the previous section, we know that
+in the long-term, the contribution of $\lambda_1^n\BV_1$ will
+dominate the solution.
+Of course, we still have to do the work to find this eigenvalue
+and eigenvector.
+
+A calculation shows that the eigenvalues of $A$
+(in order of decreasing magnitude) are
+$\lambda_1 = 1$, $\lambda_2 \approx 0.9758$ and $\lambda_3 \approx 0.8142$.
+Since $|\lambda_2| < \lambda_1$ and $|\lambda_3| < \lambda_1$, in the
+long-term the solution to \eqref{eqn:stoch:linmap}
+will look like
+\begin{equation}
+   \BX(n) \approx c_1 \lambda_1^n\BV_1 = c_1 \BV_1 
+\end{equation}
+where $\BV_1$ is an eigenvector associated with $\lambda_1$.
+(Since $\lambda_1=1$, we used $\lambda_1^n=1$.)  This says that the
+population will approach a consant distribution in the long-term.
+Further calculation shows that
+\begin{equation}
+  \BV_1 = \begin{bmatrix}
+               1 \\ 5 \\ 3
+          \end{bmatrix}
+\end{equation}
+Moreover, since the total population remains constant at 100,000,
+the entries of $\BX(n)$ must add up to 100, and this must hold in
+the long-term.  This implies $c_1(1+5+3) = 100$, or
+$c_1 = 100/9$.  Thus, in the long-term, the population approaches
+\begin{equation}
+    100\begin{bmatrix} 1/9 \\ 5/9 \\ 1/3\end{bmatrix}
+\end{equation}
+In other words, in the long-term, $1/9$ of the population will
+be in \textbf{A}, $5/9$ in \textbf{B} and $1/3$ in \textbf{C}.
+
+Note that the columns of $A$ add up to 1.  This class of matrices
+is important enough to have its own name.
 \begin{definition}
 An $m\times m$ matrix $A$ is called \emph{stochastic}\index{stochastic matrix}
 if $A \ge 0$ and the sum of the entries
 of each column of $A$ is one.
-(Such a Matrix is also called a \emph{Markov matrix}.\index{Markov matrix})
+(Such a matrix is also called a \emph{Markov matrix}.\index{Markov matrix})
 \end{definition}
 \begin{xexample}
 The following matrices are stochastic:
@@ -1672,10 +1751,12 @@ The following matrices are stochastic:
   B = \begin{bmatrix}
           0 & 1 & 0.2 \\ 0.5 & 0 & 0.2 \\ 0.5 & 0 & 0.6
       \end{bmatrix}
+\label{eqn:stoch:examples}
 \end{equation}
 \end{xexample}
-Stochastic matrices are an important special class of
-nonnegative matrices.
+In our example of the populations of the three cities,
+we found that $1$ was an eigenvalue of the matrix $A$, and it
+had a positive eigenvector.  This is true in general.
 \begin{theorem}
 Let $A$ be a stochastic matrix. Then
 \begin{enumerate}
@@ -1690,12 +1771,12 @@ Let's look at two proofs of the statement that
 $\lambda_1=1$ is an eigenvalue of $A$.
 
 \emph{Proof that $\lambda_1=1$ is an eigenvalue, version 1:}
-Since the sums of the columns of $A$ are all one,
-the sums of the columns of $A-I$ are all zero.
+Since the sums of the columns of $A$ are all $1$,
+the sums of the columns of $A-I$ are all $0$.
 This implies that the rows of $A-I$ are linearly
 dependent, which then implies that
 $A-I$ is singular.  This is precisely the condition
-for one to be an eigenvalue of $A$.
+for $1$ to be an eigenvalue of $A$.
 
 \emph{Proof that $\lambda_1=1$ is an eigenvalue, version 2:}
 Let
@@ -1706,14 +1787,14 @@ Then it is easily verified that
 \begin{equation}
   A^{\textsf{T}}\BE = \BE
 \end{equation}
-which shows that one is an eigenvalue of $A$, with
+which shows that $1$ is an eigenvalue of $A$, with
 eigenvector $\BE$.
 Since, in general, $A$ and $A^{\textsf{T}}$ have the
-same eigenvalues, one is also an eigenvalue of $A$.
+same eigenvalues, $1$ is also an eigenvalue of $A$.
 \hfill $\qed$
 
 Before proving that all the eigenvalues of a stochastic
-matrix have magnitude less than or equal to one, we
+matrix have magnitude less than or equal to $1$, we
 define some convenient notation.
 
 \begin{definition}
@@ -1738,11 +1819,11 @@ scalar $\lambda$.
 We'll use the 1-norm in the following.
 
 \emph{Proof that $|\lambda_j|\le 1$ for a stochastic matrix $A$.}
-Let $\BU_j$ be the $j$th column of $A$.
-By assumption, $\|\BU_j\|_1 = 1$.
+Let $\BU_k$ be the $k$th column of $A$.
+By assumption, $\|\BU_k\|_1 = 1$.
 We recall from Linear Algebra that
 $A\BX$ is a linear combination of the columns of $A$, with
-coefficients given by the elements of $\BX$:
+coefficients given by the entries of $\BX$:
 \begin{equation}
   A\BX = x_1 \BU_1 + x_2\BU_2 + \cdots + x_m \BU_m.
 \end{equation}
@@ -1759,12 +1840,13 @@ Then
 So
 \begin{equation}
 \|A\BX\|_1 \le \|\BX\|_1
+\label{eqn:norminequality}
 \end{equation}
 for any $\BX$.  If
 \begin{equation}
   A\BX = \lambda \BX,
 \end{equation}
-this implies
+then \eqref{eqn:norminequality} implies
 \begin{equation}
   \|\lambda\BX\|_1 \le \|\BX\|_1,
 \end{equation}
@@ -1775,17 +1857,19 @@ and since
 we have
 \begin{equation}
  |\lambda| \|\BX\|_1 \le \|\BX\|_1
- \quad
- \implies
- \quad
+\end{equation}
+which implies
+\begin{equation}
  |\lambda| \le 1.
 \end{equation}
 \begin{xexample}
-Let $A$ and $B$ be the matrices given in the previous example.
+Let $A$ and $B$ be the matrices given in \eqref{eqn:stoch:examples}.
 For $A$, we find $\lambda_1 = 1$ and $\lambda_2 = 0.7$.
 For $B$, we find $\lambda_1 = 1$,
 $\lambda_2 = (-1+\sqrt{6})/5 \approx 0.2899$,
 and $\lambda_3 = (-1-\sqrt{6})/5 \approx -0.6899$.
+In both cases we find $\lambda_1=1$ and $|\lambda_j|\le 1$, as
+required by the theorem.
 \end{xexample}
 \begin{xexample}
 The matrix
@@ -1799,6 +1883,27 @@ is stochastic. We find that the eigenvalues
 are $\lambda_1 = 1$ and $\lambda_2 = -1$.
 Note that the magnitude of both eigenvalues is 1.
 \end{xexample}
+Note that the theorem for stochastic matrices
+does not say that the eigenvalue
+$\lambda_1 = 1$ is simple.
+(Compare the conclusion of that theorem to the
+conclusions of the Perron-Frobenius Theorems.)
+\begin{xexample}
+Let $I$ be the $m\times m$ identity matrix.
+The \emph{only} eigenvalue of $I$ is $\lambda_1 = 1$, and it
+has multiplicity $m$; the eigenvalue is \emph{not} simple.
+\end{xexample}
+We will see many more examples of stochastic matrices
+in the chaper on Markov Chains.
+%
+
+\newpage
+\begin{exercises}
+\begin{exercise}
+Find a $4\times 4$ stochastic matrix with eigenvalues
+$1$, $-1$, $i$ and $-i$.
+\end{exercise}
+\end{exercises}
 %
 \newpage
 %
