@@ -8,12 +8,18 @@ clear
 set zeroaxis linestyle -1
 set xtics axis
 set ytics axis
-set label "\$y\$" at xmax,-0.03
-set label "\$\\frac{dy}{dt}\$" at 0.05,ymax
+# set label "\$y\$" at xmax,-0.03
+# set label "\$\\frac{dy}{dt}\$" at 0.05,ymax
+set label "y" at xmax,-0.03
+set label "dy/dt" at 0.05,ymax
 unset key
 unset border
 plot [xmin:xmax] [ymin:ymax] x*(1-x) w lines lt -1
 
-set terminal latex
-set output "logisticrhs.tex"
+# set terminal latex
+# set output "logisticrhs.tex"
+# rep
+
+set terminal postscript eps
+set output "logisticrhs.eps"
 rep
