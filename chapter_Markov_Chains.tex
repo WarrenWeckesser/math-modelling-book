@@ -11,37 +11,39 @@ at step $n$.
 Let $S = \{S_1,S_2,\ldots,S_r\}$ be the possible states.
 Let
 \begin{equation}
-   \BP_n = \begin{bmatrix}
-               p_1 \\ p_2 \\ \vdots \\ p_r
+   \BX(n) = \begin{bmatrix}
+               x_1(n) \\ x_2(n) \\ \vdots \\ x_r(n)
            \end{bmatrix}
 \end{equation}
 be the vector  of probabilities of each state
-at step $n$. That is, the $i$th entry of $\BP_n$
+at step $n$. That is, the $i$th entry of $\BX(n)$
 is the probability that the process is in
 state $S_i$ at step $n$.
-For such a probability vector, $p_1+p_2+\cdots+p_r = 1$.
+For such a probability vector, $x_1(n)+x_2(n)+\cdots+x_r(n) = 1$.
 
 Let
 \begin{equation}
-  p_{ij} = \textrm{Prob( State $n+1$ is $S_i$ $|$ State $n$ is $S_j$)},
+  a_{ij} = \textrm{Prob( State $n+1$ is $S_i$ $|$ State $n$ is $S_j$)},
 \end{equation}
 and let
 \begin{equation}
-   P = \begin{bmatrix}
-           p_{11} & p_{12} & \cdots & p_{1r} \\
-	   p_{21} & p_{22} & \cdots & p_{2r} \\
+   A = \begin{bmatrix}
+           a_{11} & a_{12} & \cdots & a_{1r} \\
+	   a_{21} & a_{22} & \cdots & a_{2r} \\
 	   \vdots  &  & \ddots \\
-	   p_{r1} &  & & p_{rr}
+	   a_{r1} &  & & a_{rr}
        \end{bmatrix}
 \end{equation}
-That is, $p_{ij}$ is the (conditional) probability
+That is, $a_{ij}$ is the (conditional) probability
 of being in state $S_i$ at step $n+1$ given that the
 process was in state $S_j$ at step $n$.
-$P$ is called the \emph{transition matrix}.
-$P$ contains all the conditional probabilities
+$A$ is called the \emph{transition matrix}.
+Note that $A$ is a stochastic matrix:
+the sum of the entries in each column is 1.
+$A$ contains all the conditional probabilities
 of the Markov chain.
 It can be useful to label the rows and columns
-of $P$ with the states, as in this example
+of $A$ with the states, as in this example
 with three states:
 
 \medskip
@@ -53,33 +55,34 @@ with three states:
     \> \hspace{1cm} $\overbrace{S_1 \quad\; S_2 \quad \; S_3}$ \\
     State $n+1$ \> $\;\left\{\begin{matrix} S_1 \T\B \\ S_2 \B \\ S_3 \B \end{matrix}
                           \begin{bmatrix}
-                              p_{11} & p_{12} & p_{13} \T\B \\
-			      p_{21} & p_{22} & p_{23} \B \\
-			      p_{31} & p_{32} & p_{33} \B
+                              a_{11} & a_{12} & a_{13} \T\B \\
+			      a_{21} & a_{22} & a_{23} \B \\
+			      a_{31} & a_{32} & a_{33} \B
                           \end{bmatrix}\right.$
 \end{tabbing}
 \end{minipage}
 }
 
+\medskip
 The fundamental property of a Markov chain is that 
 \begin{equation}
-   \BP_{n+1} = P\BP_{n}.
+   \BX(n+1) = A\BX(n).
 \end{equation}
-Given an initial probability vector $\BP_0$,
+Given an initial probability vector $\BX(0)$,
 we can determine the probability vector at any
 step $n$ by computing the iterates of a linear map.
 
 The information contained in the transition matrix
 can also be represented in a \emph{transition diagram}.
-In a transition diagram, the states are arranged
-in a diagram, typically with a ``bubble''
-around each state.
-If $p_{ij} > 0$, then an
-arrow is drawn from state $j$ to state $i$, and the
-arrow is labeled with $p_{ij}$.  Examples are given
+This is the graph $\Gamma(A)$ associated with 
+the transition matrix $A$.
+If $a_{ij} > 0$, the graph has an edge from state
+$j$ to state $i$, and we label the edge with the
+value $a_{ij}$.
+Examples are given
 in the following discussions.
 
-In these notes, we will consider two special cases
+We will consider two special cases
 of Markov chains: regular Markov chains and absorbing
 Markov chains.
 Generalizations of Markov chains, including
@@ -87,44 +90,62 @@ continuous time Markov processes and infinite
 dimensional Markov processes, are widely studied,
 but we will not discuss them in these notes.
 %
+\bigskip
+\begin{exercises}
+\begin{exercise}
+Draw the transition diagram for each of the following
+matrices.
+\begin{enumerate}
+\item[(a)] $\ds \begin{bmatrix} 0 & 1/4 \\ 1 & 3/4 \end{bmatrix}$
+\vspace{0.2cm}
+\item[(b)] $\ds \begin{bmatrix}
+                0.5 & 0.5 & 0.3 \\
+		0.5 & 0.25 & 0.7 \\
+		 0  & 0.25 & 0
+           \end{bmatrix}$
+\end{enumerate}
+\end{exercise}
+\end{exercises}
+\newpage
 %
-\subsection*{Regular Markov Chains}
+\section{Regular Markov Chains}
 
-\noindent
-\emph{Definition.} A Markov chain is a \emph{regular}
-Markov chain if some power of the transition
-matrix has only positive entries.
-That is, if we define the $(i,j)$ entry of $P^n$
-to be $p_{ij}^{(n)}$, then the Markov chain is
-regular if there is some $n$ such that
-$p_{ij}^{(n)}> 0$ for all $(i,j)$.
-
+%\noindent
+\begin{definition} A Markov chain is a \emph{regular}
+Markov chain if the transition
+matrix is primitive.
+(Recall that a matrix $A$ is primitive if there is
+an integer $k>0$ such that all entries in $A^k$
+are positive.)
+\end{definition}
 \medskip
-If a Markov chain is regular, then no matter what the
-initial state, in $n$ steps there is a positive
+Suppose a Markov chain with transition matrix $A$ is regular,
+so that $A^k > 0$ for some $k$.
+Then no matter what the
+initial state, in $k$ steps there is a positive
 probability that the process is in \emph{any} of the states.
 
 \noindent
 \textbf{Essential facts about regular Markov chains.}
 \begin{enumerate}
 \item
-$P^n\rightarrow W$ as $n\rightarrow\infty$, where
+$A^n\rightarrow W$ as $n\rightarrow\infty$, where
 $W$ is a constant matrix and all the columns of
 $W$ are the same.
 \item There is a unique probability vector
-$\BW$ such that $P\BW = \BW$.
+$\BW$ such that $A\BW = \BW$.
 
 Note:
 \begin{enumerate}
-\item $\BW$ is a fixed point of the linear map $\BX_{i+1} = P\BX_i$.
+\item $\BW$ is a fixed point of the linear map $\BX(n+1) = A\BX(n)$.
 \item $\BW$ is an eigenvector associated with the eigenvalue $\lambda=1$.
-(The claim implies that the transition matrix $P$ of a regular
+(The claim implies that the transition matrix $A$ of a regular
 Markov chain \emph{must} have the eigenvalue $\lambda=1$.
 Then $\BW$ is the eigenvector whose entries add up to $1$.)
 \item The matrix $W$ is $W = \begin{bmatrix} \BW & \BW & \cdots & \BW\end{bmatrix}$.
 \end{enumerate}
-\item $P^n\BP_0 \rightarrow \BW$ as $n\rightarrow\infty$ for \emph{any}
-initial probability vector $\BP_0$.
+\item $A^n\BX(0) \rightarrow \BW$ as $n\rightarrow\infty$ for \emph{any}
+initial probability vector $\BX(0)$.
 Thus $\BW$ gives the long-term probability distribution of the
 states of the Markov chain.
 \end{enumerate}
@@ -154,17 +175,18 @@ The transition diagram is
 \noindent
 and the transition matrix is
 \begin{equation}
-  P = \begin{bmatrix}
+  A = \begin{bmatrix}
           0.8 & 0.6 \\
 	  0.2 & 0.4 
       \end{bmatrix}.
 \end{equation}
-We see that all entries of $P$ are positive, so the Markov
-chain is regular.  (The conditions of the 
-definition are satisfied when $n=1$.)
+We see that all entries of $A$ are positive, so the Markov
+chain is regular.
+%  (The conditions of the 
+% definition are satisfied when $k=1$.)
 
 To find the long-term probabilities of sunny and cloudy days,
-we must find the eigenvector of $P$ associated with the
+we must find the eigenvector of $A$ associated with the
 eigenvalue $\lambda=1$. We know from Linear Algebra that
 if $\BV$ is an eigenvector, then so is $c\BV$ for any
 constant $c\ne0$.  The probability vector $\BW$ is the
@@ -174,13 +196,13 @@ the sum of the entries of the vector $\BW$ must be $1$.
 We solve
 \begin{equation}
 \begin{split}
-   P\BW & = \BW \\
-   (P-I)\BW & = \BZero
+   A\BW & = \BW \\
+   (A-I)\BW & = \BZero
 \end{split}
 \end{equation}
 Now
 \begin{equation}
-  P-I = \begin{bmatrix}
+  A-I = \begin{bmatrix}
             -0.2 &  0.6 \\
 	     0.2 & -0.6
         \end{bmatrix}
@@ -225,35 +247,35 @@ Markov chain is regular.
 \begin{enumerate}
 \item Suppose the transition matrix is
 \begin{equation}
-  P = \begin{bmatrix} 1/3 & 0 \\ 2/3 & 1 \end{bmatrix}.
+  A = \begin{bmatrix} 1/3 & 0 \\ 2/3 & 1 \end{bmatrix}.
 \end{equation}
 We find
 \begin{equation}
- P^2 = \begin{bmatrix} (1/3)^2 & 0 \\ (2/3)(1+1/3) & 1 \end{bmatrix},
+ A^2 = \begin{bmatrix} (1/3)^2 & 0 \\ (2/3)(1+1/3) & 1 \end{bmatrix},
  \quad
- P^3 = \begin{bmatrix} (1/3)^3 & 0 \\ (2/3)(1+1/3+(1/3)^2) & 1 \end{bmatrix},
+ A^3 = \begin{bmatrix} (1/3)^3 & 0 \\ (2/3)(1+1/3+(1/3)^2) & 1 \end{bmatrix},
 \end{equation}
 and, in general,
 \begin{equation}
- P^n = \begin{bmatrix} (1/3)^n & 0 \\ (2/3)(1+1/3+\cdots+(1/3)^{n-1}) & 1 \end{bmatrix}.
+ A^n = \begin{bmatrix} (1/3)^n & 0 \\ (2/3)(1+1/3+\cdots+(1/3)^{n-1}) & 1 \end{bmatrix}.
 \end{equation}
-The upper right entry in $P^n$ is $0$ for all $n$, so the Markov chain
+The upper right entry in $A^n$ is $0$ for all $n$, so the Markov chain
 is \emph{not} regular.
 \item Here's a simple example that is not regular.
 \begin{equation}
-   P = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}
+   A = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}
 \end{equation}
 Then
 \begin{equation}
-   P^2 = I, \quad P^3 = P, \quad \textrm{etc.}
+   A^2 = I, \quad A^3 = A, \quad \textrm{etc.}
 \end{equation}
-Since $P^n=I$ if $n$ is even and $P^n=P$ if $n$ is odd, $P$
+Since $A^n=I$ if $n$ is even and $A^n=A$ if $n$ is odd, $A$
 always has two entries that are zero.  Therefore the Markov
 chain is not regular.
 \item
 Let
 \begin{equation}
-  P = \begin{bmatrix}
+  A = \begin{bmatrix}
            1/5 & 1/5 & 2/5 \\
 	   0   & 2/5 & 3/5 \\
 	   4/5 & 2/5 & 0
@@ -261,28 +283,73 @@ Let
 \end{equation}
 The transition matrix has two entries that are zero, but
 \begin{equation}
-  P^2 = \begin{bmatrix}
+  A^2 = \begin{bmatrix}
            9/25 & 7/25 & 5/25 \\
 	   12/25 & 10/25 & 6/25 \\
 	   4/25 & 8/25 & 14/25
         \end{bmatrix}.
 \end{equation}
-Since all the entries of $P^2$ are positive, the Markov chain
+Since all the entries of $A^2$ are positive, the Markov chain
 is regular.
 \end{enumerate}
 \end{xexample}
 %
 %
+\begin{exercises}
+\begin{exercise}
+\label{ex:markov1}
+Let
+\begin{equation}
+  A = \begin{bmatrix}
+           19/20 & 1/10 & 1/10 \\
+	   1/20 & 0   & 0   \\
+	   0    & 9/10 & 9/10
+      \end{bmatrix}
+\end{equation}
+be the transition matrix of a Markov chain.
+\begin{enumerate}
+\item[(a)]
+Draw the transition diagram that corresponds to this transition matrix.
+\item[(b)]
+Show that this Markov chain is regular.
+\item[(c)]
+Find the long-term probability distribution for the state of the Markov
+chain.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\label{ex:markov2}
+Consider the following transition diagram:
+
+\medskip
+\centerline{%
+\includegraphics[width=3in]{fig/trans_diag.eps}
+}
+\begin{enumerate}
+\item[(a)] Find the transition matrix,
+and show that the Markov chain is regular.
+\item[(b)]  Find the long-term probability distribution of the states
+$A$, $B$, and $C$.
+\end{enumerate}
+\end{exercise}
+\end{exercises}
 %
-\subsection*{Absorbing Markov Chains}
+%
+\newpage
+%
+\section{Absorbing Markov Chains}
 
 We consider another important class of Markov chains.
+\begin{definition}
 A state $S_k$ of a Markov chain is called
 an \emph{absorbing state} if, once the Markov chains enters
 the state, it remains there forever.  In other words,
 the probability of leaving the state is zero.
-This means $p_{kk} = 1$, and $p_{jk} = 0$ for $j\ne k$.
+This means $a_{kk} = 1$, and $a_{jk} = 0$ for $j\ne k$.
+\end{definition}
 
+\begin{definition}
 A Markov chain is called an \emph{absorbing chain}
 if
 \begin{enumerate}
@@ -291,6 +358,7 @@ if
 of reaching an absorbing state in a finite number
 of steps is nonzero.
 \end{enumerate}
+\end{definition}
 An essential observation for an absorbing Markov chain
 is that it will eventually enter an absorbing state.
 (This is a consequence of the fact that if
@@ -358,9 +426,9 @@ transition matrix has the form
 
 \medskip
 \noindent
-That is, we may partition $P$ as
+That is, we may partition $A$ as
 \begin{equation}
-  P = \begin{bmatrix}
+  A = \begin{bmatrix}
              I & R \\
 	     \textbf{0} & Q \\
       \end{bmatrix}
@@ -372,21 +440,21 @@ transient states to absorbing states, while $Q$
 gives the probabilities of transitions from
 transient states to transient states.
 
-Consider the powers of $P$:
+Consider the powers of $A$:
 \begin{equation}
-  P^2 = \begin{bmatrix}
+  A^2 = \begin{bmatrix}
              I & R(I+Q) \\
 	     \textbf{0} & Q^2 \\
         \end{bmatrix},
 	\quad
-  P^3 = \begin{bmatrix}
+  A^3 = \begin{bmatrix}
              I & R(I+Q+Q^2) \\
 	     \textbf{0} & Q^3 \\
         \end{bmatrix},
 \end{equation}
 and, in general,
 \begin{equation}
-  P^n = \begin{bmatrix}
+  A^n = \begin{bmatrix}
              I & R(I+Q+Q^2+\cdots+Q^{n-1}) \\
 	     \textbf{0} & Q^n \\
         \end{bmatrix}
@@ -405,7 +473,7 @@ formula are not necessarily the same size.
 The \textbf{0} in the lower left is $\ell \times k$,
 while the \textbf{0} in the lower right is $\ell\times\ell$.}
 \begin{equation}
-  \lim_{n\rightarrow\infty} P^n
+  \lim_{n\rightarrow\infty} A^n
    = \begin{bmatrix}
              I & R(I-Q)^{-1} \\
 	     \textbf{0} & \textbf{0}
@@ -440,13 +508,13 @@ Then $QU=U-I$ implies
 \end{split}
 \end{equation}
 which is the second claim.
-(The claims can be rigorously justified, but for our purposes,
-the above arguments will suffice.)
+% (The claims can be rigorously justified, but for our purposes,
+% the above arguments will suffice.)
 
 The matrix $R(I-Q)^{-1}$ has the following meaning.
 The column $i$ of $R(I-Q)^{-1}$ gives the probabilities of
 ending up in each of the absorbing states, given that the
-process started in the $i^{\textrm{th}}$ transient states.
+process started in the $i^{\textrm{th}}$ transient state.
 
 There is more information that we can glean from
 $(I-Q)^{-1}$.
@@ -531,7 +599,7 @@ Thus the $(i,j)$ entry of $(I-Q)^{-1}$ gives the expected number
 of times that the process is in the $i^{\textrm{th}}$ transient
 state, given that it started in the $j^{\textrm{th}}$
 transient state.
-It follows that the sum of the $i^{\textrm{th}}$ column of $N$
+It follows that the sum of the $j^{\textrm{th}}$ column of $N$
 gives the expected number of times that the process will be in 
 some transient state, given that the process started
 in the $j^{\textrm{th}}$ transient state.
@@ -595,7 +663,7 @@ are State 3 and State 4.
 
 The transition matrix is
 \begin{equation}
- P = \begin{bmatrix}
+ A = \begin{bmatrix}
          1 & 0 & 1/2 &  0  \\
 	 0 & 1 &  0  & 1/6 \\
 	 0 & 0 &  0  & 1/6 \\
@@ -673,10 +741,10 @@ turns for \emph{Die} is $4$.  Thus the expected total number
 of turns is $14/3\approx 4.67$.
 \end{enumerate}
 
-The following table gives the results of our
-``experiment'' with the Coin and Die Game along with
+The following table gives the results of an
+experiment with the Coin and Die Game along with
 the predictions of the theory.
-In class, a total of 220 games were played in which
+A total of 220 games were played in which
 \emph{Coin} went first.
 \emph{Coin} won 138 times, and the total number of
 turns was 821, for an average of 3.73 turns per game.
@@ -692,50 +760,14 @@ Average Number of Turns per Game & 3.33  & 3.73
 }}
 
 \medskip
-It appears that in our experiment, \emph{Die} won more
+It appears that in this experiment, \emph{Die} won more
 often than predicted by the theory.
-Presumably if we played the game a lot more, the
+Presumably if the games was played the game a lot more, the
 experimental results would approach the predicted results.
 \end{xexample}
 
 \begin{exercises}
-\begin{exercise}
-\label{ex:markov1}
-Let
-\begin{equation}
-  P = \begin{bmatrix}
-           19/20 & 1/10 & 1/10 \\
-	   1/20 & 0   & 0   \\
-	   0    & 9/10 & 9/10
-      \end{bmatrix}
-\end{equation}
-be the transition matrix of a Markov chain.
-\begin{enumerate}
-\item[(a)]
-Draw the transition diagram that corresponds to this transition matrix.
-\item[(b)]
-Show that this Markov chain is regular.
-\item[(c)]
-Find the long-term probability distribution for the state of the Markov
-chain.
-\end{enumerate}
-\end{exercise}
 
-\begin{exercise}
-\label{ex:markov2}
-Consider the following transition diagram:
-
-\medskip
-\centerline{%
-\includegraphics[width=3in]{fig/trans_diag.eps}
-}
-\begin{enumerate}
-\item[(a)] Find the transition matrix,
-and show that the Markov chain is regular.
-\item[(b)]  Find the long term probability distribution of the states
-$A$, $B$, and $C$.
-\end{enumerate}
-\end{exercise}
 
 %
 \begin{exercise}
@@ -760,6 +792,3 @@ The new rules for \emph{Die} are:
 \end{enumerate}
 \end{exercise}
 \end{exercises}
-
-%\section{Monopoly (tm)}
-%\section{Baseball}

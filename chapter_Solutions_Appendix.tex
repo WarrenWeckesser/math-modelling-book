@@ -221,7 +221,10 @@ general could sustain and still win the battle
 when the reinforcements arrive, so the final answer
 to this question is $6500-4011 = 2489$.
 \end{enumerate}
+%
+%
 \newpage
+%
 %\medskip
 \textbf{\ref{ex:markov1}}
 \begin{enumerate}
@@ -236,20 +239,20 @@ to this question is $6500-4011 = 2489$.
 \item[(b)]
 We find
 \[
-  P ^2= \begin{bmatrix}
+  A^2= \begin{bmatrix}
            \frac{363}{400} & \frac{37}{200} & \frac{37}{200} \T\B \\
 	   \frac{19}{400} & \frac{1}{200}   & \frac{1}{200} \B  \\
 	   \frac{9}{200}    & \frac{81}{100} & \frac{81}{100} \B
       \end{bmatrix}
 \]
-Since each entry in $P^2$ is positive, the Markov chain is regular.
+Since each entry in $A^2$ is positive, the Markov chain is regular.
 \item[(c)]
 To find the long-term probability distribution, we find an eigenvector
 associated with the eigenvalue $\lambda=1$, and normalize it so that
 it is a probability vector.
 Thus, we must solve
 \[
-  (P-I)\BW = \BZero.
+  (A-I)\BW = \BZero.
 \]
 We form the augmented matrix,
 and then reduce it to reduced row echelon form:
@@ -288,7 +291,7 @@ is
 \begin{enumerate}
 \item[(a)] The transition matrix is
 \[
-  P = \begin{bmatrix}
+  A = \begin{bmatrix}
            \frac{1}{4}  & \frac{1}{2} & 1 \T\B \\
 	   \frac{1}{4}  & \frac{1}{2} & 0 \B \\
 	   \frac{1}{2}  & 0   & 0 \B
@@ -296,16 +299,16 @@ is
 \]
 Then
 \[
-  P^2 = \begin{bmatrix}
+  A^2 = \begin{bmatrix}
            \frac{11}{16}  & \frac{3}{8} & \frac{1}{4} \T\B \\
 	   \frac{3}{16}  & \frac{3}{8} & \frac{1}{4} \B \\
 	   \frac{1}{8}  & \frac{1}{4}   & \frac{1}{2} \B
       \end{bmatrix}
 \]
-and since each entry in $P^2$ is positive, the Markov chain
+and since each entry in $A^2$ is positive, the Markov chain
 is regular.
 \item[(b)]  As in the previous problem, we must find the probability
-vector $\BW$ such that $(P-I)\BW=\BZero$.
+vector $\BW$ such that $(A-I)\BW=\BZero$.
 By following the same steps as before, we find
 \[
    \BW = \begin{bmatrix}
@@ -326,7 +329,7 @@ The transition diagram for this version of the Coin and Die game is
 }
 and the transition matrix is
 \[
-P = \begin{bmatrix}
+A = \begin{bmatrix}
         1  &  0  & \frac{1}{2} & 0 \T \B \\
 	0  &  1  &   0         & \frac{1}{3} \B \\
 	0  &  0  &   0         & \frac{1}{2} \B \\
