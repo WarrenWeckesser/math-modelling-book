@@ -232,7 +232,7 @@ to this question is $6500-4011 = 2489$.
 
 \medskip
 \centerline{%
-\includegraphics[width=4in]{fig/MarkovProbSol.eps}
+\includegraphics[width=3.5in]{fig/MarkovProbSol.eps}
 }
 \medskip
 
@@ -256,6 +256,7 @@ Thus, we must solve
 \]
 We form the augmented matrix,
 and then reduce it to reduced row echelon form:
+{\small
 \[
 \begin{bmatrix}
    -1/20 & 1/10 & 1/10 & \vdots & 0 \\
@@ -269,19 +270,23 @@ and then reduce it to reduced row echelon form:
    0  &   0  &  0     & \vdots & 0
 \end{bmatrix}
 \]
-The third component $w_3$ of $\BW$ is arbitrary, so we may write
+}
+% The third component $w_3$ of $\BW$ is arbitrary, so
+We may write
 the set of solutions as
-\[
-   \BW = w_3 \begin{bmatrix}
-               \frac{20}{9} \T\B \\ \frac{1}{9} \B\\ 1
-             \end{bmatrix} .
-\]
+%\[
+$\BW = w_3 \begin{bmatrix}
+%               \frac{20}{9} \T\B \\ \frac{1}{9} \B\\ 1
+                 20/9 \\ 1/9 \\ 1
+             \end{bmatrix}$.
+%\]
 For $\BW$ to be a probability vector, we must have $w_1+w_2+w_3=1$,
 which implies $w_3 = 9/30$.  Then the long-term probability vector
 is
 \[
   \BW = \begin{bmatrix}
-          \frac{2}{3} \T\B \\ \frac{1}{30} \B \\ \frac{3}{10} \B
+%          \frac{2}{3} \T\B \\ \frac{1}{30} \B \\ \frac{3}{10} \B
+           2/3 \\ 1/30 \\ 3/10
         \end{bmatrix} .
 \]
 \end{enumerate}
@@ -296,20 +301,19 @@ is
 	   \frac{1}{4}  & \frac{1}{2} & 0 \B \\
 	   \frac{1}{2}  & 0   & 0 \B
       \end{bmatrix}
-\]
-Then
-\[
+  \quad\textrm{and we compute}
+  \quad
   A^2 = \begin{bmatrix}
            \frac{11}{16}  & \frac{3}{8} & \frac{1}{4} \T\B \\
 	   \frac{3}{16}  & \frac{3}{8} & \frac{1}{4} \B \\
 	   \frac{1}{8}  & \frac{1}{4}   & \frac{1}{2} \B
       \end{bmatrix}
 \]
-and since each entry in $A^2$ is positive, the Markov chain
+Since each entry in $A^2$ is positive, the Markov chain
 is regular.
-\item[(b)]  As in the previous problem, we must find the probability
+\item[(b)]  We must find the probability
 vector $\BW$ such that $(A-I)\BW=\BZero$.
-By following the same steps as before, we find
+We find
 \[
    \BW = \begin{bmatrix}
             \frac{1}{2} \T\B \\ \frac{1}{4} \B \\ \frac{1}{4} \B \\

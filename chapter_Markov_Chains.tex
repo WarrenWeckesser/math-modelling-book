@@ -125,30 +125,42 @@ Then no matter what the
 initial state, in $k$ steps there is a positive
 probability that the process is in \emph{any} of the states.
 
-\noindent
-\textbf{Essential facts about regular Markov chains.}
-\begin{enumerate}
-\item
-$A^n\rightarrow W$ as $n\rightarrow\infty$, where
-$W$ is a constant matrix and all the columns of
-$W$ are the same.
-\item There is a unique probability vector
-$\BW$ such that $A\BW = \BW$.
+Recall that the solution to the linear map
+$\BX(n+1) = A\BX(n)$ has the form
+\begin{equation}
+   \BX(n) = c_1 \lambda_1^n\BV_1 + c_2 \lambda_2^n\BV_2 + \cdots,
+\end{equation}
+assuming that the eigenvalues are real and distinct.
+(Complex eigenvalues contribute terms involving
+$\sin(n\theta_j)$ and $\cos(n\theta_j)$, where $\theta_j$ is
+the angle of the complex eigenvalues $\lambda_j$.)
+The transition matrix $A$ for a Markov chain is stochastic,
+so the largest eigenvalue is $\lambda_1=1$.
+The transition matrix is primitive for a regular Markov
+chain, so by the Perron-Frobenius Theorem for
+primitive matrices, $\lambda_1$ is a simple eigenvalue, and
+all the other eigenvalues have magnitude less than 1.
+This implies that the solution to the linear map
+has the form
+\begin{equation}
+   \BX(n) = c_1\BV_1 + \left\{\textrm{expressions that go to 0 as $n\rightarrow\infty$}\right\}.
+\end{equation}
+Since $\BX(n)$ must be a probability vector (i.e. it has nonnegative entries whose sum is 1)
+for all $n$, the term $c_1\BV_1$ must also be a probability vector.
+In other words, we can replace $c_1\BV_1$ with $\BW$, where $\BW$ is the eigenvector
+associated with $\lambda_1=1$ that is also a probability vector.
 
-Note:
-\begin{enumerate}
-\item $\BW$ is a fixed point of the linear map $\BX(n+1) = A\BX(n)$.
-\item $\BW$ is an eigenvector associated with the eigenvalue $\lambda=1$.
-(The claim implies that the transition matrix $A$ of a regular
-Markov chain \emph{must} have the eigenvalue $\lambda=1$.
-Then $\BW$ is the eigenvector whose entries add up to $1$.)
-\item The matrix $W$ is $W = \begin{bmatrix} \BW & \BW & \cdots & \BW\end{bmatrix}$.
-\end{enumerate}
-\item $A^n\BX(0) \rightarrow \BW$ as $n\rightarrow\infty$ for \emph{any}
+In summary, the main result for a regular Markov chain is the following theorem.
+
+\begin{theorem} Let $A$ be the transition matrix associated with a
+regular Markov chain. Let $\BW$ be the (unique) eigenvector of $A$ associated
+with the eigenvalue $\lambda_1=1$ that is also a probability vector.
+Then
+$A^n\BX(0) \rightarrow \BW$ as $n\rightarrow\infty$ for \emph{any}
 initial probability vector $\BX(0)$.
 Thus $\BW$ gives the long-term probability distribution of the
 states of the Markov chain.
-\end{enumerate}
+\end{theorem}
 
 \begin{xexample}
 \textbf{Sunny or Cloudy?}
@@ -294,6 +306,7 @@ is regular.
 \end{enumerate}
 \end{xexample}
 %
+\newpage
 %
 \begin{exercises}
 \begin{exercise}
@@ -790,10 +803,10 @@ often than predicted by the theory.
 Presumably if the games was played the game a lot more, the
 experimental results would approach the predicted results.
 \end{xexample}
-
+%
+\newpage
+%
 \begin{exercises}
-
-
 %
 \begin{exercise}
 \label{ex:markov3}

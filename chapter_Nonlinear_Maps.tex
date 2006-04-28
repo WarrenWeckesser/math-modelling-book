@@ -221,33 +221,34 @@ $x^*_2$ is a sink.
 \bigskip
 If $|f'(x^*)|=1$, we can not make any conclusions about the
 stability of the fixed point.  Examples demonstrating why this
-is the case are shown in Figures~\ref{fig:noconclusion2},
-\ref{fig:noconclusion3}
+is the case are shown in Figures~\ref{fig:noconclusion2}
+% \ref{fig:noconclusion3}
 and \ref{fig:noconclusion1}.
 %
 \begin{figure}
 \centerline{%
 \includegraphics[width=2.25in]{matlab_map1d/noconclusion2.eps}%
+\includegraphics[width=2.25in]{matlab_map1d/noconclusion3.eps}%
 }
-\caption{An example that shows why we can not determine
+\caption{Two examples that show why we can not determine
 the stability of a fixed point based on the linearization
 when
-$|f'(x^*)|=1$.  The fixed point is $x^*=0$, and $f'(x^*)=1$.
-In this case, $x^*$ is a source.}
+$|f'(x^*)|=1$.  In both cases, the fixed point is $x^*=0$, and $f'(x^*)=1$.
+On the left, $x^*$ is a source, and on the right, $x^*$ is a sink.}
 \label{fig:noconclusion2}
 \end{figure}
 %
-\begin{figure}
-\centerline{%
-\includegraphics[width=2.25in]{matlab_map1d/noconclusion3.eps}%
-}
-\caption{An example that shows why we can not determine
-the stability of a fixed point based on the linearization
-when
-$|f'(x^*)|=1$.  The fixed point is $x^*=0$, and $f'(x^*)=1$.
-In this case, $x^*$ is a sink.}
-\label{fig:noconclusion3}
-\end{figure}
+% \begin{figure}
+% \centerline{%
+% \includegraphics[width=2.25in]{matlab_map1d/noconclusion3.eps}%
+% }
+% \caption{An example that shows why we can not determine
+% the stability of a fixed point based on the linearization
+% when
+% $|f'(x^*)|=1$.  The fixed point is $x^*=0$, and $f'(x^*)=1$.
+% In this case, $x^*$ is a sink.}
+% \label{fig:noconclusion3}
+% \end{figure}
 %
 \begin{figure}
 \centerline{%
@@ -267,22 +268,22 @@ In this case, $x^*$ is unstable (but it is not a source).
 \end{figure}
 %
 %
-\newpage
-%
-\section{A Bit of Chaos}
-We give a brief demonstration of \emph{chaos}.\index{chaos}
-A thorough analysis of this phenomenon would lead us too far
-astray, but it is important to know that chaos is a possible
-(and, in fact, common) behavior of even very simple
-discrete maps.
-As an example, we consider
-\begin{equation}
-   x(n+1) = 4x(n)(1-x(n)).
-\end{equation}
-This is the logistic map with the parameter set to 4.
-
-\emph{Describe solutions; philosophical implications: solutions
-do not converge to stable fixed points or periodic solutions.}
+% \newpage
+% %
+% \section{A Bit of Chaos}
+% We give a brief demonstration of \emph{chaos}.\index{chaos}
+% A thorough analysis of this phenomenon would lead us too far
+% astray, but it is important to know that chaos is a possible
+% (and, in fact, common) behavior of even very simple
+% discrete maps.
+% As an example, we consider
+% \begin{equation}
+%    x(n+1) = 4x(n)(1-x(n)).
+% \end{equation}
+% This is the logistic map with the parameter set to 4.
+% 
+% \emph{Describe solutions; philosophical implications: solutions
+% do not converge to stable fixed points or periodic solutions.}
 %
 %
 \newpage
@@ -381,7 +382,9 @@ We will focus on two-dimensional systems, but the
 techniques used here also work in $n$ dimensions.
 While there are a few differences, the steps that
 we follow here are fundamentally the same as those
-in Section~\ref{sec:DELinearization}.
+in Section~\ref{sec:DELinearization}, where we discussed
+the linearization of nonlinear differential equations
+near an equilibrium point.
 
 A two-dimensional map has the form
 shown in \eqref{eqn:map}.
@@ -455,11 +458,10 @@ of that phenomena to higher dimensions.
 
 
 \begin{xexample}
-In this rather long example, we determine
-how the stability of a fixed point depends on a parameter.
-We consider the example given in
-equation \eqref{eqn:linearizationexample}.
-We will determine the behavior near $(0,0)$.
+We continue the study of the system
+\eqref{eqn:linearizationexample} introduced in the previous example.
+Here, we determine
+how the stability of the fixed point $(0,0)$ depends on the parameter $b$.
 
 The Jacobian matrix 
 at a fixed point $(x^*,y^*)$ is
@@ -564,12 +566,12 @@ Figure~\ref{fig:LinearizationFPExamples} shows trajectories
 near the fixed point $(0,0)$ for several values of $b$.
 \begin{figure}
 \centerline{%
-\includegraphics[width=2.5in]{matlab/LinearizationFPExample_n1.25.eps}
-\includegraphics[width=2.5in]{matlab/LinearizationFPExample_n0.25.eps}
+\includegraphics[width=2.25in]{matlab/LinearizationFPExample_n1.25.eps}
+\includegraphics[width=2.25in]{matlab/LinearizationFPExample_n0.25.eps}
 }
 \centerline{%
-\includegraphics[width=2.5in]{matlab/LinearizationFPExample_p0.25.eps}
-\includegraphics[width=2.5in]{matlab/LinearizationFPExample_p3.50.eps}
+\includegraphics[width=2.25in]{matlab/LinearizationFPExample_p0.25.eps}
+\includegraphics[width=2.25in]{matlab/LinearizationFPExample_p3.50.eps}
 }
 \caption{Trajectories near $(0,0)$ of system
 \eqref{eqn:linearizationexample}. Upper left: $b=-1.25$, spiral source.
@@ -579,6 +581,8 @@ Lower right: $b=3.5$, source.}
 \label{fig:LinearizationFPExamples}
 \end{figure}
 \end{xexample}
+
+\newpage
 
 \begin{exercises}
 \begin{exercise}
@@ -607,10 +611,9 @@ of the fixed point depends on $b$.
 % \section{The Hopf Bifurcation for Maps}
 % 
 % \section{The Period-Doubling Bifurcation for Maps}
-
-\section{Marital Relationships: Gottman and Murray's Model}
-The model discussed in this section is based on the
-work of Gottman, Murray, \emph{et al}\cite{GM}.
-\section{Exercises}
+% 
+% \section{Marital Relationships: Gottman and Murray's Model}
+% The model discussed in this section is based on the
+% work of Gottman, Murray, \emph{et al}\cite{GM}.
 %
 %
