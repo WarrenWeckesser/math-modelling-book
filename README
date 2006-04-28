@@ -24,6 +24,9 @@ Subdirectory scilab:
    -->exec('SIRscript.sce')
    This creates "SIR.eps"
 
+   -->exec('plotiterations.sci')
+   This creates "nonlinearexample.eps".
+
 Subdirectory matlab_map1d:
    Run matlab, and give the command:
    >> make_all_plots

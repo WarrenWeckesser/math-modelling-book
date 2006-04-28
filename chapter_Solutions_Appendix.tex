@@ -226,7 +226,7 @@ to this question is $6500-4011 = 2489$.
 \newpage
 %
 %\medskip
-\textbf{\ref{ex:markov1}}
+\textbf{\ref{ex:regmarkov1}}
 \begin{enumerate}
 \item[(a)] The transition diagram:
 
@@ -287,7 +287,7 @@ is
 \end{enumerate}
 
 % \newpage
-\textbf{\ref{ex:markov2}}
+\textbf{\ref{ex:regmarkov2}}
 \begin{enumerate}
 \item[(a)] The transition matrix is
 \[
@@ -318,6 +318,26 @@ By following the same steps as before, we find
 Thus, in the long run, the probabilities of being in state A, B or C
 are $1/2$, $1/4$ and $1/4$, respectively.
 \end{enumerate}
+
+\textbf{\ref{ex:regmarkov3}}
+The transition matrix is
+\begin{equation}
+ A = \begin{bmatrix}
+        0.6 & 0.4 & 0.2   \\
+        0.2 & 0.5 & 0.2   \\
+        0.2 & 0.1 & 0.6
+     \end{bmatrix}
+\end{equation}
+An eigenvector associated with the eigenvalue $\lambda=1$
+is $[3/2 \quad 1 \quad 1]^{\textsf{T}}$, and we divide by $7/2$ to create
+the probability vector
+\[
+   \BW = \begin{bmatrix} 3/7 \\ 2/7 \\ 2/7 \end{bmatrix}
+\]
+This vector gives the long-term probability distribution
+of the Markov chain.
+Thus, in the long-term, we expected $3/7$ of the males to
+be farmers, $2/7$ laborers, and $2/7$ professionals.
 
 \medskip
 \textbf{\ref{ex:markov3}}
