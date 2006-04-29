@@ -11,6 +11,13 @@ Let $z=x+iy$
 
 \medskip
 \noindent
+The \emph{real part} of $z$, written $\textrm{Re}(z)$, is $x$,
+and the \emph{imaginary part} of $z$, written
+$\textrm{Im}(z)$, is $y$. Note that the imaginary part
+is a real number.
+
+\medskip
+\noindent
 Complex conjugate:
 \[
    \overline{z} = x-iy.
@@ -30,6 +37,31 @@ Euler's formula\index{Euler's formula}
 \begin{equation}
    e^{i\theta} = \cos\theta + i \sin\theta
    \label{eqn:EULER}
+\end{equation}
+Euler's formula can be used to derive many trigonometric identities.
+For example,
+\begin{equation}
+  e^{i(A+B)} = \cos(A+B) + i\sin(A+B)
+\label{eqn:eulersum1}
+\end{equation}
+and also
+\begin{equation}
+\begin{split}
+  e^{i(A+B)} & = e^{iA}e^{iB} \\
+             & = \left(\cos A +i\sin A \right)\left(\cos B + i\sin B \right) \\
+             & = \cos A \cos B  - \sin A \sin B
+                   + i \left(\cos A \sin B + \sin A \cos B \right)
+\end{split}
+\label{eqn:eulersum2}
+\end{equation}
+By equating the real and imaginary parts of
+\eqref{eqn:eulersum1} and \eqref{eqn:eulersum2},
+we obtain the identities
+\begin{equation}
+\begin{split}
+   \cos(A+B) & = \cos(A)\cos(B) - \sin(A)\sin(B) \\
+   \sin(A+B) & = \cos(A)\sin(B) + \sin(A)\cos(B)
+\end{split}
 \end{equation}
 %
 \section{Geometric Sum, Geometric Series}
@@ -84,7 +116,7 @@ result:
 % \end{question}
 
 \subsection*{Geometric Series.}
-If $0 < r < 1$, then
+If $|r| < 1$, then
 \begin{equation}
    \sum_{k=0}^{\infty} r^k = \frac{1}{1-r}
 \end{equation}
@@ -124,7 +156,7 @@ It is easy to verify:
 %
 \section{A Few Calculus Reminders}
 
-A function $f$ is \emph{continuous}\index{continuous} at at point $a$ if
+A function $f$ is \emph{continuous}\index{continuous} at a point $a$ if
 \[
   \lim_{x\rightarrow a} f(x) = f(a).
 \]
@@ -143,3 +175,18 @@ defined to be
 There is a corresponding definition for $f_y(x,y)$,
 and the generalizations to more variables
 (such as $f_y(w,x,y,z)$) should be clear.
+
+In practice, to compute a partial derivative, you treat
+all the other variables as if they were constants.
+For example, if 
+\begin{equation}
+   f(x,y,z) = xy^2 + \sin(x^2z)+z,
+\end{equation}
+then
+\begin{equation}
+\begin{split}
+  f_x(x,y,z) & = y^2 + 2xz\cos(x^2z), \\
+  f_y(x,y,z) & = 2xy, \\
+  f_z(x,y,z) & = x^2\cos(x^2z) + 1.
+\end{split}
+\end{equation}
