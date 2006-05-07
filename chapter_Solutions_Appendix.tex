@@ -291,7 +291,7 @@ is
 \]
 \end{enumerate}
 
-% \newpage
+%\newpage
 \textbf{\ref{ex:regmarkov2}}
 \begin{enumerate}
 \item[(a)] The transition matrix is
@@ -323,6 +323,8 @@ Thus, in the long run, the probabilities of being in state A, B or C
 are $1/2$, $1/4$ and $1/4$, respectively.
 \end{enumerate}
 
+\newpage
+
 \textbf{\ref{ex:regmarkov3}}
 The transition matrix is
 \begin{equation}
@@ -343,7 +345,8 @@ of the Markov chain.
 Thus, in the long-term, we expected $3/7$ of the males to
 be farmers, $2/7$ laborers, and $2/7$ professionals.
 
-\medskip
+%\medskip
+\newpage
 \textbf{\ref{ex:markov3}}
 The transition diagram for this version of the Coin and Die game is
 
@@ -409,4 +412,71 @@ The probability that \emph{Coin} wins if \emph{Die}
 goes first is given by the entry in the first
 row and second column of $B$, which is
 $\frac{3}{7} \approx 0.429$.
+\end{enumerate}
+
+\newpage
+
+\textbf{\ref{ex:nonlinmap1}}
+\begin{enumerate}
+\item[(a)]
+We must solve
+\[
+   x = x + y/2 \quad\textrm{and}\quad y = bx + (y-1)^3/12.
+\]
+From the first equation we conclude $y=0$,
+and then the second implies $x = \frac{1}{12b}$.
+So the only fixed point is $\left(\frac{1}{12b},0\right)$.
+\item[(b)]
+The Jacobian of the map is
+\[
+  J = \begin{bmatrix}
+            1  & 1/2 \\
+	    b  & (y-1)^2/4
+      \end{bmatrix}
+\]
+and at the fixed point $\left(\frac{1}{12b},0\right)$, this is
+\[
+  J = \begin{bmatrix}
+           1 & 1/2 \\
+	   b & 1/4
+      \end{bmatrix}
+\]
+The characteristic polynomial is
+ $\lambda^2 - \frac{5}{4}\lambda + \frac{1}{4}-\frac{b}{2}$,
+and the eigenvalues are
+\[
+   \lambda_1 = \frac{5}{8} + \frac{1}{2}\sqrt{\frac{9}{16} + 2b\,}
+   \quad\textrm{and}\quad
+   \lambda_2 = \frac{5}{8} - \frac{1}{2}\sqrt{\frac{9}{16} + 2b\,}
+\]
+The eigenvalues are real if $b \ge -\frac{9}{32}$.
+When $b > -\frac{9}{32}$, $\lambda_1 > 5/8$ and $\lambda_2 < 5/8$.
+The classification of the fixed point changes when $\lambda_1 = 1$
+or $\lambda_2 = -1$.  We find $\lambda_1 = 1$ when $b=0$, and
+$\lambda_2 = -1$ when $b = 5$.  Thus we have
+\begin{itemize}
+\item $-\frac{9}{32} < b < 0$:   $|\lambda_1| < 1$ and $|\lambda_2| < 1$, so the fixed point is a sink (asymptotically stable).
+\item $0 < b < 5$: $\lambda_1 > 1$ and $|\lambda_2| < 1$, so the fixed point is an saddle point (unstable).
+\item $b > 5$: $\lambda_1 > 1$ and $\lambda_2 < -1$, so the fixed point is a source (unstable).
+\end{itemize}
+If $b < -\frac{9}{32}$, the eigenvalues are complex,
+and we may write them as
+\[
+   \lambda = \frac{5}{8} \pm \frac{i}{2}\sqrt{-\frac{9}{16} - 2b\,}
+\]
+so $\mu = \frac{5}{8}$ and $\omega = \frac{1}{2}\sqrt{-\frac{9}{16} - 2b\,}$.
+We find where the stability of the fixed point changes by solving
+$|\lambda|^2 = \mu^2+\omega^2 = 1$:
+\[
+   \frac{25}{64} + \frac{1}{4}\left(-\frac{9}{16} - 2b\right) = 1
+\]
+which gives
+\[
+   b = -\frac{3}{2}.
+\]
+So we have
+\begin{itemize}
+\item $-\frac{3}{2} < b < -\frac{9}{32}$: $|\lambda| < 1$ so the fixed point is a spiral sink (asymptotically stable).
+\item $ b < -\frac{3}{2}$: $|\lambda|>1$ so the fixed point is a spiral source (unstable).
+\end{itemize}
 \end{enumerate}
