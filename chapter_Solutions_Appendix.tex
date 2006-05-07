@@ -225,6 +225,147 @@ to this question is $6500-4011 = 2489$.
 %
 \newpage
 %
+\textbf{\ref{ex:linmapwithparam}}
+\begin{enumerate}
+\item[(a)]
+The eigenvalues are $\lambda = \frac{1}{2} \pm \sqrt{k}$.
+We have the following cases:
+\[
+\begin{matrix}
+   \T k > \frac{9}{4} \B& \textrm{source, unstable} \\
+   \T \frac{1}{4} < k < \frac{9}{4} \B & \textrm{saddle, unstable} \\
+   \T 0 < k < \frac{1}{4} \B& \textrm{sink, asymptotically stable} \\
+   \T -\frac{3}{4} < k < 0 \B & \textrm{spiral sink, asymptotically stable} \\
+   \T k < -\frac{3}{4} \B & \textrm{spiral source}
+\end{matrix}
+\]
+\item[(b)]
+When $k=4/9$, the eigenvalues are $\lambda_1 = 7/6$
+and $\lambda_2 = -1/6$, with eigenvectors
+\[
+  \BV_1 = \begin{bmatrix} 3 \\ 2 \end{bmatrix}
+  \quad \textrm{and} \quad
+  \BV_2 = \begin{bmatrix} 3 \\ -2 \end{bmatrix}
+\]
+respectively. (Of course, other choices for the eigenvectors
+are possible.)
+The general solutions is
+$\BX(n) = c_1 \lambda_1^n \BV_1 + c_2 \lambda_2^n \BV_2$,
+and to satisfy the given initial condition, we must
+have $c_1 = 1$ and $c_2 = -1$.  Therefore, the solution
+is
+\[
+   \BX(n) = \left(\frac{7}{6}\right)^n\begin{bmatrix} 3 \\ 2 \end{bmatrix}
+      - \left(-\frac{1}{6}\right)^n\begin{bmatrix} 3 \\ -2 \end{bmatrix}.
+\]
+\end{enumerate}
+
+%
+\newpage
+%
+\textbf{\ref{ex:stoch4cities}}
+\begin{enumerate}
+\item[(a)]
+The transition matrix is
+\[
+   A = \begin{bmatrix}
+         0.90 & 0.00 & 0.01 & 0.00 \\
+	 0.05 & 0.99 & 0.00 & 0.02 \\
+	 0.04 & 0.00 & 0.95 & 0.00 \\
+	 0.01 & 0.01 & 0.04 & 0.98
+       \end{bmatrix}
+\]
+\item[(b)] The transition graph:
+
+\medskip
+\centerline{\includegraphics[width=3.5in]{fig/ExStoch4Cities.eps}}
+
+\item[(c)]
+$A$ is \emph{not} primitive.
+For all $k > 1$, $A^k$ has the pattern
+\[
+   A = \begin{bmatrix}
+         \# & 0  & \# & 0  \\
+	 \# & \# & \# & \# \\
+	 \# & 0  & \# & 0  \\
+	 \# & \# & \# & \#
+       \end{bmatrix}
+\]
+where $\#$ represent a nonzero number.
+Therefore
+$A^k$ is not positive for any $k > 0$.
+
+\item[(d)]
+$A$ is reducible.  We can verify this in (at least) two
+ways. (1) By inspection of $\Gamma(A)$, we see that
+the vertices \textbf{1} and \textbf{3} are decoupled
+from \textbf{2} and \textbf{4}; that is, there are
+no edges from $\{\textbf{2},\textbf{4}\}$ to
+$\{\textbf{1},\textbf{3}\}$.
+Then by Theorem \ref{thm:irredgraphtest}
+(with $V = \{\textbf{1},\textbf{3}\}$), $A$
+is reducible.
+(2) We can use Theorem \ref{thm:irredtest}.
+We find
+\[
+   (I+A)^3 = \begin{bmatrix}
+         \# & 0  & \# & 0  \\
+	 \# & \# & \# & \# \\
+	 \# & 0  & \# & 0  \\
+	 \# & \# & \# & \#
+       \end{bmatrix}
+\]
+so by Theorem \ref{thm:irredtest}, $A$ is reducible.
+(This may be verified with a computer, but since all
+that matters is the pattern of nonzero entries, it is
+also easily checked by hand.)
+
+A permutation matrix that transforms $A$ into
+the block-structured reduced form is
+\[
+  P = \begin{bmatrix}
+          0 & 0 & 0 & 1 \\
+	  0 & 1 & 0 & 0 \\
+	  0 & 0 & 1 & 0 \\
+	  1 & 0 & 0 & 0
+      \end{bmatrix}
+\]
+Then
+\[
+  P^{\textsf{T}}AP = \begin{bmatrix}
+                      0.98 & 0.01 & 0.04 & 0.01 \\
+		      0.02 & 0.99 & 0.00 & 0.05 \\
+		      0.00 & 0.00 & 0.95 & 0.04 \\
+		      0.00 & 0.00 & 0.01 & 0.90
+                    \end{bmatrix}
+\]
+\item[(e)]
+Because $A$ is stochastic, we know that $\lambda_1=1$
+is an eigenvalue, and no other eigenvalue of $A$
+has a magnitude larger than $1$.  With a computer,
+we find $\lambda_2 = 0.97$, $\lambda_3 \approx 0.9570$
+and $\lambda_4 \approx 0.8930$.
+Since $|\lambda_j| < 1$ for $j=2,3,4$, 
+we know that the long term behavior is given
+by the eigenvector associated with the eigenvalue
+$\lambda_1=1$.
+The eigenvector, normalized so that the sum of
+its entries is $1$, is
+\[
+  \BV_1 = \begin{bmatrix}
+             0 \\ 2/3 \\ 0  \\ 1/3
+          \end{bmatrix}
+\]
+Therefore, in the long-term, the populations of
+cities \textbf{1} and \textbf{3} will decay to zero.  Two-thirds
+of the population will be in city \textbf{2} and one-third
+will be in city \textbf{4}.
+
+\end{enumerate}
+%
+%
+\newpage
+%
 %\medskip
 \textbf{\ref{ex:regmarkov1}}
 \begin{enumerate}

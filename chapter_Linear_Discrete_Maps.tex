@@ -721,6 +721,23 @@ fixed point and classify its type and stability.
                         \BX(n) + \begin{bmatrix} 2 \\ 8 \end{bmatrix}$
 \end{enumerate}
 \end{exercise}
+\begin{exercise}
+\label{ex:linmapwithparam}
+Consider the linear map
+\begin{equation}
+  \BX(n+1) = \begin{bmatrix} 1/2 & 1 \\ k & 1/2 \end{bmatrix}
+                \BX(n)
+\end{equation}
+\begin{enumerate}
+\item[(a)]
+Determine how the classification and stability of the fixed point at the
+origin depends on $k$.
+That is, find the ranges of $k$ where $\BZero$ is a spiral source,
+a spiral sink, a sink, a saddle, or a source.
+\item[(b)] If $k=4/9$, find the solution for which
+$\BX(0)=\begin{bmatrix} 0 \\ 4 \end{bmatrix}$.
+\end{enumerate}
+\end{exercise}
 \end{exercises}
 
 \newpage
@@ -1314,6 +1331,7 @@ we convert \eqref{eqn:pf:linmap} into
 The following theorem, which we state without proof, provides
 a test for irreducibility.
 \begin{theorem}
+\label{thm:irredtest}
 An $m\times m$ nonnegative matrix $A$ is 
 irreducible if and only if
 \begin{equation}
@@ -1571,6 +1589,7 @@ We give the interpretation of the reducibility of $A$ in terms of the graph $\Ga
 in the following theorem.
 
 \begin{theorem}
+\label{thm:irredgraphtest}
 The matrix $A$ is reducible if and only if $\,\Gamma(A)$ contains a subset
 $V$ of vertices such that the
 edges between $V$ and vertices not in $V$
@@ -1903,6 +1922,33 @@ in the chaper on Markov Chains.
 \begin{exercise}
 Find a $4\times 4$ stochastic matrix with eigenvalues
 $1$, $-1$, $i$ and $-i$.
+(These are four distinct eigenvalues, all with magnitude 1.)
+\end{exercise}
+\begin{exercise}
+\label{ex:stoch4cities}
+(You use a computer program such as Scilab or Matlab for this problem.)
+
+A population moves among four cities according to the following patterns:
+\begin{itemize}
+\item Each year, 5\% of the population of city 1 moves to city 2,
+4\% of city 1 moves to city 3 and 1\% of city 1 moves to city 4.
+\item Each year, 1\% of the population of city 2 moves to city 4.
+\item Each year, 1\% of the population of city 3 moves to city 1,
+and 4\% of city 3 moves to city 4.
+\item Each year, 2\% of the population of city 4 moves to city 2.
+\end{itemize}
+\begin{enumerate}
+\item If $\BX(n)\in\Real^4$ represents the populations of cities 1 through 4
+in year $n$, find the matrix $A$ for which the population change is given
+by $\BX(n+1) = A\BX(n)$ (i.e. the transition matrix).
+\item Sketch the graph $\Gamma(A)$ (i.e. the transition diagram).
+\item Is $A$ primitive?  If so, find $k$ such that $A^k$ is positive.
+\item Is $A$ reducible? If so, find the permutation matrix $P$ that
+transforms $A$ into the reduced form.
+\item Find the long-term distribution of the populations.
+Explain how you determined your answer.
+\end{enumerate}
+
 \end{exercise}
 \end{exercises}
 %
