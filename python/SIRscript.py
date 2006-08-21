@@ -4,7 +4,7 @@
 #         Department of Mathematics
 #         Colgate University
 #
-# Copyright(c) 2005 Warren Weckesser
+# Copyright(c) 2005, 2006 Warren Weckesser
 #
 #
 # Load the SciPy libraries and Gnupot libraries.
@@ -22,14 +22,11 @@ from SIRvectorfield import SIRvectorfield
 r = 0.12
 g = 0.07
 #
-# Set the initial conditions.
+# Set the initial conditions and put into the array x0.
 #
 S0 = 0.995
 I0 = 0.005
 R0 = 0.0
-#
-# Put the initial conditions in x0.
-#
 x0 = [S0,I0,R0]
 #
 # Create the time samples for the output of the
