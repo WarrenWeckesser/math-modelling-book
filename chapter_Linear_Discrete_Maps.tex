@@ -1753,8 +1753,8 @@ $c_1 = 100/9$.  Thus, in the long-term, the population approaches
 In other words, in the long-term, $1/9$ of the population will
 be in \textbf{A}, $5/9$ in \textbf{B} and $1/3$ in \textbf{C}.
 
-Note that the columns of $A$ add up to 1.  This class of matrices
-is important enough to have its own name.
+Note that the sum of the entries in each column of $A$ is 1.
+This class of matrices is important enough to have its own name.
 \begin{definition}
 An $m\times m$ matrix $A$ is called \emph{stochastic}\index{stochastic matrix}
 if $A \ge 0$ and the sum of the entries
@@ -1807,7 +1807,7 @@ Then it is easily verified that
 \begin{equation}
   A^{\textsf{T}}\BE = \BE
 \end{equation}
-which shows that $1$ is an eigenvalue of $A$, with
+which shows that $1$ is an eigenvalue of $A^{\textsf{T}}$, with
 eigenvector $\BE$.
 Since, in general, $A$ and $A^{\textsf{T}}$ have the
 same eigenvalues, $1$ is also an eigenvalue of $A$.
@@ -1926,7 +1926,7 @@ $1$, $-1$, $i$ and $-i$.
 \end{exercise}
 \begin{exercise}
 \label{ex:stoch4cities}
-(You use a computer program such as Scilab or Matlab for this problem.)
+(You may use a computer program such as Scilab or Matlab for this problem.)
 
 A population moves among four cities according to the following patterns:
 \begin{itemize}
