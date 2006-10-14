@@ -924,31 +924,20 @@ significantly...
 
 \newpage
 
-\section{Epidemiology and the SI Model\index{SI model}}
+% \section{Epidemiology and the SI Model\index{SI model}}
 
-
-\section{The SIS Model\index{SIS model}}
-%
-% Perhaps the SIS model could be given as an exercise:
-% state the assumption, and then have the student give
-% the equations.
-%
-For some diseases, surviving an infection
-does not guarantee immunity from subsequent infections.
-Infectives can recover,
-but once they have recovered, they return to the
-susceptible pool... 
-
-
-\section{The SIR Model\index{SIR model}}
+\section{The SIR Model\index{SIR model} of the Spread of a Disease}
+Recall the SI model of the spread of a disease, discussed
+in Section \ref{sec:SIModel}.
 For many diseases, people recover after being infected,
 and from then on they are immune to the disease.
 To incorporate this into our model of the spread of
 a disease, we consider a third class of \emph{recovered}
-people. (Calling them the recovered people is the
-optimistic point of view.  It turns out that the
-model is the same if we interpret this group as
-\emph{removed}, meaning deceased.)
+individuals.
+% (Calling them the recovered people is the
+%optimistic point of view.  It turns out that the
+%model is the same if we interpret this group as
+%\emph{removed}, meaning deceased.)
 
 We assume that the rate at which the infected
 group changes to recovered is proportional to
@@ -971,12 +960,14 @@ Putting this all together, we obtain the
 $SIR$ model:\index{SIR model}
 \begin{equation}
 \begin{split}
-   \frac{dS}{dt} & = -r S I \\
-   \frac{dI}{dt} & = r S I - \gamma I \\
+   \frac{dS}{dt} & = -\alpha S I \\
+   \frac{dI}{dt} & = \alpha S I - \gamma I \\
    \frac{dR}{dt} & = \gamma I
 \end{split}
 \label{eqn:SIR}
 \end{equation}
+(Instead of $r$, we have used $\alpha$ as the coefficient of the $SI$ terms.
+This is to avoid confusion with $R$ when talking about the model.)
 As in the $SI$ model, we have assumed that the total
 population remains constant.  This is apparent in the equations:
 add them all together to find
@@ -990,9 +981,76 @@ of \eqref{eqn:SIR}.  This means we can analyze the equations
 for $S$ and $I$, and then infer the behavior of $R$ afterwards.
 
 \medskip
+
+\emph{To do: Discuss $(S,I)$ phase plane..}
+
+\medskip
+
+From calculus, we know
+\begin{equation}
+   \frac{ \frac{dI}{dt} }{ \frac{dS}{dt} } = \frac{dI}{dS}
+\end{equation}
+This says that, if we consider a solution in the $(S,I)$ plane,
+and interpret the curve as the graph of a function of $S$
+(i.e. $I=f(S)$), we can find the slope of the curve
+at a point by computing $\frac{dI}{dt}/\frac{dS}{dt}$.
+Thus we can use the first two equations in
+\eqref{eqn:SIR} to obtain
+\begin{equation}
+   \frac{dI}{dS} = -1 +\frac{\alpha}{\gamma S}
+\end{equation}
+We can integrate to find
+\begin{equation}
+   I = -S + \frac{\alpha}{\gamma}\ln(S) + C
+\end{equation}
+In other words, the function
+\begin{equation}
+   H(S,I) = I+S-\frac{\alpha}{\gamma}\ln(S)
+\end{equation}
+is \emph{constant} along solutions.
+
+
+\medskip
 \noindent
 \emph{To be continued...}
 
+\newpage
+\begin{exercises}
+\begin{exercise}
+\label{ex:sismodel}
+In this exercise, we consider a different variation of the
+SI model.
+For some diseases, surviving an infection
+does not guarantee immunity from subsequent infections.
+Infectives can recover,
+but once they have recovered, they return to the
+susceptible pool.
+This model is often called the SIS model.
+\begin{enumerate}
+\item[(a)]
+By using the same assumptions concerning the infectious period
+as used in the development of the SIR model, give the differential
+equations for the SIS model, and show that the equation for
+$I(t)$ may be written
+\begin{equation}
+  \frac{dI}{dt} = \alpha(N-I)I-\gamma I,
+\label{eqn:SISequation}
+\end{equation}
+where $N$ is the total size of the population.
+\item[(b)]
+Without explicitly solving
+\eqref{eqn:SISequation},
+determine the long term behavior of the solutions.
+How does the long term behavior depend on the parameters
+$N$, $\alpha$ and $\gamma$, and the initial condition
+$I(0)=I_0$?
+\item[(c)]
+Equation \eqref{eqn:SISequation} is a a separable
+first order differential equation.
+Find the solution to the equation.
+\end{enumerate}
+\end{exercise}
+\end{exercises}
 
 \section{The SIQR Model\index{SIQR model}}
 \section{The SEIR Model\index{SEIR model}}
