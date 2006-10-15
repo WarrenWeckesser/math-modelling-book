@@ -18,6 +18,9 @@ Subdirectory fig:
    the exported .eps files (but these are not in the Subversion
    repository).  Run xfig, open each .fig files, and export it
    as eps.  (Eventually I'll make a script that does this.)
+   OR
+   Use the command fig2dev, e.g.:
+   $ fig2dev -L eps IMMtitle.fig > IMMtitle.eps
 
 Subdirectory scilab:
    Run scilab and give the command
@@ -77,5 +80,13 @@ Subdirectory matlab:
    >> LanchesterExamplePlots
    creates "LanchesterExamplePlots.eps"
 
+   >> auton_example_plot
+
+   >> solow_plots
+
 Subdirectory python
    $ python SIRscript.py
+
+Subdirectory logisticplots2
+   $ gnuplot logisticrhs.gnuplot
+   $ gnuplot logisticsolutions.gnuplot
