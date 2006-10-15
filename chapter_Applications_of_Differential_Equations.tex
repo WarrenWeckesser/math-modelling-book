@@ -232,6 +232,8 @@ approximately proportional to the labor, and then it will settle into a long ter
 which capital remains proportional to the labor.
 \end{xexample}
 %
+\newpage
+%
 \begin{exercises}
 \begin{exercise}
 Verify that the maximum value of the right side
@@ -307,6 +309,47 @@ specific function given in \eqref{eqn:cobbexample}.
 %
 \section{Predator-Prey\index{predator-prey}}
 %
+\emph{Explain assumptions...}
+
+\medskip
+
+One version of these equations is
+\begin{equation}
+\begin{split}
+  \frac{dx}{dt} & = -\gamma (1-\alpha y) x \\
+  \frac{dy}{dt} & = \delta (1-\beta x) y
+\end{split}
+\label{eqn:predatorprey}
+\end{equation}
+where $\alpha$, $\beta$, $\gamma$ and $\delta$ are positive constants.
+
+\medskip
+
+The system \eqref{eqn:predatorprey} has a conserved quantity, which
+we now derive.
+If we consider a solution in the $(x,y)$ plane, the slope at a point
+on the curve is
+\begin{equation}
+  \frac{dy}{dx} = \frac{\frac{dy}{dt}}{\frac{dx}{dt}}
+    = \frac{\delta(1-\beta x)y}{-\gamma(1-\alpha y)x}
+\end{equation}
+This is a separable first order equation.  By separating, we find
+\begin{equation}
+  \frac{\gamma(1-\alpha y)}{y} dy = -\frac{\delta(1-\beta x)}{x} dx
+\end{equation}
+By integrating with respect to $y$ on the left and $x$ on the right,
+we obtain
+\begin{equation}
+  \gamma \ln(y) - \gamma\alpha y = -\delta\ln(x) + \delta\beta x + C
+\end{equation}
+In other words, if $(x(t),y(t))$ is a solutions to \eqref{eqn:predatorprey},
+the function
+\begin{equation}
+  H(x,y) = \delta\ln(x) - \delta\beta x + \gamma\ln(y) - \gamma\alpha y
+\end{equation}
+remains constant.
+\medskip
+
 \newpage
 %
 \section{Competing Species\index{competing species}}
@@ -1025,7 +1068,7 @@ does not guarantee immunity from subsequent infections.
 Infectives can recover,
 but once they have recovered, they return to the
 susceptible pool.
-This model is often called the SIS model.
+This model is often called the SIS model.\index{SIS model}
 \begin{enumerate}
 \item[(a)]
 By using the same assumptions concerning the infectious period
