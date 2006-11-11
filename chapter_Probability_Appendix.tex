@@ -17,24 +17,30 @@
 \begin{xexample}
 A person enters a queue at time $t=0$ for which the
 waiting time is exponentially distributed, with mean $20$ minutes.
-\begin{enumerate}
-\item What is the probability that the person will leave the
+
+\noindent
+$\bullet$
+ What is the probability that the person leaves the
 queue in less than 10 minutes?
 
 \noindent
 \emph{Answer:} $\ds \textrm{Prob}(t < 10) =\int_0^{10} \frac{1}{20} \exp\left(\frac{-x}{20}\right)\,dx
      = C(10) = 1-e^{1/2} \approx 0.3935$
-\item What is the probability that the person is in the queue for
+
+\noindent
+$\bullet$
+What is the probability that the person is in the queue for
 more than an hour?
 
 \noindent
 \emph{Answer:} $\ds \textrm{Prob}(t > 60) = \int_{60}^{\infty} \frac{1}{20} \exp\left(\frac{-x}{20}\right)\,dx
      = 1-C(60) = e^{-3} \approx 0.04979$
 
-\item If the person has not left the queue after 20 minutes, what is the
+\noindent
+$\bullet$
+If the person has not left the queue after 20 minutes, what is the
 probability that the person will still be in the queue after an additional
 20 minutes?
-\end{enumerate}
 \label{ex:exp_example}
 \end{xexample}
 %
@@ -42,13 +48,29 @@ probability that the person will still be in the queue after an additional
 %
 \noindent
 \textbf{The Gamma Distribution}\index{gamma distribution}
+\begin{equation}
+  p(x) = \frac{\lambda^{k} x^{k-1} e^{-\lambda x}}{\Gamma(k)}
+   \quad (x \ge 0)
+\end{equation}
+The parameter $k>0$ is called the \emph{shape parameter},
+and $\lambda > 0$ is called the \emph{scale parameter}.
+The mean is $k/\lambda$.
+
+When $k$ is an integer, $\Gamma(k) = (k-1)!$; in this case,
+the gamma distribution is known as the \emph{Erlang distribution}:
+\begin{equation}
+  p(x) = \frac{\lambda^{k} x^{k-1} e^{-\lambda x}}{(k-1)!}
+   \quad (x \ge 0)
+\end{equation}
+When $k=1$, the distribution is simply the exponential distribution.
+%
 \begin{xexample}
 A person enters a queue at time $t=0$ for which the
 waiting time is a random variable with a gamma distribution
 with mean $20$ minutes and shape parameter $k=2$.
 (Compare this example to Example \ref{ex:exp_example}.)
 \begin{enumerate}
-\item What is the probability that the person will leave the
+\item What is the probability that the person leaves the
 queue in less than 10 minutes?
 
 \noindent
