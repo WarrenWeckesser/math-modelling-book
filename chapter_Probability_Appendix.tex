@@ -1,0 +1,72 @@
+%
+\chapter{Probability}
+%
+\section{Basic Definitions and Results}
+%
+\section{Probability Density Functions\index{probability density function}}
+%
+
+\noindent
+\textbf{The Exponential Distribution}
+\begin{equation}
+ p(x) = \lambda e^{-\lambda x}, \quad (x \ge 0)
+\end{equation}
+\begin{equation}
+  C(x) = \int_0^x p(s)\,ds =  1 - e^{-\lambda x}
+\end{equation}
+\begin{xexample}
+A person enters a queue at time $t=0$ for which the
+waiting time is exponentially distributed, with mean $20$ minutes.
+\begin{enumerate}
+\item What is the probability that the person will leave the
+queue in less than 10 minutes?
+
+\noindent
+\emph{Answer:} $\ds \textrm{Prob}(t < 10) =\int_0^{10} \frac{1}{20} \exp\left(\frac{-x}{20}\right)\,dx
+     = C(10) = 1-e^{1/2} \approx 0.3935$
+\item What is the probability that the person is in the queue for
+more than an hour?
+
+\noindent
+\emph{Answer:} $\ds \textrm{Prob}(t > 60) = \int_{60}^{\infty} \frac{1}{20} \exp\left(\frac{-x}{20}\right)\,dx
+     = 1-C(60) = e^{-3} \approx 0.04979$
+
+\item If the person has not left the queue after 20 minutes, what is the
+probability that the person will still be in the queue after an additional
+20 minutes?
+\end{enumerate}
+\label{ex:exp_example}
+\end{xexample}
+%
+\section{Other Frequently Used Density Functions}
+%
+\noindent
+\textbf{The Gamma Distribution}\index{gamma distribution}
+\begin{xexample}
+A person enters a queue at time $t=0$ for which the
+waiting time is a random variable with a gamma distribution
+with mean $20$ minutes and shape parameter $k=2$.
+(Compare this example to Example \ref{ex:exp_example}.)
+\begin{enumerate}
+\item What is the probability that the person will leave the
+queue in less than 10 minutes?
+
+\noindent
+\emph{Answer:} $\ds \textrm{Prob}(t < 10) = \int_0^{10} \ldots \,dx
+     = \ldots$
+\item What is the probability that the person is in the queue for
+more than an hour?
+
+\noindent
+\emph{Answer:}
+ $\ds \textrm{Prob}(t > 60) = \int_{60}^{\infty} \ldots \,dx
+     = \ldots$
+
+\item If the person has not left the queue after 20 minutes, what is the
+probability that the person will still be in the queue after an additional
+20 minutes?
+\end{enumerate}
+\end{xexample}
+
+\noindent
+\textbf{The Lognormal Distribution}\index{lognormal distribution}...
