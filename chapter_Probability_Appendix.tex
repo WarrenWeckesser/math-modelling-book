@@ -6,15 +6,15 @@
 yada yada...
 
 Let $\mathcal{E}$ be the \emph{event space},
-and let $\textrm{Pr}$ be a function that assigns
+and let $\Pr$ be a function that assigns
 a real number to each subset of $\mathcal{E}$.
-Let $A$ and $B$ be disjoint subsets of $\mathcal{E}$.
-$\textrm{Pr}$ has the following properties.
+Let $A$ and $B$ be subsets of $\mathcal{E}$.
+$\Pr$ has the following properties.
 \begin{equation}
 \begin{split}
-   \textrm{Pr}(\emptyset) & = 0 \\
-   \textrm{Pr}(\mathcal{E}) & = 1 \\
-   \textrm{Pr}(A\cup B) & = \textrm{Pr}(A) + \textrm{Pr}(B)
+   \Pr(\emptyset) & = 0 \\
+   \Pr(\mathcal{E}) & = 1 \\
+   \Pr(A\cup B) & = \Pr(A) + \Pr(B) - \Pr(A\cap B)
 \end{split}
 \end{equation}
 
@@ -39,6 +39,8 @@ The event space for a pair of die is given in the following table:
 There are $36$ possible events.
 Our assumption that each die is ``fair'' implies that
 each event is equally likely.
+That is, for any $(i,j)$ in the event space,
+$\Pr((i,j)) = 1/36$.
 
 \begin{xexample}
 Suppose two dice are rolled.
@@ -69,7 +71,7 @@ the die are $1$. Thus the probability that one of the dice
 is a $1$ is $(1/6)+(1/6)-(1/36) = 11/36$.  This is an
 example of the rule
 \[
-   \textrm{Pr}(A \;\textrm{or}\; B) = \textrm{Pr}(A) + \textrm{Pr}(B) - \textrm{Pr}(A \;\textrm{and}\; B)
+   \Pr(A \;\textrm{or}\; B) = \Pr(A) + \Pr(B) - \Pr(A \;\textrm{and}\; B)
 \]
 In this case, the description of $A$ is ``the first die is a 1''.
 By interpeting this as a subset of the event space, we have
@@ -78,20 +80,78 @@ Similarly, $B = \{(1,1),(2,1),(3,1),(4,1),(5,1),(6,1)\}$.
 When we intepret $A$ and $B$ as subsets of the event space, the
 above formula may be written
 \[
-  \textrm{Pr}(A \cup B) = \textrm{Pr}(A) + \textrm{Pr}(B) - \textrm{Pr}(A \cap B)
+  \Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)
 \]
 \end{xexample}
 
 \section{Conditional Probability}
 %
-\begin{xexample}
-Two dice are rolled, and you are told that the sum of the dice
-is greater than 6.  What is the probability that one of the die
-is a 5?
+\emph{yada yada...}
 
 \medskip
 \noindent
-\emph{Answer:} 3/7
+$\Pr(B|A)$ is the probability of $B$ given
+$A$; in effect, it is the probability
+of $B$, assuming that the event space
+is $A$ (rather than the original $\mathcal{E}$).
+
+\noindent
+\medskip
+\begin{equation}
+  \Pr(B|A) = \frac{\Pr(A\cap B)}{\Pr(A)}
+\end{equation}
+\begin{xexample}
+\emph{Two dice are rolled, and you are told that the
+sum of the dice is greater than 6.
+What is the probability that one of the dice is a 5?}
+
+\medskip
+Let $A$ be the subset of $\mathcal{E}$
+for which the sum of the dice is greater than
+$6$.  We found in a previous example that
+$\Pr(A) = 7/12$.
+$B$ is the subset of $\mathcal{E}$ where one
+of the dice is a $5$.
+Then $A\cap B$ is the subset of $\mathcal{E}$
+where the sum of the dice is greater than
+$6$ \emph{and} one of the dice is a $5$.
+From the event space table for two dice given
+above, we find that
+$\Pr(A\cap B) = 9/21 = 3/7$.
+So
+\begin{equation}
+  \Pr(B|A) = \frac{\Pr(A\cap B)}{\Pr(A)}
+    = \frac{\left(\frac{3}{7}\right)}
+           {\left(\frac{7}{12}\right)}
+    = \frac{36}{49}
+\end{equation}
+\end{xexample}
+%
+\begin{xexample}
+\emph{Again two dice are rolled, and neither is a $1$.
+What is the probability that the sum is greater
+than $6$?}
+
+\medskip
+Let $A$ be the subset of $\mathcal{E}$
+where neither of the dice is a $1$.
+We compute $\Pr(A) = 25/36$.
+$B$ is the subset of $\mathcal{E}$
+where the sum of the dice is greater than $6$.
+Then $A\cap B$ is the subset of $\mathcal{E}$
+where neither dice is a $1$ and the sum is
+greater than $6$.  There are $19$ possible
+events where this occurs, so
+\begin{equation}
+  \Pr(A\cap B) = 19/36
+\end{equation}
+Then
+\begin{equation}
+  \Pr(B|A) = \frac{\Pr(A\cap B)}{\Pr(A)}
+    = \frac{\left(\frac{19}{36}\right)}
+           {\left(\frac{25}{36}\right)}
+    = \frac{19}{25}
+\end{equation}
 \end{xexample}
 %
 \section{Probability Density Functions\index{probability density function}}
@@ -103,6 +163,115 @@ The subsets of $\mathcal{E}$ for which we will compute probabilities
 will be intervals of the real line, such as $1 < x < 3$, or
 $100 \le x < \infty$.
 
+For example, suppose a person contracts an
+infectious disease. We can model the length
+of time that the persion is sick as a random
+variable.  The event space is the set of nonnegative
+real numbers, $\mathbb{R^{0+}}$.
+Let $A \subset \mathbb{R^{0+}}$ be the interval
+$[1,2]$.
+Then $\Pr(A)$ is the probability that the
+time $t$ at which the person
+recovers is in the interval $[1,2]$.
+
+Suppose $B = \{1\}$.  That is, $B$ is the subset
+of $\mathbb{R}^{0+}$ that contains just the single
+number $1$.
+$\Pr(B)$ is the probability that the person
+recovers at \emph{exactly} $t=1$.
+Intuitively, we expect this probability to be zero.
+On the other hand--depending on the disease--it
+might not be unreasonable for $A$ to have a nonzero
+probability: there is a finite chance that a person
+recovers during the time interval $[1,2]$.
+
+A standard way to define a function $\Pr$ on 
+a continuous event space such as $\mathbb{R}$
+or $\mathbb{R}^{0+}$ is by using an
+\emph{integral}.
+Suppose $p(t)$ is a function defined on
+$\mathbb{R}^{0+}$ with the following properties.
+\begin{enumerate}
+\item $p(t) \ge 0$ for all $t \ge 0$.
+\item for any $0 \le a \le b$,
+$\int_a^b p(t)\,dt$ exists.
+(We will generally assume that $p(t)$ is piecewise
+continuous, which is sufficient for this condition to
+hold.)
+\item $\int_0^{\infty} p(t)\,dt = 1$.
+\end{enumerate}
+Let $I$ be the interval $[a,b]$, where $a$
+and $b$ are in $\mathbb{R}^{0+}$, and $a \le b$.
+We define
+\begin{equation}
+  \Pr(A) = \int_a^b p(t)\,dt.
+\end{equation}
+By the third property of $p(t)$ listed above,
+we have
+\begin{equation}
+  \Pr([0,\infty)) = \int_0^{\infty} p(t)\,dt = 1.
+\end{equation}
+Since $\mathbb{R}^{0+} = [0,\infty) = \mathcal{E}$,
+the previous equation
+is the property $\Pr(\mathcal{E})=1$ that
+we require of the function $\Pr$.
+
+We have assumed that $p(t)$ is piecewise continuous.
+A result from calculus then tells that the
+the value of $p(t)$ at a single point does not
+affect the integral of $p(t)$ over an interval.
+Therefore,
+\begin{equation}
+  \Pr([a,b]) = \Pr([a,b)) = \Pr((a,b]) = \Pr((a,b))
+   = \int_a^b p(t)\,dt
+\end{equation}
+In other words, the integral is the same whether
+we have an interval that is open, or close, or neither.
+Moreover, since $(a,a)$ is the empty set, we have
+\begin{equation}
+  \Pr(\emptyset) = \Pr((a,a))
+     = \int_a^a p(t)\,dt = 0
+\end{equation}
+
+Let $0 \le a \le b \le c \le d$,
+and define $A = [a,c]$, $B = [b,d]$.
+Then $A \cup B = [a,d]$, and
+\begin{equation}
+\begin{split}
+  \Pr(A\cup B) & = \int_a^d p(t)\,dt \\
+     & = \int_a^c p(t)\,dt
+           + \int_b^d p(t)\,dt
+           - \int_b^c p(t)\,dt \\
+     & = \Pr(A) + \Pr(B) - \Pr(A\cap B)
+\end{split}
+\end{equation}
+%
+%
+\section{Some Frequently Used Probability 
+Density Functions}
+\medskip
+\noindent
+\textbf{The Uniform Distribution}
+Suppose $a < b$.
+Define
+\begin{equation}
+   p(x) = \begin{cases}
+            \frac{1}{b-a} & \textrm{if}\; a < x < b \\
+	    0             & \textrm{otherwise}
+          \end{cases}
+\end{equation}
+
+\medskip
+\noindent
+\textbf{The Normal (or Gaussian) Distribution}
+\index{normal distribution}
+\index{Gaussian distribution}
+\begin{equation}
+  p(x) = \frac{1}{\sigma \sqrt{2\pi}}
+           \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+\end{equation}
+The mean is $\mu$ and the variance is $\sigma^2$.
+
 \medskip
 \noindent
 \textbf{The Exponential Distribution}
@@ -112,6 +281,7 @@ $100 \le x < \infty$.
 \begin{equation}
   C(x) = \int_0^x p(s)\,ds =  1 - e^{-\lambda x}
 \end{equation}
+The mean is $1/\lambda$.
 \begin{xexample}
 A person enters a queue at time $t=0$ for which the
 waiting time is exponentially distributed, with mean $20$ minutes.
@@ -122,7 +292,7 @@ $\bullet$
 queue in less than 10 minutes?
 
 \noindent
-\emph{Answer:} $\ds \textrm{Prob}(t < 10) =\int_0^{10} \frac{1}{20} \exp\left(\frac{-x}{20}\right)\,dx
+\emph{Answer:} $\ds \Pr(t < 10) =\int_0^{10} \frac{1}{20} \exp\left(\frac{-x}{20}\right)\,dx
      = C(10) = 1-e^{1/2} \approx 0.3935$
 
 \noindent
@@ -131,7 +301,7 @@ What is the probability that the person is in the queue for
 more than an hour?
 
 \noindent
-\emph{Answer:} $\ds \textrm{Prob}(t > 60) = \int_{60}^{\infty} \frac{1}{20} \exp\left(\frac{-x}{20}\right)\,dx
+\emph{Answer:} $\ds \Pr(t > 60) = \int_{60}^{\infty} \frac{1}{20} \exp\left(\frac{-x}{20}\right)\,dx
      = 1-C(60) = e^{-3} \approx 0.04979$
 
 \noindent
@@ -142,9 +312,9 @@ probability that the person will still be in the queue after an additional
 \label{ex:exp_example}
 \end{xexample}
 %
-\section{Other Frequently Used Density Functions}
 %
 \noindent
+\medskip
 \textbf{The Gamma Distribution}\index{gamma distribution}
 \begin{equation}
   p(x) = \frac{\lambda^{k} x^{k-1} e^{-\lambda x}}{\Gamma(k)}
@@ -172,14 +342,14 @@ with mean $20$ minutes and shape parameter $k=2$.
 queue in less than 10 minutes?
 
 \noindent
-\emph{Answer:} $\ds \textrm{Prob}(t < 10) = \int_0^{10} \ldots \,dx
+\emph{Answer:} $\ds \Pr(t < 10) = \int_0^{10} \ldots \,dx
      = \ldots$
 \item What is the probability that the person is in the queue for
 more than an hour?
 
 \noindent
 \emph{Answer:}
- $\ds \textrm{Prob}(t > 60) = \int_{60}^{\infty} \ldots \,dx
+ $\ds \Pr(t > 60) = \int_{60}^{\infty} \ldots \,dx
      = \ldots$
 
 \item If the person has not left the queue after 20 minutes, what is the
