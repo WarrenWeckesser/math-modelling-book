@@ -531,6 +531,61 @@ The final concise formula for the solution is
 where $C$ is an arbitrary constant.
 \end{xexample}
 %
+\begin{xexample}
+We find the exact solutions to the logistic equation.
+\index{logistic equation}
+Recall that the logistic equation is
+\eqref{eqn:logistic}, which we repeat here:
+\begin{equation}
+  \frac{dp}{dt} = r\left(1-\frac{p}{K}\right)p
+\end{equation}
+We assume that the initial condition is
+\begin{equation}
+   p(0) = p_0 > 0.
+\end{equation}
+Separating gives
+\begin{equation}
+   \frac{dp}{\left(1-\frac{p}{K}\right)p} = r\,dt
+\label{eqn:solve_logistic_separated}
+\end{equation}
+We have assumed that $p\ne 0$ and $p\ne K$.
+In fact, we already know that these are the equilibrium
+solutions; we are now looking for the nonequilibrium solutions.
+
+To integrate the expression on the left
+of \eqref{eqn:solve_logistic_separated}, we use the
+partial fraction expansion
+\begin{equation}
+  \frac{1}{\left(1-\frac{p}{K}\right)P} = \frac{1}{K-P} + \frac{1}{P}
+\end{equation}
+Integrating both sides of \eqref{eqn:solve_logistic_separated}
+gives
+\begin{equation}
+  -\ln|K-p| \,+\, \ln|p| = rt + C_1
+\end{equation}
+
+\noindent
+\emph{More details...?}
+
+\medskip
+\noindent
+We solve for $p$ to find
+\begin{equation}
+  p = \frac{C_2 K e^{rt}}{1+C_2 e^{rt}}
+\end{equation}
+From the initial condition, we find
+\begin{equation}
+  C_2 = \frac{p_0}{K-p_0}
+\end{equation}
+After a little algebra, we find
+\begin{equation}
+  p = \frac{Kp_0}{(K-p_0)e^{-rt} + p_0}
+\end{equation}
+We can use this formula to confirm our earlier analysis:
+\begin{equation}
+  \lim_{t\rightarrow\infty} p(t) = K.
+\end{equation}
+\end{xexample}
 \newpage
 %
 \begin{exercises}
@@ -546,11 +601,12 @@ a constant.
 \end{enumerate}
 \end{exercise}
 \begin{exercise}
-\label{ex:SolveFirstOrderYCubed}
-Solve the following initial value problem.
-\[
-  \frac{dy}{dt} = y^3, \quad y(0)=-2.
-\]
+\label{ex:SolveFirstOrderAut}
+Solve the following initial value problems.
+\begin{enumerate}
+\item[(a)] $\ds \frac{dy}{dt} = y^3, \quad y(0)=-2.$
+\item[(b)] $\ds \frac{dy}{dt} = y^2+1, \quad y(0)=0.$
+\end{enumerate}
 \end{exercise}
 \end{exercises}
 %

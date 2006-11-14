@@ -44,7 +44,6 @@ temperature, and it should cool off. This means $h(t)$ should
 decrease, so $\frac{dh}{dt}$ must be negative.  We assumed
 $k>0$, so the equation requires the minus sign.
 
-
 \medskip
 \textbf{\ref{ex:AutFirstOrder_autclassify}}
 \begin{tabbing}
@@ -102,7 +101,9 @@ A rough sketch of this solution is included above.
 \end{enumerate}
 
 \medskip
-\textbf{\ref{ex:SolveFirstOrderYCubed}}
+\textbf{\ref{ex:SolveFirstOrderAut}}
+\begin{enumerate}
+\item[(a)]
 This equation is separable.  Separating gives
 \[
    y^{-3}dy = dt,
@@ -128,6 +129,23 @@ choose the negative sign.  The solution to the initial value problem is
 \]
 (Note that this solution is only defined for $t < 1/8$.  The
 solution has a vertical asymptote at $t=1/8$.)
+\item[(b)]
+Separate:
+\[
+   \frac{dy}{y^2+1} = dt
+\]
+Integrate:
+\[
+  \arctan(y) = t + C
+\]
+We can use the initial condition $y(0)=0$ at this point to find that
+$C=0$.
+Then solve for $y$:
+\[
+  y = \tan(t)
+\]
+(This solution is only defined for $-\pi/2 < t < \pi/2$.)
+\end{enumerate}
 
 \medskip
 \textbf{\ref{ex:Nondim_lrgmP}}
