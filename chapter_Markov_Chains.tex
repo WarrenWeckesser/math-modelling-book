@@ -830,3 +830,63 @@ The new rules for \emph{Die} are:
 \end{enumerate}
 \end{exercise}
 \end{exercises}
+%
+\newpage
+%
+\section{The Moran Process}\index{Moran process}
+
+We consider a population of two ``species'', $A$ and $B$.
+We consider a process where, in each step, one individual
+in the population ``dies'', and another ``reproduces''.
+
+\noindent
+\emph{yada yada...}
+
+Let $n_A$ be the number of $A$'s in the population.
+The number of $B$'s is then $M-n_A$.
+
+This is an absorbing Markov chain.
+The states $n_A=0$ and $n_A=M$ are the absorbing states.
+
+The probability matrix is (\emph{fix the typesetting!})
+\begin{equation}
+   P = \begin{bmatrix}
+         1 & b_1 & 0 &   & \cdots & 0 \\
+         0 & r_2   & b_2 & 0 &   & \vdots \\
+         0 & a_3 & r_3 & b_3 & 0 \\
+           & \ddots & \ddots & \ddots & \ddots & 0\\
+         0 & & \cdots & 0 & a_N & 1
+       \end{bmatrix}
+\end{equation}
+If we reorder the states so that the absording states
+are first, we have
+\begin{equation}
+   P = \begin{bmatrix}
+          1 & 0 & 0 & \cdots & 0 & \# \\
+          0 & 1 & \# & 0 &\cdots & 0 \\
+          0 & 0 & \# & \# & 0 \cdots & 0\\
+            &   & \# & \# & \# & 0  &  & 0 \\
+            &   & 0  & \# & \# & 0  &  & 0 \\
+          \vdots & \vdots \\
+          0 & 0
+       \end{bmatrix}
+\end{equation}
+In the terminology of the previous section,
+\begin{equation}
+   R = \begin{bmatrix}
+           0 & 0 & \cdots & 0 & \# \\
+           \# & 0 & \cdots & 0 & 0  \\
+       \end{bmatrix}
+\end{equation}
+and $Q$ is the tridiagonal matrix
+\begin{equation}
+   Q = \begin{bmatrix}
+           \# & \# & 0 & & \cdots & & 0 \\
+           \# & \# & \# & 0 & & \\
+           0  & \# & \# & \# & 0 & & \vdots\\
+             & \ddots & \ddots & \ddots & \ddots & \ddots \\
+           \vdots & &  0 &  \#  & \#  &  \#   &   0 \\
+           &  & &      0  & \#  &  \#   &  \# \\
+           0 & & \cdots  & & 0 & \# & \#  
+       \end{bmatrix}
+\end{equation}
