@@ -942,6 +942,7 @@ This means we can replace $S$ in \eqref{eqn:SI_I} with
 $N-I$ to obtain
 \begin{equation}
   \frac{dI}{dt} = r(N-I)I.
+\label{eqn:SI_Ionly}
 \end{equation}
 This is just another version of the logistic equation,
 with carrying capacity $N$.
@@ -1514,7 +1515,7 @@ Solutions to the nondimensional equation are shown
 in Figure~\ref{fig:logisticsolutionsplot}.
 \begin{figure}
 \centerline{%
-\includegraphics[width=4in]{logisticplots2/logisticrhs.eps}
+\includegraphics[width=3.75in]{logisticplots2/logisticrhs.eps}
 %\framebox{%
 %\parbox{5.5in}{%
 %\include{logisticplots2/logisticrhs}
@@ -1526,7 +1527,7 @@ for the nondimensional logistic equation~\eqref{eqn:logisticnondim}.}
 \end{figure}
 \begin{figure}
 \centerline{%
-\includegraphics[width=4in]{logisticplots2/logisticsolutions.eps}
+\includegraphics[width=3.75in]{logisticplots2/logisticsolutions.eps}
 %\framebox{%
 %\parbox{5.5in}{%
 %\include{logisticplots2/logisticsolutions}
@@ -1565,6 +1566,26 @@ The half-life is the time required for a given sample
 of the material to decay to half of the original
 amount.)
 
+\newpage
+%
+\begin{exercises}
+\begin{exercise}
+Repeat the nondimensionalization of the logistic
+equation \eqref{eqn:logistic_again}, but
+nondimensional $P$ by dividing by the initial
+condition $P_0$ instead of $K$.
+\end{exercise}
+\begin{exercise}
+Follow the procedure outlined in this section
+to find the nondimensional version of the
+$SI$ equation \eqref{eqn:SI_Ionly} along
+with the initial condition $I(0)=I_0$.
+(Be careful: the parameter $r$ in equation
+\eqref{eqn:SI_Ionly} does not have the same dimensions
+as the parameter $r$ in the logistic equation
+\eqref{eqn:logistic_again}.)
+\end{exercise}
+\end{exercises}
 
 \newpage
 
