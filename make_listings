@@ -1,11 +1,12 @@
-./mylister scilab/eigenvalues.scilab > scilab/eigenvalues.scilab.tex
+./mylister scilab/eigenvalues.scilab > scilab/eigenvalues.scilab.listing.tex
 ./mylister scilab/SIRvectorfield.sci > scilab/SIRvectorfield.sci.listing.tex
 ./mylister scilab/SIRscript.sce      > scilab/SIRscript.sce.listing.tex
-./mylister matlab/eigenvalues.matlab > matlab/eigenvalues.matlab.tex
+./mylister matlab/eigenvalues.matlab > matlab/eigenvalues.matlab.listing.tex
 ./mylister matlab/SIRvectorfield.m   > matlab/SIRvectorfield.m.listing.tex
 ./mylister matlab/SIRscript.m        > matlab/SIRscript.m.listing.tex
-./mylister python/python_example.eigenvalues   > python/python_example.eigenvalues.tex
+./mylister python/python_example.eigenvalues   > python/python_example.eigenvalues.listing.tex
 ./mylister python/SIRvectorfield.py   > python/SIRvectorfield.py.listing.tex
 ./mylister python/SIRscript.py        > python/SIRscript.py.listing.tex
 expand maxima/maxima_example.firstorderde > maxima/detabbed1
-./mylister maxima/detabbed1           > maxima/maxima_example.firstorderde.tex
+./mylister maxima/detabbed1   > maxima/maxima_example.firstorderde.listing.tex
+rm maxima/detabbed1
