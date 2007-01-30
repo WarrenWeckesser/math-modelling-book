@@ -1,70 +1,256 @@
 %
 \chapter{Linear Algebra}
 %
-\section{Matrices}
+\section{Matrices -- a shorthand notation}
 A \emph{matrix} is an arrangement of numbers into
 a set of rows and columns.  We call a matrix with
 $m$ rows and $n$ columns an $m\times n$ matrix.
 For example,
 \[
-   A = \begin{bmatrix}
+   \MA = \begin{bmatrix}
            1 & 5 & -7 \\ 3 & 0 & 4
        \end{bmatrix}
 \]
-is a $2\times 3$ matrix.
+is a $2\times 3$ matrix.  The entries are referred to using double
+subscripts representing the row and then column for the entry.  Thus
+$\MA_{23}=4$ above.
 %
+Matrices are useful notation when dealing with systems of linear
+equations or with collections of vector quantities.  Each row of
+the matrix can be thought of as a vector with each number representing
+the coordinate for that column's dimension(direction).
+Similarly, each column can be thought of as a vector.  Note that
+the usefulness of these two views depends on the situation and while
+we sometimes switch from the row view to the column view, we rarely
+use both at the same time.
+
+{\bf Multiplication:} Matrix multiplication is a generalization of the dot product operation 
+on vectors.  Each row of the first matrix is combined with each column
+of the second matrix via the dot product to give one number in the resulting
+product matrix.
+For example, (bold face variables represent matrices arrows represent vectors)
+\[
+   \begin{array}{c}
+     2x+3y=5 \\ 4x-6y=3
+   \end{array}
+   \Leftrightarrow
+   \begin{bmatrix}
+      2 & 3 \\ 4 & -6
+   \end{bmatrix}
+   \cdot
+   \begin{bmatrix}
+      x \\ y
+   \end{bmatrix}
+    =
+   \begin{bmatrix}
+      5 \\ 3
+   \end{bmatrix}
+   \Leftrightarrow
+   \MA\BX = \BZero
+\]
+Note that in general, order matters for matrix multiplication:  
+$\MA\MB \neq \MB\MA$ for many $\MA$ and $\MB$.
+For this reason, we distinguish premultiplication and postmultiplication.
+Also for this reason, division cannot use the standard fraction notation.
+Instead we use negative powers (called the inverse) to represent division.
+
+In the special case where a matrix $\MA$ multiplies a vector,
+the result is a linear combination of the columns of the matrix $\MA$.
+\[
+   \begin{bmatrix}
+      2 & 3 \\ 4 & -6
+   \end{bmatrix}
+   \cdot
+   \begin{bmatrix}
+      x \\ y
+   \end{bmatrix}
+    =
+   x
+   \begin{bmatrix}
+      2 \\ 4
+   \end{bmatrix}
+   +y
+   \begin{bmatrix}
+      3 \\ -6
+   \end{bmatrix}
+\]
+One can think of this as addition of vectors.  The resulting vector must have the
+same dimension ($m=2$ in this case) as the vectors we are taking the linear combination of.  
+Since the coefficients in the linear combination are arbitrary, the result is arbitrary.
+But for some matrices, the dimension of the resulting linear combination is less 
+than $m$.  This occurs when one column of the matrix can be written as a linear combination
+of the others.  The collection of all possible vectors resulting from multiplication
+of an arbitrary column vector $\BX$ by a matrix $\MA$ is the \emph{ Row Space} of $\MA$.
+Similarly, multiplying $\MA$ by a row vector $\BX$ results in a set of vectors
+called the \emph{ Column Space} of $\MA$.  Matrix theory ensures that the dimension
+of the row space and column space for any matrix are the same and that number is called
+the \emph{ rank} of the matrix.  The rank $r$ of $\MA$ is the effective number of 
+independent equations represented by the matrix $\MA$.  Note that $r\leq m$.
+
+As an example, the rank of the following matrices are 1, 2 and 2 respectively.
+\[
+   \begin{bmatrix}
+      2 & 3 \\ 4 & 6
+   \end{bmatrix}
+   \quad
+   \begin{bmatrix}
+      2 & 3 \\ 4 & -6
+   \end{bmatrix}
+   \quad
+   \begin{bmatrix}
+      2 & 3 & 4 \\ 4 & 6 & 7 \\ 6 & 9 & 11
+   \end{bmatrix}
+\]
+This can be seen by noting that in the first matrix, the second row is a multiple of
+the first.  Thus the second equation in $\MA \BX$ would not be independent of the first.
+The second matrix generates two independent equations. 
+The third matrix has its third row being the sum of the first two.
 
 \medskip
 \noindent
-\emph{To do:} Matrix multiplication, basic facts, identity matrix,
-determinants, etc.
+{\bf Special Matrices:} 
+Addition of matrices involves the sum of elements componentwise.
+Some special matrices involve the identity under addition and multiplication.
+Thus we define $\MZero$ to be the matrix of zeros and $\MA+\MZero=\MA$ for all $\MA$.
+Using our notion of multiplication, we note that a matrix ($\MI$ of zeros with ones down
+the main (left to right, up to down) diagonal ensures $\MA\MI=\MI\MA=\MA$ for all $\MA$.
+The zero matrix $\MZero$ and the identity matrix $\MI$ are particularly important matrices.
+
+\medskip
+\noindent
+{\bf Inverse:}
+The {\emph inverse} of a square matrix $\MA$ is the matrix by which you can multiply to
+obtain the identity $\MI$.  Denoting the inverse $\MA^{-1}$, we have $\MA^{-1}\MA=\MI$.
+It is important to note that just as the number $0$ has no multiplicative inverse, there
+are matrices with no inverse.  Many matrix properties are equivalent to having an inverse.
+For example, if the rank $r$ is the size of $\MA$, ($r=n$) then $\MA$ has an inverse (is invertible).
+A matrix that has no inverse is called a {\emph singular} matrix.
+
+\medskip
+\noindent
+{\bf Determinant:}
+A common matrix property that is used to determine whether a matrix is invertible
+is called the determinant.  The determinant is a function of all the elements of $\MA$
+which produces a single number.  That number is $0$ precisely when $\MA$ has no inverse.
+This is because, generally, you must divide by the determinant to obtain the inverse.
+Unfortunately the determinant is defined recursively, breaking up the matrix into smaller
+and smaller pieces.  For n=1,2, or 3 there are geometric patterns involving the diagonals 
+of $\MA$ to help in this process but for larger matrices no such simple patterns exist.
+
+Let $|\MA|_{ij}$ be the determinant of the martrix obtained by removing 
+the $i^{th}$ row and $j^{th}$ column from $\MA$.  Define the determinant of a $1\times 1$
+matrix be the value of its single entry.  Then the determinant $\det\p{\MA}$ is defined
+to be 
+\[
+  \det\p{\MA} = \sum_{j=1}^{n} (-1)^{j+1} \MA_{1j}|\MA|_{1j}
+\]
+
+For the $2\times 2$ case, we have $\det\p{\MA} = \MA_{11} \MA_{22} - \MA_{12}\MA_{21}$.
+You will notice that this is the product along the main diagonal minus the product
+of the off diagonal (upper left to lower right).
+
+The $3\times 3$ case is only slightly more complicated.  Here, we envision diagonals
+wrapping around the right and left edges of the matrix and reappearing on the other side.
+Thus there are three right moving diagonals and three left moving diagonals.  The determinant
+is the sum of products along the right moving diagonals minus the sum of products along the 
+left moving diagonals.  For example,
+\[
+  \det\p{\begin{bmatrix} a & b & c \\ d & e & f \\ g & h & i \end{bmatrix}}=
+  (aeh+bfg+cdh)-(ceg+bdi+afh).
+\]
+
+Remember that no such simple method works for larger matrices.  Also that
+the determinant is zero if and only if the matrix has an inverse.
+
+\medskip
+\noindent
+{\bf Trace:}
+A second property of matrices which does not predict whether a matrix is invertible, but
+is useful nevertheless is called the {\emph trace}.  The trace $Tr\p{\MA}$ is the sum of
+the main diagonal entries.  It is useful because its value does not change if you change
+the coordinate system in which you specify your vectors (and thus coliummns and rows of $\MA$).
+
 %
 \section{Eigenvalues and Eigenvectors\index{eigenvalue}\index{eigenvector}}
 %
+Matrix multiplication transforms vectors, producing new vectors in the 
+same dimensional space.  
+One important way to describe how this process occurs is to find special
+vectors for which the transformation is very simple.  The transformation of
+other vectors can then be stated in terms of the effect on these special
+vectors.  Eigenvectors are vectors for which the transformation is a simple
+stretching.  That is, they transform to a multiple of themselves.  This multiple
+measures the stretching $\MA$ provides in that direction and is called the
+eigenvalue associated with that eigenvector.
+
 The \emph{eigenvalue problem}\index{eigenvalue problem}
 for an $n \times n$ matrix $A$
-is the problem of finding a number $\lambda$ and a nonzero vector $\BV$
-such that
+is the problem of finding the \emph{eigenvalue} $\lambda$ and the associated 
+\emph{eigenvector} $\BV$ such that
 \begin{equation}
     A\BV = \lambda \BV.
     \label{eqn:EIGVALPROB}
 \end{equation}
-The number $\lambda$ is called an \emph{eigenvalue}, 
-and the vector $\BV$ is called an \emph{eigenvector}
-associated with the eigenvalue $\lambda$.
 Note that if $\BV$ is an eigenvector associated with
-$\lambda$, then so is $c\BV$ for any nonzero constant
-$c$.
-The set of all such vectors, augmented with the zero
+$\lambda$, then so is $c\BV$ for any nonzero constant $c$.
+So there is a family of such eigenvectors all pointing along
+the same straight line.  This set of vectors, augmented with the zero
 vector, is called the \emph{eigenspace}\index{eigenspace}
-associated with the eigenvalue $\lambda$.
+associated with the eigenvalue $\lambda$.  Generally one
+representative of the family (often with unit length) is
+chosen as the eigenvector of interest.
 
-We can rewrite \eqref{eqn:EIGVALPROB} as
+To solve \eqref{eqn:EIGVALPROB} we rewrite it as
 \begin{equation}
-   \left(A - \lambda I\right) \BV = \BZero.
+   \left(A - \lambda I\right) \BV = \BZero,
 \end{equation}
+and note that if the matrix $A-\lambda I$ has an inverse, 
+then multiplying both sides by it yields $\BV=\BZero$.
 Because we insist that eigenvectors be nonzero,
-this equation can give us eigenvectors only if
-the matrix $A-\lambda I$ is \emph{singular}.
-We know that a matrix is singular if and only if
-its determinant is zero, so the equation that determines
-the eigenvalues is
+the matrix $A-\lambda I$ must be \emph{singular} and thus
 \begin{equation}
    \det\left(A-\lambda I\right) = 0.
    \label{eqn:CHAREQN}
 \end{equation}
-The polynomial $\det\left(A-\lambda I\right)$ is called
+The $n^{th}$ order polynomial in $\lambda$ on the left hand side is called
 the \emph{characteristic polynomial}\index{characteristic polynomial}
 of $A$, and
 \eqref{eqn:CHAREQN} is 
 called the \emph{characteristic equation}\index{characteristic equation}.
+The roots of this polynomial are the eigenvalues of $\MA$.
+Once we find the eigenvalues of $\MA$ we can plug each one into \eqref{eqn:CHAREQN}
+and solve for the associated eigenvector.  Usually there are $n$ eigenvalues and
+$n$ eigenvectors, though some trouble may arise if \eqref{eqn:CHAREQN} has roots
+of multiplicity greater than one.  Those eigenvalues are also said to have multiplicity
+greater than one and there may be fewer eigenvectors in that case.  Generalized
+eigenvectors can be defined and constructed in such cases to bring the total
+number of eigenvectors to $n$ and the result is a \emph{basis} (the unit vectors
+of a coordinate system) for $n$ dimensional space.
+
+Switching coordinate systems from the original standard basis to the eigenvector
+basis is extremely powerful because the transformation of multiplying by $\MA$ 
+is then written as a diagonal matrix (or almost diagonal in the case of generalized 
+eigenvectors).  This diagonal matrix is called the Jordan Form for $\MA$.  The 
+values on the diagonal are precisely the eigenvalues of $\MA$.  The coordinate
+switch is acheived by forming a matrix whose columns are the eigenvectors of $\MA$.
+Let $\MS$ be such a matrix.  Then in the new coordinate system the action of multiplying
+by $\MA$ is given by $\MD=\MS^{-1}\MA\MS$ which is a diagonal matrix (unless generalized
+eigenvectors had to be used to form $\MS$).
+
+Two helpful properties of $\MA$ which do not change under a coordinate transformation
+are the determinant and the trace.  This is sometimes helpful in finding eigenvalues because
+the determinant is the product of the eigenvalues and the trace is the sum:
+\[
+  \det\p{\MA} = \Pi_{i=1}^n \lambda_i  \quad \mbox{ and } \quad Tr\p{\MA}=\sum_{i=1}^n \lambda_i.
+\]
+
 %
-\newpage
+%\newpage
 %
 \section{Shortcuts for $2\times 2$ Matrices}
 In this section, we give
 some shortcuts for finding the inverse of and the eigenvectors of $2\times 2$ matrices.
-
+%
 Let
 \[
    A = \begin{bmatrix}
@@ -73,8 +259,8 @@ Let
 \]
 
 \noindent
-\textbf{Inverse.}
-You can easily check that the inverse is
+\textbf{Inverse:}
+You can check through multiplying that the inverse is
 \[
    A^{-1} = \frac{1}{\det A}\begin{bmatrix}
                                d & -b \\ -c & a
@@ -97,69 +283,38 @@ So to find the inverse of a $2x2$ matrix,
 \end{xexample}
 
 \noindent
-\textbf{Eigenvalues and eigenvectors.}
-To find the eigenvalues of $A$, we must solve
+{\bf Eigenvalues and eigenvectors:}
+To find the eigenvalues of $A$, we solve
 $\det(A-\lambda I)=0$ for $\lambda$.
-% (The expression $\det(A-\lambda I)$ is called
-% the \emph{characteristic polynomial}.)
 We have
 \[
 \begin{split}
    \det(A-\lambda I) & = (a-\lambda)(d-\lambda)-bc \\
                      & = \lambda^2-(a+d)\lambda + (ad-bc) \\
-		     & = \lambda^2 - \textrm{Tr(A)}\lambda + \det(A)
+		     & = \lambda^2 - \textrm{Tr(A)}\lambda + \det(A).
 \end{split}
 \]
-where $\textrm{Tr(A)} = a+d$ is the \emph{trace} of $A$.
-(The trace of a square matrix is the sum of the diagonal elements.)
-Then the eigenvalues are found by using the quadratic
-formula, as usual.
+The eigenvalues are found by using the quadratic
+formula, resulting in two solution $\lambda_1$ and $\lambda_2$.
 
-Now consider the problem of finding the eigenvectors
+Let's find the eigenvectors
 for the eigenvalues $\lambda_1$ and $\lambda_2$.
-An eigenvector associated with $\lambda_1$ is a nontrivial
+The eigenvector associated with $\lambda_1$ is a nontrivial
 solution $\BV_1$ to
 \begin{equation}
-    (A-\lambda_1 I)\BV = \BZero.
+    (A-\lambda_1 I)\BV_1 = \BZero.
 \label{eqn:eigvec}
 \end{equation}
-Now
-\[
-   A - \lambda_1 I = \begin{bmatrix}
-                           a-\lambda_1 & b \\
-			   c & d-\lambda_1
-                     \end{bmatrix}
-\]
-The matrix $A-\lambda_1 I$ \emph{must} be singular.
-That is precisely what makes $\lambda_1$ an eigenvalue.
-If a $2\times 2$ matrix is singular, the second
-row \emph{must} be a multiple of the first row (unless
-the first row is zero).  Therefore, we know that putting
-$A-\lambda_1 I$ into row echelon form must result in
-a row of zeros.  Since we know this must be the case,
-there is no need to actually do it!  All we need to
-find an eigenvector is the first row.
-In particular, if $\BV = [v_1,v_2]^{\textsf{T}}$,
-then \eqref{eqn:eigvec} implies
+But $(A-\lambda_1 I)$ was chosen to be singular, so the second row must
+be a multiple of the first.  Using only the first row of 
+\eqref{eqn:eigvec} we find 
 \begin{equation}
-  (a-\lambda_1)v_1 + b v_2 = 0.
+  (a-\lambda_1)v_1 + b v_2 = 0,
 \label{eqn:eigveceqn}
 \end{equation}
-We could solve this for, say, $v_2$ in terms of $v_1$,
-and give all the possible eigenvectors in terms of
-the arbitrary parameter $v_1$. (This is the
-\emph{eigenspace} associated with the eigenvalue $\lambda_1$.)
-However,
-% for the
-% purpose of solving a system of differential equations,
-often
-all we need is \emph{one} eigenvector from this space.
-(More precisely, we want a \emph{basis} for the eigenspace.)
+where $\BV = [v_1,v_2]^{\textsf{T}}$.
 An easy solution to \eqref{eqn:eigveceqn}
-is $v_1=-b$ and $v_2 = (a-\lambda_1)$.
-Thus (unless $(a-\lambda_1)$ and $b$ both happen to be
-zero), once we write down the matrix $A-\lambda_1 I$,
-we can immediately obtain the eigenvector
+is $v_1=-b$ and $v_2 = (a-\lambda_1)$ so that
 \[
    \BV_1 = \begin{bmatrix} -b \\ a-\lambda_1 \end{bmatrix}
 \]
@@ -191,7 +346,7 @@ Now we'll find an eigenvector for each eigenvalue.
 
 \medskip
 \noindent
-\underline{$\lambda_1 = -5$}
+\underline{$\lambda_1 = -5$:}
 \[
    A-\lambda_1 I = \begin{bmatrix}
                    6 & 2 \\ 3 & 1
@@ -203,26 +358,24 @@ above, we can immediately find one eigenvector to be
 \[
    \BV_1 = \begin{bmatrix} -2 \\ 6 \end{bmatrix}
 \]
-Of course, since any nonzero multiple of an eigenvector
-is also an eigenvector, we could also choose
-\[
-   \BV_1 = \begin{bmatrix} -1 \\ 3 \end{bmatrix}
-\]
 
 \medskip
 \noindent
-\underline{$\lambda_2 = 2$}
+\underline{$\lambda_2 = 2$:}
 \[
   A - \lambda_2 I = \begin{bmatrix}
                       -1 & 2 \\ 3 & -6
                     \end{bmatrix}
 \]
-In this case, a possible eigenvector is
+In this case, an eigenvector is
 \[
   \BV_2 = \begin{bmatrix} -2 \\ -1 \end{bmatrix}
 \]
-or, if we want to minimize the number of minus signs,
+Of course, since any nonzero multiple of an eigenvector
+is also an eigenvector, we could also choose
 \[
+   \BV_1 = \begin{bmatrix} -1 \\ 3 \end{bmatrix}
+  \quad \mbox{ and } \quad
   \BV_2 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}
 \]
 \end{xexample}
@@ -260,12 +413,12 @@ immediately write down the eigenvector
 \[
   \BV_1 = \begin{bmatrix} 3 \\ -2-2\sqrt{2}\, i \end{bmatrix}
 \]
-(If we were solving a system of differential equations, we would
-then want to express $\BV_1$ as
-\[
-   \BV_1 = \begin{bmatrix} 3 \\ -2 \end{bmatrix}
-           + i \begin{bmatrix} 0 \\ -2\sqrt{2} \end{bmatrix}
-\]
-so $\BA = \begin{bmatrix} 3 \\ -2\end{bmatrix}$
-and $\BB = \begin{bmatrix} 0 \\ -2\sqrt{2} \end{bmatrix}$.)
+%(If we were solving a system of differential equations, we would
+%then want to express $\BV_1$ as
+%\[
+%   \BV_1 = \begin{bmatrix} 3 \\ -2 \end{bmatrix}
+%           + i \begin{bmatrix} 0 \\ -2\sqrt{2} \end{bmatrix}
+%\]
+%so $\BA = \begin{bmatrix} 3 \\ -2\end{bmatrix}$
+%and $\BB = \begin{bmatrix} 0 \\ -2\sqrt{2} \end{bmatrix}$.)
 \end{xexample}
