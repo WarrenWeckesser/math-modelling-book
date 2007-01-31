@@ -167,15 +167,15 @@ For example, suppose a person contracts an
 infectious disease. We can model the length
 of time that the persion is sick as a random
 variable.  The event space is the set of nonnegative
-real numbers, $\mathbb{R^{0+}}$.
-Let $A \subset \mathbb{R^{0+}}$ be the interval
+real numbers, $\PosReal$.
+Let $A \subset \PosReal$ be the interval
 $[1,2]$.
 Then $\Pr(A)$ is the probability that the
 time $t$ at which the person
 recovers is in the interval $[1,2]$.
 
 Suppose $B = \{1\}$.  That is, $B$ is the subset
-of $\mathbb{R}^{0+}$ that contains just the single
+of $\PosReal$ that contains just the single
 number $1$.
 $\Pr(B)$ is the probability that the person
 recovers at \emph{exactly} $t=1$.
@@ -187,10 +187,10 @@ recovers during the time interval $[1,2]$.
 
 A standard way to define a function $\Pr$ on 
 a continuous event space such as $\mathbb{R}$
-or $\mathbb{R}^{0+}$ is by using an
+or $\PosReal$ is by using an
 \emph{integral}.
 Suppose $p(t)$ is a function defined on
-$\mathbb{R}^{0+}$ with the following properties.
+$\PosReal$ with the following properties.
 \begin{enumerate}
 \item $p(t) \ge 0$ for all $t \ge 0$.
 \item for any $0 \le a \le b$,
@@ -201,7 +201,7 @@ hold.)
 \item $\int_0^{\infty} p(t)\,dt = 1$.
 \end{enumerate}
 Let $I$ be the interval $[a,b]$, where $a$
-and $b$ are in $\mathbb{R}^{0+}$, and $a \le b$.
+and $b$ are in $\PosReal$, and $a \le b$.
 We define
 \begin{equation}
   \Pr(A) = \int_a^b p(t)\,dt.
@@ -211,7 +211,7 @@ we have
 \begin{equation}
   \Pr([0,\infty)) = \int_0^{\infty} p(t)\,dt = 1.
 \end{equation}
-Since $\mathbb{R}^{0+} = [0,\infty) = \mathcal{E}$,
+Since $\PosReal = [0,\infty) = \mathcal{E}$,
 the previous equation
 is the property $\Pr(\mathcal{E})=1$ that
 we require of the function $\Pr$.
