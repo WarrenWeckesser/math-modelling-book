@@ -77,15 +77,17 @@ the result is a linear combination of the columns of the matrix $\MA$.
 One can think of this as addition of vectors.  The resulting vector must have the
 same dimension ($m=2$ in this case) as the vectors we are taking the linear combination of.  
 Since the coefficients in the linear combination are arbitrary, the result is arbitrary.
-But for some matrices, the dimension of the resulting linear combination is less 
-than $m$.  This occurs when one column of the matrix can be written as a linear combination
-of the others.  The collection of all possible vectors resulting from multiplication
-of an arbitrary column vector $\BX$ by a matrix $\MA$ is the \emph{ Row Space} of $\MA$.
-Similarly, multiplying $\MA$ by a row vector $\BX$ results in a set of vectors
-called the \emph{ Column Space} of $\MA$.  Matrix theory ensures that the dimension
+Even so, if we consider all possible results, they may lie in a smaller dimensional space 
+then $m$.  
+This occurs when either 1) there are more columns than  rows ($m<n$) or 
+2) when some row of $\MA$ can be written as a linear combination of others.
+The collection of all possible vectors resulting from premultiplication
+of an arbitrary column vector $\BX$ by a matrix $\MA$ is the \emph{Column Space} of $\MA$.
+Similarly, premultiplying $\MA$ by a row vector $\BX$ results in a set of vectors
+called the \emph{Row Space} of $\MA$.  Matrix theory ensures that the dimension
 of the row space and column space for any matrix are the same and that number is called
 the \emph{ rank} of the matrix.  The rank $r$ of $\MA$ is the effective number of 
-independent equations represented by the matrix $\MA$.  Note that $r\leq m$.
+independent equations represented by $\MA\BX$.  Note that $r\leq m$ and $r\leq n$.
 
 As an example, the rank of the following matrices are 1, 2 and 2 respectively.
 \[
@@ -112,19 +114,19 @@ The third matrix has its third row being the sum of the first two.
 Addition of matrices involves the sum of elements componentwise.
 Some special matrices involve the identity under addition and multiplication.
 Thus we define $\MZero$ to be the matrix of zeros and $\MA+\MZero=\MA$ for all $\MA$.
-Using our notion of multiplication, we note that a matrix ($\MI$ of zeros with ones down
-the main (left to right, up to down) diagonal ensures $\MA\MI=\MI\MA=\MA$ for all $\MA$.
+For multiplication, we define the matrix ($\MI$) of mostly zeros except for ones down
+the main diagonal (left to right, up to down). This ensures $\MA\MI=\MI\MA=\MA$ for all $\MA$.
 The zero matrix $\MZero$ and the identity matrix $\MI$ are particularly important matrices.
 
 \medskip
 \noindent
 {\bf Inverse:}
-The {\emph inverse} of a square matrix $\MA$ is the matrix by which you can multiply to
-obtain the identity $\MI$.  Denoting the inverse $\MA^{-1}$, we have $\MA^{-1}\MA=\MI$.
-It is important to note that just as the number $0$ has no multiplicative inverse, there
-are matrices with no inverse.  Many matrix properties are equivalent to having an inverse.
-For example, if the rank $r$ is the size of $\MA$, ($r=n$) then $\MA$ has an inverse (is invertible).
-A matrix that has no inverse is called a {\emph singular} matrix.
+The \emph{inverse} of a square matrix $\MA$ is the matrix by which you can multiply to
+obtain the identity $\MI$.  Denoting the inverse $\MA^{-1}$, we have $\MA^{-1}\MA=\MA\MA^{-1}=\MI$.
+It is important to note that just as the number $0$ has no multiplicative inverse, 
+some matrices have no inverse.  Many matrix properties are equivalent to having an inverse.
+For example, if $r=n$ (the rank is the size of $\MA$) then $\MA$ has an inverse (is invertible).
+A matrix that has no inverse is called a \emph{singular} matrix.
 
 \medskip
 \noindent
@@ -132,12 +134,12 @@ A matrix that has no inverse is called a {\emph singular} matrix.
 A common matrix property that is used to determine whether a matrix is invertible
 is called the determinant.  The determinant is a function of all the elements of $\MA$
 which produces a single number.  That number is $0$ precisely when $\MA$ has no inverse.
-This is because, generally, you must divide by the determinant to obtain the inverse.
-Unfortunately the determinant is defined recursively, breaking up the matrix into smaller
+This is because generally you divide by the determinant to obtain the inverse.
+Unfortunately, the determinant is defined recursively by breaking up the matrix into smaller
 and smaller pieces.  For n=1,2, or 3 there are geometric patterns involving the diagonals 
-of $\MA$ to help in this process but for larger matrices no such simple patterns exist.
+of $\MA$ to help in computation but for larger matrices no such simple patterns exist.
 
-Let $|\MA|_{ij}$ be the determinant of the martrix obtained by removing 
+Let $|\MA|_{ij}$ be the determinant of the matrix obtained by removing 
 the $i^{th}$ row and $j^{th}$ column from $\MA$.  Define the determinant of a $1\times 1$
 matrix be the value of its single entry.  Then the determinant $\det\p{\MA}$ is defined
 to be 
@@ -156,19 +158,19 @@ is the sum of products along the right moving diagonals minus the sum of product
 left moving diagonals.  For example,
 \[
   \det\p{\begin{bmatrix} a & b & c \\ d & e & f \\ g & h & i \end{bmatrix}}=
-  (aeh+bfg+cdh)-(ceg+bdi+afh).
+  (aei+bfg+cdh)-(ceg+bdi+afh).
 \]
-
-Remember that no such simple method works for larger matrices.  Also that
+%
+Remember that no such pattern of diagonals works for larger matrices, and also that
 the determinant is zero if and only if the matrix has an inverse.
 
 \medskip
 \noindent
 {\bf Trace:}
 A second property of matrices which does not predict whether a matrix is invertible, but
-is useful nevertheless is called the {\emph trace}.  The trace $Tr\p{\MA}$ is the sum of
+is useful nevertheless is called the \emph{trace}.  The trace $Tr\p{\MA}$ is the sum of
 the main diagonal entries.  It is useful because its value does not change if you change
-the coordinate system in which you specify your vectors (and thus coliummns and rows of $\MA$).
+the coordinate system in which you specify your vectors (and in turn the columns and rows of $\MA$).
 
 %
 \section{Eigenvalues and Eigenvectors\index{eigenvalue}\index{eigenvector}}
@@ -177,7 +179,7 @@ Matrix multiplication transforms vectors, producing new vectors in the
 same dimensional space.  
 One important way to describe how this process occurs is to find special
 vectors for which the transformation is very simple.  The transformation of
-other vectors can then be stated in terms of the effect on these special
+general vectors can then be stated in terms of these special
 vectors.  Eigenvectors are vectors for which the transformation is a simple
 stretching.  That is, they transform to a multiple of themselves.  This multiple
 measures the stretching $\MA$ provides in that direction and is called the
@@ -203,16 +205,17 @@ chosen as the eigenvector of interest.
 To solve \eqref{eqn:EIGVALPROB} we rewrite it as
 \begin{equation}
    \left(A - \lambda I\right) \BV = \BZero,
+   \label{eqn:EIGVALPROB2}
 \end{equation}
 and note that if the matrix $A-\lambda I$ has an inverse, 
-then multiplying both sides by it yields $\BV=\BZero$.
+then multiplying both sides of \eqref{eqn:EIGVALPROB2} by that inverse yields $\BV=\BZero$.
 Because we insist that eigenvectors be nonzero,
 the matrix $A-\lambda I$ must be \emph{singular} and thus
 \begin{equation}
    \det\left(A-\lambda I\right) = 0.
    \label{eqn:CHAREQN}
 \end{equation}
-The $n^{th}$ order polynomial in $\lambda$ on the left hand side is called
+The left hand side is an $n^{th}$ order polynomial in $\lambda$ called
 the \emph{characteristic polynomial}\index{characteristic polynomial}
 of $A$, and
 \eqref{eqn:CHAREQN} is 
@@ -224,20 +227,20 @@ $n$ eigenvectors, though some trouble may arise if \eqref{eqn:CHAREQN} has roots
 of multiplicity greater than one.  Those eigenvalues are also said to have multiplicity
 greater than one and there may be fewer eigenvectors in that case.  Generalized
 eigenvectors can be defined and constructed in such cases to bring the total
-number of eigenvectors to $n$ and the result is a \emph{basis} (the unit vectors
-of a coordinate system) for $n$ dimensional space.
+number of eigenvectors to $n$ and the resulting collection of eigenvectors is 
+a \emph{basis} (the unit vectors of a coordinate system) for $n$ dimensional space.
 
 Switching coordinate systems from the original standard basis to the eigenvector
 basis is extremely powerful because the transformation of multiplying by $\MA$ 
-is then written as a diagonal matrix (or almost diagonal in the case of generalized 
-eigenvectors).  This diagonal matrix is called the Jordan Form for $\MA$.  The 
+is then a diagonal matrix (or almost diagonal in the case of generalized 
+eigenvectors) called the Jordan Form for $\MA$.  The 
 values on the diagonal are precisely the eigenvalues of $\MA$.  The coordinate
-switch is acheived by forming a matrix whose columns are the eigenvectors of $\MA$.
+switch is achieved by forming a matrix whose columns are the eigenvectors of $\MA$.
 Let $\MS$ be such a matrix.  Then in the new coordinate system the action of multiplying
 by $\MA$ is given by $\MD=\MS^{-1}\MA\MS$ which is a diagonal matrix (unless generalized
 eigenvectors had to be used to form $\MS$).
 
-Two helpful properties of $\MA$ which do not change under a coordinate transformation
+Two properties of $\MA$ which do not change under a coordinate transformation
 are the determinant and the trace.  This is sometimes helpful in finding eigenvalues because
 the determinant is the product of the eigenvalues and the trace is the sum:
 \[
