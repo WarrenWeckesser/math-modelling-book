@@ -697,12 +697,83 @@ a stable equilibrium.
 (Different parameters values may lead to different
 conclusions.)
 
-% \begin{exercises}
-% \begin{exercise}
-% An exercise...
-% \end{exercise}
-% \end{exercises}
-%
+\begin{exercises}
+\begin{exercise}
+For each of the following predator-prey systems, identify which dependent
+variable $x$ or $y$ is the prey population and which is the predator
+population.  Is the growth of the prey limited by any factors other 
+than the number of predators?  Do the predators have sources of food
+other than prey? (Assume that the parameters $\alpha$, $\beta$,
+$\gamma$, $\delta$, and $N$ are all positive.)
+
+\parbox{2.5in}{
+\begin{enumerate}
+\item $$ {dx\over dt} = -\alpha x +\beta x y$$
+ $$ {dy\over dt} = \gamma y - \delta x y$$ 
+\end{enumerate} }
+\hfill
+\parbox{3.0in}{
+\begin{enumerate}
+\item[b)] $$ {dx\over dt} = \alpha x -\alpha{x^2\over N}-\beta x y$$
+ $$ {dy\over dt} = \gamma y + \delta x y$$ 
+\end{enumerate}}
+\end{exercise}
+
+\begin{exercise}
+  Perform a scaling analysis for the competitive species
+model presented in class.  Transform the equations:
+$$ {dR\over dt} = a R  - b R^2 - c RS$$
+$$ {dS\over dt} = d S  - e S^2 - f RS$$
+by scaling the variables and leaving parameters in front
+of the cross terms and a single parameter in front of the
+entire right hand side of the second equation:
+$$ {du\over d\tau} = u - u^2 - \alpha uv $$
+$$ {dv\over d\tau} = r\left(v - v^2 - \beta uv\right) $$
+\end{exercise}
+
+
+\begin{exercise}
+Consider the following special case of the above model 
+$$ {dx\over dt} = x - x^2 - 3.2 xy $$
+$$ {dy\over dt} = 2(y - y^2 - 2.5 xy) $$
+Use a Phase Plane Plotter (for example 
+http://www.math.psu.edu/melvin/phase/newphase.html 
+)
+to display the phase plane portrait for this system.
+Choose an appropriate window (scale of axes) to display the 
+dynamics of the system.  The window should include all steady
+state points and show their interaction using nearby trajectories.
+Draw enough trajectories to make the long term behavior clear.  
+Print the graph and label the trajectories with arrows indicating 
+the direction they are traversed in time.
+
+Explain in a paragraph the long term behavior of this system.
+What does the model predict as the long term effect of 
+competition for food?
+\end{exercise}
+\begin{exercise}
+The following questions involve the generalized Lotka-Volterra model:
+$$ \dot{x} = r_1 x + a_{11}x^2 + a_{21} xy $$
+$$ \dot{y} = r_1 y + a_{22}y^2 + a_{12} xy $$
+
+\begin{enumerate}
+\item Examine the model and identify the meaning
+of the parameters $r_1$, $r_2$, $a_{11}$, $a_{12}$, $a_{21}$, $a_{22}$
+in terms of species interaction and growth for a model of two species.
+
+\item Reinterpret the parameters for the same equations as a model
+of the arms race.  What do $x$ and $y$ represent?
+
+\item Reinterpret these parameters for the same equations as a model
+of warfare.  What do $x$ and $y$ represent?
+
+\item Reinterpret these parameters for the same equations as a model 
+of competition between marketing departments for two consumer goods
+manufacturers.
+\end{enumerate}
+\end{exercise}
+\end{exercises}
+
 \newpage
 %
 \section{Battle of Attrition--The Lanchester Model}
@@ -946,6 +1017,29 @@ How large can the pre-reinforcement losses be before
 the reinforcement will not be enough to win the main battle?
 \end{enumerate}
 \end{exercise}
+\begin{exercise}
+We can use a Lanchester style model to analyze guerilla warfare.
+Let $x$ be the number of guerilla troops and $y$ be the number of
+conventional troops in a combat region.  We'll neglect "operational
+losses" (self-crowding) and reinforcements.  The proposed model is
+$$ \dot{x} = -axy  \hspace{3cm}  \dot{y}= -bx $$
+%
+\begin{enumerate}
+\item Discuss the assumptions and relationships necessary to justify
+the model.  Does the model seem reasonable? Could it describe what 
+is happening in Iraq?  Afghanistan?
+\item Find the steady states of the model.  What do these points represent
+for the combat situation?  Is there any way the combat could end without
+tending toward a steady state?
+\item This model is simple enough that we can
+find the trajectories without linearizing about the steady states.
+Find an equation for the slope $dy/dx$ of the trajectory at each point.
+\item Integrate this relationship to find the equation for each trajectory.
+What determines the constant of integration?
+\item Determine the separatrix (curve in the first quadrant) that separates 
+trajectories for which the guerillas win from those where the conventional forces win.
+\end{enumerate}
+\end{exercise}
 \end{exercises}
 %
 \newpage
@@ -953,6 +1047,25 @@ the reinforcement will not be enough to win the main battle?
 \section{Arms Race}
 %
 \section{Romeo and Juliet\index{Romeo}\index{Juliet}}
+\begin{exercises}
+  \begin{exercise}
+    Examine the Love Model where Romeo and Juliet are romatic clones:
+$$
+\begin{array}{c}
+   {dR\over dt} = aR+bJ
+   \\
+   {dJ\over dt} = bR+aJ
+\end{array}
+$$
+for some constants $a$ and $b$.  Should they expect 
+boredom (neither cares for the other) 
+sorrow (one loves but the other doesn't)
+or bliss (either both hate or both love)?
+Considering $b>0$ and any value for $a$ and the initial conditions,
+examine all possible outcomes.
+  \end{exercise}
+\end{exercises}
+
 \section{Laura and Petrarch\index{Laura}\index{Petrarch}}
 
 \begin{exercises}
@@ -1093,6 +1206,40 @@ first order differential equation.
 Find the solution to the equation.
 \end{enumerate}
 \end{exercise}
+
+\begin{exercise}
+From your own experience, knowledge, and creativity, describe
+how disease (say caused by a virus) is spread through a population?  
+What mechanisms of transfer are possible?  What pattern of infection 
+would you expect in the US? (which states early, which later...  
+urban vs rural) How do airplanes affect the pattern of the spread?
+\end{exercise}
+
+\begin{exercise}
+From your own experience, knowledge, and creativity, describe
+how revolutionary ideas spread through a population?  What mechanisms 
+of transfer are possible?  What pattern of support would you expect in
+the US? (which states early, which later...  urban vs rural)
+How did the rise of the modern mass media (TV, radio) affect the spread?
+How do telephones, FAXes and the Internet affect the pattern of the spread?
+What is different between these two methods of communication and how
+might that affect revolutionary behavior?  Use examples of recent 
+revolutions to critique your reasoning?
+\end{exercise}
+%\begin{exercise}
+%We talked about a model of drug use which is similar to the SIR model
+%of disease spread.  In that model, users and pushers(sellers) are assumed to be the
+%same and so are lumped into a single group called $I$.  Rewrite the model to
+%separate these groups so that $I$ is replaced by $U$--users and $P$--pushers.
+%The behavior difference between the two is that users do not influence nonusers
+%as much as pushers do and police tend to arrest (remove) pushers at a higher 
+%rate than they do the users.  Users and nonusers can become pushers.  
+%But once someone becomes a pusher they don't revert (or their gang removes them!).
+%
+%Write your newly formed equations neatly together and then briefly describe each term
+%(whether new, changed or the same) in each equation to justify the form you chose 
+%(or why it didn't change).
+%\end{exercise}
 \end{exercises}
 
 \section{The SIQR Model\index{SIQR model}}

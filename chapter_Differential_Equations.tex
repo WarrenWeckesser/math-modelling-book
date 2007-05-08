@@ -1585,6 +1585,58 @@ with the initial condition $I(0)=I_0$.
 as the parameter $r$ in the logistic equation
 \eqref{eqn:logistic_again}.)
 \end{exercise}
+\begin{exercise}
+Consider the following model for constant harvesting 
+(as opposed to proportional harvesting) 
+$$ {dP\over dt}=rP\left(1-{P\over K}\right) - H.$$
+What are the units for $H$?  Scale this equation so that one
+nondimensional parameter representing the harvest level remains.  
+Find the steady state (equilibrium) solutions by setting $dP/dt=0$.
+At what harvesting levels (in dimensional terms, $H$) will
+extinction occur?
+\end{exercise}
+\begin{exercise}
+A classic model for the spruce bud worm population in 
+Canada's balsam fir forests proposes that the population $P(t)$
+of bud worms satisfies:
+$$ {dP\over dt}=rP\left(1-{P\over K}\right) - b(P),$$
+where $b(P)$ is a term to represent predation by birds.
+The form of $b(P)$ is
+$$ b(P)= {AP^2\over B^2+P^2}.$$
+\begin{enumerate}
+\item determine the dimensions of $A$ and $B$.
+\item 
+The function $b(p)$ is often used to fit data with a gentle 
+step or ramp from one value to another.  
+Describe in a sentence or two what feature of the curve 
+$A$ represents.
+Graph ${b(P)\over A}$ for $B=$1, 5 and 10.  
+Describe in a sentence or two what feature of the curve 
+$B$ represents.
+(You don't need to hand in the graphs.)
+\item Scale this equation to form a nondimensional equation with only
+two nondimensional parameters (call them $q$ and $s$.)  Choose the
+scales so that the predation term has no parameters in it.
+
+\item Potential long term equilibria (called steady state solutions)
+are population levels for which the population does not change
+($dP/dt=0$).  To find these equilibria, we must set the right hand
+side of the equation to zero and solve for $P$.  One solution is the 
+zero population (once extinct always extinct in this model.)
+To find the other equilibrium solutions we can use graphical methods.
+First divide by the population variable (to remove the solution $P=0$).
+Then graph each term (without minus sign) against population 
+on the same graph.  
+Wherever the two curves cross, the difference between the terms is 
+zero, so we have a steady state solution.
+Note that the predation term is fixed (no parameters).  
+You should find that the other term is a line which depends 
+on $q$ and $s$.
+
+How many steady state solutions are there?
+Does it depend on $q$ and $s$? 
+\end{enumerate}
+\end{exercise}
 \end{exercises}
 
 \newpage
@@ -1739,7 +1791,14 @@ in the phase plane.
 
 \begin{exercises}
 \begin{exercise}
-An exercise...
+Do solutions move fast or slow near a steady state?
+(Note that the trajectories don't tell you that directly.  
+They only tell you what values you will pass through, not 
+how fast you pass through them.)
+Using the definition of a steady state and continuity of the 
+system (right hand sides) determine whether the solutions 
+should move fast or slow near a steady state.  
+Write a paragraph describing your choice and reasoning.
 \end{exercise}
 \end{exercises}
 %
@@ -2573,6 +2632,37 @@ differential equations, and sketch the phase portrait.
 \hspace{1cm}
 (c) $\ds \; A = \begin{bmatrix} 1 & 1 \\ -2 & -2 \end{bmatrix}$
 \end{exercise}
+\begin{exercise}
+Find the eigenvalues for the following systems of equations.
+What classification of phase plane portrait does each represent?
+\\
+a)
+$$ \left[ \begin{array}{c}u^\prime \\ v^\prime\end{array}\right] 
+= \left[ \begin{array}{cc}3 & 2 \\ 0 & -2\end{array}\right] 
+\left[ \begin{array}{c}u \\ v\end{array}\right] $$
+\\
+b)
+$$ \left[ \begin{array}{c}u^\prime \\ v^\prime\end{array}\right] 
+= \left[ \begin{array}{cc}4 & 2 \\ 1 & 3\end{array}\right] 
+\left[ \begin{array}{c}u \\ v\end{array}\right] $$
+\\
+c)
+$$ \left[ \begin{array}{c}u^\prime \\ v^\prime\end{array}\right] 
+= \left[ \begin{array}{cc}-1 & 2 \\ -2 & -1\end{array}\right] 
+\left[ \begin{array}{c}u \\ v\end{array}\right] $$
+\end{exercise}
+
+\begin{exercise}
+Given the eigenvalues and eigenvectors of a linear system, 
+draw the phase plane portrait for that system.
+
+a) $\lambda=1$, $[u,v]=[1,2]$; $\lambda=-2$, $[u,v]=[-1,2]$.
+
+b) $\lambda=-1$, $[u,v]=[1,1]$; $\lambda=-2$, $[u,v]=[2,1]$.
+
+c) $\lambda=-1$, $[u,v]=[1,1]$; $\lambda=-20$, $[u,v]=[-1,1]$.
+
+\end{exercise}
 \end{exercises}
 %
 \newpage
@@ -2588,7 +2678,26 @@ where $\BX \in \Real^{n}$.
 
 \begin{exercises}
 \begin{exercise}
-An exercise...
+\item Examine the phase plane of each of the following systems
+
+%a)
+$$ \mbox{a)}\quad 
+   {dx\over dt} = x - 0.1x^3 
+\quad\quad\quad\quad\quad
+  \mbox{b)}\quad  {dx\over dt} = y 
+\quad\quad\quad\quad\quad\quad\quad
+$$
+%b)
+$$ 
+ {dy\over dt} = -y 
+\quad\quad\quad\quad\quad\quad\quad\quad
+ {dy\over dt} = y -\sin(3*x)
+$$
+Print a picture for each with appropriate scale and sufficiently many
+trajectories to give a good picture of what is going on.
+Identify the steady state solutions and classify the stability
+of each using the classification we discussed in class.  
+Near which steady states is there oscillatory behavior?
 \end{exercise}
 \end{exercises}
 
@@ -2686,6 +2795,23 @@ where
 \end{equation}
 is called the \emph{Jacobian matrix}.\index{Jacobian matrix}
 
+\begin{exercises}
+\begin{exercise}
+
+For the following nonlinear system of equations, find the
+steady state solutions and for each such solution find the 
+linear (matrix) equation which describes solutions NEAR that
+point. (that is, linearize the equations near each steady state
+solution.)
+
+$$ \mbox{a)}\;\;\; {dx\over dt} = x - x^3 \quad \quad \quad
+\mbox{b)} \;\;\;{dx\over dt} = x - xy$$
+$$ \quad \quad \quad \quad {dy\over dt} = -y 
+  \quad \quad \quad \quad \quad \quad {dy\over dt} = 1-x-y+xy$$
+
+
+\end{exercise}
+\end{exercises}
 \subsection*{What does the linearization tell us about the original system?}
 Equation \eqref{eqn:linearizedde}
 is the linear approximation to \eqref{eqn:de} at the
@@ -2835,16 +2961,30 @@ towards or away from $(1,1)$.
 %
 \section{Periodic Solutions}
 It is possible that solutions can oscillate...
-% \begin{exercises}
-% \begin{exercise}
-% An exercise...
-% \end{exercise}
+\begin{exercises}
+\begin{exercise}
+{\bf Limit Cycle Bifurcation:}  The following predator--prey
+system is more realistic than our simple quadratic model in that
+predation is limited and the carrying capacity of the predator
+depends on the number of prey.  Investigate the limit
+cycle which occurs for certain parameter values of this system
+$$  {du\over dt} = u(1-u)- {auv\over u+d} =f(u,v)$$
+$$  {dv\over dt} = bv\left(1-{v\over u}\right) =g(u,v).$$
+Start with parameter values $a=1.75$, $b=0.1$, $d=0.1$.
+Identify a limit cycle in the phase plane for these parameter 
+values?  (Print a phase plane portrait and identify the limit cycle.)
+
+Increase the value of $d$ slowly.  Describe what happens to the 
+limit cycle.  There is a value of $d$ where the qualitative structure
+of the solution changes (a bifurcation point).  Find that 
+value of d to 2 decimal places.
+\end{exercise}
 % \begin{exercise}
 % Another exercise...
 % \end{exercise}
-% \end{exercises}
-% 
-% \newpage
+\end{exercises}
+
+\newpage
 
 \section{Higher Dimensional Systems}
 \[
