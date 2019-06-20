@@ -22,3 +22,5 @@
 *-blx.aux
 *-blx.bib
 *.run.xml
+
+python/__pycache__/
