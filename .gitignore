@@ -23,4 +23,14 @@
 *-blx.bib
 *.run.xml
 
+IMM.pdf
 python/__pycache__/
+fig/*.eps
+logisticplots2/*.eps
+matlab/*.eps
+matlab/*.tex
+maxima/*.tex
+python/*.tex
+python/*.pyc
+python/*.eps
+scilab/*.tex
